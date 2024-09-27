@@ -46,3 +46,116 @@
   .infos{
     margin-top: -55px;
   }
+
+  .deco1{
+    margin-left: 88%;
+    margin-top: 15px;
+  }
+
+h4{
+    color: #43AA12;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: -30px;
+    }
+    .services{
+
+        display: flex;
+        justify-content: center;
+        .cards{
+            display: flex;
+            width: 100%;
+          }
+          .card{
+            margin: 20px;
+            width: 250px;
+        }
+    }
+      .medecins{
+        display: flex;
+        justify-content: center;
+        .cards{
+            display: flex;
+            width: 100%;
+          }
+          .card{
+            margin: 20px;
+            width: 190px;
+        }
+        }
+        .maladies{
+            display: flex;
+            justify-content: center;
+            .cards{
+                display: flex;
+                width: 100%;
+              }
+              .card{
+                margin: 20px;
+                width: 190px;
+            }
+            }    
+    p{
+    color: #00000083;
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    }
+    
+    .boutton-rv{
+      height: 45px;
+      width: 100%;
+      background-color: #43AA12;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    .boutton{
+      height: 40px;
+      width: 100%;
+      background-color: #1245aa;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    .image{
+      width: 100%;
+    }
+    .temoignage{
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 100px;
+    }
+    .temoignages{
+        display: flex;
+        width: 70%;
+        justify-content: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+      h4{
+        text-align: center;
+        margin-top: 50px;
+      }
+    }
+    .card-bleu{
+      height: 115px;
+      background-color: #0072D1;
+      width: 450px;
+    }
+    .card-white{
+      height: 135px;
+      background-color: #ffffff;
+      margin-top: -20px;
+      width: 90%;
+      margin-left: 5%;
+      p{
+        color: #0000009c;
+        font-size: 16px;
+        margin-top: 25px;
+        margin: 15px;
+      }
+    }
