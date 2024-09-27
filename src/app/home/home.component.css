@@ -5,7 +5,56 @@
     flex-direction: column;
     align-items: center;
   }
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .navbar-nav .nav-link.active {
+    color: #09a84c;
+    font-weight: bold;
+}
 
+  .container-fluid{
+    background-color: white;
+    padding-left: 5%;
+  }
+  .connexion{
+    margin-left: 1;
+    font-size: 18px;
+  }
+  .connexion:hover{
+    a{
+        color: #09a84c;
+    }
+  }
+  .inscription{
+    margin-left: 200px;
+    font-size: 18px;
+  }
+  .inscription:hover{
+
+    a{
+        color: #09a84c;
+    }
+  }
+  .navbar-nav{
+    margin-left: 100px;
+    font-size: 20px;
+
+
+    a{
+        color: #1F2B6C;
+        font-family: merriweather;
+        margin-left: 50px;
+    }
+    .nav-item{
+        a:hover{
+            color: #09a84c;
+        }
+    }
+
+  }
   .banner{
     background-image: url('/images/banner2.jpg');
     background-size: cover;
@@ -17,6 +66,7 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5); /* Couleur noire avec 50% d'opacité */
     background-blend-mode: darken; /* Mélange la couleur de fond avec l'image */
+    font-family: merriweather;
     .text{
         border-left: 10px solid #09a84c;
         height: 200px;
@@ -24,6 +74,10 @@
         font-weight: bold;
         color: white;
         padding-top: 20px;
+        h3{
+            color: white;
+            font-size: 26px;
+        }
 
     }
     .btn-banner{
@@ -39,7 +93,7 @@
     }
 
     .images{
-        margin-left: 180px;
+        margin-left: 90px;
     }
   }
 
@@ -48,7 +102,7 @@
   }
 
   .deco1{
-    margin-left: 88%;
+    margin-left: 85%;
     margin-top: 15px;
   }
 
@@ -66,7 +120,7 @@ h4{
         justify-content: center;
         .cards{
             display: flex;
-            width: 100%;
+            width: 98%;
           }
           .card{
             margin: 20px;
@@ -78,7 +132,7 @@ h4{
         justify-content: center;
         .cards{
             display: flex;
-            width: 100%;
+            width: 98%;
           }
           .card{
             margin: 20px;
@@ -90,7 +144,10 @@ h4{
             justify-content: center;
             .cards{
                 display: flex;
-                width: 100%;
+                width: 98%;
+              }
+              .image{
+                margin: 10px;
               }
               .card{
                 margin: 20px;
@@ -126,9 +183,7 @@ h4{
       border-radius: 5px;
       border: none;
     }
-    .image{
-      width: 100%;
-    }
+
     .temoignage{
       justify-content: space-between;
       align-items: center;
@@ -144,6 +199,10 @@ h4{
         text-align: center;
         margin-top: 50px;
       }
+    }
+    .card-header{
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
     .card-bleu{
       height: 115px;
@@ -163,3 +222,112 @@ h4{
         margin: 15px;
       }
     }
+
+
+
+
+
+    /* Pour les écrans plus petits (téléphones) */
+@media (max-width: 767px) {
+    .navbar-nav {
+        margin-left: 0; /* Aligner les éléments correctement */
+    }
+    
+
+    .inscription, .connexion {
+        margin-left: 0; /* Annuler les marges sur petits écrans */
+        font-size: 16px;
+    }
+
+    .banner {
+        height: 400px; /* Ajuster la hauteur de la bannière pour les petits écrans */
+    }
+
+    .services .cards, 
+    .medecins .cards, 
+    .maladies .cards {
+        flex-direction: column; /* Empiler les cartes sur petits écrans */
+        width: 100%;
+    }
+
+    .card {
+        width: 100%; /* Les cartes prennent la largeur complète */
+    }
+
+    .temoignages {
+        flex-direction: column; /* Empiler les témoignages sur petits écrans */
+        width: 100%;
+    }
+
+    .temoignages .card {
+        width: 100%; /* Les cartes de témoignage prennent toute la largeur */
+    }
+}
+
+/* Pour les écrans moyens (tablettes) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navbar-nav {
+        margin-left: 0; /* Aligner les éléments correctement */
+    }
+    
+
+    .inscription, .connexion {
+        margin-left: 0; /* Annuler les marges sur petits écrans */
+        font-size: 16px;
+    }
+
+    .banner {
+        height: 500px; /* Ajuster la hauteur de la bannière pour les petits écrans */
+        .text{
+            h3{
+                font-size: 18px;
+            }
+        }
+
+        .images{
+            display: none;
+        }
+
+    }
+
+    .infos{
+        width: 90%;
+    }
+    .services .cards, 
+    .medecins .cards, 
+    .maladies .cards {
+        flex-direction: row;
+        flex-wrap: wrap; /* Afficher plusieurs cartes par ligne */
+        justify-content: center;
+    }
+
+    .card {
+        width: 45%; /* Les cartes prennent 45% de la largeur de l'écran */
+    }
+
+    .temoignages {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .temoignages .card {
+        width: 45%; /* Les cartes de témoignage prennent 45% de la largeur */
+    }
+}
+
+
+
+.banner h3 {
+    font-size: 22px;
+}
+
+@media (max-width: 767px) {
+    .banner h3 {
+        font-size: 18px; /* Réduire la taille du texte pour les petits écrans */
+    }
+
+    .btn-banner {
+        font-size: 14px; /* Ajuster la taille du bouton de la bannière */
+    }
+}

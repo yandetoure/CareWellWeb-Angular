@@ -6,11 +6,9 @@ import { HomeComponent } from './home/home.component';
 
 
 export const routes: Routes = [ // Ajoute le mot-clé export ici
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent }, 
-
-  
 ];
