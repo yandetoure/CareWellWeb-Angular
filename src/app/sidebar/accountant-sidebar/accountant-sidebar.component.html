@@ -1,10 +1,40 @@
-<!-- accountant-sidebar.component.html -->
-<nav class="sidebar">
-    <ul>
-      <li><a routerLink="/accountant/dashboard">Dashboard</a></li>
-      <li><a routerLink="/accountant/reports">Reports</a></li>
-      <li><a routerLink="/accountant/billing">Billing</a></li>
-      <!-- Ajoute d'autres liens selon tes besoins -->
-    </ul>
-  </nav>
-  
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/maki-icons@latest/dist/maki.css">
+    <title>Sidebar du docteurs</title>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="images/logo.png" alt="" class="logo">
+        <ul>
+            <li>
+                <span class="material-icons icon">home</span>
+                <a routerLink="/doctor/dashboard">Tableau de bord</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon"> schedule </span>
+                <a routerLink="/doctor/patients">Rendez-vous</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">description </span>
+                <a routerLink="/doctor/appointments">Dossiers Medicaux</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">chat </span>                
+                <a routerLink="/doctor/reports">Discussions</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">group</span>                
+                <a routerLink="/doctor/doctor-profile">Secretaires</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">person</span>
+                <a routerLink="/doctor/doctor-profile">Patients</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

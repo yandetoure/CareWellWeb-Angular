@@ -1,9 +1,65 @@
-/* accountant-sidebar.component.css */
+/* doctor-sidebar.component.css */
 .sidebar {
-    background-color: #fff3cd; /* Couleur de fond pour l'accountant */
-    padding: 15px;
+    width: 240px; /* Ajuste la largeur de la sidebar */
+    background-color: #ffffff9e; /* Couleur de fond de la sidebar */
+    padding: 20px;
+    height: 100vh; /* Hauteur pleine de la sidebar */
+    padding: 10px; /* Ajoute du padding autour du lien */
+    border-radius: 4px; /* Arrondit les coins */
+    transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .sidebar a {
-    color: #856404; /* Couleur des liens */
+  
+  .logo{
+    height: 91px;
+    width: 120px;
+    margin-top: 20px;
+  }
+  .sidebar ul {
+    list-style-type: none; /* Retire les puces de la liste */
+    padding: 0; /* Enlève le remplissage par défaut */
+    width: 220px;
+    margin-top: 40px;
+    color: #0C8CAF;
+    font-weight: 500;
+    font-size: 20px;
+    font-family: kanit;
+  }
+  
+  .sidebar li {
+    display: flex; /* Utilise flexbox pour aligner l'image et le texte */
+    align-items: center; /* Centre verticalement les éléments */
+    margin-bottom: 15px; /* Espace entre les éléments */
+    padding-left: 15px;
+    height: 55px;
+    margin: 2px;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+  .sidebar li:hover {
+    background-color: #0C8CAF; /* Couleur de fond verte au survol */
+    color: #ffffff; /* Change la couleur du texte au survol */
+  }
+  
+  .sidebar a.active {
+    background-color: #0C8CAF; /* Couleur de fond verte quand actif */
+    color: #ffffff; /* Couleur du texte quand actif */
+  }
+
+  .icon {
+    font-size: 24px; /* Ajuste la taille de l'icône */
+    margin-right: 10px; /* Espace entre l'icône et le texte */
+  }
+  
+  a {
+    text-decoration: none; /* Enlève le soulignement du lien */
+    color: #b60808; /* Couleur du texte */
+  }
+  
+  a:hover {
+    color: #007bff; /* Change la couleur au survol */
   }
   
