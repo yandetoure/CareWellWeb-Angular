@@ -17,7 +17,7 @@
 
   .container-fluid{
     background-color: white;
-    padding-left: 5%;
+    padding-left: 15%;
   }
   .connexion{
     margin-left: 1;
@@ -95,7 +95,7 @@
   }
 
 .inf{
-    width: 800px;
+    width: 60%;
     height: auto;
     background-color:rgba(255, 255, 255, 0.865);
     margin-top: -150px;
