@@ -1,0 +1,9 @@
+/* accountant-sidebar.component.css */
+.sidebar {
+    background-color: #fff3cd; /* Couleur de fond pour l'accountant */
+    padding: 15px;
+  }
+  .sidebar a {
+    color: #856404; /* Couleur des liens */
+  }
+  
