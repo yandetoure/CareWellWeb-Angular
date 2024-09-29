@@ -23,7 +23,7 @@
     padding: 0; /* Enlève le remplissage par défaut */
     width: 220px;
     margin-top: 40px;
-    color: #077676;
+    color: #1F2B6C;
     font-weight: 500;
     font-size: 20px;
     font-family: kanit;
@@ -40,12 +40,12 @@
     border-radius: 10px;
   }
   .sidebar li:hover {
-    background-color: #077676; /* Couleur de fond verte au survol */
+    background-color: #1F2B6C; /* Couleur de fond verte au survol */
     color: #ffffff; /* Change la couleur du texte au survol */
   }
   
   .sidebar a.active {
-    background-color: #28a745; /* Couleur de fond verte quand actif */
+    background-color: #1F2B6C; /* Couleur de fond verte quand actif */
     color: #ffffff; /* Couleur du texte quand actif */
   }
 

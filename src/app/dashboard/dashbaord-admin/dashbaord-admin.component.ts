@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { PatientSidebarComponent } from '../../sidebar/patient-sidebar/patient-sidebar.component'; // Assurez-vous que le chemin est correct
+import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; // Assurez-vous que le chemin est correct
 
 @Component({
   selector: 'app-dashbaord-admin',
   standalone: true,
-  imports: [PatientSidebarComponent],
+  imports: [AdminSidebarComponent],
   templateUrl: './dashbaord-admin.component.html',
   styleUrl: './dashbaord-admin.component.css'
 })
