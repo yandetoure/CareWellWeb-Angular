@@ -31,7 +31,7 @@ export class RegisterComponent {
       (response) => {
         console.log(response);
         localStorage.setItem('token', response.token);
-        this.router.navigate(['/profile']); // Redirige vers la page du profil
+        this.router.navigate(['/profloginile']); // Redirige vers la page de connexion
       },
       (error) => {
         console.log(error);

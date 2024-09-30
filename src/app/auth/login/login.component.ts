@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';  // Import pour HttpCli
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [CommonModule, FormsModule, HttpClientModule],  // Ajoute HttpClientModule ici
+  imports: [CommonModule, FormsModule, HttpClientModule],
 
 })
 export class LoginComponent {
@@ -24,11 +24,11 @@ export class LoginComponent {
   login() {
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
-        console.log('User logged in:', response);
+        console.log('Vous etes connecte:', response);
         this.router.navigate(['/home']);
       },
       error: (error) => {
-        console.error('Login error:', error);
+        console.error('Une erreur est survenue lors de la connexion :', error);
       }
     });
   }
