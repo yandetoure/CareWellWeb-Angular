@@ -1,10 +1,39 @@
-<form (ngSubmit)="register()">
-  <input type="text" [(ngModel)]="user.first_name" name="first_name" placeholder="Prénom" required>
-  <input type="text" [(ngModel)]="user.last_name" name="last_name" placeholder="Nom" required>
-  <input type="email" [(ngModel)]="user.email" name="email" placeholder="Email" required>
-  <input type="text" [(ngModel)]="user.adress" name="adress" placeholder="Adresse" required>
-  <input type="text" [(ngModel)]="user.phone_number" name="phone_number" placeholder="Numéro de téléphone" required>
-  <input type="date" [(ngModel)]="user.day_of_birth" name="day_of_birth" placeholder="Date de naissance" required>
-  <input type="password" [(ngModel)]="user.password" name="password" placeholder="Mot de passe" required>
-  <button type="submit">S'inscrire</button>
-</form>
+<form (submit)="onRegister()">
+    <div>
+      <label>First Name:</label>
+      <input type="text" [(ngModel)]="user.first_name" name="first_name" required />
+    </div>
+  
+    <div>
+      <label>Last Name:</label>
+      <input type="text" [(ngModel)]="user.last_name" name="last_name" required />
+    </div>
+  
+    <div>
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="user.email" name="email" required />
+    </div>
+  
+    <div>
+      <label>Adress:</label>
+      <input type="text" [(ngModel)]="user.adress" name="adress" required />
+    </div>
+  
+    <div>
+      <label>Phone Number:</label>
+      <input type="tel" [(ngModel)]="user.phone_number" name="phone_number" required />
+    </div>
+  
+    <div>
+      <label>Date of Birth:</label>
+      <input type="date" [(ngModel)]="user.day_of_birth" name="day_of_birth" required />
+    </div>
+  
+    <div>
+      <label>Password:</label>
+      <input type="password" [(ngModel)]="user.password" name="password" required />
+    </div>
+  
+    <button type="submit">Register</button>
+  </form>
+  

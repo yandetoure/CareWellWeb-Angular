@@ -38,14 +38,23 @@
     margin: 2px;
     margin-top: 20px;
     border-radius: 10px;
+    a{
+        color: #077676;
+        text-decoration: none;
+    }
   }
   .sidebar li:hover {
     background-color: #077676; /* Couleur de fond verte au survol */
-    color: #ffffff; /* Change la couleur du texte au survol */
+    a{
+        color: #ffffff; /* Change la couleur du texte au survol */
+    }
+    .icon{
+        color: #ffffff;
+    }
   }
   
   .sidebar a.active {
-    background-color: #28a745; /* Couleur de fond verte quand actif */
+    background-color: #077676; /* Couleur de fond verte quand actif */
     color: #ffffff; /* Couleur du texte quand actif */
   }
 
@@ -54,12 +63,5 @@
     margin-right: 10px; /* Espace entre l'icône et le texte */
   }
   
-  a {
-    text-decoration: none; /* Enlève le soulignement du lien */
-    color: #b60808; /* Couleur du texte */
-  }
-  
-  a:hover {
-    color: #007bff; /* Change la couleur au survol */
-  }
+
   

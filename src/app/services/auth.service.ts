@@ -1,59 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import {  BehaviorSubject, throwError } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private apiUrl = 'http://127.0.0.1:8000/api';
+  private token: string | null = null;
 
-  private apiUrl = 'https://localhost:8000/api';  // Remplacez par l'URL de votre backend
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private http: HttpClient) { }
-
-  // Enregistrement d'un utilisateur
-  register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
+  // Méthode pour s'inscrire
+  register(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, user);
   }
 
-  // Connexion d'un utilisateur// Exemple de gestion d'erreur pour le login
-login(credentials: any): Observable<any> {
-  return this.http.post(`${this.apiUrl}/login`, credentials, {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }).pipe(
-    catchError(this.handleError)
-  );
-}
+  // Méthode pour se connecter
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials);
+  }
 
-// Méthode de gestion d'erreur
-private handleError(error: any): Observable<never> {
-  // Logique de gestion d'erreur, par exemple :
-  console.error('Une erreur est survenue:', error);
-  return throwError(() => new Error('Une erreur est survenue lors de la requête'));
-}
+  // Méthode pour se déconnecter
+  logout(): void {
+    this.token = null;
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']); // Redirection vers la page de connexion
+  }
 
-
-  // Récupérer les informations du profil
+  // Méthode pour récupérer le profil de l'utilisateur
   getProfile(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/profile`, {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.get(`${this.apiUrl}/profile`, { headers });
   }
 
-  // Déconnexion de l'utilisateur
-  logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, {}, {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    });
+  // Méthode pour stocker le token
+  setToken(token: string): void {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+  // Méthode pour récupérer le token
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 }
