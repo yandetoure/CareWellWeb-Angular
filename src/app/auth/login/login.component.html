@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connexion</title>
+
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -64,3 +65,21 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+</head>
+<body class="body">
+  <div class="image">
+    <img src="images/" alt="">
+  </div>
+  <div class="formulaire">
+    <h2>Connexion</h2>
+    <form (ngSubmit)="login()">
+      <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" required />
+      <input type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password" required />
+      <button type="submit">Connexion</button>
+    </form>
+  </div>
+</body>
+</html>
+
+

@@ -45,5 +45,15 @@ export class RegisterComponent {
       // Affiche une alerte si le formulaire n'est pas valide
       alert('Veuillez remplir le formulaire correctement.');
     }
+    this.authService.register(this.user).subscribe(
+      (response) => {
+        console.log(response);
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/profloginile']); // Redirige vers la page de connexion
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
