@@ -30,14 +30,14 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <input type="text" class="form-control" placeholder="Prénom" formControlName="first_name" />
-                  <div *ngIf="registerForm.get('first_name').invalid && (registerForm.get('first_name').touched || registerForm.get('first_name').dirty)">
+                  <div *ngIf="registerForm.get('first_name')?.invalid && (registerForm.get('first_name')?.touched || registerForm.get('first_name')?.dirty)">
                     <small class="text-danger">Le prénom est requis.</small>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
                   <input type="text" class="form-control" placeholder="Nom" formControlName="last_name" />
-                  <div *ngIf="registerForm.get('last_name').invalid && (registerForm.get('last_name').touched || registerForm.get('last_name').dirty)">
+                  <div *ngIf="registerForm.get('last_name')?.invalid && (registerForm.get('last_name')?.touched || registerForm.get('last_name')?.dirty)">
                     <small class="text-danger">Le nom est requis.</small>
                   </div>
                 </div>
@@ -46,14 +46,14 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <input type="email" class="form-control" placeholder="Email" formControlName="email" />
-                  <div *ngIf="registerForm.get('email').invalid && (registerForm.get('email').touched || registerForm.get('email').dirty)">
+                  <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)">
                     <small class="text-danger">L'email est requis et doit être valide.</small>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
                   <input type="text" class="form-control" placeholder="Adresse" formControlName="adress" />
-                  <div *ngIf="registerForm.get('adress').invalid && (registerForm.get('adress').touched || registerForm.get('adress').dirty)">
+                  <div *ngIf="registerForm.get('adress')?.invalid && (registerForm.get('adress')?.touched || registerForm.get('adress')?.dirty)">
                     <small class="text-danger">L'adresse est requise.</small>
                   </div>
                 </div>
@@ -62,14 +62,14 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <input type="tel" class="form-control" placeholder="Téléphone" formControlName="phone_number" />
-                  <div *ngIf="registerForm.get('phone_number').invalid && (registerForm.get('phone_number').touched || registerForm.get('phone_number').dirty)">
+                  <div *ngIf="registerForm.get('phone_number')?.invalid && (registerForm.get('phone_number')?.touched || registerForm.get('phone_number')?.dirty)">
                     <small class="text-danger">Le numéro de téléphone est requis.</small>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
                   <input type="date" class="form-control" placeholder="Date de naissance" formControlName="day_of_birth" />
-                  <div *ngIf="registerForm.get('day_of_birth').invalid && (registerForm.get('day_of_birth').touched || registerForm.get('day_of_birth').dirty)">
+                  <div *ngIf="registerForm.get('day_of_birth')?.invalid && (registerForm.get('day_of_birth')?.touched || registerForm.get('day_of_birth')?.dirty)">
                     <small class="text-danger">La date de naissance est requise.</small>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <input type="password" class="form-control" placeholder="Mot de passe" formControlName="password" />
-                  <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').touched || registerForm.get('password').dirty)">
+                  <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)">
                     <small class="text-danger">Le mot de passe doit contenir au moins 6 caractères.</small>
                   </div>
                 </div>
