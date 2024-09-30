@@ -11,6 +11,7 @@ import { DoctorsComponent } from './doctor/doctors/doctors.component';
 import { PatientsComponent } from './doctor/patients/patients.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthComponent } from './auth/auth/auth.component';
 
 export const routes: Routes = [ // Ajoute le mot-clé export ici
     { path: '', redirectTo: '/register', pathMatch: 'full' },
@@ -26,6 +27,7 @@ export const routes: Routes = [ // Ajoute le mot-clé export ici
   { path: 'doctor/doctors', component: DoctorsComponent },
   { path: 'patients', component: PatientsComponent},
   { path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  { path: 'auth', component: AuthComponent}
 
 ];
