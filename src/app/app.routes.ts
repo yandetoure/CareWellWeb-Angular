@@ -12,6 +12,9 @@ import { PatientsComponent } from './doctor/patients/patients.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthComponent } from './auth/auth/auth.component';
+import { ServicesComponent } from './admin/services/services.component';
+import { ArticlesComponent } from './admin/articles/articles.component';
+import { PrescriptionComponent } from './admin/prescription/prescription.component';
 
 export const routes: Routes = [ // Ajoute le mot-clé export ici
     { path: '', redirectTo: '/register', pathMatch: 'full' },
@@ -28,6 +31,9 @@ export const routes: Routes = [ // Ajoute le mot-clé export ici
   { path: 'patients', component: PatientsComponent},
   { path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  { path: 'auth', component: AuthComponent}
+  { path: 'auth', component: AuthComponent},
+  { path: 'admin/services', component: ServicesComponent},
+  { path: 'articles', component: ArticlesComponent},
+  { path: 'prescriptions', component: PrescriptionComponent},
 
 ];

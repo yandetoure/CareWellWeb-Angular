@@ -1,5 +1,3 @@
-// src/app/service-management/service.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,36 +6,37 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceService {
+export class ArticlesService {
+
   private apiUrl = 'http://127.0.0.1:8000/api';
   private token: string | null = null; // Optionnel : à définir si vous utilisez une authentification
 
   constructor(private http: HttpClient, private router: Router) {}
 
   // Méthode pour récupérer les services
-  getServices(): Observable<any> {
+  getArticles(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.get(`${this.apiUrl}/services`, { headers });
+    return this.http.get(`${this.apiUrl}/articles`, { headers });
   }
 
   // Méthode pour ajouter un service
  // src/app/service-management/service.service.ts
 
-addService(serviceData: FormData): Observable<any> {
+addArticle(articleData: FormData): Observable<any> {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-  return this.http.post(`${this.apiUrl}/services`, serviceData, { headers });
+  return this.http.post(`${this.apiUrl}/articles`, articleData, { headers });
 }
 
 
   // Méthode pour mettre à jour un service
-  updateService(id: number, serviceData: any): Observable<any> {
+  updateArticle(id: number, articleData: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.put(`${this.apiUrl}/services/${id}`, serviceData, { headers });
+    return this.http.put(`${this.apiUrl}/articles/${id}`, articleData, { headers });
   }
 
   // Méthode pour supprimer un service
-  deleteService(id: number): Observable<any> {
+  deleteArticle(id: number): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.delete(`${this.apiUrl}/services/${id}`, { headers });
+    return this.http.delete(`${this.apiUrl}/articles/${id}`, { headers });
   }
 }

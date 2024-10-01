@@ -101,6 +101,15 @@
     margin-top: -55px;
   }
 
+  .a-propos{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .us{
+    display: flex;
+    flex-direction: column;
+  }
   .deco1{
     margin-left: 85%;
     margin-top: 15px;
@@ -126,6 +135,11 @@ h4{
             margin: 20px;
             width: 250px;
         }
+    }
+    .cards{
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
     }
       .medecins{
         display: flex;
@@ -155,12 +169,9 @@ h4{
             }
             }    
     p{
-    color: #00000083;
+    color: #000000a7;
     font-weight: bold;
     font-size: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
     }
     
     .boutton-rv{
@@ -201,8 +212,12 @@ h4{
       }
     }
     .card-header{
-        margin-top: 15px;
-        margin-bottom: 15px;
+        margin-top: 10px;
+        h5{
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+        }
     }
     .card-bleu{
       height: 115px;
