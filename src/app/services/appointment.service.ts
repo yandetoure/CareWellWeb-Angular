@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AvailabilityService {
-  private apiUrl = 'http://127.0.0.1:8000/api/availabilities'; // Change avec ton URL backend
+export class AppointmentService {
+
+  private apiUrl = 'http://127.0.0.1:8000/api'; // Change avec ton URL backend
 
   constructor(private http: HttpClient) { }
 
@@ -24,4 +25,14 @@ export class AvailabilityService {
   getAvailabilityByDoctorAndService(doctorId: number, serviceId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${doctorId}/${serviceId}`);
   }
+
+    // Récupérer tous les rendez-vous
+    getAppointments(): Observable<any> {
+      return this.http.get(`${this.apiUrl}/appointments`);
+    }
+  
+    // Ajouter un nouveau rendez-vous
+    addAppointment(appointmentData: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/appointments`, appointmentData);
+    }
 }

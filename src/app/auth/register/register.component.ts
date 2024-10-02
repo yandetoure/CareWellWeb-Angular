@@ -47,7 +47,7 @@ export class RegisterComponent {
         (response) => {
           console.log(response);
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/login']);
         },
         (error) => {
           console.log(error);

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +21,38 @@ export class AuthService {
 
   // Méthode pour se connecter
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+      map((response: any) => {
+        console.log('Login response:', response);  // Vérifie la réponse complète
+  
+        // Vérifie si l'objet user et le role sont présents
+        if (response && response.user && response.user.roles && response.user.roles.length > 0) {
+          const { token, user } = response;
+          const userRole = response.user.roles[0].name || response.user.roles[0];  // Extraire le nom du rôle
+  
+          console.log('User role:', userRole);  // Vérifie le rôle
+  
+          this.setToken(token);
+          localStorage.setItem('user', JSON.stringify(user));
+  
+          // Redirige en fonction du rôle
+          this.redirectBasedOnRole(userRole);
+        } else {
+          console.error('Role is undefined or missing in response');
+        }
+  
+        return response;
+      })
+    );
   }
+  
+  
 
   // Méthode pour se déconnecter
   logout(): void {
     this.token = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('user');  // Supprimer les informations utilisateur
     this.router.navigate(['/login']); // Redirection vers la page de connexion
   }
 
@@ -44,5 +71,25 @@ export class AuthService {
   // Méthode pour récupérer le token
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  // Méthode pour rediriger selon le rôle de l'utilisateur
+  private redirectBasedOnRole(role: string): void {
+    switch (role) {
+      case 'Admin':
+        this.router.navigate(['/dashboard/admin']);
+        break;
+      case 'Patient':
+        this.router.navigate(['/dashboard/patient']);
+        break;
+      case 'Accountant':
+        this.router.navigate(['/accountant-dashboard']);
+        break;
+      case 'Secretary':
+        this.router.navigate(['/secretary-dashboard']);
+        break;
+      default:
+        this.router.navigate(['/login']);
+    }
   }
 }

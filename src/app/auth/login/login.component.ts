@@ -14,23 +14,21 @@ import { HttpClientModule } from '@angular/common/http';  // Import pour HttpCli
 
 })
 export class LoginComponent {
-  credentials = {
-    email: '',
-    password: ''
-  };
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
-  login() {
-    this.authService.login(this.credentials).subscribe({
-      next: (response) => {
-        console.log('Vous etes connecte:', response);
-        this.router.navigate(['/home']);
+  onSubmit() {
+    const credentials = { email: this.email, password: this.password };
+    this.authService.login(credentials).subscribe(
+      response => {
+        // Redirection gérée dans le service après la connexion réussie
       },
-      error: (error) => {
-        console.error('Une erreur est survenue lors de la connexion :', error);
+      error => {
+        this.errorMessage = 'Erreur de connexion, veuillez vérifier vos identifiants.';
       }
-    });
+    );
   }
-  
 }

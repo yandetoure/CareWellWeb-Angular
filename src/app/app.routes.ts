@@ -15,6 +15,8 @@ import { AuthComponent } from './auth/auth/auth.component';
 import { ServicesComponent } from './admin/services/services.component';
 import { ArticlesComponent } from './admin/articles/articles.component';
 import { PrescriptionComponent } from './admin/prescription/prescription.component';
+import { AvailabilityComponent } from './doctor/availability/availability.component';
+import { AppointmentsComponent } from './patient/appointments/appointments.component';
 
 export const routes: Routes = [ // Ajoute le mot-clé export ici
     { path: '', redirectTo: '/register', pathMatch: 'full' },
@@ -35,5 +37,7 @@ export const routes: Routes = [ // Ajoute le mot-clé export ici
   { path: 'admin/services', component: ServicesComponent},
   { path: 'articles', component: ArticlesComponent},
   { path: 'prescriptions', component: PrescriptionComponent},
+  { path: 'doctor/availability', component: AvailabilityComponent},
+  { path: 'patient/appointments', component: AppointmentsComponent}
 
 ];
