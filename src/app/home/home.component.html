@@ -18,10 +18,10 @@
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="service">Services</a>
+            <a class="nav-link" href="#service" [class.active]="currentSection === 'service'" (click)="setActiveSection('service')" >Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profile">A propos</a>
+            <a class="nav-link"  href="#article" [class.active]="currentSection === 'article'" (click)="setActiveSection('article')">A propos</a>
           </li>
           <li class="inscription">
             <a class="nav-link" href="/register">S'inscrire</a>
@@ -37,7 +37,7 @@
   </nav>
 
     <div class="body">
-  <div class="banner">
+  <div class="banner" id="banner">
     <div class="text">
       <h3> Votre sante n'a pas de prix alors prenez en soin avec CareWell.</h3>
       <h6>Un esprit sain dans un corps sain</h6>
@@ -55,44 +55,31 @@
     <img src="images/infos.png" alt="Image 1" class="imfo">
   </div>
 
-  <!-- <div class="a-propos">
-    <div class="us">
-      <h2>À propos de CareWell</h2>
-      <p>CareWell est un service de soins en ligne spécialisé dans la pneumologie et la gastro-enterologie. Nous proposons un large éventail de services adaptés à votre besoin et à votre situation. CareWell vous accompagne dans votre recherche de soin et vous aide à trouver un médecin qui vous convient le mieux.</p>
-      <img src="images/auth.png" alt="">
-    </div> -->
-
-    <!-- <div class="objectifs">
-
-    <h3>Nos objectifs</h3>
-    <ul>
-      <li>Faciliter la recherche de soins en ligne</li>
-      <li>Proposer un service de soins adapté à votre situation</li>
-      <li>Aider les patients à trouver un médecin qui leur convient le mieux</li>
-    </ul>
-  </div> -->
-  <!-- </div> -->
-
     <img src="/images/deco.png" alt="" class="deco1">
-    <h4>Catégories de Services</h4>
-    <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
-    <div class="services">
+
+<section id="service">
+  <h4>Catégories de Services</h4>
+  <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
+  <div class="services">
 
 
-      <div class="cards">
-        <ng-container *ngFor="let service of services; let i = index">
-          <div *ngIf="i < 8" class="card"> <!-- Affiche uniquement les 8 premiers services -->
-            <img *ngIf="service.photo" [src]="service.photo" alt="{{ service.name }}" class="image" />
-            <div class="card-header">
-              <h5>{{ service.name }}</h5>
-              <p>{{ service.description }} </p>
-            </div>
-            <button class="boutton-rv">Prendre rendez-vous</button>
-            <p>Créé le : {{ service.created_at }}</p>
+    <div class="cards">
+      <ng-container *ngFor="let service of services; let i = index">
+        <div *ngIf="i < 8" class="card"> <!-- Affiche uniquement les 8 premiers services -->
+          <img *ngIf="service.photo" [src]="service.photo" alt="{{ service.name }}" class="image" />
+          <div class="card-header">
+            <h5>{{ service.name }}</h5>
+            <p>{{ service.description }} </p>
           </div>
-        </ng-container>
-      </div>
+          <button class="boutton-rv">Prendre rendez-vous</button>
+          <p>Créé le : {{ service.created_at }}</p>
+        </div>
+      </ng-container>
     </div>
+  </div>
+</section>
+
+<section id="article">
 
     <img src="/images/deco.png" alt="" class="deco1">
     <h4>Catégories de Maladies</h4>
@@ -154,6 +141,7 @@
 
       </div>
     </div>
+  </section>
 
     <img src="/images/deco.png" alt="" class="deco1">
 

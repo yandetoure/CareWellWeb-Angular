@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,8 @@ export class AppointmentService {
 
   // Ajouter une disponibilité
   addAvailability(availability: any): Observable<any> {
+    const token = localStorage.getItem('token'); // Supposons que le token est stocké dans localStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<any>(this.apiUrl, availability);
   }
 
@@ -34,5 +36,20 @@ export class AppointmentService {
     // Ajouter un nouveau rendez-vous
     addAppointment(appointmentData: any): Observable<any> {
       return this.http.post(`${this.apiUrl}/appointments`, appointmentData);
+      
+    }
+
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('auth_token'); 
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      } else {
+        console.error('Token non trouvé');
+        return new HttpHeaders();
+      }
+    }
+
+    getAppointment(){
+      return this.http.get<any>(this.apiUrl+'/appointments');
     }
 }

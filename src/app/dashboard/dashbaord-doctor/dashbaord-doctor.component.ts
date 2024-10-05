@@ -4,10 +4,10 @@ import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-side
 @Component({
   selector: 'app-dashbaord-doctor',
   standalone: true,
-  imports: [DoctorSidebarComponent], // Ajoutez ici le composant de la sidebar
+  imports: [DoctorSidebarComponent], 
   templateUrl: './dashbaord-doctor.component.html',
-  styleUrls: ['./dashbaord-doctor.component.css'] // Corrigez ici 'styleUrl' en 'styleUrls'
+  styleUrls: ['./dashbaord-doctor.component.css'] 
 })
 export class DashbaordDoctorComponent {
-  // Ajoutez ici la logique spécifique à ce composant si nécessaire
+
 }

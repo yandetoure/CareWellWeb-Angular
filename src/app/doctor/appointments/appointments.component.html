@@ -1,9 +1,14 @@
-<h2>Rendez-vous</h2>
-<ul>
-  <li *ngFor="let appointment of appointments">
-    Utilisateur: {{ appointment.user.name }}, Service: {{ appointment.service.name }}, Date: {{ appointment.date }}
-  </li>
-</ul>
+<!-- <h2>Rendez-vous</h2>
+<div *ngFor="let appointment of appointments" style="border-bottom: 1px solid #ccc; padding: 10px;">
+  <p><strong>Utilisateur :</strong> {{ appointment.user.name }}</p>
+  <p><strong>Service :</strong> {{ appointment.service.name }}</p>
+  <p><strong>Date :</strong> {{ appointment.date }}</p>
+  <p><strong>Heure :</strong> {{ appointment.time }}</p>
+  <p><strong>Raison :</strong> {{ appointment.reason }}</p>
+  <p><strong>Symptômes :</strong> {{ appointment.symptoms || 'Non spécifié' }}</p>
+</div>
+
+
 
 <h3>Ajouter un nouveau rendez-vous</h3>
 <form (submit)="addAppointment()">
@@ -26,4 +31,4 @@
   <input id="time" type="time" [(ngModel)]="newAppointment.time" name="time" required>
 
   <button type="submit">Ajouter rendez-vous</button>
-</form>
+</form> -->

@@ -1,0 +1,39 @@
+
+h4{
+    color: #43AA12;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: -30px;
+    }
+    .services{
+
+        display: flex;
+        justify-content: center;
+        .cards{
+            display: flex;
+            width: 98%;
+          }
+          .card{
+            margin: 20px;
+            width: 250px;
+        }
+    }
+    .cards{
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+    }
+      .medecins{
+        display: flex;
+        justify-content: center;
+        .cards{
+            display: flex;
+            width: 98%;
+          }
+          .card{
+            margin: 20px;
+            width: 190px;
+        }
+    }

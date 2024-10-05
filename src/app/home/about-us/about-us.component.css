@@ -1,0 +1,53 @@
+.a-propos {
+    height: 400px;
+    width: 100%;
+    background-image: url('/assets/images/photo6.png');
+    background-size: cover; 
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .banner{
+    background-image: url('/images/banner2.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 450px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur noire avec 50% d'opacité */
+    background-blend-mode: darken; /* Mélange la couleur de fond avec l'image */
+    font-family: merriweather;
+    .text{
+        border-left: 10px solid #09a84c;
+        background-color: #e8b63660;
+        width: 40%;
+        height: 300px;
+        padding-left: 10px;
+        font-weight: bold;
+        color: white;
+        padding-top: 20px;
+        h3{
+            color: white;
+            font-size: 26px;
+        }
+
+    }
+    .btn-banner{
+        background-color: #09a84c;
+        color: white;
+        font-size: 18px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .images{
+        margin-left: 90px;
+    }
+  }

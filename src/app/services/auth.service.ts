@@ -19,6 +19,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
 
+  
   // Méthode pour se connecter
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
@@ -27,12 +28,12 @@ export class AuthService {
   
         // Vérifie si l'objet user et le role sont présents
         if (response && response.user && response.user.roles && response.user.roles.length > 0) {
-          const { token, user } = response;
+          const { access_token, user } = response;
           const userRole = response.user.roles[0].name || response.user.roles[0];  // Extraire le nom du rôle
   
           console.log('User role:', userRole);  // Vérifie le rôle
   
-          this.setToken(token);
+          this.setToken(access_token);
           localStorage.setItem('user', JSON.stringify(user));
   
           // Redirige en fonction du rôle
@@ -80,8 +81,11 @@ export class AuthService {
         this.router.navigate(['/dashboard/admin']);
         break;
       case 'Patient':
-        this.router.navigate(['/dashboard/patient']);
+        this.router.navigate(['/patient/appointments']);
         break;
+        case 'Doctor':
+          this.router.navigate(['/dashboard/doctor']);
+          break;
       case 'Accountant':
         this.router.navigate(['/accountant-dashboard']);
         break;
@@ -92,4 +96,10 @@ export class AuthService {
         this.router.navigate(['/login']);
     }
   }
+
+    // // Méthode pour récupérer l'utilisateur connecté
+    // getUser(): Observable<any> {
+    //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    //   return this.http.get<any>(`${this.apiUrl}/user`); // Utilise l'API backend pour récupérer l'utilisateur
+    // }
 }

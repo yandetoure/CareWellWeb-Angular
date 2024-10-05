@@ -1,65 +1,57 @@
-/* doctor-sidebar.component.css */
-.sidebar {
-    width: 240px; /* Ajuste la largeur de la sidebar */
-    background-color: #dedbdb70; /* Couleur de fond de la sidebar */
-    padding: 20px;
-    height: 100vh; /* Hauteur pleine de la sidebar */
-    padding: 10px; /* Ajoute du padding autour du lien */
-    border-radius: 4px; /* Arrondit les coins */
-    transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.body {
+  background-size: cover; /* Ajuste l'image pour couvrir tout l'arrière-plan */
+  background-position: center; /* Centre l'image */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar-nav .nav-link.active {
+  color: #09a84c;
+  font-weight: bold;
+}
+
+.container-fluid{
+  background-color: white;
+  padding-left: 15%;
+}
+.connexion{
+  margin-left: 1;
+  font-size: 18px;
+}
+.connexion:hover{
+  a{
+      color: #09a84c;
   }
-  
-  .logo{
-    height: 91px;
-    width: 120px;
-    margin-top: 20px;
+}
+.inscription{
+  margin-left: 200px;
+  font-size: 18px;
+}
+.inscription:hover{
+
+  a{
+      color: #09a84c;
   }
-  .sidebar ul {
-    list-style-type: none; /* Retire les puces de la liste */
-    padding: 0; /* Enlève le remplissage par défaut */
-    width: 220px;
-    margin-top: 40px;
-    color: #077676;
-    font-weight: 500;
-    font-size: 20px;
-    font-family: kanit;
+}
+.navbar-nav{
+  margin-left: 100px;
+  font-size: 20px;
+
+
+  a{
+      color: #1F2B6C;
+      font-family: merriweather;
+      margin-left: 50px;
   }
-  
-  .sidebar li {
-    display: flex; /* Utilise flexbox pour aligner l'image et le texte */
-    align-items: center; /* Centre verticalement les éléments */
-    margin-bottom: 15px; /* Espace entre les éléments */
-    padding-left: 15px;
-    height: 55px;
-    margin: 2px;
-    margin-top: 20px;
-    border-radius: 10px;
-  }
-  .sidebar li:hover {
-    background-color: #077676; /* Couleur de fond verte au survol */
-    color: #ffffff; /* Change la couleur du texte au survol */
-  }
-  
-  .sidebar a.active {
-    background-color: #28a745; /* Couleur de fond verte quand actif */
-    color: #ffffff; /* Couleur du texte quand actif */
+  .nav-item{
+      a:hover{
+          color: #09a84c;
+      }
   }
 
-  .icon {
-    font-size: 24px; /* Ajuste la taille de l'icône */
-    margin-right: 10px; /* Espace entre l'icône et le texte */
-  }
-  
-  a {
-    text-decoration: none; /* Enlève le soulignement du lien */
-    color: #b60808; /* Couleur du texte */
-  }
-  
-  a:hover {
-    color: #007bff; /* Change la couleur au survol */
-  }
-  
+}

@@ -1,0 +1,20 @@
+<img src="/images/deco.png" alt="" class="deco1">
+<h4>Catégories de Services</h4>
+<p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
+<div class="services">
+
+
+  <div class="cards">
+    <ng-container *ngFor="let service of services; let i = index">
+      <div *ngIf="i < 8" class="card"> <!-- Affiche uniquement les 8 premiers services -->
+        <img *ngIf="service.photo" [src]="service.photo" alt="{{ service.name }}" class="image" />
+        <div class="card-header">
+          <h5>{{ service.name }}</h5>
+          <p>{{ service.description }} </p>
+        </div>
+        <button class="boutton-rv">Prendre rendez-vous</button>
+        <p>Créé le : {{ service.created_at }}</p>
+      </div>
+    </ng-container>
+  </div>
+</div>

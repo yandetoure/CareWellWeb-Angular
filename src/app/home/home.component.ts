@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class HomeComponent implements OnInit {
+  currentSection: string='';
+
+  setActiveSection(section: string) {this.currentSection = section;}
   services: any[] = []; // Gardez le type any[]
 
   constructor(private serviceService: ServiceService) {}

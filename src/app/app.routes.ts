@@ -17,6 +17,11 @@ import { ArticlesComponent } from './admin/articles/articles.component';
 import { PrescriptionComponent } from './admin/prescription/prescription.component';
 import { AvailabilityComponent } from './doctor/availability/availability.component';
 import { AppointmentsComponent } from './patient/appointments/appointments.component';
+import { PageComponent } from './home/page/page.component';
+import { AboutUsComponent } from './home/about-us/about-us.component';
+import { BannerComponent } from './home/banner/banner.component';
+import { ContactsComponent } from './home/contacts/contacts.component';
+import { Component } from '@angular/core';
 
 export const routes: Routes = [ // Ajoute le mot-clé export ici
     { path: '', redirectTo: '/register', pathMatch: 'full' },
@@ -38,6 +43,8 @@ export const routes: Routes = [ // Ajoute le mot-clé export ici
   { path: 'articles', component: ArticlesComponent},
   { path: 'prescriptions', component: PrescriptionComponent},
   { path: 'doctor/availability', component: AvailabilityComponent},
-  { path: 'patient/appointments', component: AppointmentsComponent}
+  { path: 'patient/appointments', component: AppointmentsComponent},
+  { path: 'page', component: PageComponent},
+  { path: 'us', component: AboutUsComponent},
 
 ];

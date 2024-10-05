@@ -24,7 +24,6 @@ export class LoginComponent {
     const credentials = { email: this.email, password: this.password };
     this.authService.login(credentials).subscribe(
       response => {
-        // Redirection gérée dans le service après la connexion réussie
       },
       error => {
         this.errorMessage = 'Erreur de connexion, veuillez vérifier vos identifiants.';
