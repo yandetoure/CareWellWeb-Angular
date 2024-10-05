@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
+    <!-- Ajoutez Bootstrap CSS ici -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <img src="images/logo.png" alt="Image 1" class="logo" height="60">
+      <img src="images/logo.png" alt="Logo" class="logo" height="60">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -18,219 +20,185 @@
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#service" [class.active]="currentSection === 'service'" (click)="setActiveSection('service')" >Services</a>
+            <a class="nav-link" href="#service" [class.active]="currentSection === 'service'" (click)="setActiveSection('service')">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  href="#article" [class.active]="currentSection === 'article'" (click)="setActiveSection('article')">A propos</a>
+            <a class="nav-link" href="#article" [class.active]="currentSection === 'article'" (click)="setActiveSection('article')">À propos</a>
           </li>
           <li class="inscription">
             <a class="nav-link" href="/register">S'inscrire</a>
           </li>
-            <!-- <li class="connexion">
-            <a class="nav-link" href="#">Se connecter</a>
-          </li> -->
-        </ul>
-        <ul>
         </ul>
       </div>
     </div>
   </nav>
 
-    <div class="body">
-  <div class="banner" id="banner">
-    <div class="text">
-      <h3> Votre sante n'a pas de prix alors prenez en soin avec CareWell.</h3>
-      <h6>Un esprit sain dans un corps sain</h6>
-
-      <button class="btn btn-banner"> Prendre rendez-vous</button>
-    </div>
-
-    <div class="images">
-      <img src="images/banner.png" alt="Image 1">
-    </div>
-
-  </div>
-
-  <div class="infos">
-    <img src="images/infos.png" alt="Image 1" class="imfo">
-  </div>
-
-    <img src="/images/deco.png" alt="" class="deco1">
-
-<section id="service">
-  <h4>Catégories de Services</h4>
-  <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
-  <div class="services">
-
-
-    <div class="cards">
-      <ng-container *ngFor="let service of services; let i = index">
-        <div *ngIf="i < 8" class="card"> <!-- Affiche uniquement les 8 premiers services -->
-          <img *ngIf="service.photo" [src]="service.photo" alt="{{ service.name }}" class="image" />
-          <div class="card-header">
-            <h5>{{ service.name }}</h5>
-            <p>{{ service.description }} </p>
-          </div>
-          <button class="boutton-rv">Prendre rendez-vous</button>
-          <p>Créé le : {{ service.created_at }}</p>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-</section>
-
-<section id="article">
-
-    <img src="/images/deco.png" alt="" class="deco1">
-    <h4>Catégories de Maladies</h4>
-    <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
-
-    <div class="maladies">
-
-    
-      <div class="cards">
-        <div class="card">
-          <img alt="Maladie" src="/images/maladie1.png" class="image">
-          <div class="card-header">
-            <h5>Asthme</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-    
-        <div class="card">
-          <img alt="Maladie" src="/images/maladie2.png" class="image">
-          <div class="card-header">
-            <h5>Asthme</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
-        <div class="card">
-          <img alt="Maladie" src="/images/maladie3.png" class="image">
-          <div class="card-header">
-            <h5>Asthme</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
-        <div class="card">
-          <img alt="Maladie" src="/images/maladie4.png" class="image">
-          <div class="card-header">
-            <h5>Asthme</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
-        <div class="card">
-          <img alt="Maladie" src="/images/maladie5.png" class="image">
-          <div class="card-header">
-            <h5>Asthme</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
+  <div class="body">
+    <div class="banner" id="banner">
+      <div class="text">
+        <h3>Votre santé n'a pas de prix alors prenez-en soin avec CareWell.</h3>
+        <h6>Un esprit sain dans un corps sain</h6>
+        <button class="btn btn-banner">Prendre rendez-vous</button>
       </div>
-    </div>
-  </section>
-
-    <img src="/images/deco.png" alt="" class="deco1">
-
-    <h4>Catégories de Médecins</h4>
-    <p>Trouvez ci-dessous nos médecins et prenez rendez-vous avec eux.</p>
-    <div class="medecins">
-    
-      <div class="cards">
-        <div class="card">
-          <img alt="Médecin" src="/images/medecin.png" class="image">
-          <div class="card-header">
-            <h5>Aissatou Ndiaye</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-    
-        <div class="card">
-          <img alt="Médecin" src="/images/medecin.png" class="image">
-          <div class="card-header">
-            <h5>Aissatou Ndiaye</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
-        <div class="card">
-          <img alt="Médecin" src="/images/medecin.png" class="image">
-          <div class="card-header">
-            <h5>Aissatou Ndiaye</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
-        <div class="card">
-          <img alt="Médecin" src="/images/medecin.png" class="image">
-          <div class="card-header">
-            <h5>Aissatou Ndiaye</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
-        <div class="card">
-          <img alt="Médecin" src="/images/medecin.png" class="image">
-          <div class="card-header">
-            <h5>Aissatou Ndiaye</h5>
-          </div>
-          <button class="boutton">
-            Consulter
-          </button>
-        </div>
-
+      <div class="images">
+        <img src="images/banner.png" alt="Banner Image">
       </div>
     </div>
 
-    <img src="/images/deco.png" alt="" class="deco1">
-
-    <h4>Témoignages</h4>
-    <div class="temoignages">
-
-    
-      <div class="temoignage">      
-        <div class="card-bleu">
-          <div class="card-white">
-            <h5>Sophiatou Mendy</h5>
-            <p>“Une expérience inoubliable, cette application m’a beaucoup aidé dans la prise de rendez-vous et le suivi de mon dossier médical. Un grand merci à CareWell.</p>
-          </div>
-        </div>
-      </div>
-    
-      <div class="temoignage">      
-        <div class="card-bleu">
-          <div class="card-white">
-            <h5>Sophiatou Mendy</h5>
-            <p>“Une expérience inoubliable, cette application m’a beaucoup aidé dans la prise de rendez-vous et le suivi de mon dossier médical. Un grand merci à CareWell.</p>
-          </div>
-        </div>
-      </div>
+    <div class="infos">
+      <img src="images/infos.png" alt="Info Image" class="info">
     </div>
 
-    <div class="quetions">
-      
+    <img src="images/deco.png" alt="Decoration Image" class="deco1">
+      <h4>Catégories de Services</h4>
+      <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
+      <div class="services">
+        <div class="cards">
+          <ng-container *ngFor="let service of services; let i = index">
+            <div *ngIf="i < 8" class="card">
+              <img *ngIf="service.photo" [src]="service.photo" alt="{{ service.name }}" class="image" />
+              <div class="card-header">
+                <h5>{{ service.name }}</h5>
+                <p>{{ limitWords(service.description) }}</p>                 
+              </div>
+              <a href="login"> <button class="boutton-rv">  Prendre rendez-vous</button></a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <h4>Catégories de Services</h4>
+
+    <div class="banner2" id="banner">
+      <div class="text">
+        <h2>À propos de CareWell</h2>
+        <p>Carewell est une application de la clinique La Croix Bleue qui offre un espace totalement digitalise.</p>
+        <h6>Ce que nous proposons</h6>
+        <p>Une prise de rnddez-en ligne en un clic</p>    
+      </div>
+  
+    </div>
+
+    <img src="images/deco.png" alt="Decoration Image" class="deco1">
+
+      <h4>Catégories de Maladies</h4>
+      <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
+
+      <div class="maladies">
+        <div class="cards">
+          <ng-container *ngFor="let article of articles; let i = index">
+            <div *ngIf="i < 8" class="card">
+              <img *ngIf="article.photo" [src]="article.photo" alt="{{ article.title }}" class="image" />
+              <div class="card-header">
+                <h5>{{ article.title }}</h5>
+                <p>{{ limitWords(article.content) }}</p>                 
+              </div>
+              <button (click)="openDetailsModal(article)" class="boutton ">Consulter</button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <h4>Nos Médecins</h4>
+      <p>Trouvez ci-dessous nos médecins et prenez rendez-vous avec eux.</p>
+      <div class="medecins">
+        <div class="cards">
+          <ng-container *ngFor="let user of users; let i = index">
+            <div *ngIf="i < 8" class="card">
+              <img *ngIf="user.photo" [src]="user.photo" alt="{{ user.first_name }} {{ user.last_name }}" class="image" />
+              <div class="card-header">
+                <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+                <p>{{ user.service.name }}</p>
+              </div>
+              <button class="boutton">Consulter</button>
+              <p>Créé le : {{ user.created_at | date:'short' }}</p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+    <img src="images/deco.png" alt="Decoration Image" class="deco1">
+
+    <!-- Témoignages Section avec Slider -->
+    <section id="temoignages" class="py-5">
+      <h4 class="text-center mb-4">Témoignages</h4>
+      <div id="temoignagesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="temoignage text-center">
+              <div class="card-bleu p-4">
+                <div class="card-white p-3">
+                  <h5>Sophiatou Mendy</h5>
+                  <p>“Une expérience inoubliable, cette application m’a beaucoup aidé dans la prise de rendez-vous et le suivi de mon dossier médical. Un grand merci à CareWell.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="temoignage text-center">
+              <div class="card-bleu p-4">
+                <div class="card-white p-3">
+                  <h5>Fatou Diop</h5>
+                  <p>“CareWell a vraiment amélioré ma gestion de la santé. J'apprécie énormément la rapidité pour prendre des rendez-vous et accéder à mes dossiers médicaux.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="temoignage text-center">
+              <div class="card-bleu p-4">
+                <div class="card-white p-3">
+                  <h5>Alioune Sow</h5>
+                  <p>“Je recommande CareWell à tout le monde. Le suivi personnalisé m'a permis d'avoir une vue claire de mes consultations et prescriptions.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#temoignagesCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#temoignagesCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="questions">
+      <!-- Ajoutez ici le contenu ou les éléments que vous souhaitez -->
     </div>
   </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true" [ngClass]="{ 'show': isDetailsModalOpen }" [style.display]="isDetailsModalOpen ? 'block' : 'none'">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">{{ selectedArticle?.title }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeDetailsModal()"></button>
+      </div>
+      <div class="modal-body">
+        <img *ngIf="selectedArticle?.photo" [src]="selectedArticle.photo" alt="{{ selectedArticle.title }}" class="img-fluid mb-3" />
+        <h6>Description :</h6>
+        <p>{{ selectedArticle?.content }}</p>
+
+        <h6>Symptomes :</h6>
+        <p>{{ selectedArticle?.symptoms}} </p>
+
+        <h6>Conseils :</h6>
+        <p>{{ selectedArticle?.advices}} </p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

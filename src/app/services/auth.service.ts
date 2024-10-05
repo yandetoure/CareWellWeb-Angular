@@ -97,6 +97,11 @@ export class AuthService {
     }
   }
 
+    // Méthode pour récupérer tous les utilisateurs
+    getUsers(): Observable<any> {
+      return this.http.get(this.apiUrl); // Faire une requête HTTP pour récupérer les utilisateurs
+    }
+
     // // Méthode pour récupérer l'utilisateur connecté
     // getUser(): Observable<any> {
     //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);

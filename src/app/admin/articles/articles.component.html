@@ -27,7 +27,8 @@
         <div class="article-card" *ngFor="let article of articles">
             <img *ngIf="article.photo" [src]="'http://localhost:8000/storage/' + article.photo" alt="{{ article.name }}" class="article-photo" />
             <h4>{{ article.title }}</h4>
-            <p>{{ limitWords(article.content) }}</p>             <div class="article-buttons">
+            <p>{{ limitWords(article.content) }}</p>             
+            <div class="article-buttons">
                 <button (click)="deleteArticle(article.id)" class="btn btn-danger"><i class="fas fa-trash"></i> Supprimer</button>
                 <button (click)="openUpdateModal(article)" class="btn btn-secondary"><i class="fas fa-edit"></i> Modifier</button>
                 <button (click)="openDetailsModal(article)" class="btn btn-info"><i class="fas fa-eye"></i> Voir les détails</button>

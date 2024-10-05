@@ -114,6 +114,7 @@
     margin-left: 85%;
     margin-top: 15px;
   }
+  
 
 h4{
     color: #43AA12;
@@ -130,6 +131,8 @@ h4{
         .cards{
             display: flex;
             width: 98%;
+            margin-bottom: 70px;
+
           }
           .card{
             margin: 20px;
@@ -147,6 +150,7 @@ h4{
         .cards{
             display: flex;
             width: 98%;
+            margin-bottom: 70px;
           }
           .card{
             margin: 20px;
@@ -156,12 +160,10 @@ h4{
         .maladies{
             display: flex;
             justify-content: center;
+            margin-bottom: 70px;
             .cards{
                 display: flex;
                 width: 98%;
-              }
-              .image{
-                margin: 10px;
               }
               .card{
                 margin: 20px;
@@ -195,24 +197,28 @@ h4{
       border: none;
     }
 
-    .temoignage{
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 100px;
-    }
-    .temoignages{
-        display: flex;
-        width: 70%;
-        justify-content: center;
-        justify-content: space-between;
-        margin-bottom: 50px;
-      h4{
-        text-align: center;
-        margin-top: 50px;
-      }
-    }
+    .temoignages {
+      background-color: #ffffff; /* Fond blanc pour la section témoignages */
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .temoignage h5 {
+      font-weight: bold;
+      color: #343a40; /* Couleur du titre */
+  }
+  .temoignage p {
+      font-style: italic; /* Italique pour les témoignages */
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+      background-color: #007bff; /* Couleur des flèches */
+      border-radius: 50%;
+  }
     .card-header{
         margin-top: 10px;
+        background-color: #ffffff;
         h5{
           font-size: 18px;
           font-weight: bold;
@@ -220,16 +226,13 @@ h4{
         }
     }
     .card-bleu{
-      height: 115px;
-      background-color: #0072D1;
-      width: 450px;
+      height: 250px;
+      background-color: #0073d179;
+      width: 1000px;
     }
     .card-white{
-      height: 135px;
+      height: 200px;
       background-color: #ffffff;
-      margin-top: -20px;
-      width: 90%;
-      margin-left: 5%;
       p{
         color: #0000009c;
         font-size: 16px;
@@ -242,7 +245,54 @@ h4{
   height: 200px;
 }
 
+.missions{
+  margin: 100px;
+}
 
+.banner2{
+  background-image: url('/images/medecins.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(12, 11, 11, 0.701); /* Couleur noire avec 50% d'opacité */
+  background-blend-mode: darken; /* Mélange la couleur de fond avec l'image */
+  font-family: merriweather;
+  margin-top: 10px;
+  .text{
+      background-color: #ffffff82;
+      width: 600px;
+      height: 300px;
+      padding-left: 10px;
+      font-weight: bold;
+      color: white;
+      padding-top: 20px;
+      padding: 20px;
+      h3{
+          color: white;
+          font-size: 26px;
+      }
+
+  }
+  .btn-banner{
+      background-color: #09a84c;
+      color: white;
+      font-size: 18px;
+      margin-top: 50px;
+      margin-bottom: 10px;
+      padding-left: 18px;
+      padding-right: 18px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+
+  .images{
+      margin-left: 90px;
+  }
+}
 
     /* Pour les écrans plus petits (téléphones) */
 @media (max-width: 767px) {
@@ -283,6 +333,8 @@ h4{
         width: 100%; /* Les cartes de témoignage prennent toute la largeur */
     }
 }
+
+
 
 /* Pour les écrans moyens (tablettes) */
 @media (min-width: 768px) and (max-width: 1174px) {

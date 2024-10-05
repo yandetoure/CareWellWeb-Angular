@@ -21,30 +21,50 @@ import { PageComponent } from './home/page/page.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
 import { BannerComponent } from './home/banner/banner.component';
 import { ContactsComponent } from './home/contacts/contacts.component';
-import { Component } from '@angular/core';
 
-export const routes: Routes = [ // Ajoute le mot-clé export ici
-    { path: '', redirectTo: '/register', pathMatch: 'full' },
-    
+// Routes array - corrected
+export const routes: Routes = [
+  { path: '', redirectTo: '/register', pathMatch: 'full' }, // Default route
+  
   { path: 'home', component: HomeComponent }, 
   { path: 'service', component: ServiceComponent }, 
   { path: 'profile', component: ProfileComponent },
+
+  // Dashboard routes
   { path: 'dashboard/accountant', component: DashbaordAccountantComponent },
   { path: 'dashboard/admin', component: DashbaordAdminComponent },
   { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
   { path: 'dashboard/patient', component: DashbaordPatientComponent },
+
+  // Doctor-related routes
   { path: 'doctor/medical-file', component: MedicalFilesComponent },
   { path: 'doctor/doctors', component: DoctorsComponent },
-  { path: 'patients', component: PatientsComponent},
-  { path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  { path: 'auth', component: AuthComponent},
-  { path: 'admin/services', component: ServicesComponent},
-  { path: 'articles', component: ArticlesComponent},
-  { path: 'prescriptions', component: PrescriptionComponent},
-  { path: 'doctor/availability', component: AvailabilityComponent},
-  { path: 'patient/appointments', component: AppointmentsComponent},
-  { path: 'page', component: PageComponent},
-  { path: 'us', component: AboutUsComponent},
+  { path: 'patients', component: PatientsComponent },
 
+  // Auth routes
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'auth', component: AuthComponent },
+
+  // Admin routes
+  { path: 'admin/services', component: ServicesComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'prescriptions', component: PrescriptionComponent },
+
+  // Doctor availability & Patient appointments
+  { path: 'doctor/availability', component: AvailabilityComponent },
+  { path: 'patient/appointments', component: AppointmentsComponent },
+
+  // Home Page sections
+  { path: 'page', component: PageComponent },
+  { path: 'us', component: AboutUsComponent },
+
+  // Example of sections (section1 to section4)
+  { path: 'section1', component: PageComponent },
+  { path: 'section2', component: PageComponent },
+  { path: 'section3', component: PageComponent },
+  { path: 'section4', component: PageComponent },
+
+  // Default redirect if no matching route is found
+  { path: '**', redirectTo: '/register' }
 ];
