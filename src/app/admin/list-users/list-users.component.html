@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h5>Liste des Utilisateurs</h5>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Prénom</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Email</th>
+              <th scope="col">Téléphone</th>
+              <th scope="col">Statut</th> <!-- Nouvelle colonne pour le statut -->
+              <th scope="col">Rôle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone_number }}</td>
+              <td>{{ user.status }}</td> <!-- Affichage du statut -->
+              <td>{{ user.roles.join(', ') }}</td> <!-- Rôles sous forme de liste -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

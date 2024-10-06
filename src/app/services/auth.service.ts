@@ -95,10 +95,12 @@ export class AuthService {
     }
   }
 
-    // Méthode pour récupérer tous les utilisateurs
-    getUsers(): Observable<any> {
-      return this.http.get(this.apiUrl); // Faire une requête HTTP pour récupérer les utilisateurs
-    }
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users`).pipe(
+      map((response: any) => response.data) // Extraire 'data' de la réponse
+    );
+  }
+  
 
 
     getUserInfo(): Observable<any> {
