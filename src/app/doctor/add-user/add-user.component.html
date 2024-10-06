@@ -1,45 +1,56 @@
-<form [formGroup]="addUserForm" (ngSubmit)="onAddUser()">
-    <div>
-      <label for="first_name">Prénom</label>
-      <input id="first_name" formControlName="first_name" required />
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h5>Ajouter Utilisateur</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="addUserForm" (ngSubmit)="onAddUser()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="first_name" class="form-label">Prénom</label>
+              <input id="first_name" formControlName="first_name" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="last_name" class="form-label">Nom</label>
+              <input id="last_name" formControlName="last_name" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" formControlName="email" type="email" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="adress" class="form-label">Adresse</label>
+              <input id="adress" formControlName="adress" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="phone_number" class="form-label">Téléphone</label>
+              <input id="phone_number" formControlName="phone_number" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="day_of_birth" class="form-label">Date de naissance</label>
+              <input id="day_of_birth" formControlName="day_of_birth" type="date" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input id="password" formControlName="password" type="password" required class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="role" class="form-label">Rôle</label>
+              <select id="role" formControlName="role" required class="form-select">
+                <option value="Admin">Admin</option>
+                <option value="Patient">Patient</option>
+                <option value="Doctor">Docteur</option>
+                <option value="Accountant">Comptable</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="photo" class="form-label">Photo</label>
+              <input type="file" (change)="onFileChange($event)" class="form-control" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Ajouter Utilisateur</button>
+        </form>
+      </div>
     </div>
-    <div>
-      <label for="last_name">Nom</label>
-      <input id="last_name" formControlName="last_name" required />
-    </div>
-    <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" type="email" required />
-    </div>
-    <div>
-      <label for="adress">Adresse</label>
-      <input id="adress" formControlName="adress" required />
-    </div>
-    <div>
-      <label for="phone_number">Téléphone</label>
-      <input id="phone_number" formControlName="phone_number" required />
-    </div>
-    <div>
-      <label for="day_of_birth">Date de naissance</label>
-      <input id="day_of_birth" formControlName="day_of_birth" type="date" required />
-    </div>
-    <div>
-      <label for="password">Mot de passe</label>
-      <input id="password" formControlName="password" type="password" required />
-    </div>
-    <div>
-      <label for="role">Rôle</label>
-      <select id="role" formControlName="role" required>
-        <option value="Admin">Admin</option>
-        <option value="Patient">Patient</option>
-        <option value="Doctor">Docteur</option>
-        <option value="Accountant">Comptable</option>
-      </select>
-    </div>
-    <div>
-      <label for="photo">Photo</label>
-      <input type="file" (change)="onFileChange($event)" />
-    </div>
-    <button type="submit">Ajouter Utilisateur</button>
-  </form>
+  </div>
   
