@@ -22,6 +22,7 @@ import { AboutUsComponent } from './home/about-us/about-us.component';
 import { BannerComponent } from './home/banner/banner.component';
 import { ContactsComponent } from './home/contacts/contacts.component';
 import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
+import { AddUserComponent } from './doctor/add-user/add-user.component';
 
 // Routes array - corrected
 export const routes: Routes = [
@@ -41,6 +42,7 @@ export const routes: Routes = [
   { path: 'doctor/medical-file', component: MedicalFilesComponent },
   { path: 'doctor/doctors', component: DoctorsComponent },
   { path: 'patients', component: PatientsComponent },
+  { path: 'doctor/user', component: AddUserComponent },
 
   // Auth routes
   { path: 'login', component: LoginComponent },

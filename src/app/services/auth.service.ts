@@ -125,4 +125,10 @@ export class AuthService {
     //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     //   return this.http.get<any>(`${this.apiUrl}/user`); // Utilise l'API backend pour récupérer l'utilisateur
     // }
+
+
+
+    addUser(userData: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/add-user`, userData);
+    }
 }
