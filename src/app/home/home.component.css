@@ -258,24 +258,27 @@ h4{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(12, 11, 11, 0.701); /* Couleur noire avec 50% d'opacité */
-  background-blend-mode: darken; /* Mélange la couleur de fond avec l'image */
+  background-color: rgba(12, 11, 11, 0.701);
+  background-blend-mode: darken;
   font-family: merriweather;
   margin-top: 10px;
   .text{
-      background-color: #ffffff82;
+      background-color: #224f4a82;
       width: 600px;
       height: 300px;
-      padding-left: 10px;
+      text-align: center;
       font-weight: bold;
       color: white;
       padding-top: 20px;
       padding: 20px;
+      color: white;
       h3{
           color: white;
           font-size: 26px;
       }
-
+      h6{
+        font-size: 18px;
+      }
   }
   .btn-banner{
       background-color: #09a84c;

@@ -9,35 +9,7 @@
     <app-patient-header></app-patient-header>
 
 <div class="container">
-    <h2>Rendez-vous</h2>
-
-    <h2>Rendez-vous</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Utilisateur</th>
-          <th>Service</th>
-          <th>Date</th>
-          <th>Raison</th>
-          <th>Symptômes</th>
-          <th>Heure</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let appointment of appointments">
-          <td>{{ appointment.user.name }}</td>
-          <td>{{ appointment.service.name }}</td>
-          <td>{{ appointment.date }}</td>
-          <td>{{ appointment.reason }}</td>
-          <td>{{ appointment.symptoms || 'Non spécifié' }}</td>
-          <td>{{ appointment.time }}</td>
-        </tr>
-      </tbody>
-    </table>
-    
-
-    <hr>
-
+  
     <!-- Formulaire pour ajouter un rendez-vous -->
     <h3>Ajouter un nouveau rendez-vous</h3>
     <form (submit)="addAppointment()">

@@ -7,37 +7,40 @@
     <title>Sidebar du docteurs</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <img src="images/logo.png" alt="Image 1" class="logo" height="60">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/patient/appointments">Rendez-vous</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/tickets">Billets</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="profile">Billets</a>
-              </li>
-              <li class="inscription">
-                <a class="nav-link" href="/register">Profil</a>
-              </li>
-                <!-- <li class="connexion">
-                <a class="nav-link" href="#">Se connecter</a>
-              </li> -->
-            </ul>
-            <ul>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <div class="sidebar">
+        <img src="images/logo.png" alt="" class="logo">
+        <ul>
+            <li>
+                <span class="material-icons icon">home</span>
+                <a routerLink="/doctor/dashboard">Tableau de bord</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon"> schedule </span>
+                <a routerLink="/doctor/patients">Rendez-vous</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">description </span>
+                <a routerLink="/doctor/appointments">Dossiers Medicaux</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">chat </span>                
+                <a routerLink="/doctor/reports">Discussions</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">stethoscope</span>
+                <a routerLink="/doctor/doctor-profile">Docteur</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">person</span>
+                <a routerLink="/articles">Articles</a>
+            </li>
+            <li>
+                <span class="material-symbols-outlined icon">person</span>
+                <a routerLink="/admin/dervices">Services</a>
+            </li>
+
+            <!-- <button color="danger" (click)="logout" > Deconnexion</button> -->
+        </ul>
+    </div>
 </body>
 </html>

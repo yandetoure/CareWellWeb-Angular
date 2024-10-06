@@ -46,8 +46,6 @@ export class AuthService {
       })
     );
   }
-  
-  
 
   // Méthode pour se déconnecter
   logout(): void {
@@ -102,6 +100,26 @@ export class AuthService {
       return this.http.get(this.apiUrl); // Faire une requête HTTP pour récupérer les utilisateurs
     }
 
+
+    getUserInfo(): Observable<any> {
+      return this.http.get<any>(`${this.apiUrl}/profile`, { headers: this.getHeaders() });
+    }
+    
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('auth_token'); 
+      if (token) {
+        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      } else {
+        console.error('Token non trouvé');
+        return new HttpHeaders();
+      }
+    }
+
+      // Méthode pour mettre à jour les informations du profil
+  updateUserInfo(userInfo: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update`, userInfo);
+  }
+    
     // // Méthode pour récupérer l'utilisateur connecté
     // getUser(): Observable<any> {
     //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);

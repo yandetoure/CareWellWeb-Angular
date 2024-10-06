@@ -126,4 +126,7 @@ closeDetailsModal(): void {
   }
 }
 
+
+
+
 }

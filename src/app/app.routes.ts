@@ -21,6 +21,7 @@ import { PageComponent } from './home/page/page.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
 import { BannerComponent } from './home/banner/banner.component';
 import { ContactsComponent } from './home/contacts/contacts.component';
+import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
 
 // Routes array - corrected
 export const routes: Routes = [
@@ -64,6 +65,9 @@ export const routes: Routes = [
   { path: 'section2', component: PageComponent },
   { path: 'section3', component: PageComponent },
   { path: 'section4', component: PageComponent },
+
+  // Patient profile
+  { path: 'patient/profil', component: PatientProfileComponent},
 
   // Default redirect if no matching route is found
   { path: '**', redirectTo: '/register' }
