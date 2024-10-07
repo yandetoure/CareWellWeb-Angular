@@ -52,4 +52,20 @@ export class AppointmentService {
     getAppointment(){
       return this.http.get<any>(this.apiUrl+'/appointments');
     }
+
+
+      // Méthode pour récupérer les rendez-vous du docteur connecté
+  getDoctorAppointments(): Observable<any> {
+    const token = localStorage.getItem('token'); // Récupère le token si nécessaire
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,  // En-tête d'autorisation si besoin
+    });
+
+    return this.http.get(`${this.apiUrl}/appointments`,{ headers }) ;
+  }
+
+
+  updateAppointment(appointment: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${appointment.id}`, appointment);
+  }
 }

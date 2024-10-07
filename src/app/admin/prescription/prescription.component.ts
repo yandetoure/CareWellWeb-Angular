@@ -40,23 +40,23 @@ export class PrescriptionComponent {
     });
   }
 
-  // addPrescription() {
-  //   const formData = new FormData();
-  //   formData.append('title', this.newArticle.title);
-  //   formData.append('photo', this.newArticle.photo);
-  //   formData.append('content', this.newArticle.content);  
-  //   formData.append('symptoms', this.newArticle.symptoms);
-  //   formData.append('advices', this.newArticle.advices);  // Ajouter les conseils
+  addPrescription() {
+    const formData = new FormData();
+    formData.append('title', this.newPrescription.title);
+    formData.append('photo', this.newPrescription.photo);
+    formData.append('content', this.newPrescription.content);  
+    formData.append('symptoms', this.newPrescription.symptoms);
+    formData.append('advices', this.newPrescription.advices);  // Ajouter les conseils
 
-  //   this.http.post('http://localhost:8000/api/prescriptions', formData).subscribe(response => {
-  //     this.loadPrescriptions(); // Rechargez les articles
-  //     this.newArticle = { title: '', photo: null, content: '', symptoms:'', advicess:'' }; // Réinitialisez le formulaire
-  //   });
-  // }
+    this.http.post('http://localhost:8000/api/prescriptions', formData).subscribe(response => {
+      this.loadPrescriptions(); // Rechargez les articles
+      this.newPrescription = { title: '', photo: null, content: '', symptoms:'', advicess:'' }; // Réinitialisez le formulaire
+    });
+  }
 
-  // onFileSelected(event: any) {
-  //   this.newArticle.photo = event.target.files[0]; // Assigner le fichier sélectionné
-  // }
+  onFileSelected(event: any) {
+    this.newPrescription.photo = event.target.files[0]; // Assigner le fichier sélectionné
+  }
 
   // deleteArticle(id: number) {
   //   this.http.delete(`http://localhost:8000/api/articles/${id}`).subscribe(response => {

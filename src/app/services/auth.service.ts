@@ -120,7 +120,8 @@ export class AuthService {
       // Méthode pour mettre à jour les informations du profil
   updateUserInfo(userInfo: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/update`, userInfo);
-  }
+    }
+    
     
     // // Méthode pour récupérer l'utilisateur connecté
     // getUser(): Observable<any> {
@@ -133,4 +134,14 @@ export class AuthService {
     addUser(userData: any): Observable<any> {
       return this.http.post(`${this.apiUrl}/add-user`, userData);
     }
+
+    //Supprimer un utilisateur
+    deleteUser(id: number): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/delete-user/${id}`);
+    }
+
+    // Mettre à jour un utilisateur
+    // updateUser(userData: any): Observable<any> {
+    //   return this.http.put(`${this.apiUrl}/update-user`, userData);
+    // }
 }

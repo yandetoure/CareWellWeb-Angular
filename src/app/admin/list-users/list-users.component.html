@@ -1,32 +1,52 @@
+<div class="dashboard-container">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="main-content">
+
+        <button > Ajouter un utilisateur </button>
+
 <div class="container mt-4">
-    <div class="card">
-      <div class="card-header">
-        <h5>Liste des Utilisateurs</h5>
-      </div>
-      <div class="card-body">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Prénom</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Téléphone</th>
-              <th scope="col">Statut</th> <!-- Nouvelle colonne pour le statut -->
-              <th scope="col">Rôle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users">
-              <td>{{ user.first_name }}</td>
-              <td>{{ user.last_name }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.phone_number }}</td>
-              <td>{{ user.status }}</td> <!-- Affichage du statut -->
-              <td>{{ user.roles.join(', ') }}</td> <!-- Rôles sous forme de liste -->
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      <h5>Liste des Utilisateurs</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.status }}</td>
+            <td>{{ user.roles.join(', ') }}</td>
+            <td>
+              <button (click)="viewUser(user)" class="btn btn-sm btn-info">
+                <i class="fa fa-eye"></i>
+              </button>
+              <button (click)="editUser(user)" class="btn btn-sm btn-warning">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button (click)="confirmDelete(user.id)" class="btn btn-sm btn-danger">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  
+</div>
+ 
+</div>
+</div>

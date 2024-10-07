@@ -24,6 +24,8 @@ import { ContactsComponent } from './home/contacts/contacts.component';
 import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { ListUsersComponent } from './admin/list-users/list-users.component';
+import { DoctorAppointmentComponent } from './doctor/doctor-appointment/doctor-appointment.component';
+import { AccountablePrescriptionsComponent } from './accountable/accountable-prescriptions/accountable-prescriptions.component';
 
 // Routes array - corrected
 export const routes: Routes = [
@@ -43,6 +45,7 @@ export const routes: Routes = [
   { path: 'doctor/medical-file', component: MedicalFilesComponent },
   { path: 'doctor/doctors', component: DoctorsComponent },
   { path: 'patients', component: PatientsComponent },
+  { path: 'doctor/appointment',component:DoctorAppointmentComponent },
 
   // Auth routes
   { path: 'login', component: LoginComponent },
@@ -73,6 +76,11 @@ export const routes: Routes = [
 
   // Patient profile
   { path: 'patient/profil', component: PatientProfileComponent},
+
+
+
+  //Accountable routes
+  { path: 'accountable/prescriptions', component: AccountablePrescriptionsComponent},
 
   // Default redirect if no matching route is found
   { path: '**', redirectTo: '/register' }

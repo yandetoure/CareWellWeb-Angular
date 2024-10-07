@@ -52,6 +52,7 @@
     height: 200px;
     width: 200px;
     border-radius: 50%;
+    border: 5px solid #077676;
   }
   .infos{
     display: flex;
@@ -120,4 +121,3 @@
   button {
     margin-top: 10px;
   }
-  
