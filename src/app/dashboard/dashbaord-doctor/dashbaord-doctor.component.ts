@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component'; // Assurez-vous que le chemin est correct
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngMode
 @Component({
   selector: 'app-dashbaord-doctor',
   standalone: true,
-  imports: [DoctorSidebarComponent, CommonModule, FormsModule], 
+  imports: [DoctorSidebarComponent, CommonModule, FormsModule, RouterLink], 
   templateUrl: './dashbaord-doctor.component.html',
   styleUrls: ['./dashbaord-doctor.component.css'] 
 })

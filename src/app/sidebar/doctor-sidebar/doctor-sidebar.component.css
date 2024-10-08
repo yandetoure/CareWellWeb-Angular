@@ -43,20 +43,30 @@
         text-decoration: none;
     }
   }
+    .sidebar li.active {
+      background-color: #077676; /* Couleur de fond lorsque l'élément est actif */
+  }
+
+  .sidebar li.active a {
+      color: #ffffff; /* Couleur du texte lorsque l'élément est actif */
+  }
+
+  .sidebar li.active .icon {
+      color: #ffffff; /* Couleur de l'icône lorsque l'élément est actif */
+  }
+
   .sidebar li:hover {
-    background-color: #077676; /* Couleur de fond verte au survol */
-    a{
-        color: #ffffff; /* Change la couleur du texte au survol */
-    }
-    .icon{
-        color: #ffffff;
-    }
+      background-color: #077676; /* Couleur de fond verte au survol */
   }
-  
-  .sidebar a.active {
-    background-color: #077676; /* Couleur de fond verte quand actif */
-    color: #ffffff; /* Couleur du texte quand actif */
+
+  .sidebar li:hover a {
+      color: #ffffff; /* Change la couleur du texte au survol */
   }
+
+  .sidebar li:hover .icon {
+      color: #ffffff;
+  }
+
 
   .icon {
     font-size: 24px; /* Ajuste la taille de l'icône */

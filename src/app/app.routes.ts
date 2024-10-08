@@ -26,6 +26,13 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
 import { ListUsersComponent } from './admin/list-users/list-users.component';
 import { DoctorAppointmentComponent } from './doctor/doctor-appointment/doctor-appointment.component';
 import { AccountablePrescriptionsComponent } from './accountable/accountable-prescriptions/accountable-prescriptions.component';
+import { DoctorMedicalfileComponent } from './doctor/doctor-medicalfile/doctor-medicalfile.component';
+import { DoctorPatientComponent } from './doctor/doctor-patient/doctor-patient.component';
+import { AdminRendezVousComponent } from './admin/admin-rendez-vous/admin-rendez-vous.component';
+import { DoctorSidebarComponent } from './sidebar/doctor-sidebar/doctor-sidebar.component';
+import { AdminMedicalfilesComponent } from './admin/admin-medicalfiles/admin-medicalfiles.component';
+
+
 
 // Routes array - corrected
 export const routes: Routes = [
@@ -44,8 +51,10 @@ export const routes: Routes = [
   // Doctor-related routes
   { path: 'doctor/medical-file', component: MedicalFilesComponent },
   { path: 'doctor/doctors', component: DoctorsComponent },
-  { path: 'patients', component: PatientsComponent },
+  { path: 'doctor/patients', component: PatientsComponent },
   { path: 'doctor/appointment',component:DoctorAppointmentComponent },
+  { path: 'doctor/medicalfile', component: DoctorMedicalfileComponent},
+  { path: 'doctor/patient', component: DoctorPatientComponent},
 
   // Auth routes
   { path: 'login', component: LoginComponent },
@@ -54,10 +63,12 @@ export const routes: Routes = [
 
   // Admin routes
   { path: 'admin/services', component: ServicesComponent },
-  { path: 'articles', component: ArticlesComponent },
-  { path: 'prescriptions', component: PrescriptionComponent },
+  { path: 'admin/articles', component: ArticlesComponent },
+  { path: 'admin/prescriptions', component: PrescriptionComponent },
   { path: 'admin/user', component: AddUserComponent },
-  { path: 'admin/list-user', component: ListUsersComponent},
+  { path: 'admin/list-users', component: ListUsersComponent},
+  { path: 'admin/appoinments', component: AdminRendezVousComponent},
+  { path: 'admin/medicalfiles', component: AdminMedicalfilesComponent },
 
 
   // Doctor availability & Patient appointments
@@ -76,6 +87,9 @@ export const routes: Routes = [
 
   // Patient profile
   { path: 'patient/profil', component: PatientProfileComponent},
+
+
+
 
 
 

@@ -39,7 +39,7 @@ updatePrescription(id: string, prescription: any): Observable<any> {
 
 // Supprimer une prescription
 deletePrescription(id: string): Observable<any> {
-  return this.http.delete(`${this.apiUrl}/${id}/destroy`);
+  return this.http.delete(`${this.apiUrl}/prescriptions/${id}`,);
 }
 
   // Méthode pour récupérer les services (nouveau)

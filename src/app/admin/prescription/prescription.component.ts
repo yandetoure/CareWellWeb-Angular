@@ -1,37 +1,33 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; // Assurez-vous que le chemin est correct
-
-
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component';
+import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-prescription',
-  standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, AdminSidebarComponent],
+  standalone: true,
   templateUrl: './prescription.component.html',
-  styleUrl: './prescription.component.css'
+  styleUrls: ['./prescription.component.css']
 })
 export class PrescriptionComponent {
   prescriptions: any[] = [];
-  newPrescription: any = {
-    name: '',
-    price: null, 
-    quantity: '', 
-    service_id: '',
-  };
-  searchTerm: string = '';
-  selectedPrescription: any; // Article sélectionné pour la mise à jour
-  isModalOpen: boolean = false; // État du modal
+  services: any[] = [];
+  newPrescription: any = { name: '', quantity: '', price: '' };
+  selectedPrescription: any;
+  isModalOpen: boolean = false;
   isDetailsModalOpen: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private serviceService: ServiceService,
+  ) {}
 
   ngOnInit(): void {
     this.loadPrescriptions();
+    this.getServices(); 
   }
 
   loadPrescriptions() {
@@ -40,107 +36,64 @@ export class PrescriptionComponent {
     });
   }
 
-  addPrescription() {
-    const formData = new FormData();
-    formData.append('title', this.newPrescription.title);
-    formData.append('photo', this.newPrescription.photo);
-    formData.append('content', this.newPrescription.content);  
-    formData.append('symptoms', this.newPrescription.symptoms);
-    formData.append('advices', this.newPrescription.advices);  // Ajouter les conseils
+  getServices() {
+    this.serviceService.getServices().subscribe(
+      (response) => {
+        this.services = response.data;
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Impossible de récupérer les services.',
+        });
+      }
+    );
+  }
 
-    this.http.post('http://localhost:8000/api/prescriptions', formData).subscribe(response => {
-      this.loadPrescriptions(); // Rechargez les articles
-      this.newPrescription = { title: '', photo: null, content: '', symptoms:'', advicess:'' }; // Réinitialisez le formulaire
+  addPrescription() {
+    this.http.post('http://localhost:8000/api/prescriptions', this.newPrescription).subscribe(response => {
+      this.loadPrescriptions();
+      this.newPrescription = { name: '', quantity: '', price: '' };  // Réinitialiser le formulaire
     });
   }
 
-  onFileSelected(event: any) {
-    this.newPrescription.photo = event.target.files[0]; // Assigner le fichier sélectionné
+  deleteArticle(id: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr ?',
+      text: "Vous ne pourrez pas annuler cette action !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: 'Annuler'
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.http.delete(`http://localhost:8000/api/prescriptions/${id}`).subscribe(() => {
+          Swal.fire('Supprimé !', 'L\'article a bien été supprimé.', 'success');
+          this.loadPrescriptions();
+        });
+      }
+    });
   }
 
-  // deleteArticle(id: number) {
-  //   this.http.delete(`http://localhost:8000/api/articles/${id}`).subscribe(response => {
-  //     this.loadArticles(); // Rechargez les services
-  //   });
-  // }
+  openUpdateModal(prescription: any) {
+    this.selectedPrescription = { ...prescription };
+    this.isModalOpen = true;
+  }
 
-//   openUpdateModal(service: any) {
-//     this.selectedArticle = { ...service }; // Cloner le service sélectionné
-//     this.isModalOpen = true; // Ouvrir le modal
-//   }
+  updatePrescription() {
+    this.http.put(`http://localhost:8000/api/prescriptions/${this.selectedPrescription.id}`, this.selectedPrescription).subscribe(() => {
+      this.loadPrescriptions();
+      this.isModalOpen = false;
+    });
+  }
 
-//   closeUpdateModal() {
-//     this.isModalOpen = false; // Fermer le modal
-//   }
+  openDetailsModal(prescription: any) {
+    this.selectedPrescription = prescription;
+    this.isDetailsModalOpen = true;
+  }
 
-//   updateArticleConfirmed() {
-//     const formData = new FormData();
-//     formData.append('title', this.selectedArticle.title);
-//     formData.append('photo', this.selectedArticle.photo);
-//     formData.append('content', this.selectedArticle.content);
-//     formData.append('symptoms', this.selectedArticle.symptoms);
-//     formData.append('advices', this.selectedArticle.advices);  // Ajouter les conseils
-
-//     this.http.put(`http://localhost:8000/api/articles/${this.selectedArticle.id}`, formData).subscribe(response => {
-//       this.loadArticles(); // Rechargez les services
-//       this.closeUpdateModal(); // Fermer le modal après mise à jour
-//     });
-//   }
-
-//   searchArticle() {
-//     if (this.searchTerm) {
-//       this.articles = this.articles.filter(article => 
-//         article.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-//       );
-//     } else {
-//       this.loadArticles(); // Rechargez les services si le terme de recherche est vide
-//     }
-//   }
-
-//   deleteArticle(articleId: number) {
-//     Swal.fire({
-//       title: 'Êtes-vous sûr ?',
-//       text: "Vous ne pourrez pas annuler cette action !",
-//       icon: 'warning',
-//       showCancelButton: true,
-//       confirmButtonColor: '#3085d6',
-//       cancelButtonColor: '#d33',
-//       confirmButtonText: 'Oui, supprimer !',
-//       cancelButtonText: 'Annuler'
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         // Utilisation correcte de serviceId au lieu de id
-//         this.http.delete(`http://localhost:8000/api/articles/${articleId}`).subscribe(response => {
-//           Swal.fire(
-//             'Supprimé !',
-//             'L\'article a bien été supprimé.',
-//             'success'
-//           );
-//           // Rechargez la liste des services après suppression
-//           this.loadArticles();
-//         });
-//       }
-//     });
-//   }
-
-//   // Méthode pour tronquer le contenu à 50 mots
-// limitWords(content: string, limit: number = 20): string {
-//   let words = content.split(' ');
-//   if (words.length > limit) {
-//     return words.slice(0, limit).join(' ') + '...'; // Tronquer et ajouter des points de suspension
-//   }
-//   return content;
-// }
-
-
-//   // Méthode pour ouvrir le modal de détails
-//   openDetailsModal(article: any): void {
-//     this.selectedArticle = article;
-//     this.isDetailsModalOpen = true;
-//   }
-
-//   // Méthode pour fermer le modal de détails
-//   closeDetailsModal(): void {
-//     this.isDetailsModalOpen = false;
-//   }
+  closeDetailsModal() {
+    this.isDetailsModalOpen = false;
+  }
 }

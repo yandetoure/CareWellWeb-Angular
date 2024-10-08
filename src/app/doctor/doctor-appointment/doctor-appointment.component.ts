@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services//appointment.service'; 
-import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
-import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component'; // Assurez-vous que le chemin est correct
+import { FormsModule } from '@angular/forms'; 
+import { CommonModule } from '@angular/common';  
+import { HttpClientModule } from '@angular/common/http'; 
+import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
+import { Router } from '@angular/router';
 
 
 
@@ -16,16 +17,18 @@ import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-side
   styleUrl: './doctor-appointment.component.css'
 })
 export class DoctorAppointmentComponent {
-  appointments: any[] = []; // Stocker les rendez-vous
-  selectedAppointment: any; // Le rendez-vous sélectionné pour les détails ou l'édition
+  appointments: any[] = []; 
+  selectedAppointment: any; 
 
-  isDetailsModalOpen: boolean = false; // État du modal de détails
-  isEditModalOpen: boolean = false; // État du modal d'édition
+  isDetailsModalOpen: boolean = false; 
+  isEditModalOpen: boolean = false; 
 
-  constructor(private appointmentService: AppointmentService) { }
+  constructor(private appointmentService: AppointmentService,
+    private router: Router 
+  ) { }
 
   ngOnInit(): void {
-    this.getAppointments(); // Récupérer les rendez-vous dès le chargement du composant
+    this.getAppointments(); 
   }
 
   getAppointments(): void {
@@ -85,6 +88,10 @@ export class DoctorAppointmentComponent {
     // Ajouter la logique pour enregistrer les modifications du rendez-vous
     console.log('Rendez-vous modifié:', this.selectedAppointment);
     this.closeEditModal();
+  }
+
+  goToMedicalRecord(userId: number) {
+    this.router.navigate(['/doctor/medicalfile', userId]);
   }
 }
 

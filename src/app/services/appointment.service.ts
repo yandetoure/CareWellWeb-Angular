@@ -68,4 +68,8 @@ export class AppointmentService {
   updateAppointment(appointment: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${appointment.id}`, appointment);
   }
+
+  getPatientsWithAppointments(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/patient`);
+  }
 }

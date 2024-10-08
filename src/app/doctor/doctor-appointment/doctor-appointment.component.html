@@ -14,7 +14,7 @@
             <th>Service</th>
             <th>Date</th>
             <th>Heure</th>
-            <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +50,10 @@
           <p><strong>Service:</strong> {{ selectedAppointment?.service.name }}</p>
           <p><strong>Date:</strong> {{ selectedAppointment?.date | date: 'fullDate' }}</p>
           <p><strong>Heure:</strong> {{ selectedAppointment?.time }}</p>
+        <!-- Ajouter le bouton pour voir le dossier médical -->
+        <button class="btn btn-primary mt-3" (click)="goToMedicalRecord(selectedAppointment?.user.id)">
+          Voir Dossier Médical
+        </button>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>

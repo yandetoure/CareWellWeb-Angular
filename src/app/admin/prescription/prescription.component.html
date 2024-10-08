@@ -1,66 +1,46 @@
-
 <div class="body">
-    <app-admin-sidebar></app-admin-sidebar>
-
-
-<div class="container">
-    <div class="form-container">
-    <form class="article-form" (ngSubmit)="addPrescription()">
-        <h2 class="section-title">Ajouter un Article</h2>
-        <input type="text" [(ngModel)]="newPrescription.title" name="tilte" placeholder="Nom de l'article" required />
-        <textarea [(ngModel)]="newPrescription.content" name="content" placeholder="Description de la maladie"></textarea>
-        <input type="text" [(ngModel)]="newPrescription.symptoms" name="symptoms" placeholder="Les symptomes de la maladie" >
-        <input type="text" [(ngModel)]="newPrescription.advices" name="advices" placeholder="Conseils pratiques">
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-        <button type="submit" class="btn btn-primary">Ajouter Article</button>
-    </form>
-        
-</div>
-    <hr class="divider" />
-    <div>
-    </div>
-    <hr class="divider" />
-
-    <h2 class="section-title">Liste des Prescription</h2>
-    <!-- <input type="text" class="search-input" [(ngModel)]="searchTerm" (input)="searchArticle()" placeholder="Rechercher par nom..." /> -->
-    <div class="articles-list">
-        <div class="article-card" *ngFor="let prescription of prescriptions">
-            <h4>{{ prescription.name }}</h4>
-            <h4>{{ prescription.quantity }}</h4>
-            <h4>{{ prescription.price }}</h4>
-                <!-- <button (click)="deleteArticle(prescription.id)" class="btn btn-danger"><i class="fas fa-trash"></i> Supprimer</button> -->
-                <!-- <button (click)="openUpdateModal(prescription)" class="btn btn-secondary"><i class="fas fa-edit"></i> Modifier</button> -->
-                <!-- <button (click)="openDetailsModal(prescription)" class="btn btn-info"><i class="fas fa-eye"></i> Voir les détails</button> -->
-            </div>
-        </div>
-    </div>
-
-<!-- Modal pour la modification -->
-<!-- <div class="modal" *ngIf="isModalOpen">
-    <div class="modal-content1">
-        <span class="close" (click)="closeUpdateModal()">&times;</span>
-        <h5>Modifier l'Article</h5>
-        <form (ngSubmit)="updateArticleConfirmed()">
-            <input type="text" [(ngModel)]="selectedArticle.title" name="title" placeholder="Nom de la maladie" required />
-            <textarea [(ngModel)]="selectedArticle.content" name="content" placeholder="Description du service"></textarea>
-            <input type="text" [(ngModel)]="selectedArticle.symptoms" name="symptoms" placeholder="Symptomes de la maladie">
-            <input type="text" [(ngModel)]="selectedArticle.advices" name="advices" placeholder="Conseils pratiques">
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-            <button type="submit" class="btn btn-primary">Modifier Article</button>
+    <app-admin-sidebar></app-admin-sidebar>          
+    <div class="container mt-4">
+      <div class="form-container bg-light p-4 rounded shadow">
+        <form class="article-form" (ngSubmit)="addPrescription()">
+          <h2 class="section-title text-center mb-4">Ajouter un Article</h2>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="newPrescription.name" name="name" placeholder="Nom de l'article" required />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="newPrescription.quantity" name="quantity" placeholder="Quantité" required />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="newPrescription.price" name="price" placeholder="Prix" required />
+          </div>
+          <div class="form-group">
+            <label for="service_id">Sélectionner un service :</label>
+            <select id="service_id" [(ngModel)]="newPrescription.service_id" name="service_id" class="form-control" required>
+              <option *ngFor="let service of services" [value]="service.id">{{ service.name }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mt-3">Ajouter Article</button>
         </form>
+      </div>
+      
+      <hr class="my-4" />
+      
+      <h2 class="section-title text-center mb-4">Liste des Prescriptions</h2>
+      
+      <div class="articles-list">
+        <div class="article-card card mb-3" *ngFor="let prescription of prescriptions">
+          <div class="card-body">
+            <h4 class="card-title">{{ prescription.name }}</h4>
+            <p class="card-text">Quantité: {{ prescription.quantity }}</p>
+            <p class="card-text">Prix: {{ prescription.price }} FCFA</p>
+            <div class="d-flex justify-content-between">
+              <button (click)="deleteArticle(prescription.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+              <button (click)="openUpdateModal(prescription)" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+              <button (click)="openDetailsModal(prescription)" class="btn btn-info"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div> -->
-
-<!-- Modal pour voir les détails -->
-<!-- <div class="modal" *ngIf="isDetailsModalOpen">
-    <div class="modal-content">
-        <span class="close" (click)="closeDetailsModal()">&times;</span>
-        <h4>{{ selectedArticle?.title }}</h4>
-        <img *ngIf="selectedArticle?.photo" [src]="'http://localhost:8000/storage/' + selectedArticle.photo" alt="{{ selectedArticle.title }}" class="article-photo" />
-        <p><strong>Contenu :</strong> {{ selectedArticle?.content }}</p>
-        <p><strong>Symptômes :</strong> {{ selectedArticle?.symptoms }}</p>
-        <p><strong>Conseils pratiques :</strong> {{ selectedArticle?.advices }}</p>
-    </div>
-</div> -->
-
-</div>
+  </div>
+  
