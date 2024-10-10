@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';  // Import de CommonModule
 import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
 import Swal from 'sweetalert2';
 import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; // Assurez-vous que le chemin est correct
+import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-admin-exams',
@@ -14,7 +15,7 @@ import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar
   styleUrl: './admin-exams.component.css'
 })
 export class AdminExamsComponent {
-  examens: any[] = [];
+  exams: any[] = [];
   newExam: any = {
     name: '',
     price: null, 
@@ -22,33 +23,38 @@ export class AdminExamsComponent {
     service_id: '',
   };
   searchTerm: string = '';
-  selectedPrescription: any; // Article sélectionné pour la mise à jour
+  selectedExam: any; // Article sélectionné pour la mise à jour
   isModalOpen: boolean = false; // État du modal
   isDetailsModalOpen: boolean = false;
+  services: any[] = [];
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient,
+    private serviceService: ServiceService ,
+  ) {}
 
   ngOnInit(): void {
-    this.loadPrescriptions();
+    this.loadExam();
   }
 
-  loadPrescriptions() {
-    this.http.get<any>('http://localhost:8000/api/prescriptions').subscribe(response => {
-      this.examens = response.data;
+  loadExam() {
+    this.http.get<any>('http://localhost:8000/api/exams').subscribe(response => {
+      this.exams = response.data;
     });
   }
 
-  addPrescription() {
+  addExam() {
     const formData = new FormData();
     formData.append('title', this.newExam.title);
-    formData.append('photo', this.newExam.photo);
     formData.append('content', this.newExam.content);  
     formData.append('symptoms', this.newExam.symptoms);
-    formData.append('advices', this.newExam.advices);  // Ajouter les conseils
+    formData.append('advices', this.newExam.advices);
+    formData.append('advices', this.newExam.description);
 
-    this.http.post('http://localhost:8000/api/examens', formData).subscribe(response => {
-      this.loadPrescriptions(); // Rechargez les articles
-      this.newExam = { title: '', content: '', symptoms:'', advicess:'' }; // Réinitialisez le formulaire
+
+    this.http.post('http://localhost:8000/api/exams', formData).subscribe(response => {
+      this.loadExam(); // Rechargez les articles
+      this.newExam = { name: '', description: '', price:'', quantity:'', service_id:'' }; // Réinitialisez le formulaire
     });
   }
 

@@ -18,35 +18,54 @@
   width: 120px;
   margin-top: 20px;
 }
+
+
 .sidebar ul {
   list-style-type: none; /* Retire les puces de la liste */
   padding: 0; /* Enlève le remplissage par défaut */
-  width: 220px;
+  width: 230px;
   margin-top: 40px;
-  color: #1F2B6C;
+  color: #077676;
   font-weight: 500;
-  font-size: 20px;
+  margin: 2px;
+  font-size: 18px;
   font-family: kanit;
 }
 
 .sidebar li {
   display: flex; /* Utilise flexbox pour aligner l'image et le texte */
   align-items: center; /* Centre verticalement les éléments */
-  margin-bottom: 15px; /* Espace entre les éléments */
-  padding-left: 15px;
+  padding-left: 10px;
   height: 55px;
-  margin: 2px;
-  margin-top: 20px;
+  margin-top: 10px;
   border-radius: 10px;
+  a{
+      color: #077676;
+      text-decoration: none;
+  }
 }
-.sidebar li:hover {
-  background-color: #1F2B6C; /* Couleur de fond verte au survol */
-  color: #ffffff; /* Change la couleur du texte au survol */
+  .sidebar li.active {
+    background-color: #077676; /* Couleur de fond lorsque l'élément est actif */
 }
 
-.sidebar a.active {
-  background-color: #1F2B6C; /* Couleur de fond verte quand actif */
-  color: #ffffff; /* Couleur du texte quand actif */
+.sidebar li.active a {
+    color: #ffffff; /* Couleur du texte lorsque l'élément est actif */
+}
+
+.sidebar li.active .icon {
+    color: #ffffff; /* Couleur de l'icône lorsque l'élément est actif */
+}
+
+.sidebar li:hover {
+    background-color: #077676; /* Couleur de fond verte au survol */
+}
+
+.sidebar li:hover a {
+    color: #ffffff; /* Change la couleur du texte au survol */
+}
+
+.sidebar li:hover .icon {
+    color: #ffffff;
 }
 
 .icon {
@@ -57,8 +76,4 @@
 a {
   text-decoration: none; /* Enlève le soulignement du lien */
   color: #b60808; /* Couleur du texte */
-}
-
-a:hover {
-  color: #007bff; /* Change la couleur au survol */
 }

@@ -1,29 +1,50 @@
 <div class="dashboard-container">
-    <app-admin-sidebar></app-admin-sidebar>
-    <div class="main-content">
-
-<div class="container mt-5">
-    <h2 class="mb-4">Liste des dossiers medicaux</h2>
-    <button class="btn btn-primary mb-3" (click)="loadMedicalFiles()">Rafraîchir la liste</button>
+  <app-admin-sidebar></app-admin-sidebar>
   
-    <table class="table table-bordered" *ngIf="medicalfiles.length > 0">
-      <thead>
-        <tr>
-          <th>ID Patient</th>
-          <th>Nom</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let medicalfile of medicalfiles">
-          <td>{{ medicalfile.identification_number }}</td>
-          <td>{{ medicalfile.user_first_name }} {{ medicalfile.medicalfile_last_name }}</td>
+  <div class="main-content">
+    <div class="container mt-5">
+      <h2 class="mb-4">Liste des dossiers médicaux</h2>
+      
+      <div class="input-group mb-8">
+        <input type="text" class="form-control" placeholder="Rechercher un patient, un numéro de dossier..." [(ngModel)]="searchQuery" (input)="searchMedicalFiles()" aria-label="Search" aria-describedby="button-addon2">
+        <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="searchMedicalFiles()">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
 
-        </tr>
-      </tbody>
-    </table>
-  
-    <p *ngIf="medicalfiles.length === 0">Aucun dossier n'a été trouvé.</p>
-  </div>
-</div>
+      <p *ngIf="filteredMedicalFiles.length > 0">Nombre de dossiers trouvés : {{ filteredMedicalFiles.length }}</p>
+      
+      <p *ngIf="searchQuery && filteredMedicalFiles.length === 0">Aucun dossier ne correspond à votre recherche.</p>
+
+      <button class="btn-refresh  mb-3" (click)="loadMedicalFiles()">Rafraîchir la liste</button>
+      
+      <div class="row">
+        <div class="col-lg-2 col-md-4 col-sm-6" *ngFor="let medicalfile of filteredMedicalFiles" (click)="goToMedicalFileDetails(medicalfile.id)" style="cursor: pointer;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ medicalfile.user?.first_name }} {{ medicalfile.user?.last_name }}</h5>
+              <p class="card-text">{{ medicalfile.identification_number }}</p>
+              <p class="card-text">{{ medicalfile.created_at | date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!searchQuery">
+        <div class="row">
+          <div class="col-lg-2 col-md-4 col-sm-6 mb-4" *ngFor="let medicalfile of medicalfiles" (click)="goToMedicalFileDetails(medicalfile.id)" style="cursor: pointer;">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ medicalfile.user?.first_name }} {{ medicalfile.user?.last_name }}</h5>
+                <h5 class="card-text">{{ medicalfile.identification_number }}</h5>
+                <p class="card-text">{{ medicalfile.created_at | date }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p *ngIf="!searchQuery && medicalfiles.length === 0">Aucun dossier n'est disponible.</p>
+    </div>
+  </div>  
 </div>

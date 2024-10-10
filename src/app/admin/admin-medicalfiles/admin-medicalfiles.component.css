@@ -12,3 +12,39 @@
     flex: 1; /* Prendre tout l'espace restant */
     background-color: #ffffff; /* Couleur de fond du contenu principal */
   }
+
+  .card{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    border-left: 5px solid #054280;
+    border-radius: 15px;
+    .card-body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h5{
+      font-size: 16px;
+      font-weight: bold;
+    }
+    p{
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  }
+
+  .btn-refresh{
+    background-color: #054280;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    &:hover{
+      background-color: #003366;
+    }
+  }

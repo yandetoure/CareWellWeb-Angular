@@ -1,37 +1,103 @@
 <div class="dashboard-container">
   <app-doctor-sidebar></app-doctor-sidebar>
   <div class="main-content">
-
-<div class="container mt-5">
-    <h2 class="mb-4">Liste des patients avec rendez-vous</h2>
-    <button class="btn btn-primary mb-3" (click)="loadPatients()">Rafraîchir la liste</button>
+    <div class="container mt-5">
+      <h2 class="mb-4">Liste des patients avec rendez-vous</h2>
+      <button class="btn btn-primary mb-3" (click)="loadPatients()">Rafraîchir la liste</button>
   
-    <table class="table table-bordered" *ngIf="patients.length > 0">
-      <thead>
-        <tr>
-          <th>ID Patient</th>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Date du rendez-vous</th>
-          <th>Heure</th>
-          <th>Médecin</th>
-          <th>Service</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let patient of patients">
-          <td>{{ patient.patient_id }}</td>
-          <td>{{ patient.patient_name }}</td>
-          <td>{{ patient.patient_email }}</td>
-          <td>{{ patient.appointment_date }}</td>
-          <td>{{ patient.appointment_time }}</td>
-          <td>{{ patient.doctor }}</td>
-          <td>{{ patient.service }}</td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table table-bordered" *ngIf="patients.length > 0">
+        <thead>
+          <tr>
+            <th>ID Patient</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Date du rendez-vous</th>
+            <th>Heure</th>
+            <th>Médecin</th>
+            <th>Service</th>
+            <th>Action</th> <!-- Nouvelle colonne pour les actions -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of patients">
+            <td>{{ patient.patient_id }}</td>
+            <td>{{ patient.patient_first_name }} {{ patient.patient_last_name }}</td>
+            <td>{{ patient.patient_email }}</td>
+            <td>{{ patient.appointment_date }}</td>
+            <td>{{ patient.appointment_time }}</td>
+            <td>{{ patient.patient_disease }}</td>
+            <td>{{ patient.service }}</td>
+            <td>
+              <button class="btn btn-info" (click)="openDetailsModal(patient)">Détails</button>
+              <button class="btn btn-warning" (click)="openUpdateModal(patient)">Modifier</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   
-    <p *ngIf="patients.length === 0">Aucun patient avec rendez-vous n'a été trouvé.</p>
-  </div>
+      <p *ngIf="patients.length === 0">Aucun patient avec rendez-vous n'a été trouvé.</p>
+    </div>
   </div>
 </div>
+
+<!-- Modal pour les détails -->
+<div class="modal" tabindex="-1" role="dialog" *ngIf="isDetailsModalOpen">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Détails du patient</h5>
+        <button type="button" class="close" (click)="closeDetailsModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Nom: {{ selectedPatient.patient_first_name }} {{ selectedPatient.patient_last_name }}</p>
+        <p>Email: {{ selectedPatient.patient_email }}</p>
+        <p>Date du rendez-vous: {{ selectedPatient.appointment_date }}</p>
+        <p>Heure: {{ selectedPatient.appointment_time }}</p>
+        <p>Service: {{ selectedPatient.service }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" *ngIf="isModalOpen">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifier le rendez-vous</h5>
+        <button type="button" class="close" (click)="closeUpdateModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm">
+          <div class="form-group">
+            <label for="appointmentDate">Date du rendez-vous</label>
+            <input type="date" id="appointmentDate" [(ngModel)]="selectedPatient.appointment_date" name="appointmentDate" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="appointmentTime">Heure</label>
+            <input type="time" id="appointmentTime" [(ngModel)]="selectedPatient.appointment_time" name="appointmentTime" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="isVisited">Le patient a visité ?</label>
+            <select id="isVisited" [(ngModel)]="selectedPatient.is_visited" name="isVisited" class="form-control" required>
+              <option [ngValue]="null" disabled>Le patient a-t-il été vu ?</option>
+              <option [ngValue]="true">Oui</option>
+              <option [ngValue]="false">Non</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="updatePatientConfirmed(updateForm)">Mettre à jour</button>
+      </div>
+    </div>
+  </div>
+</div>
+

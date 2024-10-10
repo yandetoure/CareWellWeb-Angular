@@ -1,37 +1,40 @@
-<div class="container">
-    <h2>Disponibilités des Médecins</h2>
-  
-    <ul *ngIf="availabilities.length > 0">
-      <li *ngFor="let availability of availabilities">
-        {{ availability.user.first_name }} {{ availability.user.last_name }} - 
-        Service: {{ availability.service.name }} - Date: {{ availability.available_date }} 
-        De: {{ availability.start_time }} À: {{ availability.end_time }}
+<div class="dashboard-container d-flex">
+  <app-doctor-sidebar></app-doctor-sidebar>
+
+  <div class="main-content container mt-4">
+    <h2 class="text-primary">Disponibilités</h2>
+
+    <ul *ngIf="availabilities.length > 0" class="list-group mb-4">
+      <li *ngFor="let availability of availabilities" class="list-group-item">
+        <strong>{{ availability.doctor.first_name }} {{ availability.doctor.last_name }}</strong> - 
+        <span class="text-muted">Service:</span> {{ availability.service.name }} - 
+        <span class="text-muted">Date:</span> {{ availability.available_date }} - 
+        <span class="text-muted">De:</span> {{ availability.start_time }} 
+        <span class="text-muted">À:</span> {{ availability.end_time }}
       </li>
     </ul>
-  
-    <!-- Formulaire pour ajouter une disponibilité -->
-    <form (submit)="addAvailability(form.value)" #form="ngForm">
-      <div>
-        <label for="doctorId">Médecin</label>
-        <input type="number" id="doctorId" name="doctor_id" ngModel required>
+    
+    <div *ngIf="availabilities.length === 0" class="alert alert-info">Aucune disponibilité trouvée.</div>
+
+
+    <form (submit)="addAvailabilitySelf(form.value)" #form="ngForm" class="bg-light p-4 rounded shadow-sm">
+
+      <div class="mb-3">
+        <label for="availableDate" class="form-label">Date</label>
+        <input type="date" id="availableDate" name="available_date" ngModel required class="form-control">
       </div>
-      <div>
-        <label for="serviceId">Service</label>
-        <input type="number" id="serviceId" name="service_id" ngModel required>
+
+      <div class="mb-3">
+        <label for="startTime" class="form-label">Heure de début</label>
+        <input type="time" id="startTime" name="start_time" ngModel required class="form-control">
       </div>
-      <div>
-        <label for="availableDate">Date</label>
-        <input type="date" id="availableDate" name="available_date" ngModel required>
+
+      <div class="mb-3">
+        <label for="endTime" class="form-label">Heure de fin</label>
+        <input type="time" id="endTime" name="end_time" ngModel required class="form-control">
       </div>
-      <div>
-        <label for="startTime">Heure de début</label>
-        <input type="time" id="startTime" name="start_time" ngModel required>
-      </div>
-      <div>
-        <label for="endTime">Heure de fin</label>
-        <input type="time" id="endTime" name="end_time" ngModel required>
-      </div>
-      <button type="submit">Ajouter Disponibilité</button>
+
+      <button type="submit" class="btn btn-primary">Ajouter Disponibilité</button>
     </form>
   </div>
-  
+</div>

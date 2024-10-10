@@ -5,10 +5,11 @@
             <h5>Bienvenue dans le tableau de bord de l'admin</h5>
 
             <div class="profil">
-                <p>Ndeye Yande Toure</p>
-                <img src="images/profile.png" alt="" class="avatar" class="photo">
-            </div>
+                <p>{{ userInfo.first_name }} {{ userInfo.last_name}} </p>
+                <img *ngIf="userInfo.photo" [src]="userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+              </div>
         </div>
+
         <div class="cards">
             <div class="card">
                     <p>Nombre de tickets</p>

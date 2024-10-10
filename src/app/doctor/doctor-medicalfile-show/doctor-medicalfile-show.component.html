@@ -1,0 +1,82 @@
+<div class="dashboard-container">
+    <app-doctor-sidebar></app-doctor-sidebar><div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h3>Dossier Médical de {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Nom du patient: {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</h5>
+            <p><strong>Numéro de dossier:</strong> {{ medicalFile?.identification_number }}</p>
+            <p><strong>Date de naissance:</strong> {{ medicalFile?.user?.day_of_birth | date }}</p>
+            <p><strong>Date de naissance:</strong> {{ medicalFile?.user?.adress }}</p>
+            <p><strong>Date d'ouverture du dossier:</strong> {{ medicalFile?.created_at | date }}</p>
+            <hr class="my-4" />
+
+            <p><strong>Historique médical:</strong> 
+            <li>
+                {{ medicalFile?.medical_history?.content || 'Aucun historique' }}
+            </li>
+            </p>
+            <hr class="my-4" />
+
+            <p><strong>Prescriptions Médicales:</strong> 
+                <li *ngFor="let prescription of medicalFile.prescription">
+                    {{ prescription?.prescription_id  ||'Aucune Prescription'}}
+                  </li>
+                </p>
+                <hr class="my-4" />
+            
+                <p><strong>Examens Médicaux:</strong> 
+                <li *ngFor="let exam of medicalFile.exam">
+                    {{ exam.exam_id  ||'Aucune Prescription'}}
+                  </li>
+                </p>      
+                <hr class="my-4" />
+            
+                <p><strong>Notes Médicales:</strong> 
+            <li *ngFor="let note of medicalFile.note">
+                {{ note.content }}
+              </li>
+            </p>
+          </div>
+        </div>
+        
+        <form (submit)="addNote(form.value)" #form="ngForm" class="bg-light p-4 rounded shadow-sm">
+            <div class="mb-3">
+              <label for="content" class="form-label">Note</label>
+              <input type="content" id="content" name="content" ngModel required class="form-control">
+            </div>
+      
+            <button type="submit" class="btn btn-primary">Ajouter Disponibilité</button>
+          </form>
+        </div>
+      </div>
+
+      <form (ngSubmit)="addHistory(historyForm.value)" #historyForm="ngForm" class="bg-light p-4 rounded shadow-sm">
+        <div class="mb-3">
+            <label for="historyContent" class="form-label">Antécédent</label>
+            <input type="text" id="historyContent" name="content" ngModel required class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter Antécédent</button>
+    </form>
+
+    <form (ngSubmit)="addPrescription(prescriptionForm.value)" #prescriptionForm="ngForm" class="bg-light p-4 rounded shadow-sm">
+      <div class="mb-3">
+          <label for="prescription" class="form-label">Prescription</label>
+          <select id="prescription" name="prescription_id" ngModel required class="form-control">
+              <option value="" disabled selected>Sélectionnez une prescription</option>
+              <option *ngFor="let prescription of prescriptions" [value]="prescription.id">
+                  {{ prescription.name }}
+              </option>
+          </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Ajouter Prescription</button>
+  </form>
+  
+  
+      
+  </div>
+</div>
+  

@@ -20,25 +20,22 @@ export class MedicalFileService {
     return headers;
   }
 
-  // Ajouter une note au dossier médical
-  addNote(medicalFileId: number, note: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/medicalfile/${medicalFileId}/note`, 
-    { content: note }, 
-    { headers: this.getHeaders() });
+  addNote(id: string, note: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medical-files/${id}/addnote`, note)
+  }
+  
+  // Ajouter un antécédent
+  addHistory(id: string, history: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medical-files/${id}/addHistory`, history)
   }
 
-  // Ajouter une prescription au dossier médical
-  addPrescription(medicalFileId: number, prescription: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/medicalfile/${medicalFileId}/prescription`, 
-    { content: prescription }, 
-    { headers: this.getHeaders() });
+  addPrescription(id:string, data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medical-files/${id}/addprescription`, data);
   }
 
-  // Ajouter un examen au dossier médical
-  addExam(medicalFileId: number, exam: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/medicalfile/${medicalFileId}/exam`, 
-    { description: exam }, 
-    { headers: this.getHeaders() });
+  // Ajouter un examen médical
+  addExam(id: string, exam: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${id}/exams`, exam);
   }
 
   // Récupérer tous les dossiers médicaux
@@ -47,7 +44,11 @@ export class MedicalFileService {
   }
 
   // Récupérer un dossier médical spécifique
-  getMedicalFile(id: string): Observable<any> {
+  getMedicalFileById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/medicalfiles/${id}`, { headers: this.getHeaders() });
+  }
+  
+  getUserById(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users/${userId}`, { headers: this.getHeaders() });
   }
 }

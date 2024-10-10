@@ -53,11 +53,11 @@ export class DoctorAppointmentComponent {
     const appointment = new Date(appointmentDate);
 
     if (appointment < today) {
-      return 'past-appointment'; // Rendez-vous passé
+      return 'past-appointment'; 
     } else if (appointment.getTime() - today.getTime() < 3 * 24 * 60 * 60 * 1000) {
-      return 'near-appointment'; // Rendez-vous proche (dans 3 jours)
+      return 'near-appointment'; 
     } else {
-      return 'upcoming-appointment'; // Rendez-vous futur
+      return 'upcoming-appointment'; 
     }
   }
 

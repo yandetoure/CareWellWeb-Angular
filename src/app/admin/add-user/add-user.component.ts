@@ -5,11 +5,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';  // Import 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Import nécessaire pour ngModel et reactive forms
 import { CommonModule } from '@angular/common';  // Import de CommonModule
 import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component';
 
 @Component({
   selector: 'app-add-user',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule],  
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, AdminSidebarComponent],  
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
@@ -33,24 +34,24 @@ export class AddUserComponent {
   onAddUser() {
     if (this.addUserForm.valid) {
       const formData = new FormData();
-      // Ajoutez chaque champ de votre formulaire à FormData
+      
       Object.keys(this.addUserForm.value).forEach(key => {
         formData.append(key, this.addUserForm.value[key]);
       });
   
-      // Ajoutez le fichier d'image à FormData si nécessaire
+      
       const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
         formData.append('photo', fileInput.files[0]);
       }
   
- // Affichez les valeurs du formulaire dans la console pour déboguer
+ 
  console.log('Données du formulaire :', this.addUserForm.value);
   
  this.authService.addUser(formData).subscribe(
    (response: any) => {
      console.log('Utilisateur ajouté avec succès', response);
-     this.router.navigate(['/users']); // Redirection vers la liste des utilisateurs après ajout
+     this.router.navigate(['/users']);
    },
    (error: any) => {
      console.log('Erreur lors de l\'ajout de l\'utilisateur', error);

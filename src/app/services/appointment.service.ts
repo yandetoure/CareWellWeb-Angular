@@ -9,8 +9,18 @@ export class AppointmentService {
 
   private apiUrl = 'http://127.0.0.1:8000/api'; // Change avec ton URL backend
 
-  constructor(private http: HttpClient) { }
+  private token: string | null = null;
 
+  constructor(private http: HttpClient) {}
+
+  // Ajouter un token d'autorisation si nécessaire
+  private getHeaders(): HttpHeaders {
+    let headers = new HttpHeaders();
+    if (this.token) {
+      headers = headers.set('Authorization', `Bearer ${this.token}`);
+    }
+    return headers;
+  }
   // Récupérer les disponibilités des médecins
   getAvailabilities(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
@@ -39,37 +49,32 @@ export class AppointmentService {
       
     }
 
-    private getHeaders(): HttpHeaders {
-      const token = localStorage.getItem('auth_token'); 
-      if (token) {
-        return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      } else {
-        console.error('Token non trouvé');
-        return new HttpHeaders();
-      }
-    }
+
 
     getAppointment(){
       return this.http.get<any>(this.apiUrl+'/appointments');
     }
 
 
-      // Méthode pour récupérer les rendez-vous du docteur connecté
   getDoctorAppointments(): Observable<any> {
-    const token = localStorage.getItem('token'); // Récupère le token si nécessaire
+    const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,  // En-tête d'autorisation si besoin
+      'Authorization': `Bearer ${token}`,
     });
 
     return this.http.get(`${this.apiUrl}/appointments`,{ headers }) ;
   }
 
 
-  updateAppointment(appointment: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${appointment.id}`, appointment);
+  updateAppointment(patientId: number, patientData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/update/${patientId}`, patientData);
   }
 
   getPatientsWithAppointments(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/patient`);
+  }
+
+  getPatientsWithAppointmentsDoctor(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/doctor/appointments`);
   }
 }

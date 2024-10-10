@@ -2,9 +2,8 @@
 .sidebar {
     width: 240px; /* Ajuste la largeur de la sidebar */
     background-color: #dedbdb70; /* Couleur de fond de la sidebar */
-    padding: 20px;
+    padding: 10px;
     height: 100vh; /* Hauteur pleine de la sidebar */
-    padding: 10px; /* Ajoute du padding autour du lien */
     border-radius: 4px; /* Arrondit les coins */
     transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
     margin: 5px;
@@ -18,25 +17,25 @@
     width: 120px;
     margin-top: 20px;
   }
+  
   .sidebar ul {
     list-style-type: none; /* Retire les puces de la liste */
     padding: 0; /* Enlève le remplissage par défaut */
-    width: 220px;
+    width: 230px;
     margin-top: 40px;
     color: #077676;
     font-weight: 500;
-    font-size: 20px;
+    margin: 2px;
+    font-size: 18px;
     font-family: kanit;
   }
   
   .sidebar li {
     display: flex; /* Utilise flexbox pour aligner l'image et le texte */
     align-items: center; /* Centre verticalement les éléments */
-    margin-bottom: 15px; /* Espace entre les éléments */
-    padding-left: 15px;
+    padding-left: 10px;
     height: 55px;
-    margin: 2px;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 10px;
     a{
         color: #077676;

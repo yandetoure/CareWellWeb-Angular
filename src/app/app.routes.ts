@@ -25,12 +25,14 @@ import { PatientProfileComponent } from './patient/patient-profile/patient-profi
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { ListUsersComponent } from './admin/list-users/list-users.component';
 import { DoctorAppointmentComponent } from './doctor/doctor-appointment/doctor-appointment.component';
-import { AccountablePrescriptionsComponent } from './accountable/accountable-prescriptions/accountable-prescriptions.component';
 import { DoctorMedicalfileComponent } from './doctor/doctor-medicalfile/doctor-medicalfile.component';
 import { DoctorPatientComponent } from './doctor/doctor-patient/doctor-patient.component';
 import { AdminRendezVousComponent } from './admin/admin-rendez-vous/admin-rendez-vous.component';
 import { DoctorSidebarComponent } from './sidebar/doctor-sidebar/doctor-sidebar.component';
 import { AdminMedicalfilesComponent } from './admin/admin-medicalfiles/admin-medicalfiles.component';
+import { AdminMedicalfileShowComponent } from './admin/admin-medicalfile-show/admin-medicalfile-show.component';
+import { AdminExamsComponent } from './admin/admin-exams/admin-exams.component';
+import { DoctorMedicalfileShowComponent } from './doctor/doctor-medicalfile-show/doctor-medicalfile-show.component';
 
 
 
@@ -43,7 +45,7 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
 
   // Dashboard routes
-  { path: 'dashboard/accountant', component: DashbaordAccountantComponent },
+  { path: 'dashboard/accountable', component: DashbaordAccountantComponent },
   { path: 'dashboard/admin', component: DashbaordAdminComponent },
   { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
   { path: 'dashboard/patient', component: DashbaordPatientComponent },
@@ -55,6 +57,7 @@ export const routes: Routes = [
   { path: 'doctor/appointment',component:DoctorAppointmentComponent },
   { path: 'doctor/medicalfile', component: DoctorMedicalfileComponent},
   { path: 'doctor/patient', component: DoctorPatientComponent},
+  { path: 'doctor/medicalfile-show/:id', component: DoctorMedicalfileShowComponent},
 
   // Auth routes
   { path: 'login', component: LoginComponent },
@@ -69,7 +72,8 @@ export const routes: Routes = [
   { path: 'admin/list-users', component: ListUsersComponent},
   { path: 'admin/appoinments', component: AdminRendezVousComponent},
   { path: 'admin/medicalfiles', component: AdminMedicalfilesComponent },
-
+  { path: 'admin/medicalfile-details/:id', component: AdminMedicalfileShowComponent },
+  { path: 'admin/exams', component: AdminExamsComponent },
 
   // Doctor availability & Patient appointments
   { path: 'doctor/availability', component: AvailabilityComponent },
@@ -94,7 +98,6 @@ export const routes: Routes = [
 
 
   //Accountable routes
-  { path: 'accountable/prescriptions', component: AccountablePrescriptionsComponent},
 
   // Default redirect if no matching route is found
   { path: '**', redirectTo: '/register' }

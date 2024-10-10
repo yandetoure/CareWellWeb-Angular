@@ -51,14 +51,14 @@ export class AuthService {
   logout(): void {
     this.token = null;
     localStorage.removeItem('token');
-    localStorage.removeItem('user');  // Supprimer les informations utilisateur
-    this.router.navigate(['/login']); // Redirection vers la page de connexion
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
   // Méthode pour récupérer le profil de l'utilisateur
   getProfile(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.get(`${this.apiUrl}/profile`, { headers });
+    return this.http.get(`${this.apiUrl}//profile/update`, { headers });
   }
 
   // Méthode pour stocker le token
@@ -119,7 +119,7 @@ export class AuthService {
 
       // Méthode pour mettre à jour les informations du profil
   updateUserInfo(userInfo: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update`, userInfo);
+    return this.http.put(`${this.apiUrl}/profile/update`, userInfo);
     }
     
     
@@ -137,7 +137,7 @@ export class AuthService {
 
     //Supprimer un utilisateur
     deleteUser(id: number): Observable<any> {
-      return this.http.delete(`${this.apiUrl}/delete-user/${id}`);
+      return this.http.delete(`${this.apiUrl}/delete/${id}`);
     }
 
     // Mettre à jour un utilisateur

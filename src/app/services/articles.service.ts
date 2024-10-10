@@ -37,6 +37,6 @@ addArticle(articleData: FormData): Observable<any> {
   // Méthode pour supprimer un service
   deleteArticle(id: number): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.delete(`${this.apiUrl}/articles/${id}`, { headers });
+    return this.http.delete(`${this.apiUrl}/delete/${id}`, { headers });
   }
 }

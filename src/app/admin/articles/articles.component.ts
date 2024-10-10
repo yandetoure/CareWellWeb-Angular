@@ -58,19 +58,13 @@ export class ArticlesComponent {
     this.newArticle.photo = event.target.files[0]; // Assigner le fichier sélectionné
   }
 
-  // deleteArticle(id: number) {
-  //   this.http.delete(`http://localhost:8000/api/articles/${id}`).subscribe(response => {
-  //     this.loadArticles(); // Rechargez les services
-  //   });
-  // }
-
   openUpdateModal(service: any) {
     this.selectedArticle = { ...service }; // Cloner le service sélectionné
     this.isModalOpen = true; // Ouvrir le modal
   }
 
   closeUpdateModal() {
-    this.isModalOpen = false; // Fermer le modal
+    this.isModalOpen = false;
   }
 
   updateArticleConfirmed() {
@@ -79,11 +73,11 @@ export class ArticlesComponent {
     formData.append('photo', this.selectedArticle.photo);
     formData.append('content', this.selectedArticle.content);
     formData.append('symptoms', this.selectedArticle.symptoms);
-    formData.append('advices', this.selectedArticle.advices);  // Ajouter les conseils
+    formData.append('advices', this.selectedArticle.advices);
 
     this.http.put(`http://localhost:8000/api/articles/${this.selectedArticle.id}`, formData).subscribe(response => {
-      this.loadArticles(); // Rechargez les services
-      this.closeUpdateModal(); // Fermer le modal après mise à jour
+      this.loadArticles();
+      this.closeUpdateModal(); 
     });
   }
 
@@ -110,7 +104,7 @@ export class ArticlesComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         // Utilisation correcte de serviceId au lieu de id
-        this.http.delete(`http://localhost:8000/api/articles/${articleId}`).subscribe(response => {
+        this.http.delete(`http://localhost:8000/api/delete/${articleId}`).subscribe(response => {
           Swal.fire(
             'Supprimé !',
             'L\'article a bien été supprimé.',

@@ -12,37 +12,18 @@ export class ExamService {
 
   constructor(private http: HttpClient) {}
 
-  getAllExamens(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/examens`);
+  // Récupérer les examens associés à un dossier médical
+  getExams(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/medicalexam?id=${id}`);
   }
 
- // Récupérer toutes les prescriptions
- getExamens(): Observable<any> {
-  return this.http.get(`${this.apiUrl}/examens`);
-}
+  // Ajouter un examen à un dossier médical
+  addExam(exam: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medicalexam`, exam);
+  }
 
-// Ajouter une prescription
-addExam(prescription: any): Observable<any> {
-  return this.http.post(`${this.apiUrl}/examens`, prescription);
-}
-
-// Récupérer une prescription par ID
-getExamById(id: string): Observable<any> {
-  return this.http.get(`${this.apiUrl}/${id}/examens`);
-}
-
-// Mettre à jour une prescription
-updateExam(id: string, exam: any): Observable<any> {
-  return this.http.put(`${this.apiUrl}/${id}`, exam);
-}
-
-// Supprimer une prescription
-deleteExam(id: string): Observable<any> {
-  return this.http.delete(`${this.apiUrl}/${id}/destroy`);
-}
-
-  // Méthode pour récupérer les services (nouveau)
-  getServices(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/services`);
+  // Supprimer un examen d'un dossier médical
+  deleteExam(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/medicalexam/${id}`);
   }
 }
