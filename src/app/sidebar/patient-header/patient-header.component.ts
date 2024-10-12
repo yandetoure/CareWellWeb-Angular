@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterModule , Router} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-patient-header',
@@ -10,13 +10,14 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './patient-header.component.css'
 })
 export class PatientHeaderComponent {
-
-  constructor(private authService: AuthService) {}
-
-
-//deconnexion
-logout(){
-  this.authService.logout();
-}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
+  
+    logout() {
+      this.authService.logout(); // Appel au service de déconnexion
+      this.router.navigate(['/login']); // Redirection vers la page de connexion
+    }
 
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; // Assurez-vous que le chemin est correct
+import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component';
 
 @Component({
   selector: 'app-services',
@@ -21,8 +21,8 @@ export class ServicesComponent {
     description: '', 
   };
   searchTerm: string = '';
-  selectedService: any; // Service sélectionné pour la mise à jour
-  isModalOpen: boolean = false; // État du modal
+  selectedService: any;
+  isModalOpen: boolean = false;
   isDetailsModalOpen: boolean = false;
 
   constructor(private http: HttpClient) {}
@@ -41,31 +41,26 @@ export class ServicesComponent {
     const formData = new FormData();
     formData.append('name', this.newService.name);
     formData.append('photo', this.newService.photo);
-    formData.append('description', this.newService.description);  // Ajouter la description
+    formData.append('description', this.newService.description); 
 
     this.http.post('http://localhost:8000/api/services', formData).subscribe(response => {
-      this.loadServices(); // Rechargez les services
-      this.newService = { name: '', photo: null, description: '' }; // Réinitialisez le formulaire
+      this.loadServices(); 
+      this.newService = { name: '', photo: null, description: '' };
     });
   }
 
   onFileSelected(event: any) {
-    this.newService.photo = event.target.files[0]; // Assigner le fichier sélectionné
+    this.newService.photo = event.target.files[0];
   }
 
-  // deleteService(id: number) {
-  //   this.http.delete(`http://localhost:8000/api/services/${id}`).subscribe(response => {
-  //     this.loadServices(); // Rechargez les services
-  //   });
-  // }
 
   openUpdateModal(service: any) {
-    this.selectedService = { ...service }; // Cloner le service sélectionné
-    this.isModalOpen = true; // Ouvrir le modal
+    this.selectedService = { ...service }; 
+    this.isModalOpen = true; 
   }
 
   closeUpdateModal() {
-    this.isModalOpen = false; // Fermer le modal
+    this.isModalOpen = false; 
   }
 
   updateServiceConfirmed() {
@@ -74,9 +69,11 @@ export class ServicesComponent {
     formData.append('photo', this.selectedService.photo);
     formData.append('description', this.selectedService.description);
 
+    console.log(formData)
+
     this.http.put(`http://localhost:8000/api/services/${this.selectedService.id}`, formData).subscribe(response => {
-      this.loadServices(); // Rechargez les services
-      this.closeUpdateModal(); // Fermer le modal après mise à jour
+      this.loadServices(); 
+      this.closeUpdateModal();
     });
   }
 
@@ -86,7 +83,7 @@ export class ServicesComponent {
         service.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
-      this.loadServices(); // Rechargez les services si le terme de recherche est vide
+      this.loadServices();
     }
   }
 
@@ -102,14 +99,12 @@ export class ServicesComponent {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Utilisation correcte de serviceId au lieu de id
         this.http.delete(`http://localhost:8000/api/services/${serviceId}`).subscribe(response => {
           Swal.fire(
             'Supprimé !',
             'Le service a bien été supprimé.',
             'success'
           );
-          // Rechargez la liste des services après suppression
           this.loadServices();
         });
       }
@@ -117,23 +112,20 @@ export class ServicesComponent {
   }
   
 
-  // Méthode pour tronquer le contenu à 50 mots
 limitWords(content: string, limit: number = 50): string {
   let words = content.split(' ');
   if (words.length > limit) {
-    return words.slice(0, limit).join(' ') + '...'; // Tronquer et ajouter des points de suspension
+    return words.slice(0, limit).join(' ') + '...'; 
   }
   return content;
 }
 
 
-  // Méthode pour ouvrir le modal de détails
   openDetailsModal(article: any): void {
     this.selectedService = article;
     this.isDetailsModalOpen = true;
   }
 
-  // Méthode pour fermer le modal de détails
   closeDetailsModal(): void {
     this.isDetailsModalOpen = false;
   }

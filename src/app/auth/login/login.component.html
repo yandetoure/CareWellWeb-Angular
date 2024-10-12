@@ -1,48 +1,81 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header text-center">
-          <h4>Connexion</h4>
-        </div>
-        <div class="card-body">
-          <form (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                class="form-control" 
-                [(ngModel)]="email" 
-                name="email" 
-                required 
-                placeholder="Entrez votre email"
-              />
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Inscription</title>
+</head>
+<body style="background-color: #f8f9fa;">
 
-            <div class="form-group">
-              <label for="password">Mot de passe</label>
-              <input 
-                type="password" 
-                id="password" 
-                class="form-control" 
-                [(ngModel)]="password" 
-                name="password" 
-                required 
-                placeholder="Entrez votre mot de passe"
-              />
-            </div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-justified mb-4" id="ex1" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a  class="nav-link active" id="tab-login" data-toggle="pill" href="/login" role="tab"
+                  aria-controls="pills-login" aria-selected="true">Connexion</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tab-register" data-toggle="pill" href="#pills-register" role="tab"
+                  aria-controls="pills-register" aria-selected="false">Inscription</a>
+              </li>
+            </ul>
 
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+            <h2 class="text-center mb-6">Connexion</h2>
+            <div class="col-md-6">
+                <div class="card-body">
+                  <form (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input 
+                        type="email" 
+                        id="email" 
+                        class="form-control" 
+                        [(ngModel)]="email" 
+                        name="email" 
+                        required 
+                        placeholder="Entrez votre email"
+                      />
+                    </div>
+        
+                    <div class="form-group">
+                      <label for="password">Mot de passe</label>
+                      <input 
+                        type="password" 
+                        id="password" 
+                        class="form-control" 
+                        [(ngModel)]="password" 
+                        name="password" 
+                        required 
+                        placeholder="Entrez votre mot de passe"
+                      />
+                    </div>
+        
+                    <div class="form-group text-center">
+                      <button type="submit" class="btn btn-success btn-block">Se connecter</button>
+                    </div>
+                    
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                      {{ errorMessage }}
+                    </div>
+                  </form>
+                </div>
             </div>
-            
-            <div *ngIf="errorMessage" class="alert alert-danger">
-              {{ errorMessage }}
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+</body>
+</html>
+
+
+<div class="container">
+  <div class="row justify-content-center">
+
   </div>
 </div>

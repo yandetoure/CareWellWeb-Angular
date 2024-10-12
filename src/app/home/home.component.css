@@ -297,6 +297,18 @@ h4{
   }
 }
 
+.footer{
+  background-color: #224f4a;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+
+  p{
+    color: #ffffff;
+  }
+}
+
     /* Pour les écrans plus petits (téléphones) */
 @media (max-width: 767px) {
     .navbar-nav {
@@ -406,3 +418,4 @@ h4{
         font-size: 14px; /* Ajuster la taille du bouton de la bannière */
     }
 }
+

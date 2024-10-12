@@ -16,7 +16,7 @@
             </li>
             <li routerLinkActive="active">
                 <span class="material-symbols-outlined icon"> schedule </span>
-                <a routerLink="/patient/appointments">Rendez-vous</a>
+                <a routerLink="/patient/user-appointment">Rendez-vous</a>
             </li>
             <li routerLinkActive="active">
                 <span class="material-symbols-outlined icon">description </span>
@@ -38,8 +38,10 @@
                 <span class="material-symbols-outlined icon">person</span>
                 <a routerLink="/admin/dervices">Services</a>
             </li>
-
-            <button color="danger" > Deconnexion</button>
+            <li (click)="logout()" class="logout">
+                <span class="material-symbols-outlined icon">logout</span>
+                <a href="javascript:void(0)">Déconnexion</a>
+            </li>
         </ul>
     </div>
 </body>

@@ -1,38 +1,36 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';  // Import des formulaires réactifs
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Import nécessaire pour ngModel et reactive forms
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';  
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { CommonModule } from '@angular/common'; 
+import { HttpClientModule } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule],  // Ajoute HttpClientModule ici
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule], 
 })
 export class RegisterComponent {
-  registerForm: FormGroup; // Utilisation d'un FormGroup pour le formulaire
+  registerForm: FormGroup; 
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    // Initialisation du formulaire avec des validations
     this.registerForm = this.fb.group({
-      first_name: ['', [Validators.required]], // Prénom requis
-      last_name: ['', [Validators.required]], // Nom requis
-      email: ['', [Validators.required, Validators.email]], // Email requis et format valide
-      adress: ['', [Validators.required]], // Adresse requise
-      phone_number: ['', [Validators.required]], // Téléphone requis
-      day_of_birth: ['', [Validators.required]], // Date de naissance requise
-      password: ['', [Validators.required, Validators.minLength(6)]], // Mot de passe requis avec min 6 caractères
+      first_name: ['', [Validators.required]], 
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]], 
+      adress: ['', [Validators.required]], 
+      phone_number: ['', [Validators.required]],
+      day_of_birth: ['', [Validators.required]], 
+      password: ['', [Validators.required, Validators.minLength(6)]], 
     });
   }
 
   onRegister() {
     if (this.registerForm.valid) {
       const formData = new FormData();
-      // Ajoutez chaque champ de votre formulaire à FormData
       Object.keys(this.registerForm.value).forEach(key => {
         formData.append(key, this.registerForm.value[key]);
       });

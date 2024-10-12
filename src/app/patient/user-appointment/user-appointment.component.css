@@ -1,18 +1,18 @@
 .dashboard-container {
-  display: flex; 
-}
-
+    display: flex; 
+  }
+  
 app-admin-sidebar {
-  width: 250px; 
-  background-color: #ffffff; 
+  width: 250px;
+  background-color: #ffffff;
   height: 100vh; 
-  position: fixed; 
+  position: fixed;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .main-content {
-  flex: 1; 
+  flex: 1;
   overflow-y: auto; 
   background-color: #ffffff; 
-  padding: 20px;
+  padding: 20px; 
 }

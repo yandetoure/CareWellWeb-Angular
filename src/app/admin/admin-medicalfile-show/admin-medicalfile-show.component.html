@@ -1,17 +1,36 @@
 <div class="dashboard-container">
   <app-admin-sidebar></app-admin-sidebar>
-  <div class="main-content"><div class="container mt-5">
-    <h2>Détails du Dossier Médical</h2>
-    <p><strong>ID:</strong> {{ medicalFile?.identification_number }}</p>
-    <p><strong>Nom:</strong> {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</p>
-    <p><strong>Date de création:</strong> {{ medicalFile?.created_at | date }}</p>
-    <p><strong>Historique médical:</strong> {{ medicalFile?.medical_history || 'Aucun historique' }}</p>
-    <p><strong>Prescriptions:</strong> <span *ngIf="medicalFile?.prescriptions.length > 0; else noPrescriptions">
+  <div class="main-content">
+    <div class="container mt-5">
+      <h2 class="text-center">Détails du Dossier Médical</h2>
+      <div class="card mt-4 p-4 shadow-sm">
+        <p><strong>ID:</strong> {{ medicalFile?.identification_number }}</p>
+        <p><strong>Nom:</strong> {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</p>
+        <p><strong>Date de création:</strong> {{ medicalFile?.created_at | date }}</p>
+        <hr />
+        <p><strong>Historique médical:</strong></p>
+        <p class="bg-light p-3 rounded">{{ medicalFile?.medical_history || 'Aucun historique' }}</p>
+        <hr />
+        <p><strong>Prescriptions:</strong></p>
+        <span *ngIf="medicalFile?.prescriptions.length > 0; else noPrescriptions">
+          <ul class="list-unstyled">
+            <li *ngFor="let prescription of medicalFile?.prescriptions" class="bg-light p-2 rounded mb-2">
+              {{ prescription }}
+            </li>
+          </ul>
+        </span>
+
+        <p><strong>Notes Médicales:</strong></p>
         <ul>
-          <li *ngFor="let prescription of medicalFile?.prescriptions">{{ prescription }}</li>
+          <li *ngFor="let note of medicalFile.note">
+            {{ medicalFile?.note_content }}
+          </li>
         </ul>
-      </span>
-      <ng-template #noPrescriptions>Aucune prescription disponible</ng-template>
-    </p>
+
+        <ng-template #noPrescriptions>
+          <p class="text-muted">Aucune prescription disponible</p>
+        </ng-template>
+      </div>
+    </div>
   </div>
-</div></div>
+</div>

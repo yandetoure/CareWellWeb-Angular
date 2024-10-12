@@ -42,10 +42,11 @@
                 <span class="material-symbols-outlined icon">person</span>
                 <a routerLink="/admin/prescriptions">Prescriptions</a>
             </li>
-
+            <li (click)="logout()" class="logout">
+                <span class="material-symbols-outlined icon">logout</span>
+                <a href="javascript:void(0)">Déconnexion</a>
+            </li>
         </ul>
-        <button color="danger" > Deconnexion</button>
-
     </div>
 </body>
 </html>

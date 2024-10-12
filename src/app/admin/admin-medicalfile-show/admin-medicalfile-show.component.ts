@@ -32,7 +32,7 @@ export class AdminMedicalfileShowComponent {
   loadMedicalFileDetails(id: string): void {
     this.medicalFileService.getMedicalFileById(id).subscribe({
       next: (data) => {
-        this.medicalFile = data.data; // Assurez-vous que l'API renvoie les détails correctement
+        this.medicalFile = data.data;
       },
       error: (error) => {
         console.error('Erreur lors du chargement des détails du dossier médical', error);

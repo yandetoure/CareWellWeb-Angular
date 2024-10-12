@@ -72,5 +72,14 @@
     margin-right: 10px; /* Espace entre l'icône et le texte */
   }
   
+  .logout {
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background-color: #f8d7da; /* Changement de fond au survol */
+    color: #721c24; /* Changement de la couleur du texte */
+}
 
   

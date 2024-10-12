@@ -1,20 +1,20 @@
 .dashboard-container {
-    display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
+    display: flex; 
   }
   
   app-doctor-sidebar, app-admin-sidebar {
-    width: 250px; /* Largeur de la sidebar, ajuste selon tes besoins */
-    background-color: #f8f9fa; /* Couleur de fond de la sidebar, modifiable */
-    height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
+    width: 250px;
+    background-color: #f8f9fa; 
+    height: 100vh;
   }
   .header{
     display: flex;
-    justify-content: space-between; /* Aligner le texte vers la droite */
-    align-items: center; /* Centrer verticalement le texte */
-    background-color: #077676; /* Couleur de fond de l'en-tête */
-    color: #ffffff; /* Couleur du texte de l'en-tête */
-    font-size: 16px; /* Taille du texte de l'en-tête */
-    font-weight: 400; /* Écrire en gras */
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #077676; 
+    color: #ffffff; 
+    font-size: 16px; 
+    font-weight: 400;
     padding: 10px;
   }
   
@@ -22,8 +22,10 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
+    border: 2px solid #ffffff;
     margin-right: 50px;
     margin-left: 10px;
+    object-fit: cover;
   }
 
   .profil{
@@ -33,8 +35,8 @@
     margin-left: 20px;
   }
   .main-content {
-    flex: 1; /* Prendre tout l'espace restant */
-    background-color: #ffffff; /* Couleur de fond du contenu principal */
+    flex: 1; 
+    background-color: #ffffff; 
   }
   
   .banner{
@@ -42,8 +44,8 @@
     justify-content: center;
     padding-top: 50px;
     height: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.275); /* Ajoute une ombre à la carte */
-    transition: box-shadow 0.3s; /* Transition douce pour le changement d'ombre */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.275);
+    transition: box-shadow 0.3s;
     border-radius: 30px;
     margin: 35px;
   }
@@ -53,6 +55,7 @@
     width: 200px;
     border-radius: 50%;
     border: 5px solid #077676;
+    object-fit: cover;
   }
   .infos{
     display: flex;

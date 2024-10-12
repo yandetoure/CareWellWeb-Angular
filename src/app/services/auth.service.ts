@@ -24,14 +24,14 @@ export class AuthService {
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       map((response: any) => {
-        console.log('Login response:', response);  // Vérifie la réponse complète
+        console.log('Login response:', response);
   
         // Vérifie si l'objet user et le role sont présents
         if (response && response.user && response.user.roles && response.user.roles.length > 0) {
           const { access_token, user } = response;
-          const userRole = response.user.roles[0].name || response.user.roles[0];  // Extraire le nom du rôle
+          const userRole = response.user.roles[0].name || response.user.roles[0];
   
-          console.log('User role:', userRole);  // Vérifie le rôle
+          console.log('User role:', userRole); 
   
           this.setToken(access_token);
           localStorage.setItem('user', JSON.stringify(user));
@@ -79,13 +79,13 @@ export class AuthService {
         this.router.navigate(['/dashboard/admin']);
         break;
       case 'Patient':
-        this.router.navigate(['/patient/appointments']);
+        this.router.navigate(['/dashboard/patient']);
         break;
         case 'Doctor':
           this.router.navigate(['/dashboard/doctor']);
           break;
       case 'Accountant':
-        this.router.navigate(['/accountant-dashboard']);
+        this.router.navigate(['/dashboard-accontable']);
         break;
       case 'Secretary':
         this.router.navigate(['/secretary-dashboard']);
@@ -97,7 +97,7 @@ export class AuthService {
 
   getUsers(): Observable<any> {
     return this.http.get(`${this.apiUrl}/users`).pipe(
-      map((response: any) => response.data) // Extraire 'data' de la réponse
+      map((response: any) => response.data)
     );
   }
   

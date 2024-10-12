@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../services/service.service';
 import { ArticlesService } from '../services/articles.service';
-import { AuthService } from '../services/auth.service'; // Assurez-vous d'importer le service AuthService
+import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, RouterLink,]
 })
 export class HomeComponent implements OnInit {
   currentSection: string = '';
@@ -21,7 +23,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private serviceService: ServiceService,
     private articlesService: ArticlesService,
-    private authService: AuthService // Ajout de l'injection du service AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
   selectedArticle: any; // Article sélectionné pour la mise à jour
 
@@ -127,6 +130,8 @@ closeDetailsModal(): void {
 }
 
 
-
+goToMedicalFileDetails(id: string): void {
+  this.router.navigate(['/article-details', id]);
+}
 
 }

@@ -33,18 +33,18 @@ import { AdminMedicalfilesComponent } from './admin/admin-medicalfiles/admin-med
 import { AdminMedicalfileShowComponent } from './admin/admin-medicalfile-show/admin-medicalfile-show.component';
 import { AdminExamsComponent } from './admin/admin-exams/admin-exams.component';
 import { DoctorMedicalfileShowComponent } from './doctor/doctor-medicalfile-show/doctor-medicalfile-show.component';
+import { ArticleDetailsComponent } from './home/article-details/article-details.component';
+import { UserAppointmentComponent } from './patient/user-appointment/user-appointment.component';
 
 
-
-// Routes array - corrected
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, // Default route
   
   { path: 'home', component: HomeComponent }, 
   { path: 'service', component: ServiceComponent }, 
   { path: 'profile', component: ProfileComponent },
+  { path: 'article-details/:id', component: ArticleDetailsComponent },
 
-  // Dashboard routes
   { path: 'dashboard/accountable', component: DashbaordAccountantComponent },
   { path: 'dashboard/admin', component: DashbaordAdminComponent },
   { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
@@ -78,6 +78,7 @@ export const routes: Routes = [
   // Doctor availability & Patient appointments
   { path: 'doctor/availability', component: AvailabilityComponent },
   { path: 'patient/appointments', component: AppointmentsComponent },
+  { path: 'patient/user-appointment', component: UserAppointmentComponent},
 
   // Home Page sections
   { path: 'page', component: PageComponent },

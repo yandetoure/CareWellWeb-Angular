@@ -56,6 +56,15 @@ export class AppointmentService {
     }
 
 
+    getUserAppointments(): Observable<any> {
+      const token = localStorage.getItem('token'); 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+      });
+  
+      return this.http.get(`${this.apiUrl}/user/appointments`,{ headers }) ;
+    }
+
   getDoctorAppointments(): Observable<any> {
     const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders({

@@ -1,11 +1,13 @@
-<div class="body">
-    <app-admin-sidebar></app-admin-sidebar>          
+<div class="dashboard-container">
+  <app-admin-sidebar></app-admin-sidebar>   
+  <div class="main-content">
+       
     <div class="container mt-4">
       <div class="form-container bg-light p-4 rounded shadow">
         <form class="article-form" (ngSubmit)="addPrescription()">
-          <h2 class="section-title text-center mb-4">Ajouter un Article</h2>
+          <h2 class="section-title text-center mb-4">Ajouter une Prescription</h2>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="newPrescription.name" name="name" placeholder="Nom de l'article" required />
+            <input type="text" class="form-control" [(ngModel)]="newPrescription.name" name="name" placeholder="Nom de la prescription" required />
           </div>
           <div class="form-group">
             <input type="text" class="form-control" [(ngModel)]="newPrescription.quantity" name="quantity" placeholder="Quantité" required />
@@ -19,13 +21,29 @@
               <option *ngFor="let service of services" [value]="service.id">{{ service.name }}</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary btn-block mt-3">Ajouter Article</button>
+          <button type="submit" class="btn btn-primary btn-block mt-3">Ajouter une prescription</button>
         </form>
       </div>
       
       <hr class="my-4" />
       
-
+    </div>
+    <h2 class="section-title text-center mb-4">Liste des Prescriptions</h2>
+      
+    <div class="articles-list">
+      <div class="article-card card mb-3" *ngFor="let prescription of prescriptions">
+        <div class="card-body">
+          <h4 class="card-title">{{ prescription.name }}</h4>
+          <p class="card-text">Quantité: {{ prescription.quantity }}</p>
+          <p class="card-text">Prix: {{ prescription.price }} FCFA</p>
+          <div class="d-flex justify-content-between">
+            <button (click)="deleteArticle(prescription.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            <button (click)="openUpdateModal(prescription)" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+            <button (click)="openDetailsModal(prescription)" class="btn btn-info"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
   

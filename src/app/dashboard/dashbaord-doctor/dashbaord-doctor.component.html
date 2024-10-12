@@ -6,12 +6,12 @@
 
       <div class="profil">
         <p>{{ userInfo.first_name }} {{ userInfo.last_name}} </p>
-        <img *ngIf="userInfo.photo" [src]="userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+        <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
       </div>
     </div>
 
     <div class="banner">
-      <img *ngIf="userInfo.photo" [src]="userInfo.photo" alt="{{ userInfo.first_name }}" class="phot" />
+      <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />
       <div class="infos">
         <div class="perso">
           <h6>Dr {{ userInfo.first_name }} {{ userInfo.last_name}} </h6>
@@ -80,10 +80,6 @@
             <input type="text" id="phone_number" class="form-control" [(ngModel)]="userInfo.phone_number" name="phone_number">
           </div>
 
-          <div class="mb-3">
-            <label for="email" class="form-label">Email :</label>
-            <input type="email" id="email" class="form-control" [(ngModel)]="userInfo.email" name="email" required>
-          </div>
 
           <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>

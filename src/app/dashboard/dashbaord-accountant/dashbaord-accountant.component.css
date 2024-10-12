@@ -13,4 +13,13 @@
     padding: 20px; /* Ajoute un peu de remplissage */
     background-color: #ffffff; /* Couleur de fond du contenu principal */
   }
+  .photo1{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    margin-right: 50px;
+    margin-left: 10px;
+    object-fit: cover;
+  }
   

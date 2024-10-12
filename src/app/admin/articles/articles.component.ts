@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; 
+import { HttpClientModule } from '@angular/common/http'; 
 import Swal from 'sweetalert2';
-import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; // Assurez-vous que le chemin est correct
+import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; 
 
 
 @Component({
@@ -24,8 +24,8 @@ export class ArticlesComponent {
     advices: '',
   };
   searchTerm: string = '';
-  selectedArticle: any; // Article sélectionné pour la mise à jour
-  isModalOpen: boolean = false; // État du modal
+  selectedArticle: any; 
+  isModalOpen: boolean = false;
   isDetailsModalOpen: boolean = false;
 
   constructor(private http: HttpClient) {}

@@ -1,10 +1,9 @@
 <div class="dashboard-container">
-    <app-doctor-sidebar></app-doctor-sidebar>
+    <app-patient-header></app-patient-header>
     <div class="main-content">
-<button><a href="/doctor/avalability"> Disponibilites</a> </button>
 
 <div class="appointments-list container mt-5">
-    <h2 class="text-center mb-4 text-primary">Liste des rendez-vous du docteur</h2>
+    <!-- <h2 class="text-center mb-4 text-primary">Liste des rendez-vous du docteur</h2> -->
   
     <div class="table-responsive">
       <table class="table table-hover table-borderless">
@@ -13,6 +12,7 @@
             <th>Patient</th>
             <th>Service</th>
             <th>Date</th>
+            <th>Médecin</th>
             <th>Heure</th>
             <th>Actions</th>
           </tr>
@@ -22,8 +22,9 @@
             <td class="fw-bold">{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
             <td>{{ appointment.service.name }}</td>
             <td>{{ appointment.date | date: 'fullDate' }}</td>
-            <td>{{ appointment.time }}</td>
             <td>{{ appointment.doctor }}</td>
+            <td>{{ appointment.time }}</td>
+            <td>{{ appointment.doctor.last_name}}</td>
             <td>
             <button (click)="openDetailsModal(appointment)" class="btn btn-sm">
                 <i class="fa fa-eye"></i>
