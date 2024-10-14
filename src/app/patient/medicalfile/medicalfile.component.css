@@ -12,8 +12,15 @@ app-admin-sidebar {
 
 .main-content {
   flex: 1; /* Prendre tout l'espace restant */
-  margin-left: 250px; /* Créer un espace pour la sidebar fixe */
   overflow-y: auto; /* Permettre le défilement vertical */
   background-color: #ffffff; /* Couleur de fond du contenu principal */
   padding: 20px; 
+}
+
+.photo{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 5px solid #077676;
+  object-fit: cover;
 }

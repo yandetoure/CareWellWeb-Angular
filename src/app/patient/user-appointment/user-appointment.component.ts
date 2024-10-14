@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../../services//appointment.service'; 
+import { AppointmentService } from '../../services/appointment.service'; 
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';  
 import { HttpClientModule } from '@angular/common/http'; 
 import { Router } from '@angular/router';
 import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component';
-
 
 @Component({
   selector: 'app-user-appointment',
@@ -14,14 +13,15 @@ import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-hea
   templateUrl: './user-appointment.component.html',
   styleUrl: './user-appointment.component.css'
 })
-export class UserAppointmentComponent {
+export class UserAppointmentComponent implements OnInit {
   appointments: any[] = []; 
   selectedAppointment: any; 
 
   isDetailsModalOpen: boolean = false; 
   isEditModalOpen: boolean = false; 
 
-  constructor(private appointmentService: AppointmentService,
+  constructor(
+    private appointmentService: AppointmentService,
     private router: Router 
   ) { }
 
@@ -44,7 +44,6 @@ export class UserAppointmentComponent {
     );
   }
 
-  // Fonction pour déterminer la classe CSS en fonction de la date du rendez-vous
   getAppointmentClass(appointmentDate: string): string {
     const today = new Date();
     const appointment = new Date(appointmentDate);
@@ -58,39 +57,57 @@ export class UserAppointmentComponent {
     }
   }
 
-  // Ouvrir le modal de détails
   openDetailsModal(appointment: any): void {
     this.selectedAppointment = appointment;
     this.isDetailsModalOpen = true;
   }
 
-  // Fermer le modal de détails
   closeDetailsModal(): void {
     this.isDetailsModalOpen = false;
   }
 
-  // Ouvrir le modal d'édition
   openEditModal(appointment: any): void {
     this.selectedAppointment = appointment;
     this.isEditModalOpen = true;
   }
 
-  // Fermer le modal d'édition
   closeEditModal(): void {
     this.isEditModalOpen = false;
   }
 
-  // Soumettre les modifications du rendez-vous
   submitEdit(): void {
-    // Ajouter la logique pour enregistrer les modifications du rendez-vous
-    console.log('Rendez-vous modifié:', this.selectedAppointment);
-    this.closeEditModal();
+    if (this.selectedAppointment) {
+      this.appointmentService.updateAppointment(this.selectedAppointment.id, this.selectedAppointment)
+        .subscribe(
+          (response) => {
+            console.log('Rendez-vous mis à jour avec succès:', response);
+            this.getAppointments();  
+            this.closeEditModal();
+          },
+          (error) => {
+            console.error('Erreur lors de la mise à jour du rendez-vous', error);
+          }
+        );
+    }
+  }
+
+  deleteAppointment(id: number): void {
+    if (confirm('Es-tu sûr de vouloir supprimer ce rendez-vous ?')) {
+      this.appointmentService.deleteAppointment(id)
+        .subscribe(
+          (response) => {
+            console.log('Rendez-vous supprimé avec succès:', response);
+            this.getAppointments();
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression du rendez-vous', error);
+          }
+        );
+    }
   }
 
   goToMedicalRecord(userId: number) {
     this.router.navigate(['/doctor/medicalfile', userId]);
   }
+  
 }
-
-
-

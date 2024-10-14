@@ -68,7 +68,6 @@ export class DoctorMedicalfileShowComponent {
   addHistory(historyData: any) {
     const medicalFileId = this.medicalFile.id;
     
-    // Debug: vérifier les données envoyées
     console.log('Données envoyées:', historyData);
   
     if (medicalFileId) {

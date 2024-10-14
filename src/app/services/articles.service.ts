@@ -39,4 +39,9 @@ addArticle(articleData: FormData): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.delete(`${this.apiUrl}/delete/${id}`, { headers });
   }
+
+
+  getArticleById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/articles/${id}`);
+  }
 }

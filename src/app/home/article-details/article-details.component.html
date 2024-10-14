@@ -1,1 +1,12 @@
-<p>article-details works!</p>
+<div class="modal-body">
+    <!-- <img *ngIf="selectedArticle?.photo" [src]="selectedArticle.photo" alt="{{ selectedArticle.title }}" class="img-fluid mb-3" /> -->
+    <h6>Description :</h6>
+    <p>{{ selectedArticle?.content }}</p>
+
+    <h6>Symptomes :</h6>
+    <p>{{ selectedArticle?.symptoms}} </p>
+
+    <h6>Conseils :</h6>
+    <p>{{ article?.advices}} </p>
+
+  </div>

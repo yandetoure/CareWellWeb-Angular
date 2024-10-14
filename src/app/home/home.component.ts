@@ -54,11 +54,11 @@ export class HomeComponent implements OnInit {
       (response: any) => {
         this.services = response.data.map((service: any) => {
           if (service.photo) {
-            service.photo = `http://localhost:8000/storage/${service.photo}`; // Construire l'URL complète
+            service.photo = `http://localhost:8000/storage/${service.photo}`; 
           }
           return service;
         });
-        console.log(this.services); // Vérifiez les données dans la console
+        console.log(this.services);
       },
       (error) => {
         console.error('Erreur lors de la récupération des services', error);
@@ -66,17 +66,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  // Méthode dédiée pour récupérer les articles depuis l'API
   loadArticles(): void {
     this.articlesService.getArticles().subscribe(
       (response: any) => {
         this.articles = response.data.map((article: any) => {
           if (article.photo) {
-            article.photo = `http://localhost:8000/storage/${article.photo}`; // Construire l'URL complète
+            article.photo = `http://localhost:8000/storage/${article.photo}`; 
           }
           return article;
         });
-        console.log(this.articles); // Vérifiez les données dans la console
+        console.log(this.articles);
       },
       (error) => {
         console.error('Erreur lors de la récupération des articles', error);
@@ -84,12 +83,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  // Méthode dédiée pour récupérer les utilisateurs avec le rôle "Doctor"
   loadDoctors(): void {
-    this.authService.getUsers().subscribe( // Utilisation de AuthService pour obtenir les utilisateurs
+    this.authService.getUsers().subscribe(
       (response: any) => {
-        this.users = response.data.filter((user: any) => user.role === 'Doctor'); // Filtrer les utilisateurs avec le rôle "Doctor"
-        console.log(this.users); // Vérifiez les utilisateurs avec le rôle Doctor dans la console
+        this.users = response.data.filter((user: any) => user.role === 'Doctor'); 
+        console.log(this.users); 
       },
       (error) => {
         console.error('Erreur lors de la récupération des utilisateurs', error);
@@ -100,14 +98,15 @@ export class HomeComponent implements OnInit {
   limitWords(content: string, limit: number = 2): string {
     let words = content.split(' ');
     if (words.length > limit) {
-      return words.slice(0, limit).join(' ') + '...'; // Tronquer et ajouter des points de suspension
+      return words.slice(0, limit).join(' ') + '...'; 
     }
     return content;
   }
 
+  goToArticleDetails(id: string): void {
+    this.router.navigate(['/article-details', id]);
+  }
 
-
-// Méthode pour ouvrir le modal de détails
 openDetailsModal(article: any): void {
   this.selectedArticle = article;
   this.isDetailsModalOpen = true;

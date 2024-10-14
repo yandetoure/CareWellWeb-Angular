@@ -35,6 +35,7 @@ import { AdminExamsComponent } from './admin/admin-exams/admin-exams.component';
 import { DoctorMedicalfileShowComponent } from './doctor/doctor-medicalfile-show/doctor-medicalfile-show.component';
 import { ArticleDetailsComponent } from './home/article-details/article-details.component';
 import { UserAppointmentComponent } from './patient/user-appointment/user-appointment.component';
+import { MedicalfileComponent } from './patient/medicalfile/medicalfile.component';
 
 
 export const routes: Routes = [
@@ -79,6 +80,7 @@ export const routes: Routes = [
   { path: 'doctor/availability', component: AvailabilityComponent },
   { path: 'patient/appointments', component: AppointmentsComponent },
   { path: 'patient/user-appointment', component: UserAppointmentComponent},
+  { path: 'patient/medicalfile', component: MedicalfileComponent},
 
   // Home Page sections
   { path: 'page', component: PageComponent },

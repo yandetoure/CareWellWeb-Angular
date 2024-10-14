@@ -1,1 +1,54 @@
-<p>medicalfile works!</p>
+<div class="dashboard-container d-flex">
+  <app-patient-header></app-patient-header>
+
+  <div class="main-content">
+    <div class="container mt-5">
+      <h2 class="text-center">Détails du Dossier Médical</h2>
+      <div class="row mt-4">
+        <!-- Card pour le dossier médical à gauche -->
+        <div class="col-md-8">
+          <div class="card p-4 shadow-sm">
+            <p>Historique médical:</p>
+            <ul>
+              <li>{{ medicalFile?.medical_history?.content || 'Aucun historique' }}</li>
+            </ul>
+            <hr class="my-4" />
+
+            <p>Prescriptions Médicales:</p>
+            <ul>
+              <li *ngFor="let prescription of medicalFile.prescription">
+                {{ prescription?.prescription_id || 'Aucune Prescription' }}</li>
+            </ul>
+            <hr class="my-4" />
+
+            <p>Examens Médicaux:</p>
+            <ul>
+              <li *ngFor="let exam of medicalFile.exam">
+                {{ exam.exam_id || 'Aucun Examen' }}</li>
+            </ul>
+            <hr class="my-4" />
+
+            <p>Notes Médicales:</p>
+            <ul>
+              <li *ngFor="let note of medicalFile.note">
+                {{ note.content }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card pour les infos utilisateur à droite -->
+        <div class="col-md-4">
+          <div class="card p-4 shadow-sm">
+            <h5 class="text-center">Informations de l'Utilisateur</h5>
+            <img *ngIf="medicalFile.user?.photo" [src]="'http://localhost:8000/storage/' + medicalFile.user?.photo" alt="{{ medicalFile.user?.first_name }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;" />
+            <p><strong>Nom Complet:</strong> {{ medicalFile.user?.first_name }} {{ medicalFile.user?.last_name }}</p>
+            <p><strong>Email:</strong> {{ medicalFile.user?.email }}</p>
+            <p><strong>Téléphone:</strong> {{ medicalFile.user?.phone_number }}</p>
+            <p><strong>Date d'inscription:</strong> {{ medicalFile.user?.created_at | date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

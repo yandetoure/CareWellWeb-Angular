@@ -1,12 +1,12 @@
 /* doctor-sidebar.component.css */
 .sidebar {
-  width: 240px; /* Ajuste la largeur de la sidebar */
-  background-color: #dedbdb70; /* Couleur de fond de la sidebar */
+  width: 240px; 
+  background-color: #dedbdb70; 
   padding: 20px;
-  height: 100vh; /* Hauteur pleine de la sidebar */
-  padding: 10px; /* Ajoute du padding autour du lien */
-  border-radius: 4px; /* Arrondit les coins */
-  transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
+  height: 100vh;
+  padding: 10px; 
+  border-radius: 4px; 
+  transition: background-color 0.3s; 
   margin: 5px;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,8 @@
 
 
 .sidebar ul {
-  list-style-type: none; /* Retire les puces de la liste */
-  padding: 0; /* Enlève le remplissage par défaut */
+  list-style-type: none;
+  padding: 0; 
   width: 230px;
   margin-top: 40px;
   color: #077676;

@@ -30,14 +30,14 @@ export class AppointmentsComponent implements OnInit {
 
   constructor(
     private appointmentService: AppointmentService,
-    private authService: AuthService,  // Utilisation du AuthService pour récupérer l'utilisateur
+    private authService: AuthService, 
     private serviceService: ServiceService
   ) {}
 
   ngOnInit(): void {
     this.getAppointments();
     this.getUserId();
-    this.getServices();  // Récupère la liste des services
+    this.getServices(); 
   }
 
   // Récupération des rendez-vous
@@ -58,7 +58,6 @@ export class AppointmentsComponent implements OnInit {
 
   // Récupération de l'utilisateur actuellement connecté
   getUserId() {
-    // Utilisation du service AuthService pour obtenir l'utilisateur actuel
    let user = localStorage.getItem('user');
    if(user)
       this.newAppointment.user_id = JSON.parse(user)?.id ?? 0;

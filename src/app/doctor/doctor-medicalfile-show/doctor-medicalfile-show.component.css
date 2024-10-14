@@ -33,3 +33,11 @@ ul {
   list-style-type: none; /* Supprimer les puces de la liste */
   padding-left: 0; /* Supprimer le remplissage gauche */
 }
+
+p{
+  font-weight: 500;
+}
+
+span{
+  color: #00000099;
+}

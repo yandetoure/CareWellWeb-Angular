@@ -1,4 +1,4 @@
-<div class="dashboard-container">
+ <div class="dashboard-container">
   <app-doctor-sidebar></app-doctor-sidebar>
   <div class="main-content">
     <div class="container mt-4">
@@ -9,36 +9,34 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-8">
-              <h5>Nom du patient: {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</h5>
-              <p><strong>Numéro de dossier:</strong> {{ medicalFile?.identification_number }}</p>
-              <p><strong>Date de naissance:</strong> {{ medicalFile?.user?.day_of_birth | date }}</p>
-              <p><strong>Adresse:</strong> {{ medicalFile?.user?.adress }}</p>
-              <p><strong>Date d'ouverture du dossier:</strong> {{ medicalFile?.created_at | date }}</p>
+              <h5>Nom du patient: <span>{{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }} </span> </h5>
+              <p>Numéro de dossier: <span> {{ medicalFile?.identification_number }} </span></p>
+              <p>Date de naissance: <span>{{ medicalFile?.user?.day_of_birth | date }}</span></p>
+              <p>Adresse: <span>{{ medicalFile?.user?.adress }}</span></p>
+              <p>Date d'ouverture du dossier: <span>{{ medicalFile?.created_at | date }}</span></p>
               <hr class="my-4" />
 
-              <p><strong>Historique médical:</strong></p>
+              <p>Historique médical:</p>
               <ul>
                 <li>{{ medicalFile?.medical_history?.content || 'Aucun historique' }}</li>
               </ul>
               <hr class="my-4" />
 
-              <p><strong>Prescriptions Médicales:</strong></p>
+              <p>Prescriptions Médicales:</p>
               <ul>
                 <li *ngFor="let prescription of medicalFile.prescription">
-                  {{ prescription?.prescription_id || 'Aucune Prescription' }}
-                </li>
+                  {{ prescription?.prescription_id || 'Aucune Prescription' }}</li>
               </ul>
               <hr class="my-4" />
 
-              <p><strong>Examens Médicaux:</strong></p>
+              <p>Examens Médicaux:</p>
               <ul>
                 <li *ngFor="let exam of medicalFile.exam">
-                  {{ exam.exam_id || 'Aucun Examen' }}
-                </li>
+                  {{ exam.exam_id || 'Aucun Examen' }}</li>
               </ul>
               <hr class="my-4" />
 
-              <p><strong>Notes Médicales:</strong></p>
+              <p>Notes Médicales:</p>
               <ul>
                 <li *ngFor="let note of medicalFile.note">
                   {{ note.content }}

@@ -50,6 +50,9 @@ export class AppointmentService {
     }
 
 
+    deleteAppointment(appointmentId: number): Observable<any> {
+      return this.http.delete<any>(`${this.apiUrl}/appointments/${appointmentId}`);
+    }
 
     getAppointment(){
       return this.http.get<any>(this.apiUrl+'/appointments');
@@ -86,4 +89,6 @@ export class AppointmentService {
   getPatientsWithAppointmentsDoctor(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/doctor/appointments`);
   }
+
+  
 }
