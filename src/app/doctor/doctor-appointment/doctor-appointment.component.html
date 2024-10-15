@@ -1,96 +1,97 @@
 <div class="dashboard-container">
-    <app-doctor-sidebar></app-doctor-sidebar>
-    <div class="main-content">
-<button><a href="/doctor/avalability"> Disponibilites</a> </button>
+  <app-doctor-sidebar></app-doctor-sidebar>
 
-<div class="appointments-list container mt-5">
-    <h2 class="text-center mb-4 text-primary">Liste des rendez-vous du docteur</h2>
-  
-    <div class="table-responsive">
-      <table class="table table-hover table-borderless">
-        <thead class="table-light">
-          <tr>
-            <th>Patient</th>
-            <th>Service</th>
-            <th>Date</th>
-            <th>Heure</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let appointment of appointments" [ngClass]="getAppointmentClass(appointment.date)">
-            <td class="fw-bold">{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
-            <td>{{ appointment.service.name }}</td>
-            <td>{{ appointment.date | date: 'fullDate' }}</td>
-            <td>{{ appointment.time }}</td>
-            <td>{{ appointment.doctor }}</td>
-            <td>
-            <button (click)="openDetailsModal(appointment)" class="btn btn-sm">
-                <i class="fa fa-eye"></i>
-              </button>
-              <button (click)="openEditModal(appointment)" class="btn btn-sm ">
-                <i class="fa fa-edit"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="main-content container mt-4">
+    <!-- Bouton de Disponibilités -->
+    <button class="btn btn-outline-primary mb-3">
+      <a href="/doctor/avalability" class="text-decoration-none text-primary">Disponibilités</a>
+    </button>
+
+    <!-- Liste des rendez-vous -->
+    <div class="appointments-list container mt-5">
+      <h2 class="text-center mb-4 text-primary">Liste des rendez-vous du docteur</h2>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-borderless">
+          <thead class="table-light">
+            <tr>
+              <th>Patient</th>
+              <th>Service</th>
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let appointment of appointments" [ngClass]="getAppointmentClass(appointment.date)">
+              <td>{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
+              <td>{{ appointment.service.name }}</td>
+              <td>{{ appointment.date | date: 'fullDate' }}</td>
+              <td>{{ appointment.time }}</td>
+              <td>
+                <button (click)="openDetailsModal(appointment)" class="btn btn-sm btn-outline-info">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button (click)="openEditModal(appointment)" class="btn btn-sm btn-outline-warning">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  
-  <!-- Details Modal -->
-  <div *ngIf="isDetailsModalOpen" id="detailsModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="detailsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="detailsModalLabel">Détails du Rendez-vous</h5>
-          <button type="button" class="btn-close" (click)="closeDetailsModal()" aria-label="Close"></button>
+
+    <!-- Modal Détails -->
+    <div *ngIf="isDetailsModalOpen" id="detailsModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="detailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Détails du Rendez-vous</h5>
+            <button type="button" class="btn-close" (click)="closeDetailsModal()" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Patient:</strong> {{ selectedAppointment?.user.first_name }} {{ selectedAppointment?.user.last_name }}</p>
+            <p><strong>Service:</strong> {{ selectedAppointment?.service.name }}</p>
+            <p><strong>Date:</strong> {{ selectedAppointment?.date | date: 'fullDate' }}</p>
+            <p><strong>Heure:</strong> {{ selectedAppointment?.time }}</p>
+            <button class="btn btn-primary mt-3" (click)="goToMedicalRecord(selectedAppointment?.user.id)">
+              Voir Dossier Médical
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <p><strong>Patient:</strong> {{ selectedAppointment?.user.first_name }} {{ selectedAppointment?.user.last_name }}</p>
-          <p><strong>Service:</strong> {{ selectedAppointment?.service.name }}</p>
-          <p><strong>Date:</strong> {{ selectedAppointment?.date | date: 'fullDate' }}</p>
-          <p><strong>Heure:</strong> {{ selectedAppointment?.time }}</p>
-        <!-- Ajouter le bouton pour voir le dossier médical -->
-        <button class="btn btn-primary mt-3" (click)="goToMedicalRecord(selectedAppointment?.user.id)">
-          Voir Dossier Médical
-        </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
+      </div>
+    </div>
+
+    <!-- Modal Édition -->
+    <div *ngIf="isEditModalOpen" id="editModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Modifier le Rendez-vous</h5>
+            <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="submitEdit()">
+              <div class="mb-3">
+                <label for="editDate" class="form-label">Date</label>
+                <input type="date" class="form-control" [(ngModel)]="selectedAppointment.date" name="editDate" required>
+              </div>
+              <div class="mb-3">
+                <label for="editTime" class="form-label">Heure</label>
+                <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Fermer</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Edit Modal -->
-  <div *ngIf="isEditModalOpen" id="editModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Modifier le Rendez-vous</h5>
-          <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Formulaire d'édition -->
-          <form (ngSubmit)="submitEdit()">
-            <div class="mb-3">
-              <label for="editDate" class="form-label">Date</label>
-              <input type="date" class="form-control" [(ngModel)]="selectedAppointment.date" name="editDate" required>
-            </div>
-            <div class="mb-3">
-              <label for="editTime" class="form-label">Heure</label>
-              <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Fermer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-</div>
 </div>

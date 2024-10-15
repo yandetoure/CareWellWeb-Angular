@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';  // Import de CommonModule
 import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
 import Swal from 'sweetalert2';
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-side
   imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent],
   templateUrl: './availability.component.html',
   styleUrl: './availability.component.css'
+  
 })
 export class AvailabilityComponent {
   availabilities: any[] = [];
@@ -21,6 +23,17 @@ export class AvailabilityComponent {
 
   ngOnInit(): void {
     this.loadAvailabilities();
+  }
+
+  // formatDate(dateString: string): string {
+  //   const date = new Date(dateString);
+  //   // Format en français: exemple "lundi 19 octobre 2025"
+  //   return this.datePipe.transform(date, 'EEEE d MMMM y', 'fr-FR') || '';
+  // }
+
+  // Fonction pour formater l'heure sans secondes
+  formatTime(timeString: string): string {
+    return timeString.slice(0, 5);  // Garde seulement les heures et minutes "HH:MM"
   }
 
   // Charger toutes les disponibilités

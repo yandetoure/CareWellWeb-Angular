@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ServiceComponent } from './service/service.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashbaordAccountantComponent } from './dashboard/dashbaord-accountant/dashbaord-accountant.component';
 import { DashbaordAdminComponent } from './dashboard/dashbaord-admin/dashbaord-admin.component';
@@ -17,9 +16,7 @@ import { ArticlesComponent } from './admin/articles/articles.component';
 import { PrescriptionComponent } from './admin/prescription/prescription.component';
 import { AvailabilityComponent } from './doctor/availability/availability.component';
 import { AppointmentsComponent } from './patient/appointments/appointments.component';
-import { PageComponent } from './home/page/page.component';
 import { AboutUsComponent } from './home/about-us/about-us.component';
-import { BannerComponent } from './home/banner/banner.component';
 import { ContactsComponent } from './home/contacts/contacts.component';
 import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
 import { AddUserComponent } from './admin/add-user/add-user.component';
@@ -36,13 +33,13 @@ import { DoctorMedicalfileShowComponent } from './doctor/doctor-medicalfile-show
 import { ArticleDetailsComponent } from './home/article-details/article-details.component';
 import { UserAppointmentComponent } from './patient/user-appointment/user-appointment.component';
 import { MedicalfileComponent } from './patient/medicalfile/medicalfile.component';
-
+import { PatientArticlesComponent } from './patient/patient-articles/patient-articles.component';
+import { PatientServicesTestComponent } from './patient/patient-services-test/patient-services-test.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, // Default route
   
   { path: 'home', component: HomeComponent }, 
-  { path: 'service', component: ServiceComponent }, 
   { path: 'profile', component: ProfileComponent },
   { path: 'article-details/:id', component: ArticleDetailsComponent },
 
@@ -83,24 +80,14 @@ export const routes: Routes = [
   { path: 'patient/medicalfile', component: MedicalfileComponent},
 
   // Home Page sections
-  { path: 'page', component: PageComponent },
   { path: 'us', component: AboutUsComponent },
+  { path: 'patient/articles', component: PatientArticlesComponent},
+  { path: 'patient/services', component: PatientServicesTestComponent},
 
-  // Example of sections (section1 to section4)
-  { path: 'section1', component: PageComponent },
-  { path: 'section2', component: PageComponent },
-  { path: 'section3', component: PageComponent },
-  { path: 'section4', component: PageComponent },
 
   // Patient profile
   { path: 'patient/profil', component: PatientProfileComponent},
 
-
-
-
-
-
-  //Accountable routes
 
   // Default redirect if no matching route is found
   { path: '**', redirectTo: '/register' }

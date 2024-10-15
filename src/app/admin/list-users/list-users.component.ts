@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { map } from 'rxjs/operators'; // Importez 'map' si nécessaire
+import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component'; // Assurez-vous que le chemin est correct
+import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component';
 
 
 @Component({
@@ -12,10 +12,10 @@ import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar
   standalone: true,
   imports: [CommonModule, HttpClientModule, AdminSidebarComponent],
   templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css'] // Assurez-vous d'utiliser 'styleUrls' (avec un 's')
+  styleUrls: ['./list-users.component.css'] 
 })
 export class ListUsersComponent {
-  users: any[] = []; // Tableau pour stocker les utilisateurs
+  users: any[] = []; 
 
   constructor(private authService: AuthService) { }
 
@@ -26,7 +26,7 @@ export class ListUsersComponent {
   loadUsers() {
     this.authService.getUsers().subscribe(
       (response: any) => {
-        this.users = response; // Assurez-vous que 'response' est un tableau
+        this.users = response; 
       },
       (error: any) => {
         console.error('Erreur lors du chargement des utilisateurs', error);
@@ -35,9 +35,7 @@ export class ListUsersComponent {
   }
 
 
-  // Fonction pour afficher les détails d'un utilisateur dans un modal
   viewUser(user: any) {
-    // Code pour afficher un modal avec les détails de l'utilisateur
     Swal.fire({
       title: `Détails de ${user.first_name} ${user.last_name}`,
       html: `
@@ -54,7 +52,6 @@ export class ListUsersComponent {
     });
   }
 
-  // Fonction pour modifier un utilisateur
   editUser(user: any) {
     Swal.fire({
       title: 'Modifier Utilisateur',
@@ -73,16 +70,13 @@ export class ListUsersComponent {
         const phoneNumber = (document.getElementById('edit-phone-number') as HTMLInputElement).value;
         const adress = (document.getElementById('edit-adress') as HTMLInputElement).value;
   
-        // Vous pouvez ajouter une validation ici si nécessaire
   
-        // Code pour modifier l'utilisateur via votre service
         this.updateUser(user.id, { first_name: firstName, last_name: lastName, identification_number: identificationNumber, email, phone_number: phoneNumber, adress });
       }
     });
   }
   
 
-  // Fonction pour confirmer la suppression d'un utilisateur
   confirmDelete(userId: number) {
     Swal.fire({
       title: 'Êtes-vous sûr ?',

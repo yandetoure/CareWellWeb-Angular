@@ -12,3 +12,9 @@
     flex: 1; /* Prendre tout l'espace restant */
     background-color: #ffffff; /* Couleur de fond du contenu principal */
   }
+
+
+ th{
+  color: #000000d5;
+  font-weight: 500;
+ }

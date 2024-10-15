@@ -15,11 +15,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   currentSection: string = '';
-  services: any[] = []; // Gardez le type any[]
-  articles: any[] = []; // Gardez le type any[]
-  users: any[] = []; // Liste des utilisateurs avec le rôle Doctor
+  services: any[] = []; 
+  articles: any[] = []; 
+  users: any[] = [];
 
-  // Injection de ServiceService, ArticlesService, et AuthService dans le constructeur
+
   constructor(
     private serviceService: ServiceService,
     private articlesService: ArticlesService,

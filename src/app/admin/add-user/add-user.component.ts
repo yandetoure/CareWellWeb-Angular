@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Import n�
 import { CommonModule } from '@angular/common';  // Import de CommonModule
 import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
 import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar.component';
+import { ServiceService } from '../../services/service.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-add-user',
@@ -16,20 +19,48 @@ import { AdminSidebarComponent } from '../../sidebar/admin-sidebar/admin-sidebar
 })
 export class AddUserComponent {
   addUserForm: FormGroup; // Utilisation d'un FormGroup pour le formulaire
+  services: any[] = [];
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder,
+     private authService: AuthService, 
+    private router: Router,
+  private serviceService: ServiceService){
     // Initialisation du formulaire avec des validations
     this.addUserForm = this.fb.group({
-      first_name: ['', [Validators.required]], // Prénom requis
-      last_name: ['', [Validators.required]], // Nom requis
-      email: ['', [Validators.required, Validators.email]], // Email requis et format valide
-      adress: ['', [Validators.required]], // Adresse requise
-      phone_number: ['', [Validators.required]], // Téléphone requis
-      day_of_birth: ['', [Validators.required]], // Date de naissance requise
-      password: ['', [Validators.required, Validators.minLength(6)]], // Mot de passe requis avec min 6 caractères
-      role: ['', [Validators.required]], // Rôle requis (ajoutez cette ligne)
+      first_name: ['', [Validators.required]], 
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      adress: ['', [Validators.required]], 
+      phone_number: ['', [Validators.required]],
+      day_of_birth: ['', [Validators.required]], 
+      password: ['', [Validators.required, Validators.minLength(6)]], 
+      role: ['', [Validators.required]], 
+      service_id: ['', Validators.required],
     });
   }
+
+  ngOnInit(): void {
+    this.getServices(); // Récupérer les services au chargement du composant
+  }
+
+
+
+  getServices() {
+    this.serviceService.getServices().subscribe(
+      (response) => {
+        this.services = response.data;
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Impossible de récupérer les services.',
+        });
+      }
+    );
+  }
+
+
 
   onAddUser() {
     if (this.addUserForm.valid) {

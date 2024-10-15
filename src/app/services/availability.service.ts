@@ -13,7 +13,7 @@ export class AvailabilityService {
   constructor(private http: HttpClient) { }
 
   getAvailabilities(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/availabilities`);
+    return this.http.get<any>(`${this.apiUrl}/doctor/availability`);
   }
 
   addAvailability(availability: any): Observable<any> {
