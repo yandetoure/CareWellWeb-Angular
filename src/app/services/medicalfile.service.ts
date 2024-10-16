@@ -29,8 +29,9 @@ export class MedicalFileService {
     return this.http.post(`${this.apiUrl}/medical-files/${id}/addHistory`, history)
   }
 
-  addPrescription(id:string, data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/medical-files/${id}/addprescription`, data);
+  // Ajouter une prescription
+  addPrescription(id: string, data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medical-files/${id}/addprescription`, data, { headers: this.getHeaders() });
   }
 
   // Ajouter un examen médical

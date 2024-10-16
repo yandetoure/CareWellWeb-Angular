@@ -1,0 +1,76 @@
+<div class="dashboard-container d-flex">
+    <app-accountant-sidebar></app-accountant-sidebar>
+    <div class="main-content w-100 p-4 bg-light">
+        <div class="container mt-5">
+
+            <!-- Titre principal -->
+            <h3 class="mt-5 mb-4 text-primary">Ajouter une nouvelle prescription</h3>
+
+            <!-- Formulaire d'ajout -->
+            <form (submit)="addPrescription()" class="p-4 border rounded bg-white shadow-sm">
+                <div class="form-group">
+                    <label for="name" class="font-weight-bold">Nom</label>
+                    <input type="text" id="name" [(ngModel)]="newPrescription.name" name="name" class="form-control" placeholder="Nom de la prescription" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity" class="font-weight-bold">Quantité</label>
+                    <input type="number" id="quantity" [(ngModel)]="newPrescription.quantity" name="quantity" class="form-control" placeholder="Quantité" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price" class="font-weight-bold">Prix</label>
+                    <input type="number" id="price" [(ngModel)]="newPrescription.price" name="price" class="form-control" placeholder="Prix" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service" class="font-weight-bold">Service</label>
+                    <select id="service" [(ngModel)]="newPrescription.service_id" name="service" class="form-control" required>
+                        <option value="" disabled selected>Sélectionner un service</option>
+                        <option *ngFor="let service of services" [value]="service.id">{{ service.name }}</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-4">Ajouter Prescription</button>
+            </form>
+
+            <!-- Titre de la liste des prescriptions -->
+            <h2 class="mb-4 mt-5 text-secondary">Liste des prescriptions</h2>
+
+            <!-- Champ de recherche -->
+            <div class="mb-4">
+                <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Rechercher une prescription" />
+            </div>
+
+            <!-- Tableau des prescriptions -->
+            <table class="table table-striped table-bordered table-hover shadow-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th>Service</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let prescription of filteredPrescriptions">
+                        <td>{{ prescription.name }}</td>
+                        <td>{{ prescription.quantity }}</td>
+                        <td>{{ prescription.price }}</td>
+                        <td>{{ prescription.service.name }}</td>
+                        <td>
+                            <button (click)="selectPrescription(prescription)" class="btn btn-sm btn-warning mr-2">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                            <button (click)="deletePrescription(prescription.id)" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -8,31 +8,30 @@
         <!-- Card pour le dossier médical à gauche -->
         <div class="col-md-8">
           <div class="card p-4 shadow-sm">
-            <p>Historique médical:</p>
+            <!-- Historique médical -->
+            <p><strong>Historique médical:</strong></p>
             <ul>
               <li>{{ medicalFile?.medical_history?.content || 'Aucun historique' }}</li>
             </ul>
             <hr class="my-4" />
 
-            <p>Prescriptions Médicales:</p>
+            <!-- Prescriptions Médicales -->
+            <p><strong>Prescriptions Médicales:</strong></p>
             <ul>
-              <li *ngFor="let prescription of medicalFile.prescription">
-                {{ prescription?.prescription_id || 'Aucune Prescription' }}</li>
+              <li *ngFor="let prescription of medicalFile.medicalprescription">
+                Prescription ID: {{ prescription.prescription_id }} - Statut: {{ prescription.is_done ? 'Effectuée' : 'Non effectuée' }}
+              </li>
+              <li *ngIf="!medicalFile.medicalprescription.length">Aucune Prescription</li>
             </ul>
             <hr class="my-4" />
 
-            <p>Examens Médicaux:</p>
-            <ul>
-              <li *ngFor="let exam of medicalFile.exam">
-                {{ exam.exam_id || 'Aucun Examen' }}</li>
-            </ul>
-            <hr class="my-4" />
-
-            <p>Notes Médicales:</p>
+            <!-- Notes Médicales -->
+            <p><strong>Notes Médicales:</strong></p>
             <ul>
               <li *ngFor="let note of medicalFile.note">
                 {{ note.content }}
               </li>
+              <li *ngIf="!medicalFile.note.length">Aucune Note</li>
             </ul>
           </div>
         </div>

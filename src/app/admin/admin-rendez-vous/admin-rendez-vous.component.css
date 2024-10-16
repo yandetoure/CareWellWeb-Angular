@@ -17,3 +17,54 @@
     background-color: #ffffff; /* Couleur de fond du contenu principal */
     padding: 20px; /* Ajouter un padding pour le contenu */
   }
+
+
+/* Appliquer un style aux cartes de rendez-vous */
+.appointments-list .appointment-card {
+  border: 4px solid transparent; /* Bordure invisible par défaut */
+  border-bottom: 4px solid rgb(0, 49, 128); /* Bordure inférieure verte */
+  border-radius: 8px; /* Coins arrondis */
+  padding: 15px; 
+  margin-bottom: 20px;
+  background-color: #f8f9fa; 
+  transition: transform 0.2s;
+  width: 90%; /* Réduire la largeur des cartes */
+  height: 100px;
+  max-width: 80%; /* Limite maximale de largeur */
+  margin-left: auto; /* Centrer horizontalement */
+  margin-right: auto; /* Centrer horizontalement */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce */
+  }
+  
+  /* Ajoute un effet de survol aux cartes */
+  .appointments-list .appointment-card:hover {
+  transform: scale(1.02); /* Légère augmentation de la taille au survol */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée au survol */
+  }
+  
+  
+  /* Masquer le tableau original */
+  .table-responsive {
+  display: none; /* Cacher le tableau */
+  }
+  
+  .appointments-list h2 {
+  text-align: center; 
+  }
+  
+  .appointment-info {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 40px; 
+  padding-top: 20px;
+  }
+  
+  .appointment-buttons {
+  display: flex;
+  justify-content: space-between;
+  }
+  
+  h5{
+  font-size: 18px;
+  }

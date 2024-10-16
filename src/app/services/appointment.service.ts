@@ -40,7 +40,7 @@ export class AppointmentService {
 
     // Récupérer tous les rendez-vous
     getAppointments(): Observable<any> {
-      return this.http.get(`${this.apiUrl}/appointments`);
+      return this.http.get(`${this.apiUrl}/doctor/appointments`);
     }
   
     // Ajouter un nouveau rendez-vous

@@ -7,6 +7,7 @@ import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-side
 import { FormsModule } from '@angular/forms';
 import { NotesService } from '../../services/notes.service';
 import { PrescriptionService } from '../../services/prescription.service';
+import { ExamService } from '../../services/exam.service';
 
 @Component({
   selector: 'app-doctor-medicalfile-show',
@@ -20,6 +21,7 @@ export class DoctorMedicalfileShowComponent {
   medicalFile: any = null;
   notes: any[] = [];
   prescriptions: any[] = [];
+  exams: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,7 @@ export class DoctorMedicalfileShowComponent {
     private authService: AuthService,
     private noteService: NotesService,
     private prescriptionService: PrescriptionService,
+    private examService: ExamService,
     private router: Router,
   ) { }
 
@@ -35,6 +38,8 @@ export class DoctorMedicalfileShowComponent {
     if (id) {
       this.loadMedicalFileDetails(id);
       this.loadPrescriptions(); 
+      this.loadExams(); 
+
     }
   }
 
@@ -96,6 +101,17 @@ export class DoctorMedicalfileShowComponent {
     });
 }
 
+loadExams(): void {
+  this.examService.getExams().subscribe({
+      next: (data) => {
+          console.log('Exams data:', data);
+          this.exams = data.data;
+      },
+      error: (error) => {
+          console.error('Erreur lors du chargement des examens', error);
+      }
+  });
+}
 
   addPrescription(prescriptionData: any) {
     const medicalFileId = this.medicalFile.id;
@@ -115,6 +131,27 @@ export class DoctorMedicalfileShowComponent {
         console.error('ID du dossier médical non trouvé');
     }
 }
+
+
+addExam(examData: any) {
+  const medicalFileId = this.medicalFile.id;
+
+  if (medicalFileId) {
+    examData.medical_files_id = medicalFileId; 
+      this.medicalFileService.addExam(medicalFileId, examData).subscribe(
+          (response) => {
+              console.log('Examen ajoutée avec succès:', response);
+              this.loadPrescriptions();
+          },
+          (error) => {
+              console.error('Erreur lors de l\'ajout de l\'examen:', error);
+          }
+      );
+  } else {
+      console.error('ID du dossier médical non trouvé');
+  }
+}
+
 
 
 }

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component'; // Assurez-vous que le chemin est correct
 import { ArticlesService } from '../../services/articles.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class PatientArticlesComponent {
 
   constructor(
     private articlesService: ArticlesService,
+    private router: Router,
 
   ) {}
 
@@ -62,5 +64,9 @@ searchArticle() {
   } else {
     this.loadArticles(); // Rechargez les services si le terme de recherche est vide
   }
+}
+
+goToArticleDetails(id: string): void {
+  this.router.navigate(['/patient/article-details', id]);
 }
 }

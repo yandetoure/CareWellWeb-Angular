@@ -86,8 +86,6 @@ export class DoctorPatientComponent {
   
         const updatedData = {
           is_visited: this.selectedPatient.is_visited,
-          appointment_date: this.selectedPatient.appointment_date,
-          appointment_time: this.selectedPatient.appointment_time
         };
   
         // Ajoutez ce log pour voir les données

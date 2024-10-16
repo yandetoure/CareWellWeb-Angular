@@ -35,6 +35,9 @@ import { UserAppointmentComponent } from './patient/user-appointment/user-appoin
 import { MedicalfileComponent } from './patient/medicalfile/medicalfile.component';
 import { PatientArticlesComponent } from './patient/patient-articles/patient-articles.component';
 import { PatientServicesTestComponent } from './patient/patient-services-test/patient-services-test.component';
+import { AccountantPrescriptionsComponent } from './accounatant/accountant-prescriptions/accountant-prescriptions.component';
+import { PatientArticleDetailsComponent } from './patient/patient-article-details/patient-article-details.component';
+import { HomeArticlesComponent } from './home/home-articles/home-articles.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, // Default route
@@ -43,7 +46,7 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'article-details/:id', component: ArticleDetailsComponent },
 
-  { path: 'dashboard/accountable', component: DashbaordAccountantComponent },
+  { path: 'dashboard/accountant', component: DashbaordAccountantComponent },
   { path: 'dashboard/admin', component: DashbaordAdminComponent },
   { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
   { path: 'dashboard/patient', component: DashbaordPatientComponent },
@@ -78,12 +81,16 @@ export const routes: Routes = [
   { path: 'patient/appointments', component: AppointmentsComponent },
   { path: 'patient/user-appointment', component: UserAppointmentComponent},
   { path: 'patient/medicalfile', component: MedicalfileComponent},
+  { path: 'patient/article-details/:id', component: PatientArticleDetailsComponent},
+  { path: 'home/articles', component: HomeArticlesComponent},
 
   // Home Page sections
   { path: 'us', component: AboutUsComponent },
   { path: 'patient/articles', component: PatientArticlesComponent},
   { path: 'patient/services', component: PatientServicesTestComponent},
 
+  //Accountant
+  { path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent},
 
   // Patient profile
   { path: 'patient/profil', component: PatientProfileComponent},

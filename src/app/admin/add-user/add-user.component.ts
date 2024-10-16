@@ -35,7 +35,7 @@ export class AddUserComponent {
       day_of_birth: ['', [Validators.required]], 
       password: ['', [Validators.required, Validators.minLength(6)]], 
       role: ['', [Validators.required]], 
-      service_id: ['', Validators.required],
+      // service_id: ['', Validators.required],
     });
   }
 

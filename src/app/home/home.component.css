@@ -56,7 +56,7 @@
 
   }
   .banner{
-    background-image: url('/images/banner2.jpg');
+    background-image: url('/images/banner9.jpg');
     background-size: cover;
     background-position: center;
     height: 640px;
@@ -64,12 +64,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Couleur noire avec 50% d'opacité */
-    background-blend-mode: darken; /* Mélange la couleur de fond avec l'image */
+    background-color: rgba(0, 0, 0, 0.619);
+    background-blend-mode: darken;
     font-family: merriweather;
     .text{
         border-left: 10px solid #09a84c;
-        height: 200px;
+        height: 250px;
         padding-left: 10px;
         font-weight: bold;
         color: white;
@@ -198,7 +198,7 @@ h4{
     }
 
     .temoignages {
-      background-color: #ffffff; /* Fond blanc pour la section témoignages */
+      background-color: #ffffff; 
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -206,14 +206,14 @@ h4{
 
   .temoignage h5 {
       font-weight: bold;
-      color: #343a40; /* Couleur du titre */
+      color: #343a40; 
   }
   .temoignage p {
-      font-style: italic; /* Italique pour les témoignages */
+      font-style: italic; 
   }
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
-      background-color: #007bff; /* Couleur des flèches */
+      background-color: #007bff;
       border-radius: 50%;
   }
     .card-header{

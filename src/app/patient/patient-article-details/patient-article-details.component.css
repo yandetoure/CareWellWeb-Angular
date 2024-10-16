@@ -1,0 +1,62 @@
+.dashboard-container {
+    display: flex; 
+  }
+  
+  app-patient-header {
+    width: 250px; 
+    background-color: #ffffff; 
+    height: 100vh; 
+    position: fixed;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .main-content {
+    flex: 1;
+    margin-left: 250px;
+    overflow-y: auto; 
+    background-color: #ffffff;
+    padding: 20px; 
+  }
+  .modal-body img {
+    width: 50%;
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .modal-body h6 {
+    font-weight: bold;
+    color: #03284f;
+    font-weight: bold;
+
+  }
+
+  .modal-body{
+    border-radius: 8px;
+    justify-content: justify;
+    font-size: 16px;
+    color: #333333e8;
+    line-height: 1.6;
+    padding: 15px; 
+    margin-bottom: 20px;
+    width: 60%;
+    height: auto;
+    background-color: #90fbf618; 
+    transition: transform 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .head{
+
+    display: flex;
+    flex-direction: row;
+    h5{
+        margin-top: 140px;
+        padding-left: 80px;
+        color: #03284f;
+        font-size: 28px;
+        font-weight: bold;
+    }
+  }

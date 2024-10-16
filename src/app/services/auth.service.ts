@@ -85,7 +85,7 @@ export class AuthService {
           this.router.navigate(['/dashboard/doctor']);
           break;
       case 'Accountant':
-        this.router.navigate(['/dashboard-accontable']);
+        this.router.navigate(['/dashboard-accountant']);
         break;
       case 'Secretary':
         this.router.navigate(['/secretary-dashboard']);

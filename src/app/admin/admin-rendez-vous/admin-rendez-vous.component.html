@@ -1,37 +1,20 @@
 <div class="dashboard-container">
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="main-content">
-
-<div class="container mt-5">
-    <h2 class="mb-4">Liste des patients avec rendez-vous</h2>
-    <button class="btn btn-primary mb-3" (click)="loadPatients()">Rafraîchir la liste</button>
-  
-    <table class="table table-bordered" *ngIf="patients.length > 0">
-      <thead>
-        <tr>
-          <th>ID Patient</th>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Date du rendez-vous</th>
-          <th>Heure</th>
-          <th>Médecin</th>
-          <th>Service</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let patient of patients">
-          <td>{{ patient.patient_id }}</td>
-          <td>{{ patient.patient_first_name }} {{ patient.patient_last_name }}</td>
-          <td>{{ patient.patient_email }}</td>
-          <td>{{ patient.appointment_date }}</td>
-          <td>{{ patient.appointment_time }}</td>
-          <td>{{ patient.doctor }}</td>
-          <td>{{ patient.service }}</td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <p *ngIf="patients.length === 0">Aucun patient avec rendez-vous n'a été trouvé.</p>
-  </div>
-</div>
+    <div class="main-content container mt-4">
+      <div class="appointments-list container mt-5">
+        <h2 class="text-center mb-4 text-primary">Liste des rendez-vous</h2>
+      
+        <div class="row">
+          <div class="col-md-12" *ngFor="let appointment of appointments" [ngClass]="getAppointmentClass(appointment.date)">
+            <div class="appointment-card">
+              <div class="appointment-info">
+                <p><strong>Nom:</strong> {{ appointment.user.first_name }} {{ appointment.user.last_name }}</p>
+                <p><strong>Service:</strong> {{ appointment.service.name }}</p>
+                <p><strong>Date:</strong> {{ appointment.date | date: 'fullDate' }}</p>
+                <p><strong>Heure:</strong> {{ appointment.time }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>

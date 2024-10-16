@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 export class DoctorAppointmentComponent {
   appointments: any[] = []; 
   selectedAppointment: any; 
+  isModalOpen: boolean = false; // État du modal
+
 
   isDetailsModalOpen: boolean = false; 
   isEditModalOpen: boolean = false; 
@@ -93,6 +95,36 @@ export class DoctorAppointmentComponent {
   goToMedicalRecord(userId: number) {
     this.router.navigate(['/doctor/medicalfile', userId]);
   }
+
+  updatePatientConfirmed(form: any) {
+    if (form.valid) {
+      if (confirm("Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?")) {
+        const patientId = this.selectedAppointment.patient_id;
+  
+        const updatedData = {
+          is_visited: this.selectedAppointment.is_visited,
+        };
+  
+        // Ajoutez ce log pour voir les données
+        console.log('Données à envoyer :', updatedData);
+  
+        this.appointmentService.updateAppointment(patientId, updatedData).subscribe(
+          (response: any) => {
+            alert("Rendez-vous mis à jour avec succès !");
+            this.getAppointments();
+          },
+          (error) => {
+            console.error("Erreur lors de la mise à jour du rendez-vous :", error);
+            alert("Une erreur est survenue lors de la mise à jour du rendez-vous.");
+          }
+        );
+      }
+    } else {
+      alert("Veuillez remplir tous les champs requis.");
+    }
+  }  
+  
+
 }
 
 

@@ -13,8 +13,8 @@ export class ExamService {
   constructor(private http: HttpClient) {}
 
   // Récupérer les examens associés à un dossier médical
-  getExams(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/medicalexam?id=${id}`);
+  getExams(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/exams`);
   }
 
   // Ajouter un examen à un dossier médical

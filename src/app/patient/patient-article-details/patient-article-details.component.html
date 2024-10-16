@@ -1,0 +1,24 @@
+ <div class="dashboard-container d-flex">
+        <app-patient-header></app-patient-header>
+        <div class="main-content">
+ 
+<div class="modal-body container mt-5">
+  <div class="head">
+    <img *ngIf="article?.photo" [src]="'http://localhost:8000/storage/' + article?.photo" alt="{{ article?.title }}" class="image" />
+    <h5>{{ article?.title }}</h5>
+  </div>
+
+<div class="content">
+  
+    <h6>Description :</h6>
+    <p>{{ article?.content }}</p>
+
+    <h6>Symptomes :</h6>
+    <p>{{ article?.symptoms}} </p>
+
+    <h6>Conseils :</h6>
+    <p>{{ article?.advices}} </p>
+  </div>
+
+  </div>
+

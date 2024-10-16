@@ -128,9 +128,4 @@ closeDetailsModal(): void {
   }
 }
 
-
-goToMedicalFileDetails(id: string): void {
-  this.router.navigate(['/article-details', id]);
-}
-
 }

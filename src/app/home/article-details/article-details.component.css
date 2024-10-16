@@ -1,0 +1,101 @@
+.body {
+    background-size: cover; 
+    background-position: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .navbar-nav .nav-link.active {
+    color: #09a84c;
+    font-weight: bold;
+}
+
+  .container-fluid{
+    background-color: white;
+    padding-left: 15%;
+  }
+  .connexion{
+    margin-left: 1;
+    font-size: 18px;
+  }
+  .connexion:hover{
+    a{
+        color: #09a84c;
+    }
+  }
+  .inscription{
+    margin-left: 200px;
+    font-size: 18px;
+  }
+  .inscription:hover{
+
+    a{
+        color: #09a84c;
+    }
+  }
+  .navbar-nav{
+    margin-left: 100px;
+    font-size: 20px;
+
+
+    a{
+        color: #1F2B6C;
+        font-family: merriweather;
+        margin-left: 50px;
+    }
+    .nav-item{
+        a:hover{
+            color: #09a84c;
+        }
+    }
+
+  }
+
+  .modal-body img {
+    width: 50%;
+    height: 300px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .modal-body h6 {
+    font-weight: bold;
+    color: #03284f;
+    font-weight: bold;
+
+  }
+
+  .modal-body{
+    border-radius: 8px;
+    justify-content: justify;
+    font-size: 16px;
+    color: #333333e8;
+    line-height: 1.6;
+    padding: 15px; 
+    margin-bottom: 20px;
+    width: 60%;
+    height: auto;
+    background-color: #90fbf618; 
+    transition: transform 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .head{
+
+    display: flex;
+    flex-direction: row;
+    h5{
+        margin-top: 140px;
+        padding-left: 80px;
+        color: #03284f;
+        font-size: 28px;
+        font-weight: bold;
+    }
+  }
