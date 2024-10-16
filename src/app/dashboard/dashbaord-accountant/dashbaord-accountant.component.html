@@ -1,8 +1,94 @@
 <div class="dashboard-container">
     <app-accountant-sidebar></app-accountant-sidebar>
     <div class="main-content">
-      <h5>Bienvenue Toure comptable</h5>
-      <!-- Autres contenus spécifiques au tableau de bord du médecin -->
+      <div class="header">
+          <h5>Bienvenue dans le tableau de bord de l'admin</h5>
+
+          <div class="profil">
+            <p>{{ userInfo.first_name }} {{ userInfo.last_name}} </p>
+            <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+          </div>
+        </div>
+    
+        <div class="banner">
+          <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />
+          <div class="infos">
+            <div class="perso">
+              <h6>Dr {{ userInfo.first_name }} {{ userInfo.last_name}} </h6>
+              <p>Adresse : {{ userInfo.adress }}</p>
+              <p>Téléphone : {{ userInfo.phone_number }}</p>
+              <p>{{ userInfo.email }}</p>
+            </div>
+    
+            <div class="specialite">
+              <h6>Spécialité : {{ userInfo.speciality }}</h6>
+              <p>Grade : {{ userInfo.grade }}</p>
+                  <!-- Nouveau bouton "Modifier le profil" -->
+        <button (click)="openModal()">Modifier le profil</button>
+            </div>
+          </div>
+        </div>
+    
+        <div class="cards">
+          <div class="card">
+            <p>Total rendez-vous</p>
+            <h4>60</h4>
+          </div>
+          <div class="card">
+            <p>Rendez-vous restant</p>
+            <h4>06</h4>
+          </div>
+          <div class="card">
+            <p>Total prescriptions</p>
+            <h4>60</h4>
+          </div>
+          <div class="card">
+            <p>Total Examens</p>
+            <h4>60</h4>
+          </div>
+        </div>
+    
+    
+    <!-- Modal stylisé avec Bootstrap -->
+    <div class="modal" *ngIf="isModalOpen" style="display: block; background: rgba(0, 0, 0, 0.5);">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modifier le profil</h5>
+            <button type="button" class="btn-close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Formulaire de modification des informations -->
+            <form (ngSubmit)="updateProfile()">
+              <div class="mb-3">
+                <label for="first_name" class="form-label">Prénom :</label>
+                <input type="text" id="first_name" class="form-control" [(ngModel)]="userInfo.first_name" name="first_name" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="last_name" class="form-label">Nom :</label>
+                <input type="text" id="last_name" class="form-control" [(ngModel)]="userInfo.last_name" name="last_name" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="adress" class="form-label">Adresse :</label>
+                <input type="text" id="adress" class="form-control" [(ngModel)]="userInfo.adress" name="adress">
+              </div>
+    
+              <div class="mb-3">
+                <label for="phone_number" class="form-label">Téléphone :</label>
+                <input type="text" id="phone_number" class="form-control" [(ngModel)]="userInfo.phone_number" name="phone_number">
+              </div>
+    
+    
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Fermer</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
+</div>

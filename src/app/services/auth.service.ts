@@ -55,24 +55,20 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Méthode pour récupérer le profil de l'utilisateur
   getProfile(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.get(`${this.apiUrl}//profile/update`, { headers });
   }
 
-  // Méthode pour stocker le token
   setToken(token: string): void {
     this.token = token;
     localStorage.setItem('token', token);
   }
 
-  // Méthode pour récupérer le token
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // Méthode pour rediriger selon le rôle de l'utilisateur
   private redirectBasedOnRole(role: string): void {
     switch (role) {
       case 'Admin':
@@ -85,10 +81,10 @@ export class AuthService {
           this.router.navigate(['/dashboard/doctor']);
           break;
       case 'Accountant':
-        this.router.navigate(['/dashboard-accountant']);
+        this.router.navigate(['/dashboard/accountant']);
         break;
       case 'Secretary':
-        this.router.navigate(['/secretary-dashboard']);
+        this.router.navigate(['/dashboard/secretary']);
         break;
       default:
         this.router.navigate(['/login']);
