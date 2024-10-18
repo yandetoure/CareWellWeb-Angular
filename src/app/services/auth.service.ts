@@ -140,4 +140,10 @@ export class AuthService {
     // updateUser(userData: any): Observable<any> {
     //   return this.http.put(`${this.apiUrl}/update-user`, userData);
     // }
+
+    getStatistics(): Observable<any> {
+      return this.http.get(`${this.apiUrl}/statistics`).pipe(
+        map((response: any) => response.data) // Adapter selon la structure de votre réponse
+      );
+    }
 }

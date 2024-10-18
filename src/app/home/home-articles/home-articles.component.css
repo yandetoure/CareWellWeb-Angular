@@ -1,61 +1,125 @@
 .body {
-    background-size: cover; /* Ajuste l'image pour couvrir tout l'arrière-plan */
-    background-position: center; /* Centre l'image */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  .navbar-nav .nav-link.active {
-    color: #09a84c;
-    font-weight: bold;
+  background-size: cover; /* Ajuste l'image pour couvrir tout l'arrière-plan */
+  background-position: center; /* Centre l'image */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar-nav .nav-link.active {
+  color: #0b645a;
+  border-bottom: 3px solid #1F2B6C;
+  font-weight: bold;
 }
 
-  .container-fluid{
-    background-color: white;
-    padding-left: 15%;
+.container-fluid{
+  background-color: white;
+  padding-left: 12%;
+}
+.connexion{
+  font-size: 18px;
+}
+.connexion:hover{
+  a{
+    color: #0b645a;
+    border-bottom: 3px solid #1F2B6C;
   }
-  .connexion{
-    margin-left: 1;
-    font-size: 18px;
+}
+.inscription{
+  margin-left: 10px;
+  font-size: 18px;
+}
+.inscription:hover{
+  a{
+    color: #0b645a;
+    border-bottom: 3px solid #1F2B6C;
   }
-  .connexion:hover{
-    a{
-        color: #09a84c;
-    }
-  }
-  .inscription{
-    margin-left: 200px;
-    font-size: 18px;
-  }
-  .inscription:hover{
+}
+.navbar-nav{
+  margin-left: 40%;
+  font-size: 20px;
+  gap: 20px;
 
-    a{
-        color: #09a84c;
-    }
-  }
-  .navbar-nav{
-    margin-left: 100px;
-    font-size: 20px;
-
-
-    a{
-        color: #1F2B6C;
-        font-family: merriweather;
-        margin-left: 50px;
-    }
-    .nav-item{
-        a:hover{
-            color: #09a84c;
-        }
-    }
+  a{
+      color: #1F2B6C;
+      font-family: merriweather;
+      font-weight: bold;
 
   }
+  .nav-item{
+      a:hover{
+        color: #0b645a;
+        border-bottom: 3px solid #1F2B6C;
+      }
+  }
 
+}
+
+.search-input {
+  display: block;
+  margin: 0 auto; /* Centre le champ de recherche */
+  border: 2px solid 0b645a; /* Bordure verte */
+  padding: 10px; /* Ajoute un peu de padding pour l'esthétique */
+  width: 50%; /* Ajuste la largeur pour qu'il ne soit pas trop grand */
+  border-radius: 5px; /* Arrondi les coins de la bordure */
+  box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); /* Ajoute une ombre subtile verte */
+}
+
+h2{
+  color: #0b645a;
+}
+.main-content {
+  text-align: center; /* Centre le contenu principal */
+}
+
+.banner{
+  background-image: url('/images/banner16.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 700px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.454);
+  background-blend-mode: darken;
+  font-family: merriweather;
+  .text{
+      border-left: 10px solid #1F2B6C;
+      height: 220px;
+      width: 600px;
+      padding-left: 10px;
+      font-weight: bold;
+      color: white;
+      margin-left: 12%;
+
+      h3{
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+      }
+      p{
+        color: white;
+        font-size: 16px;
+      }
+
+  }
+  .btn-banner{
+      background-color: #0b645a;
+      color: white;
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding-left: 18px;
+      padding-right: 18px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+
+}
 .dashboard-container {
     display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
   }
@@ -77,19 +141,25 @@ app-admin-sidebar {
 
 
     .cards{
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 30px;
     }
         .maladies{
-            display: flex;
-            justify-content: center;
-            margin-bottom: 70px;
-              .card{
-                margin: 20px;
-                width: 250px;
-            }
-            }    
+          display: flex;
+          justify-content: center;
+          padding-left: 50px;
+          padding-right: 50px;
+            .card{
+              margin: 10px;
+              flex: 0 0 20%; /* Chaque carte occupe 25% de la largeur (4 par ligne) */
+              box-sizing: border-box;
+              padding: 15px; /* Ajoute un peu de padding entre les cartes */
+          }
+          }     
     p{
     color: #000000a7;
     font-weight: bold;

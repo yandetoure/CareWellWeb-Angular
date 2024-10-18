@@ -1,0 +1,9 @@
+.container{
+    height: 100vh;
+    padding-top: 200px;
+    background-image: url('/images/back2.jpeg');
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+
+}

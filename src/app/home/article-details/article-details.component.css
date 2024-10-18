@@ -1,60 +1,63 @@
 .body {
-    background-size: cover; 
-    background-position: center; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  .navbar-nav .nav-link.active {
-    color: #09a84c;
-    font-weight: bold;
+  background-size: cover; /* Ajuste l'image pour couvrir tout l'arrière-plan */
+  background-position: center; /* Centre l'image */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar-nav .nav-link.active {
+  color: #0b645a;
+  border-bottom: 3px solid #1F2B6C;
+  font-weight: bold;
 }
 
-  .container-fluid{
-    background-color: white;
-    padding-left: 15%;
+.container-fluid{
+  background-color: white;
+  padding-left: 12%;
+}
+.connexion{
+  font-size: 18px;
+}
+.connexion:hover{
+  a{
+    color: #0b645a;
+    border-bottom: 3px solid #1F2B6C;
   }
-  .connexion{
-    margin-left: 1;
-    font-size: 18px;
+}
+.inscription{
+  margin-left: 10px;
+  font-size: 18px;
+}
+.inscription:hover{
+  a{
+    color: #0b645a;
+    border-bottom: 3px solid #1F2B6C;
   }
-  .connexion:hover{
-    a{
-        color: #09a84c;
-    }
-  }
-  .inscription{
-    margin-left: 200px;
-    font-size: 18px;
-  }
-  .inscription:hover{
+}
+.navbar-nav{
+  margin-left: 40%;
+  font-size: 20px;
+  gap: 20px;
 
-    a{
-        color: #09a84c;
-    }
-  }
-  .navbar-nav{
-    margin-left: 100px;
-    font-size: 20px;
-
-
-    a{
-        color: #1F2B6C;
-        font-family: merriweather;
-        margin-left: 50px;
-    }
-    .nav-item{
-        a:hover{
-            color: #09a84c;
-        }
-    }
+  a{
+      color: #1F2B6C;
+      font-family: merriweather;
+      font-weight: bold;
 
   }
+  .nav-item{
+      a:hover{
+        color: #0b645a;
+        border-bottom: 3px solid #1F2B6C;
+      }
+  }
+
+}
 
   .modal-body img {
     width: 50%;

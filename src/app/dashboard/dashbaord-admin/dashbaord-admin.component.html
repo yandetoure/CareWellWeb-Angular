@@ -1,52 +1,74 @@
-<div class="dashboard-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Document</title>
+
+</head>
+<body>
+  <div class="dashboard-container">
     <app-admin-sidebar></app-admin-sidebar>
     <div class="main-content">
-        <div class="header">
-            <h5>Bienvenue dans le tableau de bord de l'admin</h5>
+      <div class="header">
+        <h5>Bon retour Dr {{ userInfo.last_name }}</h5>
+        <div class="profil">
+          <p>{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
+          <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+        </div>
+      </div>
 
-            <div class="profil">
-                <p>{{ userInfo.first_name }} {{ userInfo.last_name}} </p>
-                <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
-        </div>
-        </div>
+      <div class="banner">
+        <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />
+        <div class="infos">
+          <div class="perso">
+            <h6>Dr {{ userInfo.first_name }} {{ userInfo.last_name }}</h6>
+            <p>Adresse : {{ userInfo.adress }}</p>
+            <p>Téléphone : {{ userInfo.phone_number }}</p>
+            <p>{{ userInfo.email }}</p>
+          </div>
 
-        <div class="cards">
-            <div class="card">
-                    <p>Nombre de tickets</p>
-                    <h4>60</h4>
-            </div>
-            <div class="card">
-                    <p>Nombre de Docteurs</p>
-                    <h4>60</h4>
-            </div>
-            <div class="card">
-                    <p>Nombre de Secretaires</p>
-                    <h4>60</h4>
-            </div>
-            <div class="card">
-                    <p>Nombre de tickets vendus</p>
-                    <h4>60</h4>
-            </div>
+          <div class="specialite">
+            <h6>Spécialité : {{ userInfo.speciality }}</h6>
+            <p>Grade : {{ userInfo.grade }}</p>
+          </div>
         </div>
+      </div>
 
-        <div class="cards">
-            <div class="card">
-                    <p>Nombre de Patients</p>
-                    <h4>60</h4>
-            </div>
-            <div class="card">
-                    <p>Nombre de comptes</p>
-                    <h4>60</h4>
-            </div>
-            <div class="card">
-                    <p>Nombre de rendez-vous</p>
-                    <h4>60</h4>
-            </div>
-            <div class="card">
-                    <p>Nombre de d'Examens</p>
-                    <h4>60</h4>
-            </div>
+      <div class="stats" >
+        <h6>Statistiques des utilisateurs :</h6>
+        <div class="card-container">
+          <div class="card">
+            <h6>Nombre de Docteurs</h6>
+            <p>{{ userStatistics.Doctor || 0 }}</p>           
+          </div>
+          <div class="card">
+            <h6>Nombre de Patients</h6>
+            <p>{{ userStatistics.Patient || 0 }}</p>
+          </div>
+          <div class="card">
+            <h6>Nombre d'Administrateurs</h6>
+            <p>{{ userStatistics.Admin || 0 }}</p>
+          </div>
+          <div class="card">
+            <h6>Nombre de Secrétaires</h6>
+            <p>{{ userStatistics.Secretary || 0 }}</p>
+          </div>
+          <div class="card">
+            <h6>Nombre de Comptables</h6>
+            <p>{{ userStatistics.Accountant || 0 }}</p>
+          </div>
         </div>
+      </div>
+      
+      
+      
+
+      <div class="chart-container mt-5">
+        <canvas id="myChart" width="400" height="200"></canvas>
+      </div>
     </div>
   </div>
-  
+</body>
+</html>

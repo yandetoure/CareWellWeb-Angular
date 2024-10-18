@@ -41,12 +41,18 @@ import { DashboardSecretaryComponent } from './dashboard/dashboard-secretary/das
 import { AccountantPrescriptionsComponent } from './accountant/accountant-prescriptions/accountant-prescriptions.component';
 import { AccountantArticlesComponent } from './accountant/accountant-articles/accountant-articles.component';
 import { AccountantServicesComponent } from './accountant/accountant-services/accountant-services.component';
+import { HomeServicesComponent } from './home/home-services/home-services.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
   
   { path: 'home', component: HomeComponent }, 
   { path: 'profile', component: ProfileComponent },
   { path: 'article-details/:id', component: ArticleDetailsComponent },
+  { path: 'home/articles', component: HomeArticlesComponent},
+  { path: 'home/services', component: HomeServicesComponent},
+  { path: 'contacts', component: ContactsComponent},
+
 
   { path: 'dashboard/accountant', component: DashbaordAccountantComponent },
   { path: 'dashboard/admin', component: DashbaordAdminComponent },
@@ -85,7 +91,6 @@ export const routes: Routes = [
   { path: 'patient/user-appointment', component: UserAppointmentComponent},
   { path: 'patient/medicalfile', component: MedicalfileComponent},
   { path: 'patient/article-details/:id', component: PatientArticleDetailsComponent},
-  { path: 'home/articles', component: HomeArticlesComponent},
 
   // Home Page sections
   { path: 'us', component: AboutUsComponent },

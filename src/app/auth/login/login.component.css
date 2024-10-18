@@ -2,8 +2,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(13, 65, 206);
 }
 
 .card-body{
     justify-content: center;
+}
+
+.container{
+    height: 100vh;
+    padding-top: 200px;
+    background-image: url('/images/back1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.card{
+    background-color: rgba(255, 255, 255, 0.789);
+
 }
