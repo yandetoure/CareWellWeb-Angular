@@ -4,9 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { AppointmentService } from '../../services/appointment.service'; 
+import { Chart, LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler } from 'chart.js'; // Importer les contrôleurs et échelles nécessaires
 
-
-
+// Enregistrer les échelles et le contrôleur de graphique linéaire
+Chart.register(LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler);
 
 @Component({
   selector: 'app-dashbaord-doctor',
@@ -15,15 +17,17 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './dashbaord-doctor.component.html',
   styleUrls: ['./dashbaord-doctor.component.css'] 
 })
-
 export class DashbaordDoctorComponent {
   userInfo: any = {};
   isModalOpen: boolean = false;
+  doctorStats: any = {};
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private appointmentService: AppointmentService) {}
 
   ngOnInit() {
     this.loadUserInfo();
+    this.loadDoctorStats();
   }
 
   loadUserInfo() {
@@ -39,20 +43,15 @@ export class DashbaordDoctorComponent {
     );
   }
 
-
-   // Ouvrir le modal
-   openModal() {
+  openModal() {
     console.log('Bouton "Modifier le profil" cliqué');
     this.isModalOpen = true;
   }
-  
 
-  // Fermer le modal
   closeModal() {
     this.isModalOpen = false;
   }
 
-  // Méthode pour mettre à jour les informations du profil
   updateProfile() {
     this.authService.updateUserInfo(this.userInfo).subscribe(
       response => {
@@ -64,5 +63,49 @@ export class DashbaordDoctorComponent {
         console.error('Erreur lors de la mise à jour du profil', error);
       }
     );
+  }
+
+  loadDoctorStats() {
+    this.appointmentService.getDoctorStats().subscribe(
+      (response) => {
+        if (response.status) {
+          this.doctorStats = response.data; // Récupère les statistiques du docteur
+          this.createChart(); // Appel de la méthode pour créer le diagramme
+        }
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des statistiques', error);
+      }
+    );
+  }
+
+  createChart() {
+    const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+    const myChart = new Chart(ctx, {
+      type: 'line', // Type de diagramme : line
+      data: {
+        labels: ['Rendez-vous aujourd\'hui', 'Total des rendez-vous', 'Rendez-vous complétés'], // Étiquettes pour l'axe des X
+        datasets: [{
+          label: 'Statistiques des rendez-vous',
+          data: [
+            this.doctorStats.appointments_today,
+            this.doctorStats.total_appointments,
+            this.doctorStats.completed_appointments
+          ], // Valeurs à afficher
+          fill: false, // Ne pas remplir sous la courbe
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          tension: 0.1 // Contrôle la courbure de la ligne
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
 }

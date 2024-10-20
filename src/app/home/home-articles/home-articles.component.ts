@@ -47,7 +47,7 @@ loadArticles(): void {
   );
 }
 
-limitWords(content: string, limit: number = 6): string {
+limitWords(content: string, limit: number = 2): string {
   let words = content.split(' ');
   if (words.length > limit) {
     return words.slice(0, limit).join(' ') + '...'; 

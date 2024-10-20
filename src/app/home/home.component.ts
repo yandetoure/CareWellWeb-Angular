@@ -52,12 +52,15 @@ export class HomeComponent implements OnInit {
   loadServices(): void {
     this.serviceService.getServices().subscribe(
       (response: any) => {
-        this.services = response.data.map((service: any) => {
-          if (service.photo) {
-            service.photo = `http://localhost:8000/storage/${service.photo}`; 
-          }
-          return service;
-        });
+        this.services = response.data
+          .map((service: any) => {
+            if (service.photo) {
+              service.photo = `http://localhost:8000/storage/${service.photo}`; 
+            }
+            return service;
+          })
+          .sort(() => 0.5 - Math.random()) // Mélange aléatoire des services
+          .slice(0, 4); // Prend uniquement les 4 premiers éléments mélangés
         console.log(this.services);
       },
       (error) => {
@@ -65,16 +68,20 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  
 
   loadArticles(): void {
     this.articlesService.getArticles().subscribe(
       (response: any) => {
-        this.articles = response.data.map((article: any) => {
-          if (article.photo) {
-            article.photo = `http://localhost:8000/storage/${article.photo}`; 
-          }
-          return article;
-        });
+        this.articles = response.data
+          .map((article: any) => {
+            if (article.photo) {
+              article.photo = `http://localhost:8000/storage/${article.photo}`; 
+            }
+            return article;
+          })
+          .sort(() => 0.5 - Math.random()) // Mélange aléatoire des articles
+          .slice(0, 4); // Prend uniquement les 4 premiers éléments mélangés
         console.log(this.articles);
       },
       (error) => {
@@ -82,6 +89,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+  
 
   loadDoctors(): void {
     this.authService.getUsers().subscribe(

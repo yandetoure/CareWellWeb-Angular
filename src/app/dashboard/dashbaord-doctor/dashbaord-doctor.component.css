@@ -124,3 +124,34 @@
   button {
     margin-top: 10px;
   }
+
+  .card-container {
+    display: flex; /* Utilise flexbox pour l'affichage des cartes */
+    justify-content: space-between; /* Espace entre les cartes */
+    margin-top: 20px; /* Espacement au-dessus des cartes */
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    flex: 1; /* Chaque carte prend une largeur égale */
+    margin-right: 20px; /* Ajoute un espacement entre les cartes */
+  }
+
+  .card:last-child {
+    margin-right: 0; /* Supprime le margine à droite de la dernière carte */
+  }
+
+  .card h6 {
+    color: #0056b3; /* Titre en bleu */
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    margin: 0; /* Réinitialise les marges */
+    font-size: 1.2em; 
+    font-weight: bold;
+  }

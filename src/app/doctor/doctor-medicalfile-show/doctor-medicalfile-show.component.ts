@@ -8,13 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { NotesService } from '../../services/notes.service';
 import { PrescriptionService } from '../../services/prescription.service';
 import { ExamService } from '../../services/exam.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-doctor-medicalfile-show',
   standalone: true,
   imports: [CommonModule, DoctorSidebarComponent, FormsModule],
   templateUrl: './doctor-medicalfile-show.component.html',
-  styleUrl: './doctor-medicalfile-show.component.css'
+  styleUrl: './doctor-medicalfile-show.component.css',
 })
 export class DoctorMedicalfileShowComponent {
 
@@ -59,35 +60,42 @@ export class DoctorMedicalfileShowComponent {
     if (medicalFileId) {
       this.medicalFileService.addNote(medicalFileId, noteData).subscribe(
         (response) => {
-          console.log('Note added successfully:', response);
+          console.log('Note ajoutée avec succès:', response);
+          Swal.fire('Succès', 'La note a été ajoutée avec succès.', 'success'); // SweetAlert pour succès
+          this.loadMedicalFileDetails(medicalFileId); // Recharger le dossier médical après ajout
         },
         (error) => {
-          console.error('Error adding note:', error);
+          console.error('Erreur lors de l\'ajout de la note:', error);
+          Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout de la note.', 'error'); // SweetAlert pour erreur
         }
       );
     } else {
-      console.error('Medical file ID not found');
+      console.error('ID du dossier médical non trouvé');
+      Swal.fire('Erreur', 'ID du dossier médical non trouvé.', 'error'); // SweetAlert pour erreur
     }
   }
   
   addHistory(historyData: any) {
     const medicalFileId = this.medicalFile.id;
-    
     console.log('Données envoyées:', historyData);
-  
+
     if (medicalFileId) {
       this.medicalFileService.addHistory(medicalFileId, historyData).subscribe(
         (response) => {
           console.log('Antécédent ajouté avec succès:', response);
+          Swal.fire('Succès', 'L\'antécédent a été ajouté avec succès.', 'success'); // SweetAlert pour succès
+          this.loadMedicalFileDetails(medicalFileId); // Recharger le dossier médical après ajout
         },
         (error) => {
           console.error('Erreur lors de la création de l\'antécédent:', error);
+          Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout de l\'antécédent.', 'error'); // SweetAlert pour erreur
         }
       );
     } else {
-      console.error('Medical file ID not found');
+      console.error('ID du dossier médical non trouvé');
+      Swal.fire('Erreur', 'ID du dossier médical non trouvé.', 'error'); // SweetAlert pour erreur
     }
-  }  
+  } 
 
   loadPrescriptions(): void {
     this.prescriptionService.getPrescriptions().subscribe({
@@ -113,42 +121,46 @@ loadExams(): void {
   });
 }
 
-  addPrescription(prescriptionData: any) {
-    const medicalFileId = this.medicalFile.id;
-
-    if (medicalFileId) {
-        prescriptionData.medical_files_id = medicalFileId; 
-        this.medicalFileService.addPrescription(medicalFileId, prescriptionData).subscribe(
-            (response) => {
-                console.log('Prescription ajoutée avec succès:', response);
-                this.loadPrescriptions();
-            },
-            (error) => {
-                console.error('Erreur lors de l\'ajout de la prescription:', error);
-            }
-        );
-    } else {
-        console.error('ID du dossier médical non trouvé');
-    }
+addPrescription(prescriptionData: any) {
+  const medicalFileId = this.medicalFile.id;
+  if (medicalFileId) {
+    prescriptionData.medical_files_id = medicalFileId;
+    this.medicalFileService.addPrescription(medicalFileId, prescriptionData).subscribe(
+      (response) => {
+        console.log('Prescription ajoutée avec succès:', response);
+        Swal.fire('Succès', 'La prescription a été ajoutée avec succès.', 'success'); // SweetAlert pour succès
+        this.loadMedicalFileDetails(medicalFileId); // Recharger le dossier médical après ajout
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de la prescription:', error);
+        Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout de la prescription.', 'error'); // SweetAlert pour erreur
+      }
+    );
+  } else {
+    console.error('ID du dossier médical non trouvé');
+    Swal.fire('Erreur', 'ID du dossier médical non trouvé.', 'error'); // SweetAlert pour erreur
+  }
 }
 
 
 addExam(examData: any) {
   const medicalFileId = this.medicalFile.id;
-
   if (medicalFileId) {
-    examData.medical_files_id = medicalFileId; 
-      this.medicalFileService.addExam(medicalFileId, examData).subscribe(
-          (response) => {
-              console.log('Examen ajoutée avec succès:', response);
-              this.loadPrescriptions();
-          },
-          (error) => {
-              console.error('Erreur lors de l\'ajout de l\'examen:', error);
-          }
-      );
+    examData.medical_files_id = medicalFileId;
+    this.medicalFileService.addExam(medicalFileId, examData).subscribe(
+      (response) => {
+        console.log('Examen ajouté avec succès:', response);
+        Swal.fire('Succès', 'L\'examen a été ajouté avec succès.', 'success'); // SweetAlert pour succès
+        this.loadMedicalFileDetails(medicalFileId); // Recharger le dossier médical après ajout
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de l\'examen:', error);
+        Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout de l\'examen.', 'error'); // SweetAlert pour erreur
+      }
+    );
   } else {
-      console.error('ID du dossier médical non trouvé');
+    console.error('ID du dossier médical non trouvé');
+    Swal.fire('Erreur', 'ID du dossier médical non trouvé.', 'error'); // SweetAlert pour erreur
   }
 }
 

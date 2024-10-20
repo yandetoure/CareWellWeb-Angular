@@ -52,16 +52,6 @@
     </div>
 </div>
 
-<!-- Modal pour voir les détails -->
-<div class="modal" *ngIf="isDetailsModalOpen">
-    <div class="modal-content">
-        <span class="close" (click)="closeDetailsModal()">&times;</span>
-        <h4>{{ selectedArticle?.title }}</h4>
-        <img *ngIf="selectedArticle?.photo" [src]="'http://localhost:8000/storage/' + selectedArticle.photo" alt="{{ selectedArticle.title }}" class="article-photo" />
-        <p><strong>Contenu :</strong> {{ selectedArticle?.content }}</p>
-        <p><strong>Symptômes :</strong> {{ selectedArticle?.symptoms }}</p>
-        <p><strong>Conseils pratiques :</strong> {{ selectedArticle?.advices }}</p>
-    </div>
 </div>
 </div>
 </div>

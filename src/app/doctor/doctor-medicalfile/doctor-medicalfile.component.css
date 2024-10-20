@@ -19,9 +19,10 @@ app-doctor-sidebar {
 }
 
 .card{
-  height: 200px;
+  height: 220px;
   display: flex;
   flex-direction: column;
+  width: 190px;
   border-left: 5px solid #054280;
   border-radius: 15px;
   .card-body{
@@ -33,10 +34,11 @@ app-doctor-sidebar {
   h5{
     font-size: 16px;
     font-weight: bold;
+    margin-top: 5px;
   }
   p{
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 25px;
     font-weight: bold;
   }
 }

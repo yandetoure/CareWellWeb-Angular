@@ -35,21 +35,30 @@ import { UserAppointmentComponent } from './patient/user-appointment/user-appoin
 import { MedicalfileComponent } from './patient/medicalfile/medicalfile.component';
 import { PatientArticlesComponent } from './patient/patient-articles/patient-articles.component';
 import { PatientServicesTestComponent } from './patient/patient-services-test/patient-services-test.component';
-import { AccountantPrescriptionsComponent } from './accounatant/accountant-prescriptions/accountant-prescriptions.component';
 import { PatientArticleDetailsComponent } from './patient/patient-article-details/patient-article-details.component';
 import { HomeArticlesComponent } from './home/home-articles/home-articles.component';
+import { DashboardSecretaryComponent } from './dashboard/dashboard-secretary/dashboard-secretary.component';
+import { AccountantPrescriptionsComponent } from './accountant/accountant-prescriptions/accountant-prescriptions.component';
+import { AccountantArticlesComponent } from './accountant/accountant-articles/accountant-articles.component';
+import { AccountantServicesComponent } from './accountant/accountant-services/accountant-services.component';
+import { HomeServicesComponent } from './home/home-services/home-services.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: '/register', pathMatch: 'full' }, 
   
   { path: 'home', component: HomeComponent }, 
   { path: 'profile', component: ProfileComponent },
   { path: 'article-details/:id', component: ArticleDetailsComponent },
+  { path: 'home/articles', component: HomeArticlesComponent},
+  { path: 'home/services', component: HomeServicesComponent},
+  { path: 'contacts', component: ContactsComponent},
+
 
   { path: 'dashboard/accountant', component: DashbaordAccountantComponent },
   { path: 'dashboard/admin', component: DashbaordAdminComponent },
   { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
   { path: 'dashboard/patient', component: DashbaordPatientComponent },
+  { path: 'dashboard/secretary', component: DashboardSecretaryComponent },
 
   // Doctor-related routes
   { path: 'doctor/medical-file', component: MedicalFilesComponent },
@@ -82,7 +91,6 @@ export const routes: Routes = [
   { path: 'patient/user-appointment', component: UserAppointmentComponent},
   { path: 'patient/medicalfile', component: MedicalfileComponent},
   { path: 'patient/article-details/:id', component: PatientArticleDetailsComponent},
-  { path: 'home/articles', component: HomeArticlesComponent},
 
   // Home Page sections
   { path: 'us', component: AboutUsComponent },
@@ -90,7 +98,9 @@ export const routes: Routes = [
   { path: 'patient/services', component: PatientServicesTestComponent},
 
   //Accountant
-  { path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent},
+  {path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent},
+  { path: 'accountant/articles', component: AccountantArticlesComponent},
+  { path: 'accountant/services', component: AccountantServicesComponent},
 
   // Patient profile
   { path: 'patient/profil', component: PatientProfileComponent},

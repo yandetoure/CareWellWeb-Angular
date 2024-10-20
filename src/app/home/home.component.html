@@ -6,6 +6,7 @@
     <title>Accueil</title>
 </head>
 <body>
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <img src="images/logo.png" alt="Logo" class="logo" height="60">
@@ -18,13 +19,19 @@
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/home/articles" [class.active]="currentSection === 'service'" (click)="setActiveSection('service')">Services</a>
+            <a class="nav-link" href="/home/articles" [class.active]="currentSection === 'service'" (click)="setActiveSection('service')">Articles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#article" [class.active]="currentSection === 'article'" (click)="setActiveSection('article')">À propos</a>
+            <a class="nav-link" href="/home/services" [class.active]="currentSection === 'article'" (click)="setActiveSection('article')">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts" [class.active]="currentSection === 'article'" (click)="setActiveSection('article')">Contact</a>
           </li>
           <li class="inscription">
             <a class="nav-link" href="/register">S'inscrire</a>
+          </li>
+          <li class="connexion">
+            <a class="nav-link" href="/login">Se connecter</a>
           </li>
         </ul>
       </div>
@@ -34,12 +41,12 @@
   <div class="body">
     <div class="banner" id="banner">
       <div class="text">
-        <h3>Votre santé n'a pas de prix alors prenez-en soin avec CareWell.</h3>
-        <h6>Un esprit sain dans un corps sain</h6>
+        <h3>Un esprit sain dans un corps sain</h3>
+        <p>Prenez soin de votre santé avec l'application CareWell, une prise de rendez-vous rapide pour une prise en charge de qualité. Confiez votre santé à nos professionnels diplômés et avec plus de 5 ans d'expérience</p>
         <button class="btn btn-banner">Prendre rendez-vous</button>
       </div>
       <div class="images">
-        <img src="images/banner.png" alt="Banner Image">
+        <!-- <img src="images/banner.png" alt="Banner Image"> -->
       </div>
     </div>
 
@@ -49,7 +56,7 @@
 
     <img src="images/deco.png" alt="Decoration Image" class="deco1">
       <h4>Catégories de Services</h4>
-      <p>Trouvez ci-dessous les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
+      <p>Trouvez ci-dessous les services que nous avons au sein de notre application.</p>
       <div class="services">
         <div class="cards">
           <ng-container *ngFor="let service of services; let i = index">
@@ -110,23 +117,23 @@
       </div>
   </section>
 
-      <h4>Decouvrez les Maladies</h4>
-      <p>Trouvez ci-dessous des articles sur les maladies que nous soignons et prenez rendez-vous avec nos médecins.</p>
+  <h4>Decouvrez Nos arrticles</h4>
+  <p>Trouvez ci-dessous les articles que nous rédigeons pour vous permettre de mieux comprendre les maladies et recevoir des conseils.</p>
 
-      <div class="maladies">
-        <div class="cards">
-          <ng-container *ngFor="let article of articles; let i = index">
-            <div *ngIf="i < 8" class="card">
-              <img *ngIf="article.photo" [src]="article.photo" alt="{{ article.title }}" class="image" />
-              <div class="card-header">
-                <h5>{{ article.title }}</h5>
-                <p>{{ limitWords(article.content) }}</p>                 
-              </div>
-              <button  (click)="goToArticleDetails(article.id)" class="boutton ">Consulter</button>
-            </div>
-          </ng-container>
+  <div class="services">
+    <div class="cards">
+      <ng-container *ngFor="let article of articles; let i = index">
+        <div *ngIf="i < 8" class="card">
+          <img *ngIf="article.photo" [src]="article.photo" alt="{{ article.title }}" class="image" />
+          <div class="card-header">
+            <h5>{{ article.title }}</h5>
+            <p>{{ limitWords(article.content) }}</p>                 
+          </div>
+          <button  (click)="goToArticleDetails(article.id)" class="boutton ">Consulter</button>
         </div>
-      </div>
+      </ng-container>
+    </div>
+  </div>
 
       <h4>Nos Médecins</h4>
       <p>Trouvez ci-dessous nos médecins et prenez rendez-vous avec eux.</p>
@@ -199,7 +206,7 @@
       <!-- Ajoutez ici le contenu ou les éléments que vous souhaitez -->
     </div>
   </div>
-  <footer style="background-color: #030a6c; color: #fff; padding: 20px;" class="footer">
+  <footer style=" color: #fff; padding: 20px;" class="footer">
     <div class="container">
       <div class="row">
         <div class="col-md-3">

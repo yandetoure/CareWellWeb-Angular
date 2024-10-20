@@ -20,9 +20,11 @@
 
               <p>Historique médical:</p>
               <ul>
-                <li>{{ medicalFile?.medical_history?.content || 'Aucun historique' }}</li>
+                <li *ngFor="let history of medicalFile.nedicalhiestories">
+                  {{ history.content }}
+                </li>
               </ul>
-              <hr class="my-4" />
+              <hr class="my-4" /> 
 
               <p>Prescriptions Médicales:</p>
               <ul>

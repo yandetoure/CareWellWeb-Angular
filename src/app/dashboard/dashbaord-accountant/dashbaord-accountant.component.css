@@ -9,9 +9,9 @@
   }
   
   .main-content {
-    flex: 1; /* Prendre tout l'espace restant */
-    padding: 20px; /* Ajoute un peu de remplissage */
-    background-color: #ffffff; /* Couleur de fond du contenu principal */
+    flex: 1; 
+    padding: 20px; 
+    background-color: #ffffff; 
   }
   .photo1{
     height: 50px;
@@ -21,5 +21,123 @@
     margin-right: 50px;
     margin-left: 10px;
     object-fit: cover;
+  }
+
+  .header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #741207; 
+    color: #ffffff; 
+    font-size: 16px; 
+    font-weight: 400;
+    padding: 10px;
+  }
+  
+  .photo1{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    margin-right: 50px;
+    margin-left: 10px;
+    object-fit: cover;
+  }
+
+  .profil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+  }
+  .main-content {
+    flex: 1; 
+    background-color: #ffffff; 
+  }
+  
+  .banner{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    height: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.275);
+    transition: box-shadow 0.3s;
+    border-radius: 30px;
+    margin: 35px;
+  }
+
+  .photo{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 5px solid #741207;
+    object-fit: cover;
+  }
+  .infos{
+    display: flex;
+    justify-content: space-between;
+    width: 550px;
+    margin-left: 140px;
+  }
+
+  .cards{
+    display: flex;
+    flex-wrap: wrap; /* Utiliser flexbox pour aligner les cartes côte à côte */
+    gap: 20px; /* Espace entre les cartes */   
+    margin-top: 30px; /* Ajoute un peu de marge en haut */
+    justify-content: center;
+  }
+
+  .card{
+    display: flex;
+    flex-direction: column; /* Aligner les éléments verticalement */
+    width: 260px; /* Largeur des cartes, ajuste selon tes besoins */
+    height: 140px;
+    background-color: #ffffff; /* Couleur de fond des cartes, modifiable */
+    border-left: 5px solid #1F2B6C;
+    border-radius: 50px;
+    padding: 20px; /* Ajoute un peu de remplissage */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.328); /* Ajoute une ombre à la carte */
+    transition: box-shadow 0.3s; /* Transition douce pour le changement d'ombre */
+    color: rgb(7, 44, 226);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  h6{
+    font-size: 20px;
+    color: #077676;
+    font-weight: 500;
+  }
+
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    border-radius: 5px;
+    width: 700px;
+  }
+  
+  button {
+    margin-top: 10px;
   }
   

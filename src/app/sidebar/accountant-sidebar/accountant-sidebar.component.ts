@@ -5,19 +5,20 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-accountant-sidebar',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterModule],
   templateUrl: './accountant-sidebar.component.html',
   styleUrl: './accountant-sidebar.component.css'
 })
 export class AccountantSidebarComponent {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) { }
+    constructor(
+      private authService: AuthService,
+      private router: Router,
+    ) { }
+    
+      logout() {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      }
+  }
   
-    logout() {
-      this.authService.logout(); // Appel au service de déconnexion
-      this.router.navigate(['/login']); // Redirection vers la page de connexion
-    }
-}

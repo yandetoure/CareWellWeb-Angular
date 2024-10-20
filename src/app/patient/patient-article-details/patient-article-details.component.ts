@@ -43,6 +43,8 @@ export class PatientArticleDetailsComponent {
       }
     });
   }
+
+  
 }
 
 
