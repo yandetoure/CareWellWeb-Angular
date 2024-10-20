@@ -17,7 +17,43 @@ app-admin-sidebar {
   padding: 20px; 
 }
 
+.search-input {
+  display: block;
+  margin: 0 auto; /* Centre le champ de recherche */
+  border: 2px solid 0b645a; /* Bordure verte */
+  padding: 10px; /* Ajoute un peu de padding pour l'esthétique */
+  width: 50%; /* Ajuste la largeur pour qu'il ne soit pas trop grand */
+  border-radius: 5px; /* Arrondi les coins de la bordure */
+  box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); /* Ajoute une ombre subtile verte */
+}
 
+.cards{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+    .maladies{
+        display: flex;
+        justify-content: center;
+        padding-left: 50p;
+          .card{
+              margin: 10px;
+              flex: 0 0 25%; /* Chaque carte occupe 25% de la largeur (4 par ligne) */
+              box-sizing: border-box;
+              padding: 15px; /* Ajoute un peu de padding entre les cartes */
+        }
+        } 
+
+
+h2{
+  color: #0b645a;
+}
+.main-content {
+  text-align: center; /* Centre le contenu principal */
+}
     .cards{
       display: flex;
       justify-content: center;

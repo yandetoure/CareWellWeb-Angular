@@ -19,4 +19,5 @@ export class AdminSidebarComponent {
       this.authService.logout();
       this.router.navigate(['/login']);
     }
+    
 }

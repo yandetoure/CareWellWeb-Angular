@@ -44,7 +44,7 @@ export class PatientServicesTestComponent {
     );
   }
 
-  limitWords(content: string, limit: number = 10): string {
+  limitWords(content: string, limit: number = 3): string {
     let words = content.split(' ');
     if (words.length > limit) {
       return words.slice(0, limit).join(' ') + '...'; 

@@ -35,8 +35,8 @@ export class MedicalFileService {
   }
 
   // Ajouter un examen médical
-  addExam(id: string, exam: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${id}/exams`, exam);
+  addExam(id: string, data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medical-files/${id}/addexam`, data, { headers: this.getHeaders() });
   }
 
   // Récupérer tous les dossiers médicaux
@@ -58,7 +58,7 @@ export class MedicalFileService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
-    return this.http.get<any>(`${this.apiUrl}/user/medicalfileshow`,{ headers });
+    return this.http.get<any>(`${this.apiUrl}/user/medicalfileshow/{id}`,{ headers });
   }
   
 }
