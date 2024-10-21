@@ -2,30 +2,80 @@
   <app-doctor-sidebar></app-doctor-sidebar>
 
   <div class="main-content">
-    <!-- Formulaire d'ajout de disponibilité -->
     <h6>Ajouter une disponibilité</h6>
-    <form (submit)="addAvailabilitySelf(form.value)" #form="ngForm" class="bg-light p-4 rounded shadow-sm">
+    <form [formGroup]="availabilityForm" (ngSubmit)="addAvailabilitySelf()" class="bg-light p-4 rounded shadow-sm" novalidate>
+      
       <div class="mb-3">
         <label for="availableDate" class="form-label">Date</label>
-        <input type="date" id="availableDate" name="available_date" ngModel required class="form-control">
+        <input type="date" id="availableDate" formControlName="available_date" class="form-control">
+        <div *ngIf="availabilityForm.get('available_date')?.invalid && availabilityForm.get('available_date')?.touched" class="text-danger">
+          Date obligatoire.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="recurrenceType" class="form-label">Type de récurrence</label>
+        <select id="recurrenceType" formControlName="recurrence_type" class="form-control">
+          <option value="none">Aucune</option>
+          <option value="weekly">Hebdomadaire</option>
+          <option value="monthly">Mensuel</option>
+        </select>
+      </div>
+      
+      <div class="mb-3">
+        <label for="dayOfWeek" class="form-label">Jour de la semaine</label>
+        <select id="dayOfWeek" formControlName="day_of_week" class="form-control">
+          <option value="" disabled selected>Choisir le jour</option>
+          <option value="0">Dimanche</option>
+          <option value="1">Lundi</option>
+          <option value="2">Mardi</option>
+          <option value="3">Mercredi</option>
+          <option value="4">Jeudi</option>
+          <option value="5">Vendredi</option>
+          <option value="6">Samedi</option>
+        </select>
+        <div *ngIf="availabilityForm.get('day_of_week')?.invalid && availabilityForm.get('day_of_week')?.touched" class="text-danger">
+          Jour de la semaine obligatoire.
+        </div>
       </div>
 
       <div class="mb-3">
         <label for="startTime" class="form-label">Heure de début</label>
-        <input type="time" id="startTime" name="start_time" ngModel required class="form-control">
+        <input type="time" id="startTime" formControlName="start_time" class="form-control">
+        <div *ngIf="availabilityForm.get('start_time')?.invalid && availabilityForm.get('start_time')?.touched" class="text-danger">
+          Heure de début obligatoire.
+        </div>
       </div>
 
       <div class="mb-3">
         <label for="endTime" class="form-label">Heure de fin</label>
-        <input type="time" id="endTime" name="end_time" ngModel required class="form-control">
+        <input type="time" id="endTime" formControlName="end_time" class="form-control">
+        <div *ngIf="availabilityForm.get('end_time')?.invalid && availabilityForm.get('end_time')?.touched" class="text-danger">
+          Heure de fin obligatoire.
+        </div>
+        <div *ngIf="availabilityForm.errors?.['endTimeInvalid']" class="text-danger">
+          L'heure de fin doit être après l'heure de début.
+        </div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Ajouter Disponibilité</button>
+      <div class="mb-3">
+        <label for="appointmentDuration" class="form-label">Durée du rendez-vous</label>
+        <select id="appointmentDuration" formControlName="appointment_duration" class="form-control">
+          <option value="" disabled selected>Choisir la durée</option>
+          <option value="15">15 minutes</option>
+          <option value="20">20 minutes</option>
+          <option value="30">30 minutes</option>
+        </select>
+        <div *ngIf="availabilityForm.get('appointment_duration')?.invalid && availabilityForm.get('appointment_duration')?.touched" class="text-danger">
+          Durée obligatoire.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="availabilityForm.invalid">Ajouter Disponibilité</button>
     </form>
 
     <h2 class="text-primary mt-4">Disponibilités</h2>
 
-    <!-- Liste des disponibilités sous forme de cartes -->
     <div class="row" *ngIf="availabilities.length > 0">
       <div class="col-md-4" *ngFor="let availability of availabilities">
         <div class="card mb-4 shadow-sm">

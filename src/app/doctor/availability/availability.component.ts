@@ -1,42 +1,59 @@
 import { Component } from '@angular/core';
 import { AvailabilityService } from '../../services/availability.service';
-import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { FormGroup, FormsModule, FormBuilder, Validators } from '@angular/forms';  
+import { CommonModule } from '@angular/common';  
+import { HttpClientModule } from '@angular/common/http';  
 import Swal from 'sweetalert2';
+import { ReactiveFormsModule } from '@angular/forms'; 
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
 import { DatePipe } from '@angular/common';
-
 
 @Component({
   selector: 'app-availability',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent,ReactiveFormsModule,],
   templateUrl: './availability.component.html',
   styleUrl: './availability.component.css'
-  
 })
 export class AvailabilityComponent {
-  availabilities: any[] = [];
+  availabilities: any[] = []; 
+  availabilityForm!: FormGroup; 
 
-  constructor(private availabilityService: AvailabilityService) {}
+  constructor(
+    private availabilityService: AvailabilityService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAvailabilities();
+    this.loadAvailabilities(); 
+    this.initForm(); 
+    this.availabilityForm.valueChanges.subscribe(() => {
+      this.validateEndTime();
+    });
   }
 
-  // formatDate(dateString: string): string {
-  //   const date = new Date(dateString);
-  //   // Format en français: exemple "lundi 19 octobre 2025"
-  //   return this.datePipe.transform(date, 'EEEE d MMMM y', 'fr-FR') || '';
-  // }
-
-  // Fonction pour formater l'heure sans secondes
+  initForm(): void {
+    this.availabilityForm = this.fb.group({
+      available_date: ['', Validators.required], 
+      day_of_week: ['', Validators.required], 
+      start_time: ['', Validators.required], 
+      end_time: ['', Validators.required], 
+      appointment_duration: ['', [Validators.required, Validators.min(5)]], 
+      recurrence_type: ['none', Validators.required], 
+    });
+  }
+  endTimeValidator(group: FormGroup) {
+    const startTime = group.get('start_time')?.value;
+    const endTime = group.get('end_time')?.value;
+  
+    return (startTime && endTime && startTime >= endTime) ? { endTimeInvalid: true } : null;
+  }
+  
   formatTime(timeString: string): string {
-    return timeString.slice(0, 5);  // Garde seulement les heures et minutes "HH:MM"
+    return timeString.slice(0, 5);
   }
 
-  // Charger toutes les disponibilités
+  // Charger toutes les disponibilités existantes
   loadAvailabilities() {
     this.availabilityService.getAvailabilities().subscribe(
       (response) => {
@@ -52,23 +69,63 @@ export class AvailabilityComponent {
     );
   }
 
-  // Ajouter une disponibilité (tu peux appeler cette fonction depuis un formulaire)
-  addAvailabilitySelf(availabilityData: any) {
-    console.log('Données de disponibilité à ajouter :', availabilityData); // Log des données envoyées
+  addAvailabilitySelf() {
+    console.log('État du formulaire avant soumission:', this.availabilityForm);
+    console.log('Valeurs du formulaire:', this.availabilityForm.value);
+    if (!this.availabilityForm.valid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Veuillez remplir tous les champs obligatoires.'
+      });
+      return;
+    }
+
+    const availabilityData = this.availabilityForm.value; // Utiliser directement le formulaire
+
+    // Log des données pour débogage
+    console.log('Données de disponibilité à ajouter :', availabilityData);
 
     this.availabilityService.addAvailabilitySelf(availabilityData).subscribe(
       (response) => {
         if (response.status) {
-          console.log('Disponibilité ajoutée avec succès :', response.data); // Log de la réponse en cas de succès
-          this.loadAvailabilities(); // Recharge les disponibilités après ajout
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: 'Disponibilité ajoutée avec succès.'
+          });
+          this.loadAvailabilities();
         } else {
-          console.error('Erreur lors de l\'ajout de disponibilité');
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Erreur lors de l\'ajout de la disponibilité.'
+          });
         }
       },
       (error) => {
         console.error('Erreur API', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Une erreur s\'est produite lors de la soumission des données.'
+        });
       }
     );
 }
 
+
+  validateEndTime() {
+    const { start_time, end_time } = this.availabilityForm.value;
+  
+    if (start_time && end_time) {
+      this.availabilityForm.setErrors(null); // Réinitialise les erreurs
+      const startTime = new Date(`1970-01-01T${start_time}:00`);
+      const endTime = new Date(`1970-01-01T${end_time}:00`);
+  
+      if (endTime <= startTime) {
+        this.availabilityForm.setErrors({ endTimeInvalid: true });
+      }
+    }
+}
 }
