@@ -96,4 +96,10 @@ export class AppointmentService {
   getDoctorStatsForCurrentMonth(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/appointments/current-month`);
   }
+
+  getAvailableSlots(serviceId: string, date: string) {
+    return this.http.get<any>(`/api/appointments/available-slots?service_id=${serviceId}&date=${date}`);
+}
+
+
 }

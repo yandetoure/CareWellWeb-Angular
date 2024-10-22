@@ -1,14 +1,6 @@
 <div class="dashboard-container">
     <app-patient-header></app-patient-header>
     <div class="main-content">
-      <div class="header">
-        <h5>Bienvenue M(Mme) {{ userInfo.last_name}} </h5>
-
-        <div class="profil">
-          <h6>M(Mme) {{ userInfo.last_name}} </h6>
-          <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
-          </div>
-    </div>
 
       <div class="banner">
         <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />

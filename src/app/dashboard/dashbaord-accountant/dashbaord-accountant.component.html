@@ -1,14 +1,6 @@
 <div class="dashboard-container">
     <app-accountant-sidebar></app-accountant-sidebar>
     <div class="main-content">
-      <div class="header">
-          <h5>Bienvenue dans le tableau de bord de l'admin</h5>
-
-          <div class="profil">
-            <p>{{ userInfo.first_name }} {{ userInfo.last_name}} </p>
-            <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
-          </div>
-        </div>
     
         <div class="banner">
           <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />

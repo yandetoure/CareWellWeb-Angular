@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AvailabilityService } from '../../services/availability.service';
 import { FormGroup, FormsModule, FormBuilder, Validators } from '@angular/forms';  
 import { CommonModule } from '@angular/common';  
@@ -7,17 +7,29 @@ import Swal from 'sweetalert2';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
 import { DatePipe } from '@angular/common';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 @Component({
   selector: 'app-availability',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent,ReactiveFormsModule,],
+  imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent, ReactiveFormsModule, FullCalendarModule],
   templateUrl: './availability.component.html',
-  styleUrl: './availability.component.css'
+  styleUrls: ['./availability.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })
 export class AvailabilityComponent {
   availabilities: any[] = []; 
   availabilityForm!: FormGroup; 
+  calendarPlugins = [dayGridPlugin, timeGridPlugin]; 
+  defaultView = 'timeGridWeek';
+  headerToolbar = {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay' // Assure-toi que les types de vue sont bien définis ici
+  };
+  events: any[] = []; 
 
   constructor(
     private availabilityService: AvailabilityService,
@@ -42,6 +54,14 @@ export class AvailabilityComponent {
       recurrence_type: ['none', Validators.required], 
     });
   }
+
+    // Nouvelle méthode pour gérer le clic sur l'événement
+    handleEventClick(info: any) {
+      // Logique pour gérer le clic sur un événement
+      console.log('Événement cliqué:', info);
+      // Tu peux également afficher des détails supplémentaires ou effectuer d'autres actions
+    }
+
   endTimeValidator(group: FormGroup) {
     const startTime = group.get('start_time')?.value;
     const endTime = group.get('end_time')?.value;
@@ -53,7 +73,23 @@ export class AvailabilityComponent {
     return timeString.slice(0, 5);
   }
 
-  // Charger toutes les disponibilités existantes
+  // loadAvailabilities() {
+  //   this.availabilityService.getAvailabilities().subscribe(
+  //     (response) => {
+  //       if (response.status) {
+  //         this.events = response.data.map((availability: any) => ({
+  //           title: `${availability.doctor?.first_name} ${availability.doctor?.last_name}`,
+  //           start: availability.available_date + 'T' + availability.start_time,
+  //           end: availability.available_date + 'T' + availability.end_time
+  //         }));
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Erreur API', error);
+  //     }
+  //   );
+  // }
+
   loadAvailabilities() {
     this.availabilityService.getAvailabilities().subscribe(
       (response) => {
@@ -68,7 +104,13 @@ export class AvailabilityComponent {
       }
     );
   }
+  
+  getDayName(dayIndex: number): string {
+    const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    return days[dayIndex];
+  }
 
+  
   addAvailabilitySelf() {
     console.log('État du formulaire avant soumission:', this.availabilityForm);
     console.log('Valeurs du formulaire:', this.availabilityForm.value);
@@ -81,9 +123,8 @@ export class AvailabilityComponent {
       return;
     }
 
-    const availabilityData = this.availabilityForm.value; // Utiliser directement le formulaire
+    const availabilityData = this.availabilityForm.value;
 
-    // Log des données pour débogage
     console.log('Données de disponibilité à ajouter :', availabilityData);
 
     this.availabilityService.addAvailabilitySelf(availabilityData).subscribe(
@@ -94,12 +135,13 @@ export class AvailabilityComponent {
             title: 'Succès',
             text: 'Disponibilité ajoutée avec succès.'
           });
-          this.loadAvailabilities();
+          this.loadAvailabilities(); 
+          this.availabilityForm.reset(); 
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Erreur',
-            text: 'Erreur lors de l\'ajout de la disponibilité.'
+            text: response.message || 'Une erreur s\'est produite.'
           });
         }
       },
@@ -108,24 +150,20 @@ export class AvailabilityComponent {
         Swal.fire({
           icon: 'error',
           title: 'Erreur',
-          text: 'Une erreur s\'est produite lors de la soumission des données.'
+          text: 'Une erreur s\'est produite lors de l\'ajout de la disponibilité.'
         });
       }
     );
-}
-
+  }
 
   validateEndTime() {
-    const { start_time, end_time } = this.availabilityForm.value;
-  
-    if (start_time && end_time) {
-      this.availabilityForm.setErrors(null); // Réinitialise les erreurs
-      const startTime = new Date(`1970-01-01T${start_time}:00`);
-      const endTime = new Date(`1970-01-01T${end_time}:00`);
-  
-      if (endTime <= startTime) {
-        this.availabilityForm.setErrors({ endTimeInvalid: true });
-      }
+    const startTime = this.availabilityForm.get('start_time')?.value;
+    const endTime = this.availabilityForm.get('end_time')?.value;
+
+    if (startTime && endTime && startTime >= endTime) {
+      this.availabilityForm.setErrors({ endTimeInvalid: true });
+    } else {
+      this.availabilityForm.setErrors(null);
     }
-}
+  }
 }

@@ -74,8 +74,41 @@
       <button type="submit" class="btn btn-primary" [disabled]="availabilityForm.invalid">Ajouter Disponibilité</button>
     </form>
 
+
     <h2 class="text-primary mt-4">Disponibilités</h2>
 
+    <div class="row" *ngIf="availabilities.length > 0">
+      <div class="col-md-4" *ngFor="let availability of availabilities">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ availability.doctor?.first_name }} {{ availability.doctor?.last_name }}
+            </h5>
+            <p class="card-text">
+              <strong>Service:</strong> {{ availability.service?.name }}<br>
+              <strong>Date:</strong> {{ availability.available_date }} <br>
+              <strong>Récurrence:</strong> {{ availability.recurrence_type }} <br>
+              <strong>Jour:</strong> {{ getDayName(availability.day_of_week) }} <br> <!-- Utilise la méthode ici -->
+              <strong>De:</strong> {{ formatTime(availability.start_time) }}<br>
+              <strong>À:</strong> {{ formatTime(availability.end_time) }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+    <!-- <full-calendar 
+    [plugins]="calendarPlugins" 
+    [headerToolbar]="headerToolbar" 
+    [events]="events"
+    [initialView]="defaultView"  
+    (eventClick)="handleEventClick($event)">
+  </full-calendar> -->
+  
+
+    <!-- <h2 class="text-primary mt-4">Disponibilités</h2>
     <div class="row" *ngIf="availabilities.length > 0">
       <div class="col-md-4" *ngFor="let availability of availabilities">
         <div class="card mb-4 shadow-sm">
@@ -92,7 +125,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div *ngIf="availabilities.length === 0" class="alert alert-info">
       Aucune disponibilité trouvée.

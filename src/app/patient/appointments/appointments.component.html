@@ -54,7 +54,9 @@
                     </div>
                     <div class="form-group">
                         <label for="time">Heure :</label>
-                        <input id="time" type="time" [(ngModel)]="newAppointment.time" name="time" class="form-control" required>
+                        <select id="time" [(ngModel)]="newAppointment.time" name="time" class="form-control" required>
+                            <option *ngFor="let slot of availableSlots" [value]="slot">{{ slot }}</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-submit">Ajouter rendez-vous</button>
                 </form>

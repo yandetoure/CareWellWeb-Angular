@@ -20,10 +20,9 @@ import Swal from 'sweetalert2';
 export class DoctorMedicalfileShowComponent {
 
   medicalFile: any = null;
-  notes: any[] = [];
   prescriptions: any[] = [];
   exams: any[] = [];
-
+  medicalfilehistory: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private medicalFileService: MedicalFileService,
@@ -163,7 +162,5 @@ addExam(examData: any) {
     Swal.fire('Erreur', 'ID du dossier médical non trouvé.', 'error'); // SweetAlert pour erreur
   }
 }
-
-
 
 }

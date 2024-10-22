@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/maki-icons@latest/dist/maki.css">
-    <title>Sidebar du docteurs</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Sidebar Comptable</title>
+
 </head>
 <body>
+
     <div class="sidebar">
         <img src="images/logo.png" alt="" class="logo">
         <ul>
@@ -15,22 +17,30 @@
                 <a routerLink="/dashboard/accountant">Tableau de bord</a>
             </li>
             <li routerLinkActive="active">
-                <span class="material-symbols-outlined icon"> medical_services </span>                
+                <span class="material-icons icon">medical_services</span>
                 <a routerLink="/accountant/services">Services</a>
             </li>
             <li routerLinkActive="active">
-                <span class="material-symbols-outlined icon">article</span>                
+                <span class="material-icons icon">article</span>
                 <a routerLink="/accountant/articles">Articles</a>
             </li>
             <li routerLinkActive="active">
-                <span class="material-symbols-outlined icon"> prescriptions</span>
+                <span class="material-icons icon">description</span>
                 <a routerLink="/accountant/prescriptions">Prescriptions</a>
             </li>
             <li (click)="logout()" class="logout">
-                <span class="material-symbols-outlined icon">logout</span>
+                <span class="material-icons icon">logout</span>
                 <a href="javascript:void(0)">Déconnexion</a>
             </li>
         </ul>
+    </div>
+    <div class="header">
+        <h5>Bon retour Dr {{ userInfo.last_name }}</h5>
+    
+        <div class="profil">
+            <p>{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
+            <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+        </div>
     </div>
 </body>
 </html>

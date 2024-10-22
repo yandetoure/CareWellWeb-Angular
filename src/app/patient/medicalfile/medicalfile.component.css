@@ -11,6 +11,7 @@ app-admin-sidebar {
 }
 
 .main-content {
+  margin-left: 250px;
   flex: 1; /* Prendre tout l'espace restant */
   overflow-y: auto; /* Permettre le défilement vertical */
   background-color: #ffffff; /* Couleur de fond du contenu principal */
