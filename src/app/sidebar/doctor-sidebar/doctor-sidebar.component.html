@@ -31,6 +31,10 @@
             <span class="material-symbols-outlined icon">person</span>
             <a routerLink="/doctor/patient">Patients</a>
         </li>
+        <li routerLinkActive="active">
+            <span class="material-symbols-outlined icon">chat</span>
+            <a routerLink="/doctor/chats">Discussions</a>
+        </li>
         <li (click)="logout()" class="logout">
             <span class="material-symbols-outlined icon">logout</span>
             <a href="javascript:void(0)">Déconnexion</a>
@@ -42,10 +46,9 @@
     <h5>Bon retour Dr {{ userInfo.last_name }}</h5>
 
     <div class="profil">
-        <p>{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
-        <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+      <p>{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
+      <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
     </div>
 </div>
-
 </body>
 </html>

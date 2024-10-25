@@ -6,11 +6,15 @@
     <form [formGroup]="availabilityForm" (ngSubmit)="addAvailabilitySelf()" class="bg-light p-4 rounded shadow-sm" novalidate>
       
       <div class="mb-3">
-        <label for="availableDate" class="form-label">Date</label>
-        <input type="date" id="availableDate" formControlName="available_date" class="form-control">
-        <div *ngIf="availabilityForm.get('available_date')?.invalid && availabilityForm.get('available_date')?.touched" class="text-danger">
-          Date obligatoire.
+        <div class="mb-3">
+          <label for="availableDate" class="form-label">Date de disponibilité</label>
+          <input type="date" id="availableDate" formControlName="available_date" class="form-control" [min]="minDate">
+          <div *ngIf="availabilityForm.get('available_date')?.invalid && availabilityForm.get('available_date')?.touched" class="text-danger">
+            La date est requise.
+          </div>
         </div>
+        
+        
       </div>
 
       <div class="mb-3">
@@ -96,17 +100,19 @@
         </div>
       </div>
     </div>
+
     
+    <full-calendar [options]="calendarOptions"></full-calendar>
 
-
-    <!-- <full-calendar 
+<!-- 
+    <full-calendar 
     [plugins]="calendarPlugins" 
     [headerToolbar]="headerToolbar" 
     [events]="events"
     [initialView]="defaultView"  
     (eventClick)="handleEventClick($event)">
-  </full-calendar> -->
-  
+  </full-calendar>
+   -->
 
     <!-- <h2 class="text-primary mt-4">Disponibilités</h2>
     <div class="row" *ngIf="availabilities.length > 0">

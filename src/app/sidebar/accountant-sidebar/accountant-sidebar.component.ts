@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule , Router} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-accountant-sidebar',
   standalone: true,
-  imports: [RouterLink, RouterModule],
+  imports: [RouterLink, RouterModule, CommonModule],
   templateUrl: './accountant-sidebar.component.html',
   styleUrl: './accountant-sidebar.component.css'
 })

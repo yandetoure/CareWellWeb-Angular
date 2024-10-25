@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule , Router} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-doctor-sidebar',
   standalone: true,
-  imports: [RouterLink, RouterModule],
+  imports: [RouterLink, RouterModule, CommonModule, FormsModule],
   templateUrl: './doctor-sidebar.component.html',
   styleUrl: './doctor-sidebar.component.css'
 })

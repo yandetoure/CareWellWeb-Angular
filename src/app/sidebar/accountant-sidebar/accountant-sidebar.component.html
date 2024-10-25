@@ -28,10 +28,15 @@
                 <span class="material-icons icon">description</span>
                 <a routerLink="/accountant/prescriptions">Prescriptions</a>
             </li>
+            <li routerLinkActive="active">
+                <span class="material-symbols-outlined icon">book_online</span>                
+                <a routerLink="/accountant/tickets">Tickets</a>
+            </li>
             <li (click)="logout()" class="logout">
                 <span class="material-icons icon">logout</span>
                 <a href="javascript:void(0)">Déconnexion</a>
             </li>
+
         </ul>
     </div>
     <div class="header">

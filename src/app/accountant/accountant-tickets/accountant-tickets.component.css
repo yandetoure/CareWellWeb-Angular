@@ -1,0 +1,217 @@
+.body {
+    display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
+  }
+  
+  app-accounatnt-sidebar {
+    width: 250px; /* Largeur de la sidebar */
+    background-color: #ffffff; /* Couleur de fond de la sidebar */
+    height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
+    position: fixed; /* Fixer la sidebar */
+  }
+  
+  .main-content {
+    flex: 1; /* Prendre tout l'espace restant */
+    overflow-y: auto; /* Permettre le défilement vertical */
+    background-color: #ffffff; /* Couleur de fond du contenu principal */
+    padding: 20px; /* Ajouter un padding pour le contenu */
+    margin-left: 250px; /* Créer un espace pour la sidebar fixe */
+  }
+
+  .container {
+    backdrop-filter: blur(10px); /* Flou d'arrière-plan */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombres */
+    padding: 20px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;}
+
+.section-title {
+    color: #333; /* Couleur du texte */
+    margin-bottom: 15px;
+}
+
+.service-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espace entre les champs */
+}
+
+.service-buttons {
+    display: flex;
+    gap: 10px; /* Espace entre les boutons */
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 5px 10px; /* Espacement des boutons */
+    border-radius: 5px; /* Coins arrondis pour les boutons */
+    transition: background-color 0.3s; /* Transition pour l'effet de survol */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Couleur survol */
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Couleur survol */
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Couleur survol */
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.9); /* Fond pour les cartes de service */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombres */
+}
+
+.service-photo {
+    max-width: 100%; /* S'assurer que l'image ne déborde pas */
+    border-radius: 5px; /* Coins arrondis pour l'image */
+}
+
+.modal {
+    display: flex; /* Centrer le modal */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond sombre */
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.9); /* Fond du modal */
+    border-radius: 10px; /* Coins arrondis pour le modal */
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombres */
+    width: 90%;
+    max-width: 800px; /* Limiter la largeur du modal */
+}
+
+.close {
+    cursor: pointer;
+    font-size: 24px; /* Taille de l'icône de fermeture */
+}
+
+/* Liste des services en grille */
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    gap: 15px; /* Espacement entre les cartes */
+}
+
+/* Styles pour les cartes de service */
+.service-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer le contenu */
+}
+/* Conteneur du formulaire */
+.form-container {
+    margin-bottom: 20px; /* Espacement en bas */
+    padding: 15px; /* Espacement intérieur */
+    background: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    align-items: center;
+    width: 70%;
+}
+
+.services {
+    margin-bottom: 20px; /* Espacement en bas */
+    padding: 15px; /* Espacement intérieur */
+    background: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Champ de recherche élargi */
+.search-input {
+    width: 800px; /* Remplir toute la largeur disponible */
+    padding: 10px; /* Espacement intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    border: 1px solid #ccc; /* Bordure légère */
+    margin-bottom: 20px; /* Espacement en bas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+/* Styles pour les cartes de service */
+.service-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer le contenu */
+    height: 300px; /* Hauteur fixe pour toutes les cartes */
+}
+
+/* Fixer la taille de l'image pour les cartes */
+.service-photo {
+    object-fit: cover; /* Couvrir l'espace disponible */
+    border-radius: 5px; /* Coins arrondis */
+    height: 200px; /* Hauteur fixe pour les images */
+    width: 330px;
+}
+
+h2{
+    font-size: 20px;
+}
+
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 800px;
+    border-radius: 8px;
+    position: relative;
+
+    .article-photo {
+        width: 100%;
+        height: 300px;
+        margin-bottom: 10px;
+    }
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+h4{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333be;
+}

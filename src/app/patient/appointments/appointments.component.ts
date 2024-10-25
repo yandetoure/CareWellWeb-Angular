@@ -6,6 +6,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { AuthService } from '../../services/auth.service'; 
 import { ServiceService } from '../../services/service.service';  
 import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component'; 
+import { DatePipe } from '@angular/common';
 
 import Swal from 'sweetalert2';
 
@@ -14,9 +15,11 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, PatientHeaderComponent],
   templateUrl: './appointments.component.html',
-  styleUrl: './appointments.component.css'
+  styleUrl: './appointments.component.css',
+  providers: [DatePipe] 
 })
 export class AppointmentsComponent implements OnInit {
+  minDate: string = '';
   appointments: any[] = [];
   services: any[] = [];
   newAppointment = {
@@ -32,30 +35,35 @@ export class AppointmentsComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private authService: AuthService, 
-    private serviceService: ServiceService
+    private serviceService: ServiceService,
+    private datePipe: DatePipe 
   ) {}
 
   ngOnInit(): void {
-    this.getAppointments();
+    // this.getAppointments();
+    this.setMinDate();
     this.getUserId();
     this.getServices(); 
   }
-
-  // Récupération des rendez-vous
-  getAppointments() {
-    this.appointmentService.getAppointments().subscribe(
-      (response) => {
-        this.appointments = response.data;
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: 'Impossible de récupérer les rendez-vous.',
-        });
-      }
-    );
+  setMinDate(): void {
+    const today = new Date();
+    this.minDate = this.datePipe.transform(today, 'yyyy-MM-dd')!;
   }
+  // Récupération des rendez-vous
+  // getAppointments() {
+  //   this.appointmentService.getAppointments().subscribe(
+  //     (response) => {
+  //       this.appointments = response.data;
+  //     },
+  //     (error) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Erreur',
+  //         text: 'Impossible de récupérer les rendez-vous.',
+  //       });
+  //     }
+  //   );
+  // }
 
   // Récupération de l'utilisateur actuellement connecté
   getUserId() {
@@ -105,15 +113,15 @@ export class AppointmentsComponent implements OnInit {
           title: 'Succès',
           text: 'Rendez-vous créé avec succès',
         });
-        this.getAppointments();
+        // this.getAppointments();
       },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: 'Erreur lors de la création du rendez-vous.',
-        });
-      }
+      // (error) => {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Erreur',
+      //     text: 'Erreur lors de la création du rendez-vous.'+error,
+      //   });
+      // }
     );
   }
 }

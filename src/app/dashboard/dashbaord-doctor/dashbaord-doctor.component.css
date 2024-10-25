@@ -3,7 +3,6 @@
   }
   
   app-doctor-sidebar, app-doctor-sidebar {
-    width: 250px; /* Largeur de la sidebar */
     background-color: #ffffff; /* Couleur de fond de la sidebar */
     height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
     position: fixed; /* Fixer la sidebar */
@@ -11,14 +10,14 @@
   
   .main-content {
     flex: 1; /* Prendre tout l'espace restant */
-    margin-left: 250px; /* Créer un espace pour la sidebar fixe */
-    overflow-y: auto; /* Permettre le défilement vertical */
-    background-color: #ffffff; /* Couleur de fond du contenu principal */
-    padding: 20px; /* Ajouter un padding pour le contenu */
+    margin-left: 0; /* Créer un espace pour la sidebar fixe */
+    overflow-y: auto;
+    background-color: #ffffff; 
+    padding: 20px; 
     margin-top: 40px;
   }
 
-  .header{
+  .header {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
@@ -27,7 +26,11 @@
     font-size: 16px; 
     font-weight: 400;
     padding: 10px;
+    position: fixed; /* Rendre le header fixe */
+    width: 100%; /* Prendre toute la largeur */
+    z-index: 1000; 
   }
+  
   
   .photo1{
     height: 50px;
@@ -47,10 +50,13 @@
   }
   .main-content {
     flex: 1; 
+    margin-left: 250px; /* Créer un espace pour la sidebar fixe */
+    margin-top: 50px; /* Ajuster selon la hauteur de votre header */
+    overflow-y: auto; /* Permettre le défilement vertical */
     background-color: #ffffff; 
-      margin-left: 250px;
-
+    padding: 20px; /* Ajouter un padding pour le contenu */
   }
+  
   
   .banner{
     display: flex;
@@ -168,3 +174,14 @@
     font-size: 1.2em; 
     font-weight: bold;
   }
+
+  .chart-container {
+    max-width: 100%; /* Limite la largeur maximale à 100% */
+    width: 100%; /* Fait en sorte que le conteneur prenne toute la largeur */
+    height: auto; /* Ajuste la hauteur automatiquement */
+}
+
+canvas {
+    width: 50% !important; /* Force le canvas à s'ajuster à la largeur du conteneur */
+    height: auto !important; /* Ajuste la hauteur automatiquement */
+}

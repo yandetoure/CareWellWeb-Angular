@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ServiceService {
   private apiUrl = 'http://127.0.0.1:8000/api';
-  private token: string | null = null; // Optionnel : à définir si vous utilisez une authentification
-
+  private token: string | null = null;
   constructor(private http: HttpClient, private router: Router) {}
 
   // Méthode pour récupérer les services

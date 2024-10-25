@@ -6,20 +6,34 @@ import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
-import { DatePipe } from '@angular/common';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { Calendar, CalendarOptions } from '@fullcalendar/core'
+import { DatePipe } from '@angular/common';
+import {  signal, ChangeDetectorRef } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import interactionPlugin from '@fullcalendar/interaction';
+// import listPlugin from '@fullcalendar/list';
+// import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
   selector: 'app-availability',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent, ReactiveFormsModule, FullCalendarModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent, ReactiveFormsModule, FullCalendarModule, FullCalendarModule],
   templateUrl: './availability.component.html',
   styleUrls: ['./availability.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
+  providers: [DatePipe] 
 })
 export class AvailabilityComponent {
+  
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin]
+  };
+  minDate: string = '';
   availabilities: any[] = []; 
   availabilityForm!: FormGroup; 
   calendarPlugins = [dayGridPlugin, timeGridPlugin]; 
@@ -30,18 +44,26 @@ export class AvailabilityComponent {
     right: 'dayGridMonth,timeGridWeek,timeGridDay' // Assure-toi que les types de vue sont bien définis ici
   };
   events: any[] = []; 
-
+  calendar: any;
   constructor(
     private availabilityService: AvailabilityService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private datePipe: DatePipe 
   ) {}
+
 
   ngOnInit(): void {
     this.loadAvailabilities(); 
+    this.setMinDate();
     this.initForm(); 
     this.availabilityForm.valueChanges.subscribe(() => {
       this.validateEndTime();
     });
+    
+  }
+  setMinDate(): void {
+    const today = new Date();
+    this.minDate = this.datePipe.transform(today, 'yyyy-MM-dd')!;
   }
 
   initForm(): void {

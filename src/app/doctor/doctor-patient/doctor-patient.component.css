@@ -11,6 +11,7 @@ app-doctor-sidebar, app-admin-sidebar {
 .main-content {
   flex: 1; /* Prendre tout l'espace restant */
   background-color: #ffffff; /* Couleur de fond du contenu principal */
+  margin-top: 30px;
 }
 
 /* patients.component.css */
@@ -23,7 +24,7 @@ top: 0;
 width: 100%;
 height: 100%;
 overflow: auto;
-background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .modal-content {
@@ -31,7 +32,7 @@ background-color: #fefefe;
 margin: 15% auto;
 padding: 20px;
 border: 1px solid #888;
-width: 80%; /* Width of modal */
+width: 80%;
 }
 
 .close {

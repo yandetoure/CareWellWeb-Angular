@@ -16,6 +16,12 @@
   font-weight: bold;
 }
 
+.back{
+  color: #1F2B6C;
+  text-decoration: none;
+  margin-left: 200px;
+}
+
 .container-fluid{
   background-color: white;
   padding-left: 12%;
