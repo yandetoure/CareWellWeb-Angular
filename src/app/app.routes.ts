@@ -46,6 +46,7 @@ import { PatientChatComponent } from './patient/patient-chat/patient-chat.compon
 import { DoctorChatComponent } from './doctor/doctor-chat/doctor-chat.component';
 import { PatientMessageComponent } from './patient/patient-message/patient-message.component';
 import { AccountantTicketsComponent } from './accountant/accountant-tickets/accountant-tickets.component';
+import { AccountantExamComponent } from './accountant/accountant-exam/accountant-exam.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
@@ -110,6 +111,7 @@ export const routes: Routes = [
   { path: 'accountant/articles', component: AccountantArticlesComponent},
   { path: 'accountant/services', component: AccountantServicesComponent},
   { path: 'accountant/tickets', component: AccountantTicketsComponent},
+  { path: 'accountant/exams', component: AccountantExamComponent},
 
   // Patient profile
   { path: 'patient/profil', component: PatientProfileComponent},

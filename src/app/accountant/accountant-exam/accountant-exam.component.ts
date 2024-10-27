@@ -7,17 +7,17 @@ import { AccountantSidebarComponent } from '../../sidebar/accountant-sidebar/acc
 import { ServiceService } from '../../services/service.service';
 
 @Component({
-  selector: 'app-accountant-prescriptions',
+  selector: 'app-accountant-exam',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, AccountantSidebarComponent],
-  templateUrl: './accountant-prescriptions.component.html',
-  styleUrls: ['./accountant-prescriptions.component.css']
+  templateUrl: './accountant-exam.component.html',
+  styleUrl: './accountant-exam.component.css'
 })
-export class AccountantPrescriptionsComponent {
-  prescriptions: any[] = [];
+export class AccountantExamComponent {
+  exams: any[] = [];
   services: any[] = [];
-  newPrescription: any = { name: '', quantity: '', price: '' };
-  selectedPrescription: any;
+  newExam: any = { name: '', quantity: '', price: '' };
+  selectedExam: any;
   isModalOpen: boolean = false;
   isDetailsModalOpen: boolean = false;
 
@@ -25,13 +25,13 @@ export class AccountantPrescriptionsComponent {
               private serviceService: ServiceService) {}
 
   ngOnInit(): void {
-    this.loadPrescriptions();
+    this.loadExams();
     this.getServices(); 
   }
 
-  loadPrescriptions() {
-    this.http.get<any>('http://localhost:8000/api/prescriptions').subscribe(response => {
-      this.prescriptions = response.data;
+  loadExams() {
+    this.http.get<any>('http://localhost:8000/api/exams').subscribe(response => {
+      this.exams = response.data;
     });
   }
 
@@ -50,20 +50,20 @@ export class AccountantPrescriptionsComponent {
     );
   }
 
-  addPrescription() {
-    this.http.post('http://localhost:8000/api/prescriptions', this.newPrescription).subscribe(response => {
-      this.loadPrescriptions();
-      this.newPrescription = { name: '', quantity: '', price: '' };  // Réinitialiser le formulaire
+  addExam() {
+    this.http.post('http://localhost:8000/api/exams', this.newExam).subscribe(response => {
+      this.loadExams();
+      this.newExam = { name: '', description: '', price: '' };
       Swal.fire({
         icon: 'success',
         title: 'Ajouté !',
-        text: 'La prescription a été ajoutée avec succès.',
+        text: 'L\examen a été ajouté avec succès.',
       });
     }, error => {
       Swal.fire({
         icon: 'error',
         title: 'Erreur',
-        text: 'Une erreur s\'est produite lors de l\'ajout.',
+        text: 'Une erreur s\'est produite lors de l\'ajout de l\'examen.',
       });
     });
   }
@@ -78,9 +78,9 @@ export class AccountantPrescriptionsComponent {
       cancelButtonText: 'Annuler'
     }).then(result => {
       if (result.isConfirmed) {
-        this.http.delete(`http://localhost:8000/api/prescriptions/${id}`).subscribe(() => {
+        this.http.delete(`http://localhost:8000/api/exams/${id}`).subscribe(() => {
           Swal.fire('Supprimé !', 'La prescription a bien été supprimée.', 'success');
-          this.loadPrescriptions();
+          this.loadExams();
         }, error => {
           Swal.fire({
             icon: 'error',
@@ -92,14 +92,14 @@ export class AccountantPrescriptionsComponent {
     });
   }
 
-  openUpdateModal(prescription: any) {
-    this.selectedPrescription = { ...prescription };
+  openUpdateModal(exam: any) {
+    this.selectedExam = { ...exam };
     this.isModalOpen = true;
   }
 
   updatePrescription() {
-    this.http.put(`http://localhost:8000/api/prescriptions/${this.selectedPrescription.id}`, this.selectedPrescription).subscribe(() => {
-      this.loadPrescriptions();
+    this.http.put(`http://localhost:8000/api/exams/${this.selectedExam.id}`, this.selectedExam).subscribe(() => {
+      this.loadExams();
       this.isModalOpen = false;
       Swal.fire({
         icon: 'success',
@@ -115,14 +115,14 @@ export class AccountantPrescriptionsComponent {
     });
   }
 
-  openDetailsModal(prescription: any) {
-    this.selectedPrescription = prescription;
+  openDetailsModal(exam: any) {
+    this.selectedExam = exam;
     this.isDetailsModalOpen = true;
     Swal.fire({
       title: 'Détails de la prescription',
-      html: `<p><strong>Nom :</strong> ${prescription.name}</p>
-             <p><strong>Quantité :</strong> ${prescription.quantity}</p>
-             <p><strong>Prix :</strong> ${prescription.price} FCFA</p>`,
+      html: `<p><strong>Nom :</strong> ${exam.name}</p>
+             <p><strong>Quantité :</strong> ${exam.description}</p>
+             <p><strong>Prix :</strong> ${exam.price} FCFA</p>`,
       icon: 'info',
       confirmButtonText: 'Fermer'
     });
