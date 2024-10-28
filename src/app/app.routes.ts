@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashbaordAccountantComponent } from './dashboard/dashbaord-accountant/dashbaord-accountant.component';
@@ -10,7 +11,6 @@ import { DoctorsComponent } from './doctor/doctors/doctors.component';
 import { PatientsComponent } from './doctor/patients/patients.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { AuthComponent } from './auth/auth/auth.component';
 import { ServicesComponent } from './admin/services/services.component';
 import { ArticlesComponent } from './admin/articles/articles.component';
 import { PrescriptionComponent } from './admin/prescription/prescription.component';
@@ -50,7 +50,10 @@ import { AccountantExamComponent } from './accountant/accountant-exam/accountant
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
-  
+
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+
   { path: 'home', component: HomeComponent }, 
   { path: 'profile', component: ProfileComponent },
   { path: 'article-details/:id', component: ArticleDetailsComponent },
@@ -59,64 +62,57 @@ export const routes: Routes = [
   { path: 'contacts', component: ContactsComponent},
 
 
-  { path: 'dashboard/accountant', component: DashbaordAccountantComponent },
-  { path: 'dashboard/admin', component: DashbaordAdminComponent },
-  { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
-  { path: 'dashboard/patient', component: DashbaordPatientComponent },
   { path: 'dashboard/secretary', component: DashboardSecretaryComponent },
 
   // Doctor-related routes
-  { path: 'doctor/medical-file', component: MedicalFilesComponent },
-  { path: 'doctor/doctors', component: DoctorsComponent },
-  { path: 'doctor/patients', component: PatientsComponent },
-  { path: 'doctor/appointment',component:DoctorAppointmentComponent },
-  { path: 'doctor/medicalfile', component: DoctorMedicalfileComponent},
-  { path: 'doctor/patient', component: DoctorPatientComponent},
-  { path: 'doctor/medicalfile-show/:id', component: DoctorMedicalfileShowComponent},
-  { path: 'doctor/chats', component: DoctorChatComponent},
+  { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
+  { path: 'doctor/medical-file', component: MedicalFilesComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/doctors', component: DoctorsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/patients', component: PatientsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/appointment',component:DoctorAppointmentComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/medicalfile', component: DoctorMedicalfileComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/patient', component: DoctorPatientComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/medicalfile-show/:id', component: DoctorMedicalfileShowComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/chats', component: DoctorChatComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/availability', component: AvailabilityComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
 
-  // Auth routes
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'auth', component: AuthComponent },
+
 
   // Admin routes
-  { path: 'admin/services', component: ServicesComponent },
-  { path: 'admin/articles', component: ArticlesComponent },
-  { path: 'admin/prescriptions', component: PrescriptionComponent },
-  { path: 'admin/user', component: AddUserComponent },
-  { path: 'admin/list-users', component: ListUsersComponent},
-  { path: 'admin/appoinments', component: AdminRendezVousComponent},
-  { path: 'admin/medicalfiles', component: AdminMedicalfilesComponent },
-  { path: 'admin/medicalfile-details/:id', component: AdminMedicalfileShowComponent },
-  { path: 'admin/exams', component: AdminExamsComponent },
+  { path: 'dashboard/admin', component: DashbaordAdminComponent },
+  { path: 'admin/services', component: ServicesComponent,  canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/articles', component: ArticlesComponent , canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/prescriptions', component: PrescriptionComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/user', component: AddUserComponent , canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/list-users', component: ListUsersComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/appoinments', component: AdminRendezVousComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/medicalfiles', component: AdminMedicalfilesComponent , canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/medicalfile-details/:id', component: AdminMedicalfileShowComponent , canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'admin/exams', component: AdminExamsComponent , canActivate: [AuthGuard], data: { role: 'Admin' } },
 
   // Doctor availability & Patient appointments
-  { path: 'doctor/availability', component: AvailabilityComponent },
-  { path: 'patient/appointments', component: AppointmentsComponent },
-  { path: 'patient/user-appointment', component: UserAppointmentComponent},
-  { path: 'patient/medicalfile', component: MedicalfileComponent},
-  { path: 'patient/article-details/:id', component: PatientArticleDetailsComponent},
-  { path: 'patient/chats', component: PatientChatComponent},
-  { path: 'patient/messages', component: PatientMessageComponent},
-
+  { path: 'dashboard/patient', component: DashbaordPatientComponent , canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/appointments', component: AppointmentsComponent , canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/user-appointment', component: UserAppointmentComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/medicalfile', component: MedicalfileComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/article-details/:id', component: PatientArticleDetailsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/chats', component: PatientChatComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/messages', component: PatientMessageComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/articles', component: PatientArticlesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/services', component: PatientServicesTestComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
   
   // Home Page sections
   { path: 'us', component: AboutUsComponent },
-  { path: 'patient/articles', component: PatientArticlesComponent},
-  { path: 'patient/services', component: PatientServicesTestComponent},
 
   //Accountant
-  {path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent},
-  { path: 'accountant/articles', component: AccountantArticlesComponent},
-  { path: 'accountant/services', component: AccountantServicesComponent},
-  { path: 'accountant/tickets', component: AccountantTicketsComponent},
-  { path: 'accountant/exams', component: AccountantExamComponent},
+  { path: 'dashboard/accountant', component: DashbaordAccountantComponent , canActivate: [AuthGuard], data: { role: 'Patient' } },
+  {path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'accountant/articles', component: AccountantArticlesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'accountant/services', component: AccountantServicesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'accountant/tickets', component: AccountantTicketsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'accountant/exams', component: AccountantExamComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/profil', component: PatientProfileComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
 
-  // Patient profile
-  { path: 'patient/profil', component: PatientProfileComponent},
 
-
-  // Default redirect if no matching route is found
   { path: '**', redirectTo: '/register' }
 ];
