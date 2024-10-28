@@ -67,7 +67,7 @@
 
         <div class="col-md-4">
           <div class="sticky-form">
-            <h5 class="mb-3">Ajouter des informations</h5>
+            <!-- <h5 class="mb-3">Ajouter des informations</h5> -->
         
             <form (submit)="addNote(form.value)" #form="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
               <div class="mb-2">
@@ -110,6 +110,19 @@
               </div>
               <button type="submit" class="btn  w-100">Ajouter Examen</button>
             </form>
+<!-- 
+            <form (ngSubmit)="addDisease(diseaseForm.value)" #diseaseForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
+              <div class="mb-2">
+                <label for="disease" class="form-label">Maladie</label>
+                <select id="disease" name="disease_id" ngModel required class="form-control">
+                  <option value="" disabled selected>Sélectionnez une maladie</option>
+                  <option *ngFor="let disease of   diseases" [value]="disease.id">
+                    {{ disease.name }}
+                  </option>
+                </select>
+              </div>
+              <button type="submit" class="btn  w-100">Ajouter une maladie</button>
+            </form> -->
           </div>
         </div>
         

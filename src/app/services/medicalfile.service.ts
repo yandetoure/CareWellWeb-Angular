@@ -23,7 +23,9 @@ export class MedicalFileService {
   addNote(id: string, note: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/medical-files/${id}/addnote`, note)
   }
-  
+  addDisease(id: string, disease: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/medical-files/${id}/adddisease`, disease)
+  }
   // Ajouter un antécédent
   addHistory(id: string, history: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/medical-files/${id}/addHistory`, history)
