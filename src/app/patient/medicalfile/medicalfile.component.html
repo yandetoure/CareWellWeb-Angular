@@ -2,43 +2,62 @@
   <app-patient-header></app-patient-header>
 
   <div class="main-content">
+    
     <div class="container mt-5">
       <h2 class="text-center">Détails du Dossier Médical</h2>
       <div class="row mt-4">
         <!-- Card pour le dossier médical à gauche -->
         <div class="col-md-8">
           <div class="card p-4 shadow-sm">
-            <!-- Historique médical -->
-            <p><strong>Historique médical:</strong></p>
+           
+            <p>Historique médical:</p>
             <ul>
-              <li>{{ medicalFile?.medical_history?.content || 'Aucun historique' }}</li>
+              <li *ngFor="let medicalfilehistory of medicalFile.medical_histories">
+              {{ medicalfilehistory.content || 'Aucun historique' }}
+            </ul>
+            <hr class="my-4" /> 
+            
+
+            <p>Prescriptions Médicales:</p>
+            <ul>
+              <li *ngFor="let prescription of medicalFile.medicalprescription" class="d-flex justify-content-between align-items-center">
+                <div>
+                  {{ prescription?.prescription.name || 'Aucune Prescription' }}
+                </div>
+                <div>
+                  <span class="text-muted">{{ getRelativeTime(prescription?.created_at) }}</span>
+                  <span class="text-muted ms-4">{{ prescription?.is_done ? 'Effectuée' : 'Non effectuée' }}</span>
+                </div>
+              </li>              
             </ul>
             <hr class="my-4" />
-
-            <!-- Prescriptions Médicales -->
-            <p><strong>Prescriptions Médicales:</strong></p>
+            
+            <p>Examens Médicaux:</p>
             <ul>
-              <li *ngFor="let prescription of medicalFile.medicalprescription">
-                Prescription ID: {{ prescription.prescription_id }} - Statut: {{ prescription.is_done ? 'Effectuée' : 'Non effectuée' }}
-              </li>
-              <li *ngIf="!medicalFile.medicalprescription.length">Aucune Prescription</li>
+              <li *ngFor="let exam of medicalFile.medicalexam" class="d-flex justify-content-between align-items-center">
+                <div>
+                  {{ exam?.exam.name || 'Aucun Examen' }}
+                </div>
+                <div>
+                  <span class="text-muted">{{ getRelativeTime(exam?.created_at) }}</span>
+                  <span class="text-muted ms-4">{{ exam?.is_done ? 'Effectuée' : 'Non effectuée' }}</span>
+                </div>
+              </li>              
             </ul>
-            <hr class="my-4" />
+            
 
-            <!-- Notes Médicales -->
-            <p><strong>Notes Médicales:</strong></p>
+            <p>Notes Médicales:</p>
             <ul>
               <li *ngFor="let note of medicalFile.note">
                 {{ note.content }}
               </li>
-              <li *ngIf="!medicalFile.note.length">Aucune Note</li>
             </ul>
+
           </div>
         </div>
 
-        <!-- Card pour les infos utilisateur à droite -->
         <div class="col-md-4">
-          <div class="card p-4 shadow-sm">
+          <div class="card p-4 shadow-sm card-info">
             <h5 class="text-center">Informations de l'Utilisateur</h5>
             <img *ngIf="medicalFile.user?.photo" [src]="'http://localhost:8000/storage/' + medicalFile.user?.photo" alt="{{ medicalFile.user?.first_name }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;" />
             <p><strong>Nom Complet:</strong> {{ medicalFile.user?.first_name }} {{ medicalFile.user?.last_name }}</p>

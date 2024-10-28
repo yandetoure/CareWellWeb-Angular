@@ -1,0 +1,18 @@
+<header>
+    <nav class="toolbar">
+      <h1>Liste des utilisateurs</h1>
+      <button (click)="closeModal()" class="close-button">Fermer</button>
+    </nav>
+  </header>
+  
+  <main class="content">
+    <ul class="user-list">
+      <li *ngFor="let user of users" (click)="selectUser(user)" class="user-item">
+        <div class="user-image-container">
+          <img [src]="user.image" alt="Profile Image" class="user-image">
+        </div>
+        <span class="user-pseudo">{{ user.first_name }}</span>
+      </li>
+    </ul>
+  </main>
+  

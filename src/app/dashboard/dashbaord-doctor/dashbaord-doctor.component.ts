@@ -57,7 +57,7 @@ export class DashbaordDoctorComponent {
       response => {
         alert('Profil mis à jour avec succès');
         this.closeModal();
-        this.loadUserInfo(); // Recharger les informations après la mise à jour
+        this.loadUserInfo();
       },
       error => {
         console.error('Erreur lors de la mise à jour du profil', error);
@@ -69,8 +69,8 @@ export class DashbaordDoctorComponent {
     this.appointmentService.getDoctorStats().subscribe(
       (response) => {
         if (response.status) {
-          this.doctorStats = response.data; // Récupère les statistiques du docteur
-          this.createChart(); // Appel de la méthode pour créer le diagramme
+          this.doctorStats = response.data; 
+          this.createChart();
         }
       },
       (error) => {
@@ -82,21 +82,21 @@ export class DashbaordDoctorComponent {
   createChart() {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
     const myChart = new Chart(ctx, {
-      type: 'line', // Type de diagramme : line
+      type: 'line',
       data: {
-        labels: ['Rendez-vous aujourd\'hui', 'Total des rendez-vous', 'Rendez-vous complétés'], // Étiquettes pour l'axe des X
+        labels: ['Rendez-vous aujourd\'hui', 'Total des rendez-vous', 'Rendez-vous complétés'], 
         datasets: [{
           label: 'Statistiques des rendez-vous',
           data: [
             this.doctorStats.appointments_today,
             this.doctorStats.total_appointments,
             this.doctorStats.completed_appointments
-          ], // Valeurs à afficher
-          fill: false, // Ne pas remplir sous la courbe
+          ], 
+          fill: false, 
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 2,
-          tension: 0.1 // Contrôle la courbure de la ligne
+          borderWidth: 5,
+          tension: 0.5
         }]
       },
       options: {

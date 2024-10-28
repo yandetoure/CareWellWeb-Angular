@@ -106,7 +106,7 @@
   .dashboard-container {
       display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
     }
-    
+
   app-admin-sidebar {
     width: 250px; /* Largeur de la sidebar */
     background-color: #ffffff; /* Couleur de fond de la sidebar */
@@ -169,4 +169,47 @@
     height: 250px;
     object-fit: cover;
   }
+  .banner{
+    background-image: url('/images/banner15.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 700px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.454);
+    background-blend-mode: darken;
+    font-family: merriweather;
+    .text{
+        border-left: 10px solid #1F2B6C;
+        height: 220px;
+        width: 600px;
+        padding-left: 10px;
+        font-weight: bold;
+        color: white;
+        margin-left: 12%;
+
+        h3{
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        p{
+          color: white;
+          font-size: 16px;
+        }
+
+    }
+    .btn-banner{
+        background-color: #0b645a;
+        color: white;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
   
+  }

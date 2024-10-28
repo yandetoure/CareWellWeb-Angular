@@ -3,13 +3,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AccountantSidebarComponent } from '../../sidebar/accountant-sidebar/accountant-sidebar.component'; // Assurez-vous que le chemin est correct
+import { AccountantSidebarComponent } from '../../sidebar/accountant-sidebar/accountant-sidebar.component';
 import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-accountant-prescriptions',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, AccountantSidebarComponent],  // Importez bien le composant ici
+  imports: [CommonModule, FormsModule, HttpClientModule, AccountantSidebarComponent],
   templateUrl: './accountant-prescriptions.component.html',
   styleUrls: ['./accountant-prescriptions.component.css']
 })

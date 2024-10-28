@@ -490,3 +490,46 @@ h4{
 
 
 
+
+
+    body {
+      font-family: Arial, sans-serif;
+  }
+  
+
+  @keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Monte un peu */
+    }
+}
+
+.float-button {
+    position: fixed;
+    width: 100px;
+    height: auto;
+    bottom: 40px;
+    right: 40px;
+    background-color: #721e05;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    line-height: 40px;
+
+    /* Animation de rebond */
+    animation: bounce 2s infinite; /* Le bouton rebondit toutes les 2 secondes */
+}
+
+.float-button:hover {
+    background-color: #218838;
+}
+
+  
+

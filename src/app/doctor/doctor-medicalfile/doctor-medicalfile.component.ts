@@ -18,6 +18,7 @@ export class DoctorMedicalfileComponent {
   medicalfiles: any[] = []; 
   filteredMedicalFiles: any[] = [];
   searchQuery: string = '';
+  userInfo: any = {};
 
   constructor(private medicalfilesService: MedicalFileService,
     private authService: AuthService,
@@ -28,7 +29,18 @@ export class DoctorMedicalfileComponent {
   ngOnInit(): void {
     this.loadMedicalFiles();
   }
-
+  loadUserInfo() {
+    this.authService.getUserInfo().subscribe(
+      data => {
+        if (data && data.data) {
+          this.userInfo = data.data;
+        }
+      },
+      error => {
+        console.error('Erreur lors de la récupération des informations de l\'utilisateur');
+      }
+    );
+  }
   loadMedicalFiles(): void {
     this.medicalfilesService.getMedicalFiles().subscribe({
       next: (data) => {

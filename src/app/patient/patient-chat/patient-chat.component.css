@@ -1,0 +1,111 @@
+.dashboard-container {
+  display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
+}
+
+app-doctor-sidebar {
+  width: 250px; /* Largeur de la sidebar */
+  background-color: #ffffff; /* Couleur de fond de la sidebar */
+  height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
+  position: fixed; /* Fixer la sidebar */
+}
+
+.main-content {
+  flex: 1; /* Prendre tout l'espace restant */
+  margin-left: 250px; /* Créer un espace pour la sidebar fixe */
+  overflow-y: auto; /* Permettre le défilement vertical */
+  background-color: #ffffff; /* Couleur de fond du contenu principal */
+  padding: 20px; /* Ajouter un padding pour le contenu */
+  margin-top: 50px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .toolbar h1 {
+    margin: 0;
+    font-size: 22px;
+  }
+  
+  .toolbar-buttons {
+    display: flex;
+    align-items: center;
+  }
+  .photo1{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    margin-right: 10px;
+    margin-left: 10px;
+    object-fit: cover;
+  }
+  
+  .profil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    h2{
+      color: #062e59;
+      font-size: 16px;
+    }
+  }
+  
+  .unread-button, .add-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+  
+  
+  .unread-button .material-icons, .add-button .material-icons {
+    font-size: 22px;
+  }
+  
+  .discussions-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .discussion-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .discussion-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .unread-count {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .no-discussions {
+    text-align: center;
+  }
+  
+  .start-discussion-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  p{
+    font-size: 14px;
+    margin-left: 65px;
+    margin-top: -10px;
+  }

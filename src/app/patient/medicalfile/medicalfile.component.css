@@ -1,26 +1,107 @@
+/* Container principal pour le tableau de bord */
 .dashboard-container {
-    display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
-  }
-  
+  display: flex;
+  flex-wrap: wrap; /* Permettre à la sidebar et au contenu de s'empiler sur les petits écrans */
+}
+
+/* Sidebar */
 app-admin-sidebar {
-  width: 250px; /* Largeur de la sidebar */
-  background-color: #ffffff; /* Couleur de fond de la sidebar */
-  height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
-  position: fixed; /* Fixer la sidebar */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  width: 250px; /* Largeur par défaut */
+  background-color: #ffffff;
+  height: 100vh;
+  position: fixed;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Assurez-vous que la sidebar reste au-dessus du contenu */
 }
 
+/* Contenu principal */
 .main-content {
-  flex: 1; /* Prendre tout l'espace restant */
-  overflow-y: auto; /* Permettre le défilement vertical */
-  background-color: #ffffff; /* Couleur de fond du contenu principal */
-  padding: 20px; 
+  margin-left: 250px; 
+  flex: 1;
+  overflow-y: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  transition: margin-left 0.3s ease; 
 }
-
-.photo{
+.card-info{
+  position: fixed;
+  width: 350px;
+  align-items: center;
+}
+.photo {
   height: 200px;
   width: 200px;
   border-radius: 50%;
   border: 5px solid #077676;
   object-fit: cover;
+}
+
+h5{
+  font-size: 18px;
+  font-weight: 600;
+  color: #077676;
+}
+
+h2{
+  font-size: 28px;
+  
+}
+p{
+  color: #077676;
+  font-weight: 600;
+}
+/* Responsive pour tablettes et petits écrans */
+@media (max-width: 992px) {
+  app-admin-sidebar {
+    width: 200px; /* Réduire la largeur de la sidebar */
+  }
+  .main-content {
+    margin-left: 200px; /* Adapter l'espace laissé pour la sidebar */
+  }
+}
+
+@media (max-width: 768px) {
+  app-admin-sidebar {
+    width: 60px; /* Sidebar encore plus étroite sur petits écrans */
+  }
+  .main-content {
+    margin-left: 60px; /* Espace réduit pour la sidebar */
+  }
+
+  /* Texte et contenu des cartes */
+  .card {
+    font-size: 14px; /* Réduire la taille du texte pour les petits écrans */
+  }
+
+  .photo {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Pour très petits écrans, empiler la sidebar et le contenu */
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  app-admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative; /* Sidebar devient relative */
+  }
+
+  .main-content {
+    margin-left: 0; /* Le contenu prend toute la largeur */
+    padding: 10px; /* Réduire le padding pour les petits écrans */
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .photo {
+    height: 120px;
+    width: 120px;
+  }
 }

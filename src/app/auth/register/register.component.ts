@@ -35,7 +35,6 @@ export class RegisterComponent {
         formData.append(key, this.registerForm.value[key]);
       });
   
-      // Ajoutez le fichier d'image à FormData
       const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
       if (fileInput.files && fileInput.files.length > 0) {
         formData.append('photo', fileInput.files[0]);

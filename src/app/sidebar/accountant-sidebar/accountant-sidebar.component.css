@@ -1,77 +1,163 @@
-/* doctor-sidebar.component.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
 .sidebar {
-  width: 240px; /* Ajuste la largeur de la sidebar */
-  background-color: #dedbdb70; /* Couleur de fond de la sidebar */
-  padding: 10px;
-  height: 100vh; /* Hauteur pleine de la sidebar */
-  border-radius: 4px; /* Arrondit les coins */
-  transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
-  margin: 5px;
+  width: 80px;
+  height: 100vh;
+  background-color: #490901;  
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.photo1{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  margin-right: 50px;
+  margin-left: 10px;
+  object-fit: cover;
+}
+
+.profil{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-}
-  
-  .logo{
-    height: 91px;
-    width: 120px;
-    margin-top: 20px;
-  }
-  .sidebar ul {
-    list-style-type: none; /* Retire les puces de la liste */
-    padding: 0; /* Enlève le remplissage par défaut */
-    width: 220px;
-    margin-top: 40px;
-    color: #741207;
-    font-weight: 500;
-    font-size: 18px;
-    font-family: kanit;
-  }
-  
-  .sidebar li {
-    display: flex; /* Utilise flexbox pour aligner l'image et le texte */
-    align-items: center; /* Centre verticalement les éléments */
-    margin-bottom: 15px; /* Espace entre les éléments */
-    padding-left: 15px;
-    height: 55px;
-    margin: 2px;
-    margin-top: 10px;
-    border-radius: 10px;
-  }
-  .sidebar li.active {
-    background-color: #741207; /* Couleur de fond lorsque l'élément est actif */
-}
-
-.sidebar li.active a {
-    color: #ffffff; /* Couleur du texte lorsque l'élément est actif */
-}
-
-.sidebar li.active .icon {
-    color: #ffffff; /* Couleur de l'icône lorsque l'élément est actif */
-}
-
-.sidebar li:hover {
-    background-color: #741207; /* Couleur de fond verte au survol */
-}
-
-.sidebar li:hover a {
-    color: #ffffff; /* Change la couleur du texte au survol */
-}
-
-.sidebar li:hover .icon {
+  margin-left: 20px;
+  p{
     color: #ffffff;
+  }
 }
-  .icon {
-    font-size: 24px; /* Ajuste la taille de l'icône */
-    margin-right: 10px; /* Espace entre l'icône et le texte */
-  }
-  
-  a {
-    text-decoration: none; /* Enlève le soulignement du lien */
-    color: #741207;
-  }
-  
-  a:hover {
-    color: #1F2B6C; /* Change la couleur au survol */
-  }
-  
+.sidebar:hover {
+  width: 250px;
+}
+
+.sidebar img.logo {
+  width: 80px;
+  margin: 10px auto;
+  display: block;
+  margin-top: 80px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 10px;
+}
+
+.sidebar ul li {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.sidebar ul li .icon {
+  font-size: 24px;
+  color: white;
+  display: inline-block;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sidebar:hover ul li a {
+  opacity: 1;
+}
+
+.sidebar ul li:hover {
+  background-color: #1c252e;
+}
+
+.sidebar ul li.active {
+  background-color: #741207; /* Couleur pour l'élément actif */
+}
+
+.sidebar ul li.active a {
+  color: white;
+}
+
+.logout {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+/* Alignement du header en haut et du contenu à l'intérieur */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #490901; /* Ajuste selon tes préférences */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Ajuste selon tes préférences */
+  z-index: 1000; /* S'assure que le header soit au-dessus du contenu */
+}
+
+.header h5 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+
+
+
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: white;
+}
+
+.sidebar ul li .icon {
+    font-size: 24px;
+    color: white;
+    display: inline-block;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.sidebar:hover ul li a {
+    opacity: 1;
+}
+
+.sidebar ul li:hover {
+    background-color: #1c252e;
+}
+
+.sidebar ul li.active {
+    background-color: #741207;
+}
+
+.sidebar ul li.active a {
+    color: white;
+}
+
+.logout {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';  // Import nécessaire pour ngModel
-import { CommonModule } from '@angular/common';  // Import de CommonModule
-import { HttpClientModule } from '@angular/common/http';  // Import pour HttpClient
+import { FormsModule } from '@angular/forms';  
+import { CommonModule } from '@angular/common';  
+import { HttpClientModule } from '@angular/common/http';  
 import { AppointmentService } from '../../services/appointment.service';
-import { AuthService } from '../../services/auth.service';
-import { ServiceService } from '../../services/service.service';  // Service pour récupérer les services
-import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component'; // Assurez-vous que le chemin est correct
+import { AuthService } from '../../services/auth.service'; 
+import { ServiceService } from '../../services/service.service';  
+import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component'; 
+import { DatePipe } from '@angular/common';
 
 import Swal from 'sweetalert2';
 
@@ -14,9 +15,11 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, PatientHeaderComponent],
   templateUrl: './appointments.component.html',
-  styleUrl: './appointments.component.css'
+  styleUrl: './appointments.component.css',
+  providers: [DatePipe] 
 })
 export class AppointmentsComponent implements OnInit {
+  minDate: string = '';
   appointments: any[] = [];
   services: any[] = [];
   newAppointment = {
@@ -27,42 +30,48 @@ export class AppointmentsComponent implements OnInit {
     date: '',
     time: ''
   };
+  availableSlots: string[] = []; 
 
   constructor(
     private appointmentService: AppointmentService,
     private authService: AuthService, 
-    private serviceService: ServiceService
+    private serviceService: ServiceService,
+    private datePipe: DatePipe 
   ) {}
 
   ngOnInit(): void {
-    this.getAppointments();
+    // this.getAppointments();
+    this.setMinDate();
     this.getUserId();
     this.getServices(); 
   }
-
-  // Récupération des rendez-vous
-  getAppointments() {
-    this.appointmentService.getAppointments().subscribe(
-      (response) => {
-        this.appointments = response.data;
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: 'Impossible de récupérer les rendez-vous.',
-        });
-      }
-    );
+  setMinDate(): void {
+    const today = new Date();
+    this.minDate = this.datePipe.transform(today, 'yyyy-MM-dd')!;
   }
+  // Récupération des rendez-vous
+  // getAppointments() {
+  //   this.appointmentService.getAppointments().subscribe(
+  //     (response) => {
+  //       this.appointments = response.data;
+  //     },
+  //     (error) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Erreur',
+  //         text: 'Impossible de récupérer les rendez-vous.',
+  //       });
+  //     }
+  //   );
+  // }
 
   // Récupération de l'utilisateur actuellement connecté
   getUserId() {
-   let user = localStorage.getItem('user');
-   if(user)
+    let user = localStorage.getItem('user');
+    if(user) {
       this.newAppointment.user_id = JSON.parse(user)?.id ?? 0;
-
-   console.log(this.newAppointment)
+    }
+    console.log(this.newAppointment);
   }
 
   getServices() {
@@ -80,6 +89,22 @@ export class AppointmentsComponent implements OnInit {
     );
   }
 
+  // Nouvelle méthode pour récupérer les créneaux disponibles
+  getAvailableSlots() {
+    this.appointmentService.getAvailableSlots(this.newAppointment.service_id, this.newAppointment.date).subscribe(
+      (response) => {
+        this.availableSlots = response.data; // Mettre à jour les créneaux disponibles
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Impossible de récupérer les créneaux disponibles.',
+        });
+      }
+    );
+  }
+
   addAppointment() {
     this.appointmentService.addAppointment(this.newAppointment).subscribe(
       (response) => {
@@ -88,15 +113,15 @@ export class AppointmentsComponent implements OnInit {
           title: 'Succès',
           text: 'Rendez-vous créé avec succès',
         });
-        this.getAppointments();
+        // this.getAppointments();
       },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: 'Erreur lors de la création du rendez-vous.',
-        });
-      }
+      // (error) => {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Erreur',
+      //     text: 'Erreur lors de la création du rendez-vous.'+error,
+      //   });
+      // }
     );
   }
 }

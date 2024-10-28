@@ -15,17 +15,18 @@ app-admin-sidebar {
   overflow-y: auto; /* Permettre le défilement vertical */
   background-color: #ffffff; /* Couleur de fond du contenu principal */
   padding: 20px; 
+  margin-left: 250px;
+  margin-top: 50px;
 }
 
 
 .search-input {
   display: block;
   margin: 0 auto; /* Centre le champ de recherche */
-  border: 2px solid 0b645a; /* Bordure verte */
+  border: 2px solid #02503b; /* Bordure verte */
   padding: 10px; /* Ajoute un peu de padding pour l'esthétique */
-  width: 50%; /* Ajuste la largeur pour qu'il ne soit pas trop grand */
+  width: 80%; /* Ajuste la largeur pour qu'il ne soit pas trop grand */
   border-radius: 5px; /* Arrondi les coins de la bordure */
-  box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); /* Ajoute une ombre subtile verte */
 }
 
 h2{
@@ -60,10 +61,10 @@ h4{
                   display: flex;
                   justify-content: center;
                     .card{
-                        margin: 10px;
-                        flex: 0 0 25%; /* Chaque carte occupe 25% de la largeur (4 par ligne) */
+                        margin: 7px;
+                        flex: 0 0 250px;
                         box-sizing: border-box;
-                        padding: 15px; /* Ajoute un peu de padding entre les cartes */
+                        padding: 5px;
                   }
                   }
     
