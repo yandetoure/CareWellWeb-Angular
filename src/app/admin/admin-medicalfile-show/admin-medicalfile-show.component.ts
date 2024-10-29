@@ -29,6 +29,22 @@ export class AdminMedicalfileShowComponent {
     }
   }
 
+  getRelativeTime(date: Date | string): string {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - new Date(date).getTime()) / 1000);
+    
+    let interval = Math.floor(diffInSeconds / 31536000);
+    if (interval > 1) return `il y a ${interval} ans`;
+    interval = Math.floor(diffInSeconds / 2592000);
+    if (interval > 1) return `il y a ${interval} mois`;
+    interval = Math.floor(diffInSeconds / 86400);
+    if (interval > 1) return `il y a ${interval} jours`;
+    interval = Math.floor(diffInSeconds / 3600);
+    if (interval > 1) return `il y a ${interval} heures`;
+    interval = Math.floor(diffInSeconds / 60);
+    if (interval > 1) return `il y a ${interval} minutes`;
+    return `il y a quelques secondes`;
+  }
   loadMedicalFileDetails(id: string): void {
     this.medicalFileService.getMedicalFileById(id).subscribe({
       next: (data) => {

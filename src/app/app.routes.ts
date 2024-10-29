@@ -105,13 +105,13 @@ export const routes: Routes = [
   { path: 'us', component: AboutUsComponent },
 
   //Accountant
-  { path: 'dashboard/accountant', component: DashbaordAccountantComponent , canActivate: [AuthGuard], data: { role: 'Patient' } },
-  {path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
-  { path: 'accountant/articles', component: AccountantArticlesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
-  { path: 'accountant/services', component: AccountantServicesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
-  { path: 'accountant/tickets', component: AccountantTicketsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
-  { path: 'accountant/exams', component: AccountantExamComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
-  { path: 'patient/profil', component: PatientProfileComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'dashboard/accountant', component: DashbaordAccountantComponent , canActivate: [AuthGuard], data: { role: 'Accountant' } },
+  {path: 'accountant/prescriptions', component: AccountantPrescriptionsComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
+  { path: 'accountant/articles', component: AccountantArticlesComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
+  { path: 'accountant/services', component: AccountantServicesComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
+  { path: 'accountant/tickets', component: AccountantTicketsComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
+  { path: 'accountant/exams', component: AccountantExamComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
+  { path: 'patient/profil', component: PatientProfileComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
 
 
   { path: '**', redirectTo: '/register' }

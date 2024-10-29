@@ -1,49 +1,74 @@
-html, body {
-  height: 100%; /* S'assurer que le corps et html occupent 100% de la hauteur */
-  margin: 0; /* Supprimer les marges par défaut */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2f453e;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000; 
+  border-bottom: 2px solid #0000002e;
 }
 
 .dashboard-container {
-  display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
-  height: 100vh; /* Prendre toute la hauteur de la fenêtre */
-}
-
-app-admin-sidebar {
-  width: 250px; /* Largeur de la sidebar */
-  background-color: #ffffff; /* Couleur de fond de la sidebar */
-  height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
-  position: fixed; /* Fixer la sidebar */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  display: flex;
 }
 
 .main-content {
-  flex: 1; /* Prendre tout l'espace restant */
-  margin-left: 250px; /* Créer un espace pour la sidebar fixe */
-  overflow-y: auto; /* Permettre le défilement vertical */
-  background-color: #ffffff; /* Couleur de fond du contenu principal */
-  padding: 20px; /* Ajouter un padding pour le contenu */
+  flex-grow: 1;
+  margin-left: 250px; /* Pour tenir compte de la sidebar */
+  margin-top: 20px; /* Ceci correspond à la hauteur du header */
+  overflow-y: auto;
+  background-color: #ffffff; 
+  padding: 20px;
 }
 
-.card {
-  background-color: #ffffff; /* Couleur de fond de la carte */
+.sticky-form {
+  top: 80px; /* Vous pouvez ajuster ce top en fonction de la hauteur du header */
+  position: fixed;
 }
 
-h2 {
-  color: #007bff; /* Couleur du texte du titre */
+.card-header {
+  background-color: #051d37;
+  color: white;
 }
 
-ul.list-unstyled {
-  padding-left: 0; /* Supprimer le remplissage gauche */
+.text-muted {
+  font-style: italic;
 }
 
-ul.list-unstyled li {
-  transition: background-color 0.3s; /* Ajout d'une transition pour un effet de survol */
-}
-
-ul.list-unstyled li:hover {
-  background-color: #e9ecef; /* Couleur de fond au survol */
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 .bg-light {
-  background-color: #f8f9fa !important; /* Assurez-vous que le fond clair est appliqué */
+  background-color: #f8f9fa !important;
+}
+
+button[type="submit"] {
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #051d3792;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #051d37;
+  color: white;
+}
+
+
+h3{
+  color: #ffffff;
+  text-align: center;
+}
+
+p {
+  color: #051d37;
+  font-weight: bold;
 }

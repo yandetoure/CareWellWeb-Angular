@@ -113,15 +113,25 @@ export class AppointmentsComponent implements OnInit {
           title: 'Succès',
           text: 'Rendez-vous créé avec succès',
         });
+        // Vous pouvez mettre à jour la liste des rendez-vous si nécessaire
         // this.getAppointments();
       },
-      // (error) => {
-      //   Swal.fire({
-      //     icon: 'error',
-      //     title: 'Erreur',
-      //     text: 'Erreur lors de la création du rendez-vous.'+error,
-      //   });
-      // }
+      (error) => {
+        if (error.status === 422 && error.error.message.includes('48 dernières heures')) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Attention',
+            text: 'Vous avez déjà un rendez-vous dans ce service dans les 48 dernières heures, vous devez attendre au moins 48 heures avant de reprendre rendez-vous.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Erreur lors de la création du rendez-vous.',
+          });
+        }
+      }
     );
   }
+  
 }

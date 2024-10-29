@@ -142,8 +142,8 @@ export class AuthService {
     // }
 
     getStatistics(): Observable<any> {
-      return this.http.get(`${this.apiUrl}/statistics`).pipe(
-        map((response: any) => response.data) // Adapter selon la structure de votre réponse
+      return this.http.get(`${this.apiUrl}/user/statistics`).pipe(
+        map((response: any) => response.data) 
       );
     }
 }

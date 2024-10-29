@@ -2,35 +2,67 @@
   <app-admin-sidebar></app-admin-sidebar>
   <div class="main-content">
     <div class="container mt-5">
-      <h2 class="text-center">Détails du Dossier Médical</h2>
-      <div class="card mt-4 p-4 shadow-sm">
-        <p><strong>ID:</strong> {{ medicalFile?.identification_number }}</p>
-        <p><strong>Nom:</strong> {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</p>
-        <p><strong>Date de création:</strong> {{ medicalFile?.created_at | date }}</p>
-        <hr />
-        <p><strong>Historique médical:</strong></p>
-        <p class="bg-light p-3 rounded">{{ medicalFile?.medical_history || 'Aucun historique' }}</p>
-        <hr />
-        <p><strong>Prescriptions:</strong></p>
-        <span *ngIf="medicalFile?.prescriptions.length > 0; else noPrescriptions">
-          <ul class="list-unstyled">
-            <li *ngFor="let prescription of medicalFile?.prescriptions" class="bg-light p-2 rounded mb-2">
-              {{ prescription }}
-            </li>
-          </ul>
-        </span>
+        <div class="col-md-12">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header text-white">
+              <h3>Dossier Médical de {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</h3>
+            </div>
+            <div class="card-body">
+              <h5>Nom du patient: <span class="text-muted">{{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</span></h5>
+              <p><strong>Numéro de dossier:</strong> <span class="text-muted">{{ medicalFile?.identification_number }}</span></p>
+              <p><strong>Date de naissance:</strong> <span class="text-muted">{{ medicalFile?.user?.day_of_birth | date }}</span></p>
+              <p><strong>Adresse:</strong> <span class="text-muted">{{ medicalFile?.user?.adress }}</span></p>
+              <p><strong>Date d'ouverture du dossier:</strong> <span class="text-muted">{{ medicalFile?.created_at | date }}</span></p>
+              
+              <hr class="my-4" />
 
-        <p><strong>Notes Médicales:</strong></p>
-        <ul>
-          <li *ngFor="let note of medicalFile.note">
-            {{ medicalFile?.note_content }}
-          </li>
-        </ul>
+              <p>Historique médical:</p>
+              <ul>
+                <li *ngFor="let medicalfilehistory of medicalFile.medical_histories">
+                {{ medicalfilehistory.content || 'Aucun historique' }}
+              </ul>
+              <hr class="my-4" /> 
+              
 
-        <ng-template #noPrescriptions>
-          <p class="text-muted">Aucune prescription disponible</p>
-        </ng-template>
-      </div>
+              <p>Prescriptions Médicales:</p>
+              <ul>
+                <li *ngFor="let prescription of medicalFile.medicalprescription" class="d-flex justify-content-between align-items-center">
+                  <div>
+                    {{ prescription?.prescription.name || 'Aucune Prescription' }}
+                  </div>
+                  <div>
+                    <span class="text-muted">{{ getRelativeTime(prescription?.created_at) }}</span>
+                    <span class="text-muted ms-4">{{ prescription?.is_done ? 'Effectuée' : 'Non effectuée' }}</span>
+                  </div>
+                </li>              
+              </ul>
+              <hr class="my-4" />
+              
+              <p>Examens Médicaux:</p>
+              <ul>
+                <li *ngFor="let exam of medicalFile.medicalexam" class="d-flex justify-content-between align-items-center">
+                  <div>
+                    {{ exam?.exam.name || 'Aucun Examen' }}
+                  </div>
+                  <div>
+                    <span class="text-muted">{{ getRelativeTime(exam?.created_at) }}</span>
+                    <span class="text-muted ms-4">{{ exam?.is_done ? 'Effectuée' : 'Non effectuée' }}</span>
+                  </div>
+                </li>              
+              </ul>
+              
+
+              <p>Notes Médicales:</p>
+              <ul>
+                <li *ngFor="let note of medicalFile.note">
+                  {{ note.content }}
+                </li>
+              </ul>
+            
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
 </div>
