@@ -46,7 +46,7 @@ export class AppointmentService {
     // Ajouter un nouveau rendez-vous
     addAppointment(appointmentData: any): Observable<any> {
       return this.http.post(`${this.apiUrl}/appointments`, appointmentData);
-      
+  
     }
 
 
@@ -80,6 +80,10 @@ export class AppointmentService {
 
   updateAppointment(patientId: number, patientData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/update/${patientId}`, patientData);
+  }
+
+  updateStatus(patientId: number, patientData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/update/status/${patientId}`, patientData);
   }
 
   getPatientsWithAppointments(): Observable<any> {

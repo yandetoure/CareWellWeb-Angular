@@ -4,19 +4,18 @@
   <div class="main-content">
     <div class="container mt-5">
       <h2 class="mb-4">Liste des patients avec rendez-vous</h2>
-      <!-- <button class="btn btn-refresh mb-3" (click)="loadPatients()">Rafraîchir la liste</button> -->
+      
       <div *ngIf="patients.length > 0" class="row">
         <div class="col-md-12 mb-4" *ngFor="let patient of patients">
           <div class="card shadow-sm custom-card">
             <div class="card-body">
               <p class="card-text">
-                <strong>Nom:</strong> {{ patient.patient_first_name }} {{ patient.patient_last_name }}
-                <!-- <strong>Email :</strong> {{ patient.patient_email }}<br> -->
+                <strong>Nom:</strong> {{ patient.patient_first_name }} {{ patient.patient_last_name }}<br>
                 <strong>Date du rendez-vous :</strong> {{ patient.day_of_birth | date: 'fullDate' }}<br>
-                <!-- <strong>Heure :</strong> {{ patient.appointment_time }}<br> -->
-                <!-- <strong>Médecin :</strong> {{ patient.patient_disease }}<br> -->
                 <strong>Service :</strong> {{ patient.user_adress }}
               </p>
+              <button class="btn btn-info" (click)="openDetailsModal(patient)">Détails</button>
+              <button class="btn btn-warning" (click)="openUpdateModal(patient)">Modifier</button>
             </div>
           </div>
         </div>
@@ -27,7 +26,7 @@
   </div>
 </div>
 
-<!-- Modal pour les détails -->
+<!-- Modal pour les détails du patient -->
 <div class="modal" tabindex="-1" role="dialog" *ngIf="isDetailsModalOpen">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -38,11 +37,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Nom: {{ selectedPatient.patient_first_name }} {{ selectedPatient.patient_last_name }}</p>
-        <p>Email: {{ selectedPatient.patient_email }}</p>
-        <p>Date du rendez-vous: {{ selectedPatient.appointment_date }}</p>
-        <p>Heure: {{ selectedPatient.appointment_time }}</p>
-        <p>Service: {{ selectedPatient.service }}</p>
+        <p><strong>Nom:</strong> {{ selectedPatient.patient_first_name }} {{ selectedPatient.patient_last_name }}</p>
+        <p><strong>Email:</strong> {{ selectedPatient.patient_email }}</p>
+        <p><strong>Date du rendez-vous:</strong> {{ selectedPatient.appointment_date }}</p>
+        <p><strong>Heure:</strong> {{ selectedPatient.appointment_time }}</p>
+        <p><strong>Service:</strong> {{ selectedPatient.service }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
@@ -51,7 +50,7 @@
   </div>
 </div>
 
-<!-- Modal pour modifier -->
+<!-- Modal pour modifier le rendez-vous -->
 <div class="modal" tabindex="-1" role="dialog" *ngIf="isModalOpen">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -65,15 +64,35 @@
         <form #updateForm="ngForm">
           <div class="form-group">
             <label for="appointmentDate">Date du rendez-vous</label>
-            <input type="date" id="appointmentDate" [(ngModel)]="selectedPatient.appointment_date" name="appointmentDate" class="form-control" required />
+            <input
+              type="date"
+              id="appointmentDate"
+              [(ngModel)]="selectedPatient.appointment_date"
+              name="appointmentDate"
+              class="form-control"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="appointmentTime">Heure</label>
-            <input type="time" id="appointmentTime" [(ngModel)]="selectedPatient.appointment_time" name="appointmentTime" class="form-control" required />
+            <input
+              type="time"
+              id="appointmentTime"
+              [(ngModel)]="selectedPatient.appointment_time"
+              name="appointmentTime"
+              class="form-control"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="isVisited">Le patient a visité ?</label>
-            <select id="isVisited" [(ngModel)]="selectedPatient.is_visited" name="isVisited" class="form-control" required>
+            <select
+              id="isVisited"
+              [(ngModel)]="selectedPatient.is_visited"
+              name="isVisited"
+              class="form-control"
+              required
+            >
               <option [ngValue]="null" disabled>Le patient a-t-il été vu ?</option>
               <option [ngValue]="true">Oui</option>
               <option [ngValue]="false">Non</option>
@@ -83,7 +102,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Annuler</button>
-        <button type="button" class="btn btn-primary" (click)="updatePatientConfirmed(updateForm)">Mettre à jour</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="updatePatientConfirmed(updateForm)"
+        >
+          Mettre à jour
+        </button>
       </div>
     </div>
   </div>

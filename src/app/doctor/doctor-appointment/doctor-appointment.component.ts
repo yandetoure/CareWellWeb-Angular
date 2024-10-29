@@ -85,45 +85,39 @@ export class DoctorAppointmentComponent {
     this.isEditModalOpen = false;
   }
 
-  // Soumettre les modifications du rendez-vous
-  submitEdit(): void {
-    // Ajouter la logique pour enregistrer les modifications du rendez-vous
-    console.log('Rendez-vous modifié:', this.selectedAppointment);
-    this.closeEditModal();
-  }
 
   goToMedicalRecord(userId: number) {
     this.router.navigate(['/doctor/medicalfile', userId]);
   }
+// Méthode pour soumettre la modification et fermer le modal
+submitEdit(): void {
+  if (this.selectedAppointment) {
+    // Appeler la mise à jour et confirmer la soumission
+    this.updatePatientConfirmed(this.selectedAppointment); 
+  }
+  this.closeEditModal();
+}
 
-  updatePatientConfirmed(form: any) {
-    if (form.valid) {
-      if (confirm("Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?")) {
-        const patientId = this.selectedAppointment.patient_id;
-  
-        const updatedData = {
-          is_visited: this.selectedAppointment.is_visited,
-        };
-  
-        // Ajoutez ce log pour voir les données
-        console.log('Données à envoyer :', updatedData);
-  
-        this.appointmentService.updateAppointment(patientId, updatedData).subscribe(
-          (response: any) => {
-            alert("Rendez-vous mis à jour avec succès !");
-            this.getAppointments();
-          },
-          (error) => {
-            console.error("Erreur lors de la mise à jour du rendez-vous :", error);
-            alert("Une erreur est survenue lors de la mise à jour du rendez-vous.");
-          }
-        );
+// Méthode pour mettre à jour le statut du patient après confirmation
+updatePatientConfirmed(appointment: any): void {
+  if (confirm("Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?")) {
+    const updatedData = {
+      is_visited: appointment.is_visited,
+    };
+    
+    this.appointmentService.updateAppointment(appointment.id, updatedData).subscribe(
+      (response: any) => {
+        alert("Rendez-vous mis à jour avec succès !");
+        this.getAppointments(); // Rafraîchir la liste après mise à jour
+      },
+      (error) => {
+        console.error("Erreur lors de la mise à jour du rendez-vous :", error);
+        alert("Une erreur est survenue lors de la mise à jour du rendez-vous.");
       }
-    } else {
-      alert("Veuillez remplir tous les champs requis.");
-    }
-  }  
-  
+    );
+  }
+}
+
 
 }
 

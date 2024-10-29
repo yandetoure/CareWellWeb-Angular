@@ -17,8 +17,8 @@ import Swal from 'sweetalert2';
 export class DoctorPatientComponent {
 
   patients: any[] = [];
-  selectedPatient: any; // Patient sélectionné pour la mise à jour
-  isModalOpen: boolean = false; // État du modal
+  selectedPatient: any; 
+  isModalOpen: boolean = false; 
   isDetailsModalOpen: boolean = false;
 
   constructor(private appointmentService: AppointmentService) { }
@@ -81,31 +81,36 @@ export class DoctorPatientComponent {
   
   updatePatientConfirmed(form: any) {
     if (form.valid) {
-      if (confirm("Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?")) {
-        const patientId = this.selectedPatient.patient_id;
+      Swal.fire({
+        title: 'Êtes-vous sûr ?',
+        text: "Voulez-vous vraiment mettre à jour l'état du rendez-vous ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, mettre à jour'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const patientId = this.selectedPatient.patient_id;
+          const updatedData = { is_visited: this.selectedPatient.is_visited };
   
-        const updatedData = {
-          is_visited: this.selectedPatient.is_visited,
-        };
-  
-        // Ajoutez ce log pour voir les données
-        console.log('Données à envoyer :', updatedData);
-  
-        this.appointmentService.updateAppointment(patientId, updatedData).subscribe(
-          (response: any) => {
-            alert("Rendez-vous mis à jour avec succès !");
-            this.loadPatients();
-            this.closeUpdateModal();
-          },
-          (error) => {
-            console.error("Erreur lors de la mise à jour du rendez-vous :", error);
-            alert("Une erreur est survenue lors de la mise à jour du rendez-vous.");
-          }
-        );
-      }
+          this.appointmentService.updateStatus(patientId, updatedData).subscribe(
+            (response: any) => {
+              Swal.fire('Mis à jour!', 'Le rendez-vous a été mis à jour avec succès.', 'success');
+              this.loadPatients();
+              this.closeUpdateModal();
+            },
+            (error) => {
+              Swal.fire('Erreur', 'Une erreur est survenue lors de la mise à jour.', 'error');
+              console.error("Erreur lors de la mise à jour du rendez-vous :", error);
+            }
+          );
+        }
+      });
     } else {
-      alert("Veuillez remplir tous les champs requis.");
+      Swal.fire('Attention', 'Veuillez remplir tous les champs requis.', 'warning');
     }
-  }  
+  }
+   
   
 }
