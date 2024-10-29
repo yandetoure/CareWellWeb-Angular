@@ -9,6 +9,8 @@ import { NotesService } from '../../services/notes.service';
 import { PrescriptionService } from '../../services/prescription.service';
 import { ExamService } from '../../services/exam.service';
 import Swal from 'sweetalert2';
+import { DiseasesService } from '../../services/diseases.service';
+
 
 @Component({
   selector: 'app-doctor-medicalfile-show',
@@ -24,6 +26,8 @@ export class DoctorMedicalfileShowComponent {
   prescriptions: any[] = [];
   exams: any[] = [];
   medicalfilehistory: any[] = [];
+  diseases: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private medicalFileService: MedicalFileService,
@@ -32,6 +36,8 @@ export class DoctorMedicalfileShowComponent {
     private prescriptionService: PrescriptionService,
     private examService: ExamService,
     private router: Router,
+    private diseaseService: DiseasesService,
+
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +46,7 @@ export class DoctorMedicalfileShowComponent {
       this.loadMedicalFileDetails(id);
       this.loadPrescriptions(); 
       this.loadExams(); 
+      this.loadDiseases(); 
 
     }
   }
@@ -194,4 +201,36 @@ addExam(examData: any) {
   }
 }
 
+loadDiseases(): void {
+  this.diseaseService.getDisease().subscribe({
+      next: (data) => {
+          console.log('Maladies data:', data);
+          this.diseases = data.data;
+      },
+      error: (error) => {
+          console.error('Erreur lors du chargement des examens', error);
+      }
+  });
+}
+
+addDisease(diseaseData: any) {
+  const medicalFileId = this.medicalFile.id;
+  if (medicalFileId) {
+    diseaseData.medical_files_id = medicalFileId;
+    this.medicalFileService.addDisease(medicalFileId, diseaseData).subscribe(
+      (response) => {
+        console.log('Maladie ajoutée avec succès:', response);
+        Swal.fire('Succès', 'La maladie a été ajoutée avec succès.', 'success');
+        this.loadMedicalFileDetails(medicalFileId);
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de la maladie:', error);
+        Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout de la maladie.', 'error'); 
+      }
+    );
+  } else {
+    console.error('ID du dossier médical non trouvé');
+    Swal.fire('Erreur', 'ID du dossier médical non trouvé.', 'error');
+  }
+}
 }

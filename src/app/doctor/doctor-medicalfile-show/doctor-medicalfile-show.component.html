@@ -16,6 +16,21 @@
               <p><strong>Adresse:</strong> <span class="text-muted">{{ medicalFile?.user?.adress }}</span></p>
               <p><strong>Date d'ouverture du dossier:</strong> <span class="text-muted">{{ medicalFile?.created_at | date }}</span></p>
               
+              <p>Traité pour:</p>
+              <ul>
+                <li *ngFor="let disease of medicalFile.medicaldisease" class="d-flex justify-content-between align-items-center">
+                  <div>
+                    {{ disease?.disease.name || 'Aucune maladie' }}
+                  </div>
+                  <div>
+                    {{ disease?.disease.state || 'Inconnu' }}
+                  </div>
+                  <div>
+                    {{ disease?.disease.traitment || 'Aucun Traitement' }}
+                  </div>
+                </li>              
+              </ul>
+
               <hr class="my-4" />
 
               <p>Historique médical:</p>
@@ -66,13 +81,13 @@
         </div>
 
         <div class="col-md-4">
-          <div class="sticky-form">
+          <div class="form">
             <!-- <h5 class="mb-3">Ajouter des informations</h5> -->
         
             <form (submit)="addNote(form.value)" #form="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
               <div class="mb-2">
                 <label for="content" class="form-label">Note</label>
-                <input type="text" id="content" name="content" ngModel required class="form-control">
+                <input type="text" id="content" name="content" ngModel required class="form-control" placeholder="Notes" >
               </div>
               <button type="submit" class="btn  w-100">Ajouter Note</button>
             </form>
@@ -80,7 +95,7 @@
             <form (ngSubmit)="addHistory(historyForm.value)" #historyForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
               <div class="mb-2">
                 <label for="historyContent" class="form-label">Antécédent</label>
-                <input type="text" id="historyContent" name="content" ngModel required class="form-control">
+                <input type="text" id="historyContent" name="content" ngModel required class="form-control" placeholder="Antécédent">
               </div>
               <button type="submit" class="btn  w-100">Ajouter Antécédent</button>
             </form>
@@ -110,7 +125,7 @@
               </div>
               <button type="submit" class="btn  w-100">Ajouter Examen</button>
             </form>
-<!-- 
+
             <form (ngSubmit)="addDisease(diseaseForm.value)" #diseaseForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
               <div class="mb-2">
                 <label for="disease" class="form-label">Maladie</label>
@@ -121,8 +136,16 @@
                   </option>
                 </select>
               </div>
+              <div class="mb-2">
+                <label for="state" class="form-label">Stade</label>
+                <input type="text" id="state" name="state" ngModel required class="form-control" placeholder="State">
+              </div>
+              <div class="mb-2">
+                <label for="treatment" class="form-label">Traitement</label>
+                <input type="text" id="treatment" name="treatment" ngModel required class="form-control" placeholder="Traitement">
+              </div>
               <button type="submit" class="btn  w-100">Ajouter une maladie</button>
-            </form> -->
+            </form>
           </div>
         </div>
         
