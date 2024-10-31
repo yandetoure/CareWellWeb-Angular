@@ -96,6 +96,9 @@ export class AppointmentService {
   getDoctorStats(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/doctor/stats`);
   }
+  getUserAppointmentsStats(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user/statistics`);
+  }
 
   getDoctorStatsForCurrentMonth(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/appointments/current-month`);

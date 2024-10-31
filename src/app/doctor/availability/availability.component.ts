@@ -28,7 +28,7 @@ import interactionPlugin from '@fullcalendar/interaction';
   providers: [DatePipe] 
 })
 export class AvailabilityComponent {
-  
+  currentDate: string = new Date().toISOString().split('T')[0];
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin]

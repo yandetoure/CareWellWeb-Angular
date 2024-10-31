@@ -1,89 +1,123 @@
+/* Structure principale */
 .dashboard-container {
-  display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
+  display: flex;
 }
 
-app-doctor-sidebar, app-admin-sidebar {
-  width: 250px; /* Largeur de la sidebar, ajuste selon tes besoins */
-  background-color: #f8f9fa; /* Couleur de fond de la sidebar, modifiable */
-  height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
+/* Sidebar styles */
+app-doctor-sidebar {
+  background-color: #f8f9fa;
+  height: 100vh;
+}
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background-color: #2f453e;
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 }
 
+/* Sidebar hover effect */
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Main content styles */
 .main-content {
-  flex: 1; /* Prendre tout l'espace restant */
-  background-color: #ffffff; /* Couleur de fond du contenu principal */
-  margin-top: 30px;
+  flex: 1;
+  margin-left: 80px; /* Default sidebar width */
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* Smooth transition */
+  background-color: #ffffff;
 }
 
-/* patients.component.css */
+/* Adjust content when sidebar is hovered */
+.sidebar:hover ~ .main-content {
+  margin-left: 250px; /* Sidebar width in hover mode */
+}
+
+/* Table styles */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+.table th, .table td {
+  border: 1px solid #dee2e6; /* Border color */
+  padding: 12px; /* Inner spacing */
+  text-align: left; /* Text alignment */
+}
+
+/* Header styling */
+.table th {
+  background-color: #08305b; /* Header background color */
+  color: #ffffff; /* Header text color */
+  font-weight: bold; /* Bold text for headers */
+  position: sticky; /* Sticky header */
+  top: 0; /* Positioning at the top */
+}
+
+/* Alternating row colors */
+.table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Even row background color */
+}
+
+/* Hover effect for rows */
+.table tr:hover {
+  background-color: #e9ecef; /* Background color on hover */
+}
+
+/* Button styles */
+.btn-info, .btn-warning {
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Modal styles */
+
+
+/* Styles des Modales */
 .modal {
-display: block; /* Show modal */
-position: fixed;
-z-index: 1;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0, 0, 0, 0.5); 
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
-
 .modal-content {
-background-color: #fefefe;
-margin: 15% auto;
-padding: 20px;
-border: 1px solid #888;
-width: 80%;
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Close button style */
 .close {
-color: #aaa;
-float: right;
-font-size: 28px;
-font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
+.close:hover {
+  color: #000;
 }
 
-.dashboard-container .main-content .card {
-/* Appliquer un style aux cartes de rendez-vous */
-border: 4px solid transparent; /* Bordure invisible par défaut */
-border-bottom: 4px solid green; /* Bordure inférieure verte */
-border-radius: 8px; /* Coins arrondis */
-padding: 15px; 
-background-color: #69696922; 
-transition: transform 0.2s;
-width: 90%; /* Réduire la largeur des cartes */
-height: 80px;
-max-width: 80%; /* Limite maximale de largeur */
-margin-left: auto; /* Centrer horizontalement */
-margin-right: auto; /* Centrer horizontalement */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.746); /* Ombre douce */
+/* Success and danger row styles */
+.table-success {
+  background-color: #d4edda; /* Light green for visited patients */
 }
 
-.card-text {
-display: flex;
-flex-wrap: wrap; /* Permet de disperser les informations et les boutons sur plusieurs lignes */
-gap: 20px; /* Espacement entre les éléments */
+.table-danger {
+  background-color: #f8d7da; /* Light red for unvisited patients */
 }
-
-.card:hover {
-transform: scale(1.02); /* Légère augmentation de la taille au survol */
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.492); /* Ombre plus prononcée au survol */
-}
-
-.btn-refresh {
-  background-color: #28a745; /* Couleur verte */
-  color: white; /* Couleur du texte */
-  border: none; /* Pas de bordure */
-  border-radius: 5px; /* Coins arrondis */
-  padding: 10px 20px; /* Espacement interne */
-  font-size: 16px; /* Taille de la police */
-  transition: background-color 0.3s, transform 0.3s; /* Transition pour l'effet de survol */
-}
-
-

@@ -9,10 +9,73 @@ app-doctor-sidebar, app-doctor-sidebar {
   position: fixed; /* Fixer la sidebar */
 }
 
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background-color: #2f453e;
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Sidebar en hover */
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Contenu principal ajustable */
 .main-content {
+  flex: 1;
+  margin-left: 80px; /* Largeur par défaut de la sidebar */
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* Transition douce */
+  background-color: #ffffff;
+}
+
+/* Ajustement du contenu lorsque la sidebar est en hover */
+.sidebar:hover ~ .main-content {
+  margin-left: 250px; /* Largeur de la sidebar en mode hover */
+}
+
+
+/* Wrapper pour le formulaire et la liste des disponibilités */
+.content-wrapper {
+  display: flex; /* Flex pour aligner le formulaire et la liste */
+}
+
+/* Styles pour le formulaire */
+form {
   flex: 1; /* Prendre tout l'espace restant */
-  margin-left: 250px; /* Créer un espace pour la sidebar fixe */
-  overflow-y: auto; /* Permettre le défilement vertical */
-  background-color: #ffffff; /* Couleur de fond du contenu principal */
-  padding: 20px; /* Ajouter un padding pour le contenu */
+  margin-right: 20px; /* Espace entre le formulaire et la liste */
+}
+
+/* Styles pour la liste des disponibilités */
+.availability-list {
+  flex: 1; /* Prendre l'autre moitié de l'espace */
+  p{
+    font-size: 14px;
+  }
+}
+
+/* Styles pour les cartes des disponibilités */
+.small-card {
+  width: 100%; /* S'assurer que les cartes prennent toute la largeur de leur conteneur */
+}
+
+/* Style de la carte */
+.card {
+  transition: transform 0.2s; /* Transition pour le survol */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Agrandissement au survol */
+}
+.bg-success {
+  background-color: #28a745 !important; /* Couleur verte */
+}
+
+.text-white {
+  color: white !important; /* Texte blanc */
 }

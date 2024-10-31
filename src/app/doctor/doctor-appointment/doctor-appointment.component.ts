@@ -1,43 +1,38 @@
-
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../../services//appointment.service'; 
-import { FormsModule } from '@angular/forms'; 
-import { CommonModule } from '@angular/common';  
-import { HttpClientModule } from '@angular/common/http'; 
+import { AppointmentService } from '../../services/appointment.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
 import { Router } from '@angular/router';
-
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-doctor-appointment',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, DoctorSidebarComponent],
   templateUrl: './doctor-appointment.component.html',
-  styleUrl: './doctor-appointment.component.css'
+  styleUrls: ['./doctor-appointment.component.css']
 })
-export class DoctorAppointmentComponent {
-  appointments: any[] = []; 
-  selectedAppointment: any; 
-  isModalOpen: boolean = false; // État du modal
+export class DoctorAppointmentComponent implements OnInit {
+  appointments: any[] = [];
+  selectedAppointment: any;
+  isModalOpen: boolean = false;
+  isDetailsModalOpen: boolean = false;
+  isEditModalOpen: boolean = false;
+  today: string = new Date().toISOString().split('T')[0]; // Date du jour au format YYYY-MM-DD
 
-
-  isDetailsModalOpen: boolean = false; 
-  isEditModalOpen: boolean = false; 
-
-  constructor(private appointmentService: AppointmentService,
-    private router: Router 
-  ) { }
+  constructor(private appointmentService: AppointmentService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getAppointments(); 
+    this.getAppointments();
   }
 
   getAppointments(): void {
     this.appointmentService.getDoctorAppointments().subscribe(
       (response) => {
         if (response.status) {
-          this.appointments = response.data; // Récupérer les rendez-vous de la réponse
+          this.appointments = response.data;
         } else {
           console.error('Erreur : ', response.message);
         }
@@ -48,77 +43,105 @@ export class DoctorAppointmentComponent {
     );
   }
 
-
-  // Fonction pour déterminer la classe CSS en fonction de la date du rendez-vous
   getAppointmentClass(appointmentDate: string): string {
     const today = new Date();
     const appointment = new Date(appointmentDate);
 
     if (appointment < today) {
-      return 'past-appointment'; 
+      return 'past-appointment';
     } else if (appointment.getTime() - today.getTime() < 3 * 24 * 60 * 60 * 1000) {
-      return 'near-appointment'; 
+      return 'near-appointment';
     } else {
-      return 'upcoming-appointment'; 
+      return 'upcoming-appointment';
     }
   }
 
-  // Ouvrir le modal de détails
   openDetailsModal(appointment: any): void {
     this.selectedAppointment = appointment;
     this.isDetailsModalOpen = true;
   }
 
-  // Fermer le modal de détails
   closeDetailsModal(): void {
     this.isDetailsModalOpen = false;
   }
 
-  // Ouvrir le modal d'édition
   openEditModal(appointment: any): void {
     this.selectedAppointment = appointment;
     this.isEditModalOpen = true;
   }
 
-  // Fermer le modal d'édition
   closeEditModal(): void {
     this.isEditModalOpen = false;
   }
 
-
   goToMedicalRecord(userId: number) {
     this.router.navigate(['/doctor/medicalfile', userId]);
   }
-// Méthode pour soumettre la modification et fermer le modal
-submitEdit(): void {
-  if (this.selectedAppointment) {
-    // Appeler la mise à jour et confirmer la soumission
-    this.updatePatientConfirmed(this.selectedAppointment); 
-  }
-  this.closeEditModal();
-}
 
-// Méthode pour mettre à jour le statut du patient après confirmation
-updatePatientConfirmed(appointment: any): void {
-  if (confirm("Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?")) {
-    const updatedData = {
-      is_visited: appointment.is_visited,
-    };
-    
-    this.appointmentService.updateAppointment(appointment.id, updatedData).subscribe(
-      (response: any) => {
-        alert("Rendez-vous mis à jour avec succès !");
-        this.getAppointments(); // Rafraîchir la liste après mise à jour
-      },
-      (error) => {
-        console.error("Erreur lors de la mise à jour du rendez-vous :", error);
-        alert("Une erreur est survenue lors de la mise à jour du rendez-vous.");
+  submitEdit(): void {
+    if (this.selectedAppointment) {
+      const appointmentDate = new Date(this.selectedAppointment.date);
+      const todayDate = new Date();
+
+      if (appointmentDate > todayDate) {
+        Swal.fire({
+          title: 'Date invalide',
+          text: 'La date de rendez-vous ne peut pas être ultérieure à la date du jour.',
+          icon: 'error'
+        });
+        return;
       }
-    );
+
+      this.updatePatientConfirmed(this.selectedAppointment);
+    }
+    this.closeEditModal();
+  }
+
+  updatePatientConfirmed(appointment: any): void {
+    const appointmentDate = new Date(appointment.appointment_date);
+    const now = new Date();
+    const timeDifference = appointmentDate.getTime() - now.getTime();
+    const hoursDifference = timeDifference / (1000 * 60 * 60);
+
+    if (hoursDifference < 24) {
+      Swal.fire({
+        title: 'Impossible de modifier',
+        text: "Vous ne pouvez pas modifier ce rendez-vous moins de 24 heures avant la date prévue.",
+        icon: 'error'
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: 'Confirmation',
+      text: "Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, mettre à jour',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedData = {
+          is_visited: appointment.is_visited,
+          appointment_date: appointment.appointment_date,
+          appointment_time: appointment.appointment_time,
+        };
+
+        this.appointmentService.updateAppointment(appointment.id, updatedData).subscribe(
+          (response: any) => {
+            if (response.status) {
+              Swal.fire('Mis à jour!', 'Rendez-vous mis à jour avec succès.', 'success');
+              this.getAppointments();
+            } else {
+              Swal.fire('Erreur!', 'Erreur lors de la mise à jour du rendez-vous : ' + response.message, 'error');
+            }
+          },
+          (error) => {
+            console.error("Erreur lors de la mise à jour du rendez-vous :", error);
+            Swal.fire('Erreur!', 'Une erreur est survenue lors de la mise à jour du rendez-vous.', 'error');
+          }
+        );
+      }
+    });
   }
 }
-
-
-}
-
-

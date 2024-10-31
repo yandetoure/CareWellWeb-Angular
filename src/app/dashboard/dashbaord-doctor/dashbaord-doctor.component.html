@@ -11,8 +11,7 @@
 </head>
 <body>
   <div class="dashboard-container">
-    <app-doctor-sidebar></app-doctor-sidebar>
-    <div class="main-content">
+    <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>    <div class="main-content">
 
       <div class="banner">
         <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />

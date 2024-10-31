@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http'; 
 import { Router } from '@angular/router';
 import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-user-appointment',
@@ -14,6 +17,8 @@ import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-hea
   styleUrl: './user-appointment.component.css'
 })
 export class UserAppointmentComponent implements OnInit {
+  @ViewChild('pdfContent', { static: false }) pdfContent?: ElementRef;
+
   appointments: any[] = []; 
   selectedAppointment: any; 
 
@@ -109,5 +114,27 @@ export class UserAppointmentComponent implements OnInit {
   goToMedicalRecord(userId: number) {
     this.router.navigate(['/doctor/medicalfile', userId]);
   }
+
+  downloadAppointment() {
+    if (!this.selectedAppointment || !this.pdfContent) {
+      return; // Si aucun rendez-vous ou pdfContent n'est disponible, on sort
+    }
   
+    const pdf = new jsPDF();
+  
+    // Capture du contenu HTML
+    html2canvas(this.pdfContent.nativeElement, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = pdf.internal.pageSize.getWidth();
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  
+      // Ajouter l'image au PDF
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.save('rendez-vous.pdf'); // Nom du fichier à télécharger
+    }).catch((error) => {
+      console.error('Erreur lors de la génération du PDF', error);
+    });
+  }
+  
+
 }

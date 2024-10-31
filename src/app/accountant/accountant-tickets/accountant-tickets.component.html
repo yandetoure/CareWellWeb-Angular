@@ -1,102 +1,106 @@
 <div class="page-container">
-    <app-accountant-sidebar></app-accountant-sidebar>
-    
-    <div class="main-content">
+  <app-accountant-sidebar></app-accountant-sidebar>
+  
+  <div class="main-content">
       <div class="content-header">
-        <h1>Gestion des Tickets</h1>
-        <div class="search-container">
-          <input 
-            type="text" 
-            [(ngModel)]="searchTerm" 
-            placeholder="Rechercher un ticket..." 
-            class="search-input"
-          >
-        </div>
-      </div>
-  
-      <div class="table-container">
-        <table class="content-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Date de création</th>
-              <th>Prescription</th>
-              <th>Prix</th>
-              <th>Statut</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let ticket of tickets">
-              <td>{{ ticket.id }}</td>
-              <td>{{ ticket.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
-              <td>
-                <span *ngIf="ticket.prescription">
-                  {{ ticket.prescription.name }}
-                  ({{ ticket.prescription.quantity }})
-                </span>
-                <span *ngIf="!ticket.prescription">-</span>
-              </td>
-              <td>
-                <span *ngIf="ticket.prescription">
-                  {{ ticket.prescription.price | number }} FCFA
-                </span>
-                <span *ngIf="!ticket.prescription">-</span>
-              </td>
-              <td>
-                <span [class]="ticket.is_paid ? 'status-paid' : 'status-unpaid'">
-                  {{ ticket.is_paid ? 'Payé' : 'Non payé' }}
-                </span>
-              </td>
-              <td class="actions-column">
-                <button 
-                  class="btn-details"
-                  (click)="openDetailsModal(ticket)"
-                >
-                  Détails
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  
-    <!-- Modal des détails -->
-    <div class="modal" *ngIf="isDetailsModalOpen">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Détails du ticket #{{ selectedService?.id }}</h2>
-          <button class="close-button" (click)="closeDetailsModal()">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="details-grid">
-            <div class="details-section">
-              <h3>Informations générales</h3>
-              <p><strong>Date de création:</strong> {{ selectedService?.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
-              <p><strong>Statut:</strong> {{ selectedService?.is_paid ? 'Payé' : 'Non payé' }}</p>
-            </div>
-  
-            <div class="details-section" *ngIf="selectedService?.prescription">
-              <h3>Prescription</h3>
-              <p><strong>Nom:</strong> {{ selectedService?.prescription?.name }}</p>
-              <p><strong>Quantité:</strong> {{ selectedService?.prescription?.quantity }}</p>
-              <p><strong>Prix:</strong> {{ selectedService?.prescription?.price | number }} FCFA</p>
-            </div>
-  
-            <div class="details-section" *ngIf="selectedService?.exam">
-              <h3>Examen</h3>
-              <p><strong>Type:</strong> {{ selectedService?.exam?.name }}</p>
-              <!-- Ajoutez d'autres détails d'examen si nécessaire -->
-            </div>
-  
-            <div class="details-section" *ngIf="selectedService?.appointment">
-              <h3>Rendez-vous</h3>
-              <p><strong>Date:</strong> {{ selectedService?.appointment?.date | date:'dd/MM/yyyy' }}</p>
-              <!-- Ajoutez d'autres détails de rendez-vous si nécessaire -->
-            </div>
+          <h1>Gestion des Tickets</h1>
+          <div class="search-container">
+              <input 
+                  type="text" 
+                  [(ngModel)]="searchTerm" 
+                  placeholder="Rechercher un ticket..." 
+                  class="search-input"
+              >
           </div>
-        </div>
       </div>
-    </div>
+
+      <div class="table-container">
+          <table class="content-table">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Date de création</th>
+                      <th>Prescription</th>
+                      <th>Prix</th>
+                      <th>Statut</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let ticket of tickets">
+                      <td>{{ ticket.id }}</td>
+                      <td>{{ ticket.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
+                      <td>
+                          <span *ngIf="ticket.prescription">
+                              {{ ticket.prescription.name }}
+                              ({{ ticket.prescription.quantity }})
+                          </span>
+                          <span *ngIf="!ticket.prescription">-</span>
+                      </td>
+                      <td>
+                          <span *ngIf="ticket.prescription">
+                              {{ ticket.prescription.price | number }} FCFA
+                          </span>
+                          <span *ngIf="!ticket.prescription">-</span>
+                      </td>
+                      <td>
+                          <span [class]="ticket.is_paid ? 'status-paid' : 'status-unpaid'">
+                              {{ ticket.is_paid ? 'Payé' : 'Non payé' }}
+                          </span>
+                      </td>
+                      <td class="actions-column">
+                          <button 
+                              class="btn-status"
+                              (click)="updatePaymentStatus(ticket.id, !ticket.is_paid)"
+                          >
+                              {{ ticket.is_paid ? 'Marquer comme non payé' : 'Marquer comme payé' }}
+                          </button>
+                          <button 
+                              class="btn-details"
+                              (click)="openDetailsModal(ticket)"
+                          >
+                              Détails
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
   </div>
+
+  <!-- Modal des détails -->
+  <div class="modal" *ngIf="isDetailsModalOpen">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2>Détails du ticket #{{ selectedService?.id }}</h2>
+              <button class="close-button" (click)="closeDetailsModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="details-grid">
+                  <div class="details-section">
+                      <h3>Informations générales</h3>
+                      <p><strong>Date de création:</strong> {{ selectedService?.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
+                      <p><strong>Statut:</strong> {{ selectedService?.is_paid ? 'Payé' : 'Non payé' }}</p>
+                  </div>
+
+                  <div class="details-section" *ngIf="selectedService?.prescription">
+                      <h3>Prescription</h3>
+                      <p><strong>Nom:</strong> {{ selectedService?.prescription?.name }}</p>
+                      <p><strong>Quantité:</strong> {{ selectedService?.prescription?.quantity }}</p>
+                      <p><strong>Prix:</strong> {{ selectedService?.prescription?.price | number }} FCFA</p>
+                  </div>
+
+                  <div class="details-section" *ngIf="selectedService?.exam">
+                      <h3>Examen</h3>
+                      <p><strong>Type:</strong> {{ selectedService?.exam?.name }}</p>
+                  </div>
+
+                  <div class="details-section" *ngIf="selectedService?.appointment">
+                      <h3>Rendez-vous</h3>
+                      <p><strong>Date:</strong> {{ selectedService?.appointment?.date | date:'dd/MM/yyyy' }}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

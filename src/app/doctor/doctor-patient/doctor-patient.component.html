@@ -1,30 +1,51 @@
-<div class="dashboard-container">
-  <app-doctor-sidebar></app-doctor-sidebar>
+<div class="main-content">
+  <div class="dashboard-container">
+    <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>
 
-  <div class="main-content">
-    <div class="container mt-5">
-      <h2 class="mb-4">Liste des patients avec rendez-vous</h2>
-      
-      <div *ngIf="patients.length > 0" class="row">
-        <div class="col-md-12 mb-4" *ngFor="let patient of patients">
-          <div class="card shadow-sm custom-card">
-            <div class="card-body">
-              <p class="card-text">
-                <strong>Nom:</strong> {{ patient.patient_first_name }} {{ patient.patient_last_name }}<br>
-                <strong>Date du rendez-vous :</strong> {{ patient.day_of_birth | date: 'fullDate' }}<br>
-                <strong>Service :</strong> {{ patient.user_adress }}
-              </p>
-              <button class="btn btn-info" (click)="openDetailsModal(patient)">Détails</button>
-              <button class="btn btn-warning" (click)="openUpdateModal(patient)">Modifier</button>
-            </div>
-          </div>
-        </div>
+    <div class="main-content">
+      <div class="container mt-5">
+        <h2 class="mb-4 text-center">Liste des patients avec rendez-vous</h2>
+
+        <table *ngIf="patients.length > 0" class="table table-hover table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Date du rendez-vous</th>
+              <th scope="col">Heure</th>
+              <th scope="col">Service</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let patient of patients"
+              [ngClass]="{
+                'table-success': patient.is_visited,
+                'table-danger': !patient.is_visited
+              }"
+            >
+              <td>{{ patient.patient_first_name }} {{ patient.patient_last_name }}</td>
+              <td>{{ patient.appointment_date | date: 'shortDate' }}</td>
+              <td>{{ patient.appointment_time }}</td>
+              <td>{{ patient.service }}</td>
+              <td>
+                <button class="btn btn-info btn-sm" (click)="openDetailsModal(patient)">
+                  <i class="fas fa-info-circle"></i>
+                </button>
+                <button class="btn btn-warning btn-sm" (click)="openUpdateModal(patient)">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <p *ngIf="patients.length === 0" class="text-center">Aucun patient avec rendez-vous n'a été trouvé.</p>
       </div>
-
-      <p *ngIf="patients.length === 0">Aucun patient avec rendez-vous n'a été trouvé.</p>
     </div>
   </div>
 </div>
+
 
 <!-- Modal pour les détails du patient -->
 <div class="modal" tabindex="-1" role="dialog" *ngIf="isDetailsModalOpen">
@@ -32,9 +53,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Détails du patient</h5>
-        <button type="button" class="close" (click)="closeDetailsModal()">
+        <!-- <button type="button" class="close" (click)="closeDetailsModal()">
           <span>&times;</span>
-        </button>
+        </button> -->
       </div>
       <div class="modal-body">
         <p><strong>Nom:</strong> {{ selectedPatient.patient_first_name }} {{ selectedPatient.patient_last_name }}</p>
@@ -56,9 +77,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Modifier le rendez-vous</h5>
-        <button type="button" class="close" (click)="closeUpdateModal()">
+        <!-- <button type="button" class="close" (click)="closeUpdateModal()">
           <span>&times;</span>
-        </button>
+        </button> -->
       </div>
       <div class="modal-body">
         <form #updateForm="ngForm">

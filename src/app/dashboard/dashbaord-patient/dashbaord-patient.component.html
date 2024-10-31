@@ -1,41 +1,21 @@
 <div class="dashboard-container">
-    <app-patient-header></app-patient-header>
-    <div class="main-content">
+  <app-patient-header class="sidebar"></app-patient-header>
+  <div class="main-content">
 
-      <div class="banner">
-        <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />
-        <div class="infos">
-            <div class="perso">
-              <div class="perso">
-                <h6>Nom : {{ userInfo.first_name }} {{ userInfo.last_name}} </h6>
-                <p>Adresse : {{ userInfo.adress }}</p>
-                <p>Téléphone : {{ userInfo.phone_number }}</p>
-                <p>{{ userInfo.email }}</p>
-              </div>
-
-            <!-- <div class="specialite">
-                <h6>Specialite : Pneumologue</h6>
-                <p>Grade : Medecin chef</p>
-            </div> -->
+    <div class="banner">
+      <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo" />
+      <div class="infos">
+        <div class="perso">
+          <h6>Nom : {{ userInfo.first_name }} {{ userInfo.last_name}} </h6>
+          <p>Adresse : {{ userInfo.adress }}</p>
+          <p>Téléphone : {{ userInfo.phone_number }}</p>
+          <p>{{ userInfo.email }}</p>
         </div>
       </div>
+    </div>
 
-      <!-- <div class="cards">
-        <div class="card">
-                <p>Total rendez-vous</p>
-                <h4>60</h4>
-        </div>
-        <div class="card"><p>Rendez-vous restant</p>
-                <h4>06</h4>
-        </div>
-        <div class="card">
-                <p>Total prescriptions</p>
-                <h4>60</h4>
-        </div>
-        <div class="card"><p>Total Examens</p>
-                <h4>60</h4>
-        </div>
-    </div> -->
+    <div class="chart-container">
+      <canvas id="appointmentsChart"></canvas> <!-- Ajoutez le canvas ici -->
     </div>
   </div>
-  
+</div>

@@ -35,5 +35,10 @@ addTicket(serviceData: FormData): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.delete(`${this.apiUrl}/tickets/${id}`, { headers });
   }
+
+  updatePaymentStatus(ticketId: number, isPaid: boolean): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put<any>(`${this.apiUrl}/tickets/${ticketId}`, { is_paid: isPaid });
+  }
 }
 

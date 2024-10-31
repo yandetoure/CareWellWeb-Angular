@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component'; 
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { AppointmentService } from '../../services/appointment.service'; 
 import { Chart, LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler } from 'chart.js'; // Importer les contrôleurs et échelles nécessaires
-
 // Enregistrer les échelles et le contrôleur de graphique linéaire
 Chart.register(LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler);
 
@@ -21,6 +20,8 @@ export class DashbaordDoctorComponent {
   userInfo: any = {};
   isModalOpen: boolean = false;
   doctorStats: any = {};
+  isExpanded = false;
+
 
   constructor(private authService: AuthService,
               private appointmentService: AppointmentService) {}
@@ -28,6 +29,17 @@ export class DashbaordDoctorComponent {
   ngOnInit() {
     this.loadUserInfo();
     this.loadDoctorStats();
+  }
+
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.isExpanded = true;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.isExpanded = false;
   }
 
   loadUserInfo() {

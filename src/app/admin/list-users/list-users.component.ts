@@ -23,6 +23,27 @@ export class ListUsersComponent {
     this.loadUsers();
   }
 
+  getRoleName(roles: string[]): string {
+    return roles
+      .map(role => {
+        switch (role.toLowerCase()) {
+          case 'admin':
+            return 'Administrateur';
+          case 'patient':
+            return 'Patient';
+          case 'doctor':
+            return 'Médecin';
+            case 'secretary':
+              return 'Secrétaire';
+              case 'accountant':
+                return 'Caissier';
+          default:
+            return role;
+        }
+      })
+      .join(', ');
+  }
+
   loadUsers() {
     this.authService.getUsers().subscribe(
       (response: any) => {

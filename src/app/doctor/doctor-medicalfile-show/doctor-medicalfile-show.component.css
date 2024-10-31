@@ -16,14 +16,34 @@
 .dashboard-container {
   display: flex;
 }
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background-color: #2f453e;
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
 
+/* Sidebar en hover */
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Contenu principal ajustable */
 .main-content {
-  flex-grow: 1;
-  margin-left: 250px; /* Pour tenir compte de la sidebar */
-  margin-top: 20px; /* Ceci correspond à la hauteur du header */
-  overflow-y: auto;
-  background-color: #ffffff; 
+  flex: 1;
+  margin-left: 80px; /* Largeur par défaut de la sidebar */
   padding: 20px;
+  transition: margin-left 0.3s ease; /* Transition douce */
+  background-color: #ffffff;
+}
+
+/* Ajustement du contenu lorsque la sidebar est en hover */
+.sidebar:hover ~ .main-content {
+  margin-left: 250px; /* Largeur de la sidebar en mode hover */
 }
 
 .sticky-form {
@@ -72,3 +92,42 @@ p {
   color: #051d37;
   font-weight: bold;
 }
+/* Conteneur avec défilement global pour tous les formulaires */
+.form-container-wrapper {
+  max-height: 700px; /* Hauteur maximum du conteneur */
+  overflow-y: auto; /* Barre de défilement pour le conteneur */
+  border: 1px solid #ccc;
+  padding: 10px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Applique la transition quand visible */
+.form-container-wrapper.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Style du bouton de soumission */
+button[type="submit"] {
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #051d3792;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #051d37;
+  color: white;
+}
+
+/* Conteneur de chaque champ de formulaire avec défilement spécifique */
+.form-content {
+  max-height: 150px; /* Hauteur maximum pour chaque section de champ */
+  overflow-y: auto; /* Défilement si le contenu dépasse cette hauteur */
+  margin-bottom: 10px;
+}
+

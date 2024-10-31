@@ -1,5 +1,5 @@
 <div class="dashboard-container d-flex">
-  <app-doctor-sidebar></app-doctor-sidebar>
+  <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>
   <div class="main-content flex-grow-1 p-4">
     <div class="container mt-4">
       <div class="row">
@@ -81,15 +81,17 @@
         </div>
 
         <div class="col-md-4">
-          <div class="form">
-            <!-- <h5 class="mb-3">Ajouter des informations</h5> -->
-        
+          <!-- Bouton pour afficher les formulaires -->
+          <button (click)="toggleForms()" class="btn w-100 mb-3">Ajouter</button>
+          <div class="form-container-wrapper" [ngClass]="{'visible': showForms}">
+          <!-- Conteneur des formulaires avec animation de glissement -->
+          <div class="form-container" [ngClass]="{'visible': showForms}">
             <form (submit)="addNote(form.value)" #form="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
               <div class="mb-2">
                 <label for="content" class="form-label">Note</label>
-                <input type="text" id="content" name="content" ngModel required class="form-control" placeholder="Notes" >
+                <input type="text" id="content" name="content" ngModel required class="form-control" placeholder="Notes">
               </div>
-              <button type="submit" class="btn  w-100">Ajouter Note</button>
+              <button type="submit" class="btn w-100">Ajouter Note</button>
             </form>
         
             <form (ngSubmit)="addHistory(historyForm.value)" #historyForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
@@ -97,7 +99,7 @@
                 <label for="historyContent" class="form-label">Antécédent</label>
                 <input type="text" id="historyContent" name="content" ngModel required class="form-control" placeholder="Antécédent">
               </div>
-              <button type="submit" class="btn  w-100">Ajouter Antécédent</button>
+              <button type="submit" class="btn w-100">Ajouter Antécédent</button>
             </form>
         
             <form (ngSubmit)="addPrescription(prescriptionForm.value)" #prescriptionForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
@@ -110,7 +112,7 @@
                   </option>
                 </select>
               </div>
-              <button type="submit" class="btn  w-100">Ajouter Prescription</button>
+              <button type="submit" class="btn w-100">Ajouter Prescription</button>
             </form>
         
             <form (ngSubmit)="addExam(examForm.value)" #examForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
@@ -123,15 +125,15 @@
                   </option>
                 </select>
               </div>
-              <button type="submit" class="btn  w-100">Ajouter Examen</button>
+              <button type="submit" class="btn w-100">Ajouter Examen</button>
             </form>
-
+        
             <form (ngSubmit)="addDisease(diseaseForm.value)" #diseaseForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
               <div class="mb-2">
                 <label for="disease" class="form-label">Maladie</label>
                 <select id="disease" name="disease_id" ngModel required class="form-control">
                   <option value="" disabled selected>Sélectionnez une maladie</option>
-                  <option *ngFor="let disease of   diseases" [value]="disease.id">
+                  <option *ngFor="let disease of diseases" [value]="disease.id">
                     {{ disease.name }}
                   </option>
                 </select>
@@ -144,10 +146,11 @@
                 <label for="treatment" class="form-label">Traitement</label>
                 <input type="text" id="treatment" name="treatment" ngModel required class="form-control" placeholder="Traitement">
               </div>
-              <button type="submit" class="btn  w-100">Ajouter une maladie</button>
+              <button type="submit" class="btn w-100">Ajouter une maladie</button>
             </form>
           </div>
         </div>
+        
         
       </div>
     </div>

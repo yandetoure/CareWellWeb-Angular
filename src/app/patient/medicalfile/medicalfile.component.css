@@ -14,14 +14,34 @@ app-admin-sidebar {
   z-index: 1000; /* Assurez-vous que la sidebar reste au-dessus du contenu */
 }
 
-/* Contenu principal */
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background-color: #2f453e;
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Sidebar en hover */
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Contenu principal ajustable */
 .main-content {
-  margin-left: 250px; 
   flex: 1;
-  overflow-y: auto;
-  background-color: #ffffff;
+  margin-left: 80px; /* Largeur par défaut de la sidebar */
   padding: 20px;
-  transition: margin-left 0.3s ease; 
+  transition: margin-left 0.3s ease; /* Transition douce */
+  background-color: #ffffff;
+}
+
+/* Ajustement du contenu lorsque la sidebar est en hover */
+.sidebar:hover ~ .main-content {
+  margin-left: 250px; /* Largeur de la sidebar en mode hover */
 }
 .card-info{
   position: fixed;

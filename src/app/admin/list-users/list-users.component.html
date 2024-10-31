@@ -1,50 +1,52 @@
 <div class="dashboard-container">
-    <app-admin-sidebar></app-admin-sidebar>
-    <div class="main-content">
-      
-<div class="container mt-4">
-  <div class="card">
-    <div class="card-header">
-      <h5>Liste des Utilisateurs</h5>
-    </div>
-    <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Prénom</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Téléphone</th>
-            <th scope="col">Statut</th>
-            <th scope="col">Rôle</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone_number }}</td>
-            <td>{{ user.status }}</td>
-            <td>{{ user.roles.join(', ') }}</td>
-            <td>
-              <button (click)="viewUser(user)" class="btn btn-sm btn-info">
-                <i class="fa fa-eye"></i>
-              </button>
-              <button (click)="editUser(user)" class="btn btn-sm btn-warning">
-                <i class="fa fa-edit"></i>
-              </button>
-              <button (click)="confirmDelete(user.id)" class="btn btn-sm btn-danger">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <app-admin-sidebar class="sidebar"></app-admin-sidebar>
+  <div class="main-content">
+      <div class="container mt-4">
+          <div class="card shadow-lg">
+              <div class="card-header bg-primary text-white">
+                  <h5>Liste des Utilisateurs</h5>
+              </div>
+              <div class="card-body">
+                  <table class="table table-striped table-hover">
+                      <thead class="table-dark">
+                          <tr>
+                              <th scope="col">Prénom</th>
+                              <th scope="col">Nom</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Téléphone</th>
+                              <th scope="col">Statut</th>
+                              <th scope="col">Rôle</th>
+                              <th scope="col">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let user of users">
+                              <td>{{ user.first_name }}</td>
+                              <td>{{ user.last_name }}</td>
+                              <td>{{ user.email }}</td>
+                              <td>{{ user.phone_number }}</td>
+                              <td>
+                                  <span class="badge" [ngClass]="{'badge-success': user.status === 'active', 'badge-secondary': user.status === 'inactive'}">
+                                      {{ user.status === 'active' ? 'Actif' : 'Inactif' }}
+                                  </span>
+                              </td>
+                              <td>{{ getRoleName(user.roles) }}</td>
+                              <td>
+                                  <button (click)="viewUser(user)" class="btn btn-sm btn-info me-1">
+                                      <i class="fa fa-eye"></i>
+                                  </button>
+                                  <button (click)="editUser(user)" class="btn btn-sm btn-warning me-1">
+                                      <i class="fa fa-edit"></i>
+                                  </button>
+                                  <button (click)="confirmDelete(user.id)" class="btn btn-sm btn-danger">
+                                      <i class="fa fa-trash"></i>
+                                  </button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
   </div>
-</div>
- 
-</div>
 </div>

@@ -17,13 +17,34 @@
   display: flex;
 }
 
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background-color: #2f453e;
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Sidebar en hover */
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Contenu principal ajustable */
 .main-content {
-  flex-grow: 1;
-  margin-left: 250px; /* Pour tenir compte de la sidebar */
-  margin-top: 20px; /* Ceci correspond à la hauteur du header */
-  overflow-y: auto;
-  background-color: #ffffff; 
+  flex: 1;
+  margin-left: 80px; /* Largeur par défaut de la sidebar */
   padding: 20px;
+  transition: margin-left 0.3s ease; /* Transition douce */
+  background-color: #ffffff;
+}
+
+/* Ajustement du contenu lorsque la sidebar est en hover */
+.sidebar:hover ~ .main-content {
+  margin-left: 250px; /* Largeur de la sidebar en mode hover */
 }
 
 .sticky-form {

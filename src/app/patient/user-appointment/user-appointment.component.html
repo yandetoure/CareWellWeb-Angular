@@ -1,79 +1,85 @@
 <div class="dashboard-container">
-  <app-patient-header></app-patient-header>
+  <app-patient-header class="sidebar"></app-patient-header>
   <div class="main-content">
-      <div class="appointments-list container mt-5">
-          <h2 class="text-center mb-4 text-dark">Liste de mes rendez-vous</h2>
+    <div class="appointments-list container mt-5">
+      <h2 class="text-center mb-4 text-dark">Liste de mes rendez-vous</h2>
 
-          <div class="row">
-              <div class="col-md-4 mb-4" *ngFor="let appointment of appointments">
-                  <div class="card shadow-sm h-100 border-0">
-                      <div class="card-body pb-2">
-                          <h5 class="card-title text-dark fw-bold">{{ appointment.user.first_name }} {{ appointment.user.last_name }}</h5>
-                          <p class="card-text text-muted mb-2"><strong>Service:</strong> {{ appointment.service.name }}</p>
-                          <p class="card-text text-muted mb-2"><strong>Date:</strong> {{ appointment.date | date: 'fullDate' }}</p>
-                          <p class="card-text text-muted mb-2"><strong>Médecin:</strong> Dr {{ appointment.doctor.last_name }}</p>
-                          <p class="card-text text-muted"><strong>Heure:</strong> {{ appointment.time }}</p>
-                      </div>
-                      <div class="card-footer border-0 d-flex justify-content-between align-items-center" style="border-top: 2px solid #e9ecef;">
-                          <button (click)="openDetailsModal(appointment)" class="btn btn-outline-primary btn-sm">
-                              <i class="fa fa-eye me-1"></i> Voir
-                          </button>
-                          <button (click)="openEditModal(appointment)" class="btn btn-outline-secondary btn-sm">
-                              <i class="fa fa-edit me-1"></i> Modifier
-                          </button>
-                      </div>
-                  </div>
-              </div>
+      <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let appointment of appointments">
+          <div class="card shadow-sm h-100 border-0">
+            <div class="card-body pb-2">
+              <h5 class="card-title text-dark fw-bold">{{ appointment.user.first_name }} {{ appointment.user.last_name }}</h5>
+              <p class="card-text text-muted mb-2"><strong>Service:</strong> {{ appointment.service.name }}</p>
+              <p class="card-text text-muted mb-2"><strong>Date:</strong> {{ appointment.date | date: 'fullDate' }}</p>
+              <p class="card-text text-muted mb-2"><strong>Médecin:</strong> Dr {{ appointment.doctor.last_name }}</p>
+              <p class="card-text text-muted"><strong>Heure:</strong> {{ appointment.time }}</p>
+            </div>
+            <div class="card-footer border-0 d-flex justify-content-between align-items-center" style="border-top: 2px solid #e9ecef;">
+              <button (click)="openDetailsModal(appointment)" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-eye me-1"></i> Voir
+              </button>
+              <button (click)="openEditModal(appointment)" class="btn btn-outline-secondary btn-sm">
+                <i class="fa fa-edit me-1"></i> Modifier
+              </button>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
 
-      <div *ngIf="isDetailsModalOpen" id="detailsModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="detailsModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="detailsModalLabel">Détails du Rendez-vous</h5>
-                      <button type="button" class="btn-close" (click)="closeDetailsModal()" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <p><strong>Patient:</strong> {{ selectedAppointment?.user.first_name }} {{ selectedAppointment?.user.last_name }}</p>
-                      <p><strong>Service:</strong> {{ selectedAppointment?.service.name }}</p>
-                      <p><strong>Date:</strong> {{ selectedAppointment?.date | date: 'fullDate' }}</p>
-                      <p><strong>Heure:</strong> {{ selectedAppointment?.time }}</p>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
-                  </div>
-              </div>
+    <!-- Détails du rendez-vous Modal -->
+    <div *ngIf="isDetailsModalOpen" id="detailsModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="detailsModalLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalLabel">Détails du Rendez-vous</h5>
+            <button type="button" class="btn-close" (click)="closeDetailsModal()" aria-label="Close"></button>
           </div>
+          <div class="modal-body">
+            <div id="pdfContent" class="pdf-container">
+              <img src="images/logo.png" alt="Logo" class="pdf-logo" />
+              <h2 class="pdf-title">Détails du Rendez-vous</h2>
+              <div class="pdf-appointment-info">
+                <p><strong>M.Mme:</strong> {{ selectedAppointment?.user.first_name }} {{ selectedAppointment?.user.last_name }}, vous avez pris rendez-vous en <strong>Service:</strong> {{ selectedAppointment?.service.name }} pour la date du <strong> {{ selectedAppointment?.date | date: 'fullDate' }} </strong> a <strong>{{ selectedAppointment?.time }}</strong> avec <strong>Dr {{ selectedAppointment?.doctor.last_name }}</strong></p>
+                <p><strong>Merci de venir 30 minutes avant l'heure du rendez-vous et de payer votre billet.</strong> </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-download" (click)="downloadAppointment()">Télécharger le rendez-vous</button>
+            <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <!-- Edit Modal -->
-      <div *ngIf="isEditModalOpen" id="editModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="editModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="editModalLabel">Modifier le Rendez-vous</h5>
-                      <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <!-- Formulaire d'édition -->
-                      <form (ngSubmit)="submitEdit()">
-                          <div class="mb-3">
-                              <label for="editDate" class="form-label">Date</label>
-                              <input type="date" class="form-control" [(ngModel)]="selectedAppointment.date" name="editDate" required>
-                          </div>
-                          <div class="mb-3">
-                              <label for="editTime" class="form-label">Heure</label>
-                              <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
-                          </div>
-                          <button type="submit" class="btn btn-primary">Enregistrer</button>
-                      </form>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Fermer</button>
-                  </div>
-              </div>
+    <!-- Edit Modal -->
+    <div *ngIf="isEditModalOpen" id="editModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Modifier le Rendez-vous</h5>
+            <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
           </div>
+          <div class="modal-body">
+            <!-- Formulaire d'édition -->
+            <form (ngSubmit)="submitEdit()">
+              <div class="mb-3">
+                <label for="editDate" class="form-label">Date</label>
+                <input type="date" class="form-control" [(ngModel)]="selectedAppointment.date" name="editDate" required>
+              </div>
+              <div class="mb-3">
+                <label for="editTime" class="form-label">Heure</label>
+                <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Fermer</button>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>

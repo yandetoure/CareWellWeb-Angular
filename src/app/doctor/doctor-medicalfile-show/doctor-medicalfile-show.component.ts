@@ -27,6 +27,7 @@ export class DoctorMedicalfileShowComponent {
   exams: any[] = [];
   medicalfilehistory: any[] = [];
   diseases: any[] = [];
+  showForms = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +51,9 @@ export class DoctorMedicalfileShowComponent {
 
     }
   }
-
+  toggleForms() {
+    this.showForms = !this.showForms;
+  }
   loadUserInfo() {
     this.authService.getUserInfo().subscribe(
       data => {

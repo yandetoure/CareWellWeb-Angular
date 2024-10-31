@@ -65,7 +65,7 @@ export const routes: Routes = [
   { path: 'dashboard/secretary', component: DashboardSecretaryComponent },
 
   // Doctor-related routes
-  { path: 'dashboard/doctor', component: DashbaordDoctorComponent },
+  { path: 'dashboard/doctor', component: DashbaordDoctorComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/medical-file', component: MedicalFilesComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/doctors', component: DoctorsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/patients', component: PatientsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },

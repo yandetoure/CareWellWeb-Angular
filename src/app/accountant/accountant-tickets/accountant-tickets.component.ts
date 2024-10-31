@@ -12,7 +12,7 @@ import { TicketsService } from '../../services/tickets.service';
   standalone: true,
   imports: [AccountantSidebarComponent, FormsModule, HttpClientModule, CommonModule],
   templateUrl: './accountant-tickets.component.html',
-  styleUrl: './accountant-tickets.component.css'
+  styleUrls: ['./accountant-tickets.component.css']
 })
 export class AccountantTicketsComponent implements OnInit {
   tickets: any[] = [];
@@ -86,9 +86,16 @@ export class AccountantTicketsComponent implements OnInit {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Appel à votre service pour mettre à jour le statut
-        // this.tiketService.updatePaymentStatus(ticketId, isPaid).subscribe(...)
-        this.loadTickets(); // Recharger les tickets après la mise à jour
+        this.tiketService.updatePaymentStatus(ticketId, isPaid).subscribe(
+          (response) => {
+            this.loadTickets(); // Recharger les tickets après la mise à jour
+            Swal.fire('Succès!', 'Le statut du ticket a été mis à jour.', 'success');
+          },
+          (error) => {
+            console.error('Erreur lors de la mise à jour du statut', error);
+            Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la mise à jour du statut.', 'error');
+          }
+        );
       }
     });
   }

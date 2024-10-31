@@ -8,13 +8,34 @@ app-doctor-sidebar, app-doctor-sidebar {
   height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
   position: fixed; /* Fixer la sidebar */
 }
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background-color: #2f453e;
+  transition: width 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
 
+/* Sidebar en hover */
+.sidebar:hover {
+  width: 250px;
+}
+
+/* Contenu principal ajustable */
 .main-content {
-  flex: 1; /* Prendre tout l'espace restant */
-  margin-left: 250px; /* Créer un espace pour la sidebar fixe */
-  overflow-y: auto; /* Permettre le défilement vertical */
-  background-color: #ffffff; /* Couleur de fond du contenu principal */
-  padding: 20px; /* Ajouter un padding pour le contenu */
+  flex: 1;
+  margin-left: 80px; /* Largeur par défaut de la sidebar */
+  padding: 20px;
+  transition: margin-left 0.3s ease; /* Transition douce */
+  background-color: #ffffff;
+}
+
+/* Ajustement du contenu lorsque la sidebar est en hover */
+.sidebar:hover ~ .main-content {
+  margin-left: 250px; /* Largeur de la sidebar en mode hover */
 }
 
 
