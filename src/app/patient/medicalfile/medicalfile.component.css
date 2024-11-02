@@ -5,7 +5,7 @@
 }
 
 /* Sidebar */
-app-admin-sidebar {
+app-patient-header {
   width: 250px; /* Largeur par défaut */
   background-color: #ffffff;
   height: 100vh;

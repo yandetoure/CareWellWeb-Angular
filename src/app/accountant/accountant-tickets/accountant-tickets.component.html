@@ -1,5 +1,5 @@
 <div class="page-container">
-  <app-accountant-sidebar></app-accountant-sidebar>
+  <app-accountant-sidebar class="sidebar"></app-accountant-sidebar>
   
   <div class="main-content">
       <div class="content-header">
@@ -49,19 +49,20 @@
                           </span>
                       </td>
                       <td class="actions-column">
-                          <button 
-                              class="btn-status"
-                              (click)="updatePaymentStatus(ticket.id, !ticket.is_paid)"
-                          >
-                              {{ ticket.is_paid ? 'Marquer comme non payé' : 'Marquer comme payé' }}
-                          </button>
-                          <button 
-                              class="btn-details"
-                              (click)="openDetailsModal(ticket)"
-                          >
-                              Détails
-                          </button>
-                      </td>
+                        <button 
+                        class="btn-details"
+                        (click)="openDetailsModal(ticket)"
+                    >
+                        Détails
+                    </button>
+                        <button 
+                            class="btn-status"
+                            [ngClass]="ticket.is_paid ? '' : 'unpaid'" 
+                            (click)="updatePaymentStatus(ticket.id, !ticket.is_paid)"
+                        >
+                            {{ ticket.is_paid ? 'Marquer comme non payé' : 'Marquer comme payé' }}
+                        </button>
+                    </td>
                   </tr>
               </tbody>
           </table>

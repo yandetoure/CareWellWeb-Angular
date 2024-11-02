@@ -55,6 +55,8 @@ body {
   display: flex;
   align-items: center;
   color: white;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
 .sidebar ul li .icon {
@@ -63,37 +65,7 @@ body {
   display: inline-block;
 }
 
-.sidebar ul li a {
-  text-decoration: none;
-  color: white;
-  margin-left: 10px;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
 
-.sidebar:hover ul li a {
-  opacity: 1;
-}
-
-.sidebar ul li:hover {
-  background-color: #1c252e;
-}
-
-.sidebar ul li.active {
-  background-color: #741207; /* Couleur pour l'élément actif */
-}
-
-.sidebar ul li.active a {
-  color: white;
-}
-
-.logout {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-}
-/* Alignement du header en haut et du contenu à l'intérieur */
 .header {
   display: flex;
   justify-content: space-between;
@@ -111,12 +83,8 @@ body {
 .header h5 {
   margin: 0;
   font-size: 18px;
-  color: #333;
+  color: #ffffff;
 }
-
-
-
-
 
 .sidebar ul li {
     display: flex;
@@ -159,5 +127,5 @@ body {
 .logout {
     position: absolute;
     bottom: 10px;
-    width: 100%;
+    width: 90%;
 }

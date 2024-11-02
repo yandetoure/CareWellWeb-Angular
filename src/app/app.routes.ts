@@ -47,6 +47,7 @@ import { DoctorChatComponent } from './doctor/doctor-chat/doctor-chat.component'
 import { PatientMessageComponent } from './patient/patient-message/patient-message.component';
 import { AccountantTicketsComponent } from './accountant/accountant-tickets/accountant-tickets.component';
 import { AccountantExamComponent } from './accountant/accountant-exam/accountant-exam.component';
+import { PatientTicketsComponent } from './patient/patient-tickets/patient-tickets.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
@@ -100,6 +101,7 @@ export const routes: Routes = [
   { path: 'patient/messages', component: PatientMessageComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
   { path: 'patient/articles', component: PatientArticlesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
   { path: 'patient/services', component: PatientServicesTestComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  { path: 'patient/tickets', component: PatientTicketsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
   
   // Home Page sections
   { path: 'us', component: AboutUsComponent },

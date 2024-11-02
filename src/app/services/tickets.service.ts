@@ -17,8 +17,10 @@ export class TicketsService {
     return this.http.get(`${this.apiUrl}/tickets`, { headers });
   }
 
-  // Méthode pour ajouter un service
- // src/app/service-management/service.service.ts
+  getUserTickets(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.get(`${this.apiUrl}/user/tickets`, { headers });
+  }
 
 addTicket(serviceData: FormData): Observable<any> {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
