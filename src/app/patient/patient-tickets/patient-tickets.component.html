@@ -29,20 +29,27 @@
                 <div class="ticket-content">
                     <div *ngIf="ticket.prescription">
                         <h3>Prescription</h3>
+                        <p> <strong>Patient:</strong> {{ ticket.user?.first_name }} {{ ticket.user?.last_name }}</p>    
                         <p><strong>Nom:</strong> {{ ticket.prescription.name }}</p>
                         <p><strong>Quantité:</strong> {{ ticket.prescription.quantity }}</p>
                         <p><strong>Prix:</strong> {{ ticket.prescription.price | number }} FCFA</p>
+                        <!-- <p><strong>Docteur:</strong> {{ ticket.doctor_id }}</p>  -->
                     </div>
                     <div *ngIf="ticket.appointment">
                         <h3>Rendez-vous</h3>
+                        <p> <strong>Patient:</strong> {{ ticket.user?.first_name }} {{ ticket.user?.last_name }}</p>    
                         <p><strong>Date:</strong> {{ ticket.appointment.date | date:'dd/MM/yyyy' }}</p>
-                        <!-- <p><strong>Service:</strong> {{ ticket.appointment.service.name }}</p> -->
-                        <p><strong>Prix:</strong> {{ ticket.appointment.price | number }} FCFA</p>                 
+                        <p><strong>Heure:</strong> {{ ticket.appointment.time }}</p>
+                        <p><strong>Service:</strong> {{ ticket.appointment?.service.name }}</p>
+                        <p><strong>Prix:</strong> {{ ticket.appointment.price | number }} FCFA</p>    
+                        <!-- <p><strong>Service:</strong> {{ ticket.appointment?.doctor.last_name }}</p> -->
                     </div>
                     <div *ngIf="ticket.exam">
                         <h3>Examen</h3>
+                        <p> <strong>Patient:</strong> {{ ticket.user?.first_name }} {{ ticket.user?.last_name }}</p>    
                         <p><strong>Type:</strong> {{ ticket.exam.name }}</p>
                         <p><strong>Prix:</strong> {{ ticket.exam.price }} FCFA</p>
+                        <p><strong>Description:</strong> {{ ticket.exam.description }}</p>
                     </div>
                 </div>
 

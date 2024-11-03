@@ -54,21 +54,24 @@ export class PatientTicketsComponent {
     );
   }
   
-  searchTickets() {
+searchTickets() {
     if (!this.searchTerm) {
-      this.loadTickets(); 
-      return;
+        this.loadTickets(); 
+        return;
     }
-  
+
     const term = this.searchTerm.toLowerCase();
-  
+
     this.tickets = this.tickets.filter(ticket =>
-      ticket.id.toString().includes(term) || 
-      (ticket.prescription && ticket.prescription.name.toLowerCase().includes(term))
+        ticket.id.toString().includes(term) || 
+        (ticket.prescription && ticket.prescription.name.toLowerCase().includes(term)) ||
+        (ticket.appointment && ticket.appointment.service && ticket.appointment.service.name.toLowerCase().includes(term)) || // Vérifie le service du rendez-vous
+        (ticket.exam && ticket.exam.name.toLowerCase().includes(term)) // Vérifie le nom de l'examen
     );
-  
+
     console.log('Résultats de la recherche:', this.tickets);
-  }
+}
+
   
 
   openDetailsModal(ticket: any): void {
@@ -96,7 +99,8 @@ export class PatientTicketsComponent {
 
             // Vous pouvez ajouter un titre ou d'autres éléments ici si nécessaire
             doc.setFontSize(16);
-            doc.text(`Veuillew garder ce ticket pour faire veloir ce que de droit.`, 15, imgHeight + 30);
+            doc.text(`Veuillez garder ce ticket pour faire veloir ce que de droit. 
+              Si vous perdez cette copie vous pouvez toujours le retélécharger sur votre espace Carewell.`, 15, imgHeight + 30);
 
             // Enregistrer le PDF
             doc.save(`Ticket_${ticket.id}.pdf`);

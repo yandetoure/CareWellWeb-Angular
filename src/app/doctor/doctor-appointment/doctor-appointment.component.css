@@ -89,3 +89,16 @@ justify-content: space-between;
 h5{
 font-size: 18px;
 }
+
+
+.urgent-indicator {
+  margin-top: 5px;
+  font-weight: bold; /* Mettre le texte en gras pour le faire ressortir */
+}
+
+/* Badge */
+.badge-danger {
+  background-color: red; /* Couleur de fond pour le badge d'urgence */
+  color: white; /* Couleur du texte pour le badge d'urgence */
+}
+

@@ -39,6 +39,7 @@
   padding: 20px;
   transition: margin-left 0.3s ease; /* Transition douce */
   background-color: #ffffff;
+  margin-top: 50px;
 }
 
 /* Ajustement du contenu lorsque la sidebar est en hover */

@@ -14,37 +14,44 @@
               <th scope="col">Heure</th>
               <th scope="col">Service</th>
               <th scope="col">Actions</th>
+              <th scope="col">Urgence</th>
+              <th scope="col">Statut</th> <!-- Nouvelle colonne pour le statut -->
             </tr>
           </thead>
           <tbody>
             <tr
               *ngFor="let patient of patients"
-              [ngClass]="{
-                'table-success': patient.is_visited,
-                'table-danger': !patient.is_visited
-              }"
             >
               <td>{{ patient.patient_first_name }} {{ patient.patient_last_name }}</td>
               <td>{{ patient.appointment_date | date: 'shortDate' }}</td>
               <td>{{ patient.appointment_time }}</td>
               <td>{{ patient.service }}</td>
               <td>
-                <button class="btn btn-info btn-sm" (click)="openDetailsModal(patient)">
-                  <i class="fas fa-info-circle"></i>
+                <button class="btn btn-secondary" (click)="openDetailsModal(patient)">
+                  <i class="fas fa-info-circle"></i> Détails
                 </button>
-                <button class="btn btn-warning btn-sm" (click)="openUpdateModal(patient)">
-                  <i class="fas fa-edit"></i>
+                <button class="btn btn-warning" (click)="openUpdateModal(patient)">
+                  <i class="fas fa-edit"></i> Modifier
                 </button>
               </td>
+              <td>
+                <span *ngIf="patient.is_urgent" class="badge badge-danger">Urgent</span>
+              </td>
+              <td>
+                <span [ngClass]="{ 'text-success': patient.is_visited, 'text-danger': !patient.is_visited }">
+                  {{ patient.is_visited ? 'Reçu' : 'Non reçu' }}
+                </span>
+              </td> 
             </tr>
           </tbody>
-        </table>
+        </table>        
         
         <p *ngIf="patients.length === 0" class="text-center">Aucun patient avec rendez-vous n'a été trouvé.</p>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <!-- Modal pour les détails du patient -->
@@ -83,7 +90,7 @@
       </div>
       <div class="modal-body">
         <form #updateForm="ngForm">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="appointmentDate">Date du rendez-vous</label>
             <input
               type="date"
@@ -104,7 +111,7 @@
               class="form-control"
               required
             />
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="isVisited">Le patient a visité ?</label>
             <select

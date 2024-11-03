@@ -7,12 +7,16 @@
     
       <div class="row">
         <div class="col-md-12" *ngFor="let appointment of appointments" [ngClass]="getAppointmentClass(appointment.date)">
-          <div class="appointment-card">
+          <div class="appointment-card" [ngClass]="{'urgent-appointment': appointment.is_urgent}">
             <div class="appointment-info">
               <p><strong>Nom:</strong> {{ appointment.user.first_name }} {{ appointment.user.last_name }}</p>
               <p><strong>Service:</strong> {{ appointment.service.name }}</p>
               <p><strong>Date:</strong> {{ appointment.date | date: 'fullDate' }}</p>
               <p><strong>Heure:</strong> {{ appointment.time }}</p>
+              <!-- Badge d'urgence -->
+              <div *ngIf="appointment.is_urgent" class="urgent-indicator">
+                <span class="badge badge-danger">Urgent</span>
+              </div>
             </div>
             <div class="appointment-buttons">
               <button (click)="openDetailsModal(appointment)" class="btn btn-sm btn-outline-info">
@@ -26,6 +30,8 @@
         </div>
       </div>
     </div>
+    
+    
     
     
   <!-- Details Modal -->
@@ -72,14 +78,14 @@
               <label for="editTime" class="form-label">Heure</label>
               <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="isVisited">Le patient a visité ?</label>
               <select id="isVisited" [(ngModel)]="selectedAppointment.is_visited" name="isVisited" class="form-control" required>
                 <option [ngValue]="null" disabled>Le patient a-t-il été vu ?</option>
                 <option [ngValue]="true">Oui</option>
                 <option [ngValue]="false">Non</option>
               </select>
-            </div>
+            </div> -->
             <button type="submit" class="btn btn-primary">Enregistrer</button>
           </form>
         </div>

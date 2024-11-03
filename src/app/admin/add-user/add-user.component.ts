@@ -35,6 +35,7 @@ export class AddUserComponent {
       day_of_birth: ['', [Validators.required]], 
       password: ['', [Validators.required, Validators.minLength(6)]], 
       role: ['', [Validators.required]], 
+      service_id: ['', []],
       // service_id: ['', Validators.required],
     });
   }
@@ -70,28 +71,47 @@ export class AddUserComponent {
         formData.append(key, this.addUserForm.value[key]);
       });
   
-      
       const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
         formData.append('photo', fileInput.files[0]);
       }
   
- 
- console.log('Données du formulaire :', this.addUserForm.value);
+      console.log('Données du formulaire :', this.addUserForm.value);
   
- this.authService.addUser(formData).subscribe(
-   (response: any) => {
-     console.log('Utilisateur ajouté avec succès', response);
-     this.router.navigate(['/users']);
-   },
-   (error: any) => {
-     console.log('Erreur lors de l\'ajout de l\'utilisateur', error);
-   }
- );
-} else {
- alert('Veuillez remplir le formulaire correctement.');
-}
-}
+      this.authService.addUser(formData).subscribe(
+        (response: any) => {
+          console.log('Utilisateur ajouté avec succès', response);
+          
+          // Réinitialiser le formulaire
+          this.addUserForm.reset();
+  
+          // Afficher l'alerte de succès
+          Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: 'Utilisateur ajouté avec succès !',
+          });
+          },
+        (error: any) => {
+          console.log("Erreur lors de l'ajout de l'utilisateur", error);
+          
+          // Afficher une alerte d'erreur
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: "Erreur lors de l'ajout de l'utilisateur",
+          });
+        }
+      );
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Attention',
+        text: 'Veuillez remplir le formulaire correctement.',
+      });
+    }
+  }
+  
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;

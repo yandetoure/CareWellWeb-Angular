@@ -83,7 +83,8 @@ export class AppointmentService {
   }
 
   updateStatus(patientId: number, patientData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/update/status/${patientId}`, patientData);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.put<any>(`${this.apiUrl}/update/status/${patientId}`, patientData, { headers });
   }
 
   getPatientsWithAppointments(): Observable<any> {
