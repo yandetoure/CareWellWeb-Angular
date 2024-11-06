@@ -1,6 +1,5 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessagesService } from '../../services/messages.service';
-import { ListUserComponent } from '../list-user/list-user.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,13 +13,15 @@ import { PatientListUserComponent } from '../patient-list-user/patient-list-user
   standalone: true,
   imports: [CommonModule, FormsModule, PatientHeaderComponent],   
   templateUrl: './patient-chat.component.html',
-  styleUrl: './patient-chat.component.css'
+  styleUrls: ['./patient-chat.component.css']  // Corrigez 'styleUrl' en 'styleUrls'
 })
-export class PatientChatComponent {
-
+export class PatientChatComponent implements OnInit {
   discussions: any[] = [];
   totalUnreadCount: number = 0;
-  users: any[] = [];
+  messages: any[] = [];
+  newMessage: string = '';
+  authUserId: number = 1;
+  userId!: number;
 
   constructor(
     private messagesService: MessagesService,
@@ -29,56 +30,88 @@ export class PatientChatComponent {
     private authService: AuthService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadDiscussions();
   }
 
-  loadDiscussions() {
+  loadDiscussions(): void {
     this.messagesService.getDiscussions().subscribe(
       response => {
         this.discussions = response.data;
         this.calculateUnreadMessages();
-        console.log('discussions');
-        
       },
       error => {
         console.error('Erreur lors du chargement des discussions', error);
+        // Afficher une notification d'erreur à l'utilisateur ici
       }
     );
   }
 
-  calculateUnreadMessages() {
+  calculateUnreadMessages(): void {
     this.totalUnreadCount = this.discussions.reduce((acc, discussion) => acc + discussion.unread_count, 0);
   }
 
-  getUserIds(discussions: { [key: number]: any[] }): number[] {
-    return Object.keys(discussions).map(key => parseInt(key, 10));
+  autoGrow(event: Event): void {
+    const textArea = event.target as HTMLTextAreaElement;
+    textArea.style.height = 'auto';
+    textArea.style.height = `${textArea.scrollHeight}px`;
   }
 
-  openMessages(userId: number) {
-    // Marquer les messages comme lus
+  loadMessages(userId: number): void {
+    this.userId = userId;
+    this.messagesService.getMessages(this.userId).subscribe(
+      response => {
+        this.messages = response.data;
+        this.messages.forEach(message => {
+          if (!message.is_read) {
+            this.messagesService.markMessagesAsRead(message.id).subscribe(() => {
+              message.is_read = true;
+            });
+          }
+        });
+      },
+      error => {
+        console.error('Erreur lors de la récupération des messages', error);
+        // Afficher une notification d'erreur à l'utilisateur ici
+      }
+    );
+  }
+
+  sendMessage(): void {
+    if (this.newMessage.trim()) {
+      this.messagesService.sendMessage(this.userId, this.newMessage).subscribe(
+        response => {
+          this.messages.push(response.data);
+          this.newMessage = '';
+        },
+        error => {
+          console.error('Erreur lors de l\'envoi du message', error);
+          // Afficher une notification d'erreur à l'utilisateur ici
+        }
+      );
+    }
+  }
+
+  openMessages(userId: number): void {
     this.messagesService.markMessagesAsRead(userId).subscribe(
       () => {
-        // Mise à jour des discussions localement après la réponse
         this.discussions = this.discussions.map(discussion => {
           if (discussion.user_id === userId) {
             discussion.unread_count = 0;
           }
           return discussion;
         });
-
-        // Naviguer vers la page de messages
         this.router.navigate(['/patient/messages', userId]);
       },
       error => {
         console.error('Erreur lors de la mise à jour des messages', error);
+        // Afficher une notification d'erreur à l'utilisateur ici
       }
     );
   }
 
-  startNewDiscussion() {
+  startNewDiscussion(): void {
     const dialogRef = this.dialog.open(PatientListUserComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.openMessages(result.id);
@@ -86,10 +119,7 @@ export class PatientChatComponent {
     });
   }
 
-  UserInfo() {
-    this.authService.getUsers().subscribe(response => {
-      this.users = response.data;
-    });
+  onMessageViewed(messageId: number): void {
+    this.messagesService.markMessagesAsRead(messageId).subscribe();
   }
 }
-

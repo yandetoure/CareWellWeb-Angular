@@ -48,12 +48,15 @@ import { PatientMessageComponent } from './patient/patient-message/patient-messa
 import { AccountantTicketsComponent } from './accountant/accountant-tickets/accountant-tickets.component';
 import { AccountantExamComponent } from './accountant/accountant-exam/accountant-exam.component';
 import { PatientTicketsComponent } from './patient/patient-tickets/patient-tickets.component';
+import { UrgentComponent } from './patient/urgent/urgent.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
 
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+      // Home Page sections
+  { path: 'us', component: AboutUsComponent },
 
   { path: 'home', component: HomeComponent }, 
   { path: 'profile', component: ProfileComponent },
@@ -102,9 +105,9 @@ export const routes: Routes = [
   { path: 'patient/articles', component: PatientArticlesComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
   { path: 'patient/services', component: PatientServicesTestComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
   { path: 'patient/tickets', component: PatientTicketsComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
-  
-  // Home Page sections
-  { path: 'us', component: AboutUsComponent },
+  { path: 'patient/profil', component: PatientProfileComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+  {path: 'urgence', component: UrgentComponent, canActivate: [AuthGuard], data: { role: 'Patient' } },
+
 
   //Accountant
   { path: 'dashboard/accountant', component: DashbaordAccountantComponent , canActivate: [AuthGuard], data: { role: 'Accountant' } },
@@ -113,7 +116,6 @@ export const routes: Routes = [
   { path: 'accountant/services', component: AccountantServicesComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
   { path: 'accountant/tickets', component: AccountantTicketsComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
   { path: 'accountant/exams', component: AccountantExamComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
-  { path: 'patient/profil', component: PatientProfileComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
 
 
   { path: '**', redirectTo: '/register' }

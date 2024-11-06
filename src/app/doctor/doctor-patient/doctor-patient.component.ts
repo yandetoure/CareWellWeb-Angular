@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrl: './doctor-patient.component.css'
 })
 export class DoctorPatientComponent {
+  tickets: any[] = [];
 
   patients: any[] = [];
   selectedPatient: any; 
@@ -78,39 +79,36 @@ export class DoctorPatientComponent {
   //     alert("Veuillez remplir tous les champs requis.");
   //   }
   // }
-  
-  updatePatientConfirmed(form: any) {
-    if (form.valid) {
-      Swal.fire({
-        title: 'Êtes-vous sûr ?',
-        text: "Voulez-vous vraiment mettre à jour l'état du rendez-vous ?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, mettre à jour'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const patientId = this.selectedPatient.patient_id;
-          const updatedData = { is_visited: this.selectedPatient.is_visited };
-  
-          this.appointmentService.updateStatus(patientId, updatedData).subscribe(
-            (response: any) => {
-              Swal.fire('Mis à jour!', 'Le rendez-vous a été mis à jour avec succès.', 'success');
-              this.loadPatients();
-              this.closeUpdateModal();
-            },
-            (error) => {
-              Swal.fire('Erreur', 'Une erreur est survenue lors de la mise à jour.', 'error');
-              console.error("Erreur lors de la mise à jour du rendez-vous :", error);
-            }
-          );
-        }
-      });
-    } else {
-      Swal.fire('Attention', 'Veuillez remplir tous les champs requis.', 'warning');
-    }
+  // appointment.component.ts
+
+
+  updatePatientConfirmed(appointmentId: number, isVisited: boolean) {
+    Swal.fire({
+      title: 'Confirmer la mise à jour',
+      text: `Voulez-vous marquer ce rendez-vous comme ${isVisited ? 'non reçu' : 'reçu'} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, mettre à jour',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.appointmentService.updateStatus(appointmentId, { is_visited: isVisited }).subscribe(
+          (response) => {
+            this.loadPatients(); // Recharger la liste des patients après la mise à jour
+            Swal.fire('Succès!', 'Le statut du rendez-vous a été mis à jour.', 'success');
+          },
+          (error) => {
+            console.error('Erreur lors de la mise à jour du statut', error);
+            Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la mise à jour du statut.', 'error');
+          }
+        );
+      }
+    });
   }
-   
+  
+  
+  
   
 }

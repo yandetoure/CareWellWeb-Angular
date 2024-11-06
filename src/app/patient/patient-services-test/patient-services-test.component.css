@@ -1,16 +1,11 @@
+/* Dashboard Container */
 .dashboard-container {
-    display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
-  }
-  
-app-admin-sidebar {
-  width: 250px; /* Largeur de la sidebar */
-  background-color: #ffffff; /* Couleur de fond de la sidebar */
-  height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
-  position: fixed; /* Fixer la sidebar */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  display: flex;
+  font-family: Arial, sans-serif;
+  color: #333;
 }
 
-
+/* Sidebar Styling */
 .sidebar {
   width: 80px;
   height: 100vh;
@@ -22,112 +17,149 @@ app-admin-sidebar {
   overflow: hidden;
 }
 
-/* Sidebar en hover */
 .sidebar:hover {
   width: 250px;
 }
 
-/* Contenu principal ajustable */
+/* Main Content */
 .main-content {
   flex: 1;
-  margin-left: 80px; /* Largeur par défaut de la sidebar */
+  margin-left: 80px;
   padding: 20px;
-  transition: margin-left 0.3s ease; /* Transition douce */
-  background-color: #ffffff;
+  background-color: #f5f5f5;
+  transition: margin-left 0.3s ease;
   margin-top: 50px;
 }
 
-/* Ajustement du contenu lorsque la sidebar est en hover */
 .sidebar:hover ~ .main-content {
-  margin-left: 250px; /* Largeur de la sidebar en mode hover */
+  margin-left: 250px;
 }
 
+h2.section-title {
+  font-size: 24px;
+  color: #0b645a;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
+/* Search Input */
 .search-input {
   display: block;
-  margin: 0 auto; /* Centre le champ de recherche */
-  border: 2px solid #02503b; /* Bordure verte */
-  padding: 10px; /* Ajoute un peu de padding pour l'esthétique */
-  width: 80%; /* Ajuste la largeur pour qu'il ne soit pas trop grand */
-  border-radius: 5px; /* Arrondi les coins de la bordure */
+  margin: 0 auto 20px;
+  border: 2px solid #02503b;
+  padding: 10px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
-h2{
-  color: #0b645a;
+.search-input:focus {
+  border-color: #43aa12;
 }
-  
-.main-content {
-  text-align: center; /* Centre le contenu principal */
+
+/* Cards Container */
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 20px;
 }
-h4{
-    color: #43AA12;
-    font-weight: bold;
-    margin-left: 20px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: -30px;
-    }
-    .services{
 
-        display: flex;
-        justify-content: center;
-        }
-          .cards{
-            display: flex;
-            justify-content: center;
-            flex-direction: row;
-            display: flex;
-            flex-wrap: wrap;
-            margin: 30px;
-          }
-              .maladies{
-                  display: flex;
-                  justify-content: center;
-                    .card{
-                        margin: 7px;
-                        flex: 0 0 250px;
-                        box-sizing: border-box;
-                        padding: 5px;
-                  }
-                  }
-    
-        
-    p{
-    color: #000000a7;
-    font-weight: bold;
-    font-size: 15px;
-    }
-    
-    .boutton-rv{
-      height: 40px;
-      width: 100%;
-      background-color: #43AA12;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 5px;
-      border: #43AA12;
-      color: white;
-    }
-    .boutton{
-      height: 35px;
-      width: 100%;
-      background-color: #1245aa;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 5px;
-      border: none;
-    }
+/* Individual Card */
+.card {
+  flex: 0 0 250px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-.image{
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.image {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Card Header */
+.card-header {
+  padding: 15px;
+}
+
+.card-header h5 {
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 10px;
+}
+
+.card-header p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Buttons */
+.boutton, .boutton-rv {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.boutton {
+  background-color: #1245aa;
+  color: white;
+}
+
+.boutton:hover {
+  background-color: #0f3b8e;
+}
+
+.boutton-rv {
+  background-color: #43aa12;
+  color: white;
+}
+
+.boutton-rv:hover {
+  background-color: #388e0c;
+}
+
+/* General Typography */
+p {
+  color: #555;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+h4, h5 {
+  color: #43aa12;
+  font-weight: bold;
+}
+
+/* General Container Padding */
+.maladies {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Image Styling */
+.image {
   height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
-
-.missions{
-  margin: 100px;
-}
-
-
-  .images{
-      margin-left: 90px;
-  }

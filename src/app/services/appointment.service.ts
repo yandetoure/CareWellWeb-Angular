@@ -46,9 +46,10 @@ export class AppointmentService {
     // Ajouter un nouveau rendez-vous
     addAppointment(appointmentData: any): Observable<any> {
       return this.http.post(`${this.apiUrl}/appointments`, appointmentData);
-  
     }
-
+    addUrgentAppointment(appointmentData: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/appointment/urgent`, appointmentData);
+    }
 
     deleteAppointment(appointmentId: number): Observable<any> {
       return this.http.delete<any>(`${this.apiUrl}/appointments/${appointmentId}`);
@@ -82,10 +83,11 @@ export class AppointmentService {
     return this.http.put<any>(`${this.apiUrl}/update/${patientId}`, patientData);
   }
 
-  updateStatus(patientId: number, patientData: any): Observable<any> {
+  updateStatus(appointmentId: number, patientData: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.put<any>(`${this.apiUrl}/update/status/${patientId}`, patientData, { headers });
+    return this.http.put<any>(`${this.apiUrl}/update/status/${appointmentId}`, patientData, { headers });
   }
+  
 
   getPatientsWithAppointments(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/patient`);

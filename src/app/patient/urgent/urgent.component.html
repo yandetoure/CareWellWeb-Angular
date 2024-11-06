@@ -12,10 +12,9 @@
         <div class="main-content">
             <div class="container">
                 <div class="row">
-                    <!-- Colonne du formulaire -->
                     <div class="col-md-6">
                         <div class="appointment-card">
-                            <h3>Prendre un nouveau rendez-vous</h3>
+                            <h3>Prendre un nouveau rendez-vous d'Urgence</h3>
                             <form (submit)="addAppointment()">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
@@ -47,7 +46,7 @@
                                         <input type="time" [(ngModel)]="newAppointment.time" name="time" class="form-control" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Ajouter rendez-vous</button>
+                                <button type="submit" class="btn btn-primary">Prendre rendez-vous</button>
                             </form>
                         </div>
                     </div>

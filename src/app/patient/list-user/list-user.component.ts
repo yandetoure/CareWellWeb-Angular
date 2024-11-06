@@ -3,15 +3,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service'; 
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-list-user',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './list-user.component.html',
-  styleUrl: './list-user.component.css'
+  styleUrls: ['./list-user.component.css'], // Correction du nom de la propriété
 })
-export class ListUserComponent {
+export class ListUserComponent implements OnInit { // Implémentez OnInit
   users: any[] = [];
 
   constructor(
@@ -20,6 +19,10 @@ export class ListUserComponent {
   ) {}
 
   ngOnInit() {
+    this.fetchUsers(); // Méthode pour récupérer les utilisateurs
+  }
+
+  fetchUsers() {
     this.authService.getUsers().subscribe(response => {
       this.users = response.data;
     });
@@ -33,11 +36,5 @@ export class ListUserComponent {
   closeModal() {
     // Fermer le modal sans sélectionner d'utilisateur
     this.dialogRef.close();
-  }
-
-    UserInfo() {
-    this.authService.getUsers().subscribe(response => {
-      this.users = response.data;
-    });
   }
 }
