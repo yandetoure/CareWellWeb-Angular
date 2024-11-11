@@ -75,7 +75,7 @@ export class AppointmentService {
       'Authorization': `Bearer ${token}`,
     });
 
-    return this.http.get(`${this.apiUrl}/appointments`,{ headers }) ;
+    return this.http.get(`${this.apiUrl}/doctor-appointment`,{ headers }) ;
   }
 
 
@@ -85,8 +85,10 @@ export class AppointmentService {
 
   updateStatus(appointmentId: number, patientData: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.put<any>(`${this.apiUrl}/update/status/${appointmentId}`, patientData, { headers });
+    return this.http.put<any>(`${this.apiUrl}/appointments/${appointmentId}/status`, patientData, { headers });
   }
+  
+  
   
 
   getPatientsWithAppointments(): Observable<any> {

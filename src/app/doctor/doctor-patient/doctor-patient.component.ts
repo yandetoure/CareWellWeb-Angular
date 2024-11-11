@@ -94,20 +94,19 @@ export class DoctorPatientComponent {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.appointmentService.updateStatus(appointmentId, { is_visited: isVisited }).subscribe(
-          (response) => {
+        this.appointmentService.updateStatus(appointmentId, { is_visited: isVisited }).subscribe({
+          next: (response) => {
             this.loadPatients(); // Recharger la liste des patients après la mise à jour
             Swal.fire('Succès!', 'Le statut du rendez-vous a été mis à jour.', 'success');
           },
-          (error) => {
+          error: (error) => {
             console.error('Erreur lors de la mise à jour du statut', error);
             Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la mise à jour du statut.', 'error');
           }
-        );
+        });
       }
     });
   }
-  
   
   
   

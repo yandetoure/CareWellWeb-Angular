@@ -1,0 +1,47 @@
+<div class="main-content">
+    <div class="dashboard-container">
+      <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>
+  
+      <div class="main-content">
+        <div *ngIf="loading">Chargement...</div>
+        <div *ngIf="error">{{ error }}</div>
+  
+        <div *ngIf="exams.length > 0" class="container">
+          <div class="row">
+            <div *ngFor="let exam of exams" class="col-12 col-md-6 col-lg-4">
+              <div class="prescription-card">
+                <h3>Examen : {{ exam.exam.name }}</h3>
+                
+                <div *ngIf="exam.medical_file?.user">
+                  <p>Nom : {{ exam.medical_file.user.first_name }} {{ exam.medical_file.user.last_name }}</p>
+                  <p>Âge : {{ exam.medical_file.user.age }} ans</p>
+                  <p>Numéro : {{ exam.medical_file.user.phone_number }}</p>
+                  <p>Adresse : {{ exam.medical_file.user.adress }}</p>
+                </div>
+                  <p>Fait le : {{ exam.exam.created_at | date: 'dd/MM/yyyy' }}</p>
+                <p>Prix : {{ exam.exam.price }} FCFA</p>
+  
+                <p>
+                  Statut : 
+                  <span *ngIf="exam.is_done; else notDone" class="badge badge-success">Effectuée</span>
+                  <ng-template #notDone>
+                    <span class="badge badge-danger">Non effectuée</span>
+                  </ng-template>
+                </p>
+  
+                <!-- Bouton pour marquer la prescription comme effectuée -->
+                <button *ngIf="!exam.is_done" (click)="markAsDone(exam)" class="btn btn-primary">
+                  Marquer comme effectuée
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div *ngIf="exams.length === 0 && !loading">
+          Aucune prescription trouvée pour ce service.
+        </div>
+      </div>
+    </div>
+  </div>
+  

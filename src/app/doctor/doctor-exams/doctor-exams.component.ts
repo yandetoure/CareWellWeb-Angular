@@ -3,35 +3,35 @@ import { Component } from '@angular/core';
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { PrescriptionService } from '../../services/prescription.service';
+import { ExamService } from '../../services/exam.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-doctor-prescriptions',
+  selector: 'app-doctor-exams',
   standalone: true,
   imports: [CommonModule, DoctorSidebarComponent, HttpClientModule, FormsModule],
-  templateUrl: './doctor-prescriptions.component.html',
-  styleUrl: './doctor-prescriptions.component.css'
+  templateUrl: './doctor-exams.component.html',
+  styleUrl: './doctor-exams.component.css'
 })
-export class DoctorPrescriptionsComponent {
+export class DoctorExamsComponent {
 
-  prescriptions: any[] = [];
+  exams: any[] = [];
   loading: boolean = false;
   error: string = '';
 
-  constructor(private prescriptionService: PrescriptionService) {}
+  constructor(private examService: ExamService) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.prescriptionService.getPrescriptionsByService().subscribe({
+    this.examService.getExamsByService().subscribe({
       next: (response) => {
-        this.prescriptions = response.data.map((prescription: any) => {
-          if (prescription.medical_file?.user?.day_of_birth) {
-            prescription.medical_file.user.age = this.calculateAge(
-              prescription.medical_file.user.day_of_birth
+        this.exams = response.data.map((exam: any) => {
+          if (exam.medical_file?.user?.day_of_birth) {
+            exam.medical_file.user.age = this.calculateAge(
+              exam.medical_file.user.day_of_birth
             );
           }
-          return prescription;
+          return exam;
         });
         this.loading = false;
       },
@@ -58,10 +58,10 @@ export class DoctorPrescriptionsComponent {
   }
 
 
-  markAsDone(prescription: any) {
+  markAsDone(exam: any) {
     Swal.fire({
       title: 'Êtes-vous sûr ?',
-      text: 'Voulez-vous marquer cette prescription comme effectuée ?',
+      text: 'Voulez-vous marquer cet examen comme effectué ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -69,10 +69,10 @@ export class DoctorPrescriptionsComponent {
       confirmButtonText: 'Oui, effectuer !'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.prescriptionService.updatePrescriptionStatus(prescription.id, true).subscribe({
+        this.examService.updateExamStatus(exam.id, true).subscribe({
           next: (response) => {
             // Mettre à jour l'objet prescription pour changer son statut
-            prescription.is_done = true;
+            exam.is_done = true;
             Swal.fire(
               'Effectué !',
               'La prescription a été marquée comme effectuée.',

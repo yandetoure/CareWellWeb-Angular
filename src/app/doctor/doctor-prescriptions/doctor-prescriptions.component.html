@@ -1,1 +1,49 @@
-<p>doctor-prescriptions works!</p>
+<div class="main-content">
+    <div class="dashboard-container">
+      <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>
+  
+      <div class="main-content">
+        <div *ngIf="loading">Chargement...</div>
+        <div *ngIf="error">{{ error }}</div>
+  
+        <div *ngIf="prescriptions.length > 0" class="container">
+          <div class="row">
+            <div *ngFor="let prescription of prescriptions" class="col-12 col-md-6 col-lg-4">
+              <div class="prescription-card">
+                <h3>Prescription : {{ prescription.prescription.name }}</h3>
+                
+                <div *ngIf="prescription.medical_file?.user">
+                  <p>Nom : {{ prescription.medical_file.user.first_name }} {{ prescription.medical_file.user.last_name }}</p>
+                  <p>Âge : {{ prescription.medical_file.user.age }} ans</p>
+                  <p>Numéro : {{ prescription.medical_file.user.phone_number }}</p>
+                  <p>Adresse : {{ prescription.medical_file.user.adress }}</p>
+                </div>
+  
+                <p>Quantité : {{ prescription.prescription.quantity }}</p>
+                <p>Fait le : {{ prescription.prescription.created_at | date: 'dd/MM/yyyy' }}</p>
+                <p>Prix : {{ prescription.prescription.price }} FCFA</p>
+  
+                <p>
+                  Statut : 
+                  <span *ngIf="prescription.is_done; else notDone" class="badge badge-success">Effectuée</span>
+                  <ng-template #notDone>
+                    <span class="badge badge-danger">Non effectuée</span>
+                  </ng-template>
+                </p>
+  
+                <!-- Bouton pour marquer la prescription comme effectuée -->
+                <button *ngIf="!prescription.is_done" (click)="markAsDone(prescription)" class="btn btn-primary">
+                  Marquer comme effectuée
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div *ngIf="prescriptions.length === 0 && !loading">
+          Aucune prescription trouvée pour ce service.
+        </div>
+      </div>
+    </div>
+  </div>
+  

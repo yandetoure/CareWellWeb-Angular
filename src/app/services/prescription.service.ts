@@ -47,4 +47,11 @@ deletePrescription(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/services`);
   }
 
+  getPrescriptionsByService(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/doctor/prescriptions`);
+  }
+  updatePrescriptionStatus(id: number, isDone: boolean) {
+    return this.http.put<any>(`${this.apiUrl}/prescriptions/${id}/status`, { is_done: isDone });
+  }
+  
 }

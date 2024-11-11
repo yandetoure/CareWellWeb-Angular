@@ -4,7 +4,7 @@
     <div class="container mt-4">
       <div class="row">
         <!-- Colonne principale du contenu du dossier -->
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="card shadow-sm mb-4">
             <div class="card-header text-white">
               <h3>Dossier Médical de {{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</h3>
@@ -23,10 +23,10 @@
                     {{ disease?.disease.name || 'Aucune maladie' }}
                   </div>
                   <div>
-                    {{ disease?.disease.state || 'Inconnu' }}
+                    {{ disease?.state }}
                   </div>
                   <div>
-                    {{ disease?.disease.traitment || 'Aucun Traitement' }}
+                    {{ disease?.treatment || 'Aucun Traitement' }}
                   </div>
                 </li>              
               </ul>
@@ -80,7 +80,7 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <!-- Bouton pour afficher les formulaires -->
           <button (click)="toggleForms()" class="btn w-100 mb-3">Ajouter</button>
           <div class="form-container-wrapper" [ngClass]="{'visible': showForms}">

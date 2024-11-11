@@ -49,6 +49,8 @@ import { AccountantTicketsComponent } from './accountant/accountant-tickets/acco
 import { AccountantExamComponent } from './accountant/accountant-exam/accountant-exam.component';
 import { PatientTicketsComponent } from './patient/patient-tickets/patient-tickets.component';
 import { UrgentComponent } from './patient/urgent/urgent.component';
+import { DoctorPrescriptionsComponent } from './doctor/doctor-prescriptions/doctor-prescriptions.component';
+import { DoctorExamsComponent } from './doctor/doctor-exams/doctor-exams.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
@@ -79,6 +81,8 @@ export const routes: Routes = [
   { path: 'doctor/medicalfile-show/:id', component: DoctorMedicalfileShowComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/chats', component: DoctorChatComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/availability', component: AvailabilityComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/prescriptions', component: DoctorPrescriptionsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  { path: 'doctor/exams', component: DoctorExamsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
 
 
 

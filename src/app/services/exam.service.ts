@@ -26,4 +26,11 @@ export class ExamService {
   deleteExam(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/medicalexam/${id}`);
   }
+
+  getExamsByService(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/doctor/exams`);
+  }
+  updateExamStatus(id: number, isDone: boolean) {
+    return this.http.put<any>(`${this.apiUrl}/exam/${id}/status`, { is_done: isDone });
+  }
 }
