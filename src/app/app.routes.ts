@@ -51,6 +51,7 @@ import { PatientTicketsComponent } from './patient/patient-tickets/patient-ticke
 import { UrgentComponent } from './patient/urgent/urgent.component';
 import { DoctorPrescriptionsComponent } from './doctor/doctor-prescriptions/doctor-prescriptions.component';
 import { DoctorExamsComponent } from './doctor/doctor-exams/doctor-exams.component';
+import { AddResultComponent } from './doctor/add-result/add-result.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
@@ -83,6 +84,7 @@ export const routes: Routes = [
   { path: 'doctor/availability', component: AvailabilityComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/prescriptions', component: DoctorPrescriptionsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
   { path: 'doctor/exams', component: DoctorExamsComponent , canActivate: [AuthGuard], data: { role: 'Doctor' } },
+  {path: 'doctor/add-result/:id',  component: AddResultComponent, canActivate: [AuthGuard], data: { role: 'Doctor' } },
 
 
 

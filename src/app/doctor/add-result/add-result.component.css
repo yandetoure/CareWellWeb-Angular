@@ -1,0 +1,103 @@
+.sidebar {
+    width: 80px;
+    height: 100vh;
+    background-color: #2f453e;
+    transition: width 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  
+  /* Sidebar en hover */
+  .sidebar:hover {
+    width: 250px;
+  }
+  
+  /* Contenu principal ajustable */
+  .main-content {
+    flex: 1;
+    margin-left: 40px; /* Largeur par défaut de la sidebar */
+    padding: 10px;
+    transition: margin-left 0.3s ease; /* Transition douce */
+    background-color: #ffffff;
+  }
+  
+  /* Ajustement du contenu lorsque la sidebar est en hover */
+  .sidebar:hover ~ .main-content {
+    margin-left: 250px; /* Largeur de la sidebar en mode hover */
+  }
+
+.add-result-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .left-column {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .right-column {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    resize: none;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0b630b;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0b630b;
+  }
+  .container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.result-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.exam-info, .result-info {
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #007bff;
+}
+
+.result-image-preview {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+}
+
+.btn {
+  margin-top: 10px;
+}

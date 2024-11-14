@@ -143,3 +143,21 @@ app-doctor-sidebar {
 .table-danger {
   background-color: #f8d7da; /* Light red for unvisited patients */
 }
+/* Bouton vert pour "Reçu" */
+.btn-received {
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+/* Bouton gris pour "Non reçu" */
+.btn-not-received {
+  background-color: grey;
+  color: white;
+  border: none;
+}
+
+/* Hover effect pour les boutons */
+.btn-received:hover, .btn-not-received:hover {
+  opacity: 0.8;
+}

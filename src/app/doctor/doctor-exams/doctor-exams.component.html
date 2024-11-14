@@ -33,6 +33,10 @@
                 <button *ngIf="!exam.is_done" (click)="markAsDone(exam)" class="btn btn-primary">
                   Marquer comme effectuée
                 </button>
+                
+                <button *ngIf="exam.is_done" (click)="viewResult(exam.id)" class="btn btn-info">
+                    Voir le résultat
+                  </button>
               </div>
             </div>
           </div>

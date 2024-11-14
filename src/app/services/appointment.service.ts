@@ -69,15 +69,20 @@ export class AppointmentService {
       return this.http.get(`${this.apiUrl}/user/appointments`,{ headers }) ;
     }
 
-  getDoctorAppointments(): Observable<any> {
-    const token = localStorage.getItem('token'); 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-    });
+    getDoctorAppointments(page: number = 1, limit: number = 10): Observable<any> {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+      });
+  
+      // Ajout des paramètres page et limit
+      return this.http.get(`${this.apiUrl}/doctor-appointment?page=${page}&limit=${limit}`, { headers });
+    }
 
-    return this.http.get(`${this.apiUrl}/doctor-appointment`,{ headers }) ;
-  }
-
+    
+  // getDoctorAppointments(page: number = 1, limit: number = 10): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}?page=${page}&limit=${limit}`);
+  // }
 
   updateAppointment(patientId: number, patientData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/update/${patientId}`, patientData);
@@ -89,7 +94,9 @@ export class AppointmentService {
   }
   
   
-  
+  updateAppointmentStatus(appointmentId: number, updateData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/appointments/${appointmentId}/status`, updateData);
+  }
 
   getPatientsWithAppointments(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/patient`);

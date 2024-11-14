@@ -39,47 +39,32 @@ app-doctor-sidebar, app-doctor-sidebar {
 }
 
 
-
-/* Appliquer un style aux cartes de rendez-vous */
-.appointments-list .appointment-card {
-border: 4px solid transparent; /* Bordure invisible par défaut */
-border-bottom: 4px solid green; /* Bordure inférieure verte */
-border-radius: 8px; /* Coins arrondis */
-padding: 15px; 
-margin-bottom: 20px;
-background-color: #f8f9fa; 
-transition: transform 0.2s;
-width: 90%; /* Réduire la largeur des cartes */
-height: 150px;
-max-width: 80%; /* Limite maximale de largeur */
-margin-left: auto; /* Centrer horizontalement */
-margin-right: auto; /* Centrer horizontalement */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce */
+.pagination-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
 }
 
-/* Ajoute un effet de survol aux cartes */
-.appointments-list .appointment-card:hover {
-transform: scale(1.02); /* Légère augmentation de la taille au survol */
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée au survol */
+.pagination-buttons button {
+  font-size: 0.8rem;
+  padding: 5px 15px;
 }
 
+.pagination-buttons span {
+  font-size: 12px;
+  font-weight: bold;
+}
 
 /* Masquer le tableau original */
 .table-responsive {
-display: none; /* Cacher le tableau */
+display: none; 
 }
 
 .appointments-list h2 {
 text-align: center; 
 }
 
-.appointment-info {
-margin-bottom: 10px;
-display: flex;
-flex-wrap: wrap; 
-gap: 40px; 
-padding-top: 20px;
-}
+
 
 .appointment-buttons {
 display: flex;
@@ -102,3 +87,76 @@ font-size: 18px;
   color: white; /* Couleur du texte pour le badge d'urgence */
 }
 
+/* Style des petites cartes */
+.small-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Effet de survol */
+.small-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Header de la carte */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Information du rendez-vous */
+.appointment-info {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Boutons d'action */
+.appointment-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Badge d'urgence */
+.badge-danger {
+  background-color: #ff4c4c;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .small-card {
+    padding: 10px;
+  }
+
+  .card-header h5 {
+    font-size: 16px;
+  }
+
+  .appointment-info {
+    font-size: 12px;
+  }
+
+  .appointment-buttons button {
+    font-size: 12px;
+    padding: 6px;
+  }
+}

@@ -17,24 +17,40 @@ import Swal from 'sweetalert2';
 export class DoctorAppointmentComponent implements OnInit {
   appointments: any[] = [];
   selectedAppointment: any;
-  isModalOpen: boolean = false;
   isDetailsModalOpen: boolean = false;
   isEditModalOpen: boolean = false;
-  today: string = new Date().toISOString().split('T')[0]; // Date du jour au format YYYY-MM-DD
+  currentPage: number = 1;
+  itemsPerPage = 6; 
+  totalPages: number = 1;
+  limit: number = 6;
+  currentDate: string = '';
 
   constructor(private appointmentService: AppointmentService, private router: Router) {}
 
+
+
   ngOnInit(): void {
     this.getAppointments();
+    this.currentDate = new Date().toISOString().split('T')[0]; 
   }
 
-  getAppointments(): void {
-    this.appointmentService.getDoctorAppointments().subscribe(
+  get paginatedAppointments() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.appointments.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+  
+  getAppointments(page: number = 1): void {
+    this.appointmentService.getDoctorAppointments(page, this.limit).subscribe(
       (response) => {
-        if (response.status) {
-          this.appointments = response.data;
+        console.log('Réponse API:', response);  // Vérifiez la structure complète de la réponse
+  
+        // Vérifiez que 'response.data' contient bien un tableau dans 'data'
+        if (response && response.data && response.data.data && Array.isArray(response.data.data)) {
+          this.appointments = response.data.data;  // Affectation correcte des rendez-vous
+          this.currentPage = response.data.current_page || 1;
+          this.totalPages = response.data.last_page || 1;
         } else {
-          console.error('Erreur : ', response.message);
+          console.error('Les données des rendez-vous ne sont pas un tableau:', response);
         }
       },
       (error) => {
@@ -42,17 +58,22 @@ export class DoctorAppointmentComponent implements OnInit {
       }
     );
   }
+  
+  
+  
+  
 
-  getAppointmentClass(appointmentDate: string): string {
-    const today = new Date();
-    const appointment = new Date(appointmentDate);
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.getAppointments(this.currentPage);
+    }
+  }
 
-    if (appointment < today) {
-      return 'past-appointment';
-    } else if (appointment.getTime() - today.getTime() < 3 * 24 * 60 * 60 * 1000) {
-      return 'near-appointment';
-    } else {
-      return 'upcoming-appointment';
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getAppointments(this.currentPage);
     }
   }
 
@@ -74,74 +95,43 @@ export class DoctorAppointmentComponent implements OnInit {
     this.isEditModalOpen = false;
   }
 
-  goToMedicalRecord(userId: number) {
-    this.router.navigate(['/doctor/medicalfile', userId]);
-  }
-
   submitEdit(): void {
     if (this.selectedAppointment) {
       const appointmentDate = new Date(this.selectedAppointment.date);
-      const todayDate = new Date();
-
-      if (appointmentDate > todayDate) {
+      if (appointmentDate > new Date()) {
         Swal.fire({
           title: 'Date invalide',
-          text: 'La date de rendez-vous ne peut pas être ultérieure à la date du jour.',
+          text: 'La date ne peut pas être dans le futur.',
           icon: 'error'
         });
         return;
       }
-
-      this.updatePatientConfirmed(this.selectedAppointment);
+      this.updateAppointment();
     }
-    this.closeEditModal();
   }
 
-  updatePatientConfirmed(appointment: any): void {
-    const appointmentDate = new Date(appointment.appointment_date);
-    const now = new Date();
-    const timeDifference = appointmentDate.getTime() - now.getTime();
-    const hoursDifference = timeDifference / (1000 * 60 * 60);
-
-    if (hoursDifference < 24) {
-      Swal.fire({
-        title: 'Impossible de modifier',
-        text: "Vous ne pouvez pas modifier ce rendez-vous moins de 24 heures avant la date prévue.",
-        icon: 'error'
-      });
-      return;
-    }
-
-    Swal.fire({
-      title: 'Confirmation',
-      text: "Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Oui, mettre à jour',
-      cancelButtonText: 'Annuler'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const updatedData = {
-          is_visited: appointment.is_visited,
-          appointment_date: appointment.appointment_date,
-          appointment_time: appointment.appointment_time,
-        };
-
-        this.appointmentService.updateAppointment(appointment.id, updatedData).subscribe(
-          (response: any) => {
-            if (response.status) {
-              Swal.fire('Mis à jour!', 'Rendez-vous mis à jour avec succès.', 'success');
-              this.getAppointments();
-            } else {
-              Swal.fire('Erreur!', 'Erreur lors de la mise à jour du rendez-vous : ' + response.message, 'error');
-            }
-          },
-          (error) => {
-            console.error("Erreur lors de la mise à jour du rendez-vous :", error);
-            Swal.fire('Erreur!', 'Une erreur est survenue lors de la mise à jour du rendez-vous.', 'error');
-          }
-        );
+  updateAppointment(): void {
+    this.appointmentService.updateAppointment(this.selectedAppointment.id, this.selectedAppointment).subscribe(
+      (response) => {
+        if (response.status) {
+          Swal.fire('Mis à jour!', 'Le rendez-vous a été mis à jour.', 'success');
+          this.getAppointments(this.currentPage);
+        } else {
+          Swal.fire('Erreur!', 'Le rendez-vous ne peut ´tre changé que 24h avant.', 'error');
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour', error);
+        Swal.fire('Erreur!', 'Une erreur est survenue.', 'error');
       }
-    });
+    );
+  }
+
+  goToMedicalRecord(userId: number): void {
+    this.router.navigate(['/medical-record', userId]);
+  }
+  
+  getAppointmentClass(date: string): string {
+    return new Date(date) > new Date() ? 'upcoming' : 'past';
   }
 }

@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import { CommonModule } from '@angular/common';
 import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-sidebar.component';
-import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,27 +11,26 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [CommonModule, DoctorSidebarComponent, HttpClientModule, FormsModule],
   templateUrl: './doctor-patient.component.html',
-  styleUrl: './doctor-patient.component.css'
+  styleUrls: ['./doctor-patient.component.css']
 })
 export class DoctorPatientComponent {
-  tickets: any[] = [];
-
   patients: any[] = [];
-  selectedPatient: any; 
-  isModalOpen: boolean = false; 
-  isDetailsModalOpen: boolean = false;
+  filteredPatients: any[] = []; // Liste filtrée des patients
+  filterDate: string = ''; // Date filtrée
+  searchQuery: string = ''; // Champ de recherche
+  today: Date = new Date(); // Date du jour
 
-  constructor(private appointmentService: AppointmentService) { }
+  constructor(private appointmentService: AppointmentService) {}
 
   ngOnInit(): void {
     this.loadPatients();
   }
 
-  // Charger la liste des patients depuis l'API
   loadPatients(): void {
     this.appointmentService.getPatientsWithAppointmentsDoctor().subscribe({
       next: (data) => {
         this.patients = data.data;
+        this.filteredPatients = this.patients; // Initialisation avec la liste complète
       },
       error: (error) => {
         console.error('Erreur lors du chargement des patients', error);
@@ -40,52 +38,12 @@ export class DoctorPatientComponent {
     });
   }
 
-
-  openUpdateModal(patient: any) {
-    this.selectedPatient = { ...patient };
-    this.isModalOpen = true;
-  }
-
-  closeUpdateModal() {
-    this.isModalOpen = false;
-  }
-
-  openDetailsModal(patient: any): void {
-    this.selectedPatient = patient;
-    this.isDetailsModalOpen = true;
-  }
-
-  closeDetailsModal(): void {
-    this.isDetailsModalOpen = false; 
-  }
-
-  // updatePatientConfirmed(form: any) {
-  //   if (form.valid) {
-  //     if (confirm("Êtes-vous sûr de vouloir mettre à jour le rendez-vous ?")) {
-  //       const patientId = this.selectedPatient.patient_id; 
-  //       this.appointmentService.updateAppointment(patientId, this.selectedPatient).subscribe(
-  //         () => {
-  //           alert("Rendez-vous mis à jour avec succès !");
-  //           this.loadPatients();
-  //           this.closeUpdateModal();
-  //         },
-  //         (error) => {
-  //           console.error("Error updating appointment:", error);
-  //           alert("Une erreur est survenue lors de la mise à jour du rendez-vous.");
-  //         }
-  //       );
-  //     }
-  //   } else {
-  //     alert("Veuillez remplir tous les champs requis.");
-  //   }
-  // }
-  // appointment.component.ts
-
-
-  updatePatientConfirmed(appointmentId: number, isVisited: boolean) {
+  updateStatus(appointmentId: number, currentStatus: boolean) {
+    console.log('ID du rendez-vous :', appointmentId); 
+    const newStatus = !currentStatus;
     Swal.fire({
       title: 'Confirmer la mise à jour',
-      text: `Voulez-vous marquer ce rendez-vous comme ${isVisited ? 'non reçu' : 'reçu'} ?`,
+      text: `Voulez-vous marquer ce rendez-vous comme ${newStatus ? 'reçu' : 'non reçu'} ?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -94,20 +52,30 @@ export class DoctorPatientComponent {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.appointmentService.updateStatus(appointmentId, { is_visited: isVisited }).subscribe({
-          next: (response) => {
-            this.loadPatients(); // Recharger la liste des patients après la mise à jour
-            Swal.fire('Succès!', 'Le statut du rendez-vous a été mis à jour.', 'success');
+        this.appointmentService.updateAppointmentStatus(appointmentId, { is_visited: newStatus }).subscribe({
+          next: () => {
+            this.loadPatients(); // Recharge les patients pour actualiser le statut
+            Swal.fire('Succès!', 'Le statut a été mis à jour.', 'success');
           },
           error: (error) => {
-            console.error('Erreur lors de la mise à jour du statut', error);
-            Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la mise à jour du statut.', 'error');
+            console.error('Erreur lors de la mise à jour', error);
+            Swal.fire('Erreur!', 'Impossible de mettre à jour le statut.', 'error');
           }
         });
       }
     });
   }
-  
-  
-  
+
+  filterAppointments(): void {
+    this.filteredPatients = this.patients.filter(patient => {
+      // Filtre par date
+      const matchDate = this.filterDate ? patient.appointment_date === this.filterDate : true;
+      // Filtre par recherche de texte
+      const matchSearch = this.searchQuery ? 
+        (patient.patient_first_name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+        patient.patient_last_name.toLowerCase().includes(this.searchQuery.toLowerCase())) : true;
+
+      return matchDate && matchSearch;
+    });
+  }
 }

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ExamService } from '../../services/exam.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-exams',
@@ -18,8 +19,11 @@ export class DoctorExamsComponent {
   exams: any[] = [];
   loading: boolean = false;
   error: string = '';
+  
 
-  constructor(private examService: ExamService) {}
+  constructor(private examService: ExamService,
+    private router: Router 
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -92,4 +96,7 @@ export class DoctorExamsComponent {
     });
   }
   
+  viewResult(examId: number): void {
+    this.router.navigate(['doctor/add-result', examId]);
+  }
 }

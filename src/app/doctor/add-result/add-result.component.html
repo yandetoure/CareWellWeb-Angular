@@ -1,0 +1,60 @@
+<div class="main-content">
+  <div class="dashboard-container">
+    <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>
+
+    <div class="main-content">
+      <div class="add-result-container">
+        <div class="left-column">
+          <h3>Informations sur l'examen</h3>
+          <p><strong>Nom de l'examen:</strong> {{ examPrescription?.exam?.name }}</p>
+          <p><strong>Date de l'examen:</strong> {{ examPrescription?.created_at | date: 'dd/MM/yyyy' }}</p>
+
+          <h3>Informations sur le patient</h3>
+          <p><strong>Nom du patient:</strong> {{ examPrescription?.medical_file?.user?.first_name }} {{ examPrescription?.medical_file?.user?.last_name }}</p>
+          <p><strong>Date de naissance:</strong> {{ examPrescription?.medical_file?.user?.day_of_birth | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>Numéro de téléphone:</strong> {{ examPrescription?.medical_file?.user?.phone_number }}</p>
+          <p><strong>Adresse:</strong> {{ examPrescription?.medical_file?.user?.adress }}</p>
+
+          <h3>Détails du résultat</h3>
+          <ng-container *ngIf="examPrescription?.result">
+            <p><strong>Nom:</strong> {{ examPrescription?.result?.name }}</p>
+            <p><strong>Description:</strong> {{ examPrescription?.result?.description }}</p>
+
+            <div class="result-image" *ngIf="examPrescription?.result?.image">
+              <h3>Image du résultat :</h3>
+              <img [src]="'http://localhost:8000/' + examPrescription?.result?.image" alt="Image du résultat" class="result-image-preview">
+            </div>
+          </ng-container>
+
+          <div *ngIf="!examPrescription?.result">
+            <p>Aucun résultat ajouté pour cet examen.</p>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <h3>Ajouter un Résultat</h3>
+          <form (ngSubmit)="addResult()">
+            <div class="form-group">
+              <label for="resultName">Nom du résultat</label>
+              <input type="text" id="resultName" [(ngModel)]="result.name" name="name" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="resultDescription">Description</label>
+              <textarea id="resultDescription" [(ngModel)]="result.description" name="description" class="form-control" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="resultImage">Ajouter une image</label>
+              <input type="file" (change)="onFileChange($event)" class="form-control" id="resultImage" />
+            </div>
+
+            <button type="submit" class="btn btn-success mt-2" [disabled]="!result.name || !result.description">
+              Ajouter le résultat
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

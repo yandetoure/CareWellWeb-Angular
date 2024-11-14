@@ -6,34 +6,44 @@
       <div class="container mt-5">
         <h2 class="mb-4 text-center">Liste des patients avec rendez-vous</h2>
 
+        <!-- Date du jour -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <p>Date du jour : {{ today | date: 'longDate' }}</p>
+          </div>
+          <div class="col-md-6 text-end">
+            <label for="dateFilter">Filtrer par date : </label>
+            <input type="date" id="dateFilter" [(ngModel)]="filterDate" (ngModelChange)="filterAppointments()" class="form-control">
+          </div>
+        </div>
+
+        <!-- Champ de recherche -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="search">Rechercher un patient :</label>
+            <input type="text" id="search" [(ngModel)]="searchQuery" (ngModelChange)="filterAppointments()" class="form-control" placeholder="Nom du patient">
+          </div>
+        </div>
+
+        <!-- Tableau des patients -->
         <table *ngIf="patients.length > 0" class="table table-hover table-bordered">
-          <thead class="thead-light">
+          <thead>
             <tr>
-              <th scope="col">Nom</th>
-              <th scope="col">Date du rendez-vous</th>
-              <th scope="col">Heure</th>
-              <th scope="col">Service</th>
-              <th scope="col">Actions</th>
+              <th>Nom</th>
+              <th>Date du rendez-vous</th>
+              <th>Heure</th>
+              <th>Service</th>
+              <th>Statut</th>
               <th scope="col">Urgence</th>
-              <th scope="col">Statut</th> 
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let patient of patients"
-            >
+            <tr *ngFor="let patient of filteredPatients">
               <td>{{ patient.patient_first_name }} {{ patient.patient_last_name }}</td>
               <td>{{ patient.appointment_date | date: 'shortDate' }}</td>
               <td>{{ patient.appointment_time }}</td>
               <td>{{ patient.service }}</td>
-              <td>
-                <button class="btn btn-secondary" (click)="openDetailsModal(patient)">
-                  <i class="fas fa-info-circle"></i> Détails
-                </button>
-                <button class="btn btn-warning" (click)="openUpdateModal(patient)">
-                  <i class="fas fa-edit"></i> Modifier
-                </button>
-              </td>
               <td>
                 <span *ngIf="patient.is_urgent" class="badge badge-danger">Urgent</span>
               </td>
@@ -41,103 +51,23 @@
                 <span [ngClass]="{ 'text-success': patient.is_visited, 'text-danger': !patient.is_visited }">
                   {{ patient.is_visited ? 'Reçu' : 'Non reçu' }}
                 </span>
-              </td> 
+              </td>
+              <td>
+                <button 
+                  [ngClass]="{
+                    'btn-received': patient.is_visited, 
+                    'btn-not-received': !patient.is_visited
+                  }"
+                  class="btn" 
+                  (click)="updateStatus(patient.appointment_id, patient.is_visited)">
+                  {{ patient.is_visited ? 'Marquer comme non reçu' : 'Marquer comme reçu' }}
+                </button>
+              </td>
             </tr>
           </tbody>
-        </table>        
-        
-        <p *ngIf="patients.length === 0" class="text-center">Aucun patient avec rendez-vous n'a été trouvé.</p>
-      </div>
-    </div>
-  </div>
-</div>
+        </table>
 
-
-
-<!-- Modal pour les détails du patient -->
-<div class="modal" tabindex="-1" role="dialog" *ngIf="isDetailsModalOpen">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Détails du patient</h5>
-        <!-- <button type="button" class="close" (click)="closeDetailsModal()">
-          <span>&times;</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
-        <p><strong>Nom:</strong> {{ selectedPatient.patient_first_name }} {{ selectedPatient.patient_last_name }}</p>
-        <p><strong>Email:</strong> {{ selectedPatient.patient_email }}</p>
-        <p><strong>Date du rendez-vous:</strong> {{ selectedPatient.appointment_date }}</p>
-        <p><strong>Heure:</strong> {{ selectedPatient.appointment_time }}</p>
-        <p><strong>Service:</strong> {{ selectedPatient.service }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeDetailsModal()">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal pour modifier le rendez-vous -->
-<div class="modal" tabindex="-1" role="dialog" *ngIf="isModalOpen">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modifier le rendez-vous</h5>
-        <!-- <button type="button" class="close" (click)="closeUpdateModal()">
-          <span>&times;</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
-        <form #updateForm="ngForm">
-          <!-- <div class="form-group">
-            <label for="appointmentDate">Date du rendez-vous</label>
-            <input
-              type="date"
-              id="appointmentDate"
-              [(ngModel)]="selectedPatient.appointment_date"
-              name="appointmentDate"
-              class="form-control"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="appointmentTime">Heure</label>
-            <input
-              type="time"
-              id="appointmentTime"
-              [(ngModel)]="selectedPatient.appointment_time"
-              name="appointmentTime"
-              class="form-control"
-              required
-            />
-          </div> -->
-          <div class="form-group">
-            <label for="isVisited">Le patient a visité ?</label>
-            <select
-              id="isVisited"
-              [(ngModel)]="selectedPatient.is_visited"
-              name="isVisited"
-              class="form-control"
-              required
-            >
-              <option [ngValue]="null" disabled>Le patient a-t-il été vu ?</option>
-              <option [ngValue]="true">Oui</option>
-              <option [ngValue]="false">Non</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeUpdateModal()">Annuler</button>
-        <button
-        type="button"
-        class="btn btn-primary"
-        (click)="updatePatientConfirmed(selectedPatient.appointment_id, selectedPatient.is_visited)"
-      >
-        Mettre à jour
-      </button>
-        
+        <p *ngIf="filteredPatients.length === 0" class="text-center">Aucun patient trouvé.</p>
       </div>
     </div>
   </div>
