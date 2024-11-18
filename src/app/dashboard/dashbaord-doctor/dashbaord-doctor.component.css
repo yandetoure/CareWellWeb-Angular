@@ -75,8 +75,8 @@
   .banner{
     display: flex;
     justify-content: center;
-    padding-top: 50px;
-    height: 300px;
+    padding-top: 25px;
+    height: 200px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.275);
     transition: box-shadow 0.3s;
     border-radius: 30px;
@@ -108,8 +108,8 @@
   .card{
     display: flex;
     flex-direction: column; /* Aligner les éléments verticalement */
-    width: 260px; /* Largeur des cartes, ajuste selon tes besoins */
-    height: 140px;
+    width: 200px; /* Largeur des cartes, ajuste selon tes besoins */
+    height: 120px;
     background-color: #ffffff; /* Couleur de fond des cartes, modifiable */
     border-left: 5px solid #1F2B6C;
     border-radius: 50px;
@@ -198,4 +198,16 @@
 canvas {
     width: 50% !important; /* Force le canvas à s'ajuster à la largeur du conteneur */
     height: auto !important; /* Ajuste la hauteur automatiquement */
+}
+.chart-container {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  width: 30% !important;
+  height: auto !important;
 }

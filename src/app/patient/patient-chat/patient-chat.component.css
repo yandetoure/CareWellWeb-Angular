@@ -41,94 +41,352 @@ app-doctor-sidebar {
   margin-left: 250px; /* Largeur de la sidebar en mode hover */
 }
 
+
+.photo1{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  margin-right: 10px;
+  margin-left: 10px;
+  object-fit: cover;
+}
+
+.profil{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  h2{
+    color: #062e59;
+    font-size: 16px;
+  }
+}
+
 .toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .toolbar h1 {
-    margin: 0;
-    font-size: 22px;
-  }
-  
-  .toolbar-buttons {
-    display: flex;
-    align-items: center;
-  }
-  .photo1{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    margin-right: 10px;
-    margin-left: 10px;
-    object-fit: cover;
-  }
-  
-  .profil{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
 
-    h2{
-      color: #062e59;
-      font-size: 16px;
-    }
-  }
-  
-  .unread-button, .add-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-  }
-  
-  
-  .unread-button .material-icons, .add-button .material-icons {
-    font-size: 22px;
-  }
-  
-  .discussions-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .discussion-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .discussion-item:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .unread-count {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .no-discussions {
-    text-align: center;
-  }
-  
-  .start-discussion-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-  }
+.toolbar h1 {
+  margin: 0;
+  font-size: 22px;
+}
 
-  p{
-    font-size: 14px;
-    margin-left: 65px;
-    margin-top: -10px;
-  }
+.toolbar-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.unread-button, .add-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.unread-button .material-icons, .add-button .material-icons {
+  font-size: 24px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.discussions-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.discussion-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.discussion-item:hover {
+  background-color: #f1f1f1;
+}
+
+.discussion-info h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.unread-count {
+  color: red;
+  font-weight: bold;
+}
+
+.no-discussions {
+  text-align: center;
+}
+
+.start-discussion-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+h2{
+  color: #062e59;
+  font-size: 16px;
+}
+p{
+  font-size: 14px;
+  margin-left: 65px;
+  margin-top: -10px;
+}
+
+.chat-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100vh;
+}
+
+.discussions-column {
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.messages-column {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.discussions-list {
+  list-style: none;
+  padding: 0;
+}
+
+.discussion-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.discussion-item:hover {
+  background-color: #f0f0f0;
+}
+
+.messages-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Messages stylisés */
+.sent-message {
+align-self: flex-end;
+background-color: #007bff;
+color: #fff;
+padding: 12px;
+border-radius: 20px 20px 0 20px;
+margin-bottom: 10px;
+max-width: 70%;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+position: relative;
+}
+
+.received-message {
+align-self: flex-start;
+background-color: #f0f0f0;
+color: #333;
+padding: 12px;
+border-radius: 20px 20px 20px 0;
+margin-bottom: 10px;
+max-width: 70%;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+position: relative;
+}
+
+/* Ajout d'une petite flèche pour les messages */
+.sent-message::after {
+content: '';
+position: absolute;
+top: 0;
+right: -10px;
+width: 0;
+height: 0;
+border-left: 10px solid #007bff;
+border-top: 10px solid transparent;
+border-bottom: 10px solid transparent;
+}
+
+.received-message::after {
+content: '';
+position: absolute;
+top: 0;
+left: -10px;
+width: 0;
+height: 0;
+border-right: 10px solid #f0f0f0;
+border-top: 10px solid transparent;
+border-bottom: 10px solid transparent;
+}
+
+/* Champ de saisie des messages */
+.message-input {
+display: flex;
+gap: 10px;
+padding: 10px;
+border-top: 1px solid #ddd;
+background-color: #fff;
+}
+
+.message-input input {
+flex: 1;
+padding: 15px;
+border: 1px solid #ddd;
+border-radius: 20px;
+font-size: 1rem;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-input button {
+padding: 10px 20px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 20px;
+cursor: pointer;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+transition: background-color 0.2s;
+}
+
+.message-input button:hover {
+background-color: #0056b3;
+}
+
+/* Liste des discussions */
+.discussion-item {
+display: flex;
+align-items: center;
+padding: 10px;
+cursor: pointer;
+border-bottom: 1px solid #ddd;
+transition: background-color 0.3s;
+}
+
+.discussion-item:hover {
+background-color: #f8f9fa;
+}
+
+.discussion-info h2 {
+margin: 0;
+font-size: 1.1rem;
+color: #062e59;
+}
+
+.unread-count {
+color: #dc3545;
+font-weight: bold;
+margin-top: 5px;
+}
+
+/* Style pour la colonne des messages */
+.messages-list {
+flex: 1;
+overflow-y: auto;
+padding: 10px;
+background-color: #fafafa;
+}
+
+/* Style pour le bouton Commencer une discussion */
+.start-discussion-button {
+background-color: #28a745;
+color: #fff;
+padding: 10px 15px;
+border: none;
+border-radius: 20px;
+cursor: pointer;
+transition: background-color 0.2s;
+}
+
+.start-discussion-button:hover {
+background-color: #218838;
+}
+.messages-column {
+padding: 20px;
+display: flex;
+flex-direction: column;
+}
+
+.messages-list {
+display: flex;
+flex-direction: column;
+gap: 3px;
+}
+
+/* Style des messages envoyés */
+.sent-message {
+align-self: flex-end;
+background-color: #007bff;
+color: #fff;
+padding: 12px;
+border-radius: 20px 20px 0 20px;
+margin-bottom: 10px;
+max-width: 70%;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+position: relative;
+}
+
+/* Style des messages reçus */
+.received-message {
+align-self: flex-start; 
+background-color: #047e6e;
+color: #333;
+padding: 12px;
+border-radius: 20px 20px 20px 0;
+margin-bottom: 10px;
+max-width: 70%;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+position: relative;
+}
+
+
+/* Flèche pour les messages envoyés */
+.sent-message::after {
+content: '';
+position: absolute;
+top: 0;
+right: -10px;
+width: 0;
+height: 0;
+border-left: 10px solid #007bff;
+border-top: 10px solid transparent;
+border-bottom: 10px solid transparent;
+}
+
+/* Flèche pour les messages reçus */
+.received-message::after {
+content: '';
+position: absolute;
+top: 0;
+left: -10px;
+width: 0;
+height: 0;
+border-right: 10px solid #f0f0f0;
+border-top: 10px solid transparent;
+border-bottom: 10px solid transparent;
+}
+
+/* Petites infos sous les messages */
+.sent-message small, .received-message small {
+display: block;
+text-align: right;
+font-size: 0.8rem;
+color: #888;
+}
+

@@ -28,7 +28,13 @@ export class PatientTicketsComponent {
   selectedService: any;
   isModalOpen: boolean = false;
   isDetailsModalOpen: boolean = false;
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 4;
+  totalPages: number = 1;
+  limit: number = 8;
 
+  
   constructor(
     private http: HttpClient,
     private tiketService: TicketsService,
@@ -38,14 +44,17 @@ export class PatientTicketsComponent {
     this.loadTickets();
   }
 
-  loadTickets() {
-    this.tiketService.getUserTickets().subscribe(      
+  loadTickets(page: number = 1) {
+    this.tiketService.getUserTickets(page, this.limit).subscribe(
       (response) => {
-        if (response.data) {
-          this.tickets = response.data;
+        console.log('Réponse API complète:', response);
+        if (response && response.data && response.data.data && Array.isArray(response.data.data))  {
+          this.tickets = response.data.data;
+          this.currentPage = response.data.current_page;
+          this.totalPages = response.data.last_page;
           console.log('Tickets chargés:', this.tickets);
         } else {
-          console.error('Erreur dans la réponse de l\'API:', response);
+          console.error('Structure inattendue de la réponse API:', response);
         }
       },
       (error) => {
@@ -53,6 +62,13 @@ export class PatientTicketsComponent {
       }
     );
   }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.loadTickets(page);
+    }
+  }
+  
   
 searchTickets() {
     if (!this.searchTerm) {
@@ -72,7 +88,19 @@ searchTickets() {
     console.log('Résultats de la recherche:', this.tickets);
 }
 
-  
+nextPage(): void {
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+    this.loadTickets(this.currentPage);
+  }
+}
+
+previousPage(): void {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.loadTickets(this.currentPage);
+  }
+}
 
   openDetailsModal(ticket: any): void {
     this.selectedService = ticket;
@@ -107,7 +135,5 @@ searchTickets() {
         });
     }
 }
-
-
 
 }

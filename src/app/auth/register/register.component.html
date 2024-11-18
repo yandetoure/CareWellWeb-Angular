@@ -31,14 +31,16 @@
                 <div class="form-group col-md-6">
                   <input type="text" class="form-control" placeholder="Prénom" formControlName="first_name" />
                   <div *ngIf="registerForm.get('first_name')?.invalid && (registerForm.get('first_name')?.touched || registerForm.get('first_name')?.dirty)">
-                    <small class="text-danger">Le prénom est requis.</small>
+                    <small class="text-danger">Le prénom est requis.</small> <br>
+                    <small *ngIf="registerForm.get('first_name')?.hasError('minlength')" class="text-danger">Le prénom doit contenir au moins 2 caractères.</small>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6">
                   <input type="text" class="form-control" placeholder="Nom" formControlName="last_name" />
                   <div *ngIf="registerForm.get('last_name')?.invalid && (registerForm.get('last_name')?.touched || registerForm.get('last_name')?.dirty)">
-                    <small class="text-danger">Le nom est requis.</small>
+                    <small class="text-danger">Le nom est requis.</small> <br>
+                    <small *ngIf="registerForm.get('last_name')?.hasError('minlength')" class="text-danger">Le nom doit contenir au moins 2 caractères.</small>
                   </div>
                 </div>
               </div>
@@ -63,7 +65,8 @@
                 <div class="form-group col-md-6">
                   <input type="tel" class="form-control" placeholder="Téléphone" formControlName="phone_number" />
                   <div *ngIf="registerForm.get('phone_number')?.invalid && (registerForm.get('phone_number')?.touched || registerForm.get('phone_number')?.dirty)">
-                    <small class="text-danger">Le numéro de téléphone est requis.</small>
+                    <small class="text-danger">Le numéro de téléphone est requis.</small>  <br>
+                    <small *ngIf="registerForm.get('phone_number')?.hasError('pattern')" class="text-danger">Le numéro de téléphone doit contenir uniquement des chiffres.</small>
                   </div>
                 </div>
 

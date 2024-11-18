@@ -76,38 +76,35 @@
     </div>
   </div>
   
- <!-- Edit Modal -->
-<div *ngIf="isEditModalOpen" id="editModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Modifier le Rendez-vous</h5>
-        <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulaire d'édition -->
-        <form (ngSubmit)="submitEdit()">
-          <div class="mb-3">
-            <label for="editDate" class="form-label">Date</label>
+  <!-- Edit Modal -->
+  <div *ngIf="isEditModalOpen" id="editModal" class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Modifier le Rendez-vous</h5>
+          <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulaire d'édition -->
+          <form (ngSubmit)="submitEdit()">
+            <div class="mb-3">
+              <label for="editDate" class="form-label">Date</label>
             <input
-              type="date"
-              class="form-control"
-              [(ngModel)]="selectedAppointment.date"
-              name="editDate"
-              required
-              [min]="currentDate"
-            >
-          </div>
-          <div class="mb-3">
-            <label for="editTime" class="form-label">Heure</label>
-            <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Fermer</button>
+              type="date" class="form-control" [(ngModel)]="selectedAppointment.date"name="editDate"requiredmin]="currentDate"
+            >            </div>
+            <div class="mb-3">
+              <label for="editTime" class="form-label">Heure</label>
+              <input type="time" class="form-control" [(ngModel)]="selectedAppointment.time" name="editTime" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Fermer</button>
+        </div>
       </div>
     </div>
   </div>
+  
+</div>
 </div>

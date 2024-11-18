@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessagesService } from '../../services/messages.service';
 import { ListUserComponent } from '../list-user/list-user.component';
 import { Router } from '@angular/router';
@@ -15,12 +15,17 @@ import { DoctorSidebarComponent } from '../../sidebar/doctor-sidebar/doctor-side
   templateUrl: './doctor-chat.component.html',
   styleUrl: './doctor-chat.component.css'
 })
-export class DoctorChatComponent {
-
-
+export class DoctorChatComponent implements OnInit {
   discussions: any[] = [];
   totalUnreadCount: number = 0;
   users: any[] = [];
+  messages: any[] = [];
+  selectedUserId: number | null = null;
+  selectedUserName: string = '';
+  newMessage: string = '';
+  authUserId: number = 0;
+  userId!: number;
+  groupedMessages: { date: string, messages: any[] }[] = [];
 
   constructor(
     private messagesService: MessagesService,
@@ -30,6 +35,7 @@ export class DoctorChatComponent {
   ) {}
 
   ngOnInit() {
+    // this.authUserId = this.authService.getUserId();
     this.loadDiscussions();
   }
 
@@ -38,8 +44,7 @@ export class DoctorChatComponent {
       response => {
         this.discussions = response.data;
         this.calculateUnreadMessages();
-        console.log('discussions');
-        
+        console.log('Discussions:', this.discussions);
       },
       error => {
         console.error('Erreur lors du chargement des discussions', error);
@@ -53,27 +58,6 @@ export class DoctorChatComponent {
 
   getUserIds(discussions: { [key: number]: any[] }): number[] {
     return Object.keys(discussions).map(key => parseInt(key, 10));
-  }
-
-  openMessages(userId: number) {
-    // Marquer les messages comme lus
-    this.messagesService.markMessagesAsRead(userId).subscribe(
-      () => {
-        // Mise à jour des discussions localement après la réponse
-        this.discussions = this.discussions.map(discussion => {
-          if (discussion.user_id === userId) {
-            discussion.unread_count = 0;
-          }
-          return discussion;
-        });
-
-        // Naviguer vers la page de messages
-        this.router.navigate(['/messages', userId]);
-      },
-      error => {
-        console.error('Erreur lors de la mise à jour des messages', error);
-      }
-    );
   }
 
   startNewDiscussion() {
@@ -91,5 +75,48 @@ export class DoctorChatComponent {
       this.users = response.data;
     });
   }
-}
 
+  openMessages(userId: number) {
+    this.selectedUserId = userId;
+    const discussion = this.discussions.find(d => d.user_id === userId);
+    if (discussion) {
+      this.selectedUserName = `${discussion.user_first_name} ${discussion.user_last_name}`;
+      this.loadMessages(userId);
+
+      this.messagesService.markMessagesAsRead(userId).subscribe(
+        () => {
+          discussion.unread_count = 0;
+        },
+        error => {
+          console.error('Erreur lors de la mise à jour des messages', error);
+        }
+      );
+    }
+  }
+
+  loadMessages(userId: number) {
+    this.messagesService.getMessages(userId).subscribe(
+      response => {
+        this.messages = response.data;
+        console.log(`Messages pour l'utilisateur ${userId}:`, this.messages); 
+      },
+      error => {
+        console.error('Erreur lors du chargement des messages', error);
+      }
+    );
+  }
+
+  sendMessage() {
+    if (!this.newMessage.trim()) return;
+
+    this.messagesService.sendMessage(this.selectedUserId!, this.newMessage).subscribe(
+      response => {
+        this.messages.push(response.data);
+        this.newMessage = '';
+      },
+      error => {
+        console.error('Erreur lors de l\'envoi du message', error);
+      }
+    );
+  }
+}

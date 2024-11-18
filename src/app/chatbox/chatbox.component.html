@@ -1,0 +1,26 @@
+<div class="chatbox">
+    <!-- Icône de chat, visible lorsque la fenêtre est fermée -->
+    <div class="chat-icon" *ngIf="!isOpen" (click)="toggleChat()">
+      <i class="fa fa-comment"></i>
+    </div>
+  
+    <!-- Chat header, visible lorsque la fenêtre est ouverte -->
+    <div class="chat-header" *ngIf="isOpen">
+      <h4>Chat Assistance</h4>
+      <button (click)="toggleChat()">Fermer</button>
+    </div>
+  
+    <!-- Contenu du chat -->
+    <div class="chat-content" *ngIf="isOpen">
+      <div *ngFor="let message of messages" class="message">
+        <span class="{{ message.sender }}">{{ message.text }}</span>
+      </div>
+      <input
+        type="text"
+        placeholder="Posez votre question..."
+        [(ngModel)]="userMessage"
+        (keyup.enter)="sendMessage()"
+      />
+    </div>
+  </div>
+  

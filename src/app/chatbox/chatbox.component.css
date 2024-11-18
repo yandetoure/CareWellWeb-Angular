@@ -1,0 +1,104 @@
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 5px;  /* L'icône est maintenant à 5px du bord droit */
+    width: 400px;
+    transition: all 0.3s ease;
+  
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      align-items: center;
+  
+      h4 {
+        margin: 0;
+        font-size: 18px;
+      }
+  
+      button {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
+  
+    .chat-icon {
+      font-size: 30px;
+      color: #007bff;
+      text-align: center;
+      padding: 10px;
+
+      
+      /* Animation de rebond */
+      animation: bounce 1s ease infinite;
+    }
+  
+    .chat-content {
+      padding: 10px;
+      max-height: 450px;
+      overflow-y: auto;
+    }
+  
+    .message {
+      margin: 10px 0;
+      font-size: 14px;
+  
+      .user {
+        color: #083c74;
+        text-align: right;
+        font-weight: bold;
+      }
+  
+      .bot {
+        color: #3c3c3c;
+        text-align: left;
+        font-style: italic;
+      }
+    }
+  
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-top: 1px solid #ddd;
+      outline: none;
+      border-radius: 0 0 10px 10px;
+      font-size: 14px;
+      color: #333;
+    }
+  
+    .chatbox.open {
+      width: 350px; /* La chatbox est plus large quand ouverte */
+    }
+  
+    .chatbox.closed {
+      width: 50px; /* Icône de chat lorsque fermé */
+    }
+  }
+  
+  /* Animation Bounce */
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  

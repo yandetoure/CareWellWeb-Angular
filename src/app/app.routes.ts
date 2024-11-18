@@ -52,6 +52,7 @@ import { UrgentComponent } from './patient/urgent/urgent.component';
 import { DoctorPrescriptionsComponent } from './doctor/doctor-prescriptions/doctor-prescriptions.component';
 import { DoctorExamsComponent } from './doctor/doctor-exams/doctor-exams.component';
 import { AddResultComponent } from './doctor/add-result/add-result.component';
+import { ChatboxComponent } from './chatbox/chatbox.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/register', pathMatch: 'full' }, 
@@ -67,7 +68,7 @@ export const routes: Routes = [
   { path: 'home/articles', component: HomeArticlesComponent},
   { path: 'home/services', component: HomeServicesComponent},
   { path: 'contacts', component: ContactsComponent},
-
+  { path: 'chatbox', component: ChatboxComponent},
 
   { path: 'dashboard/secretary', component: DashboardSecretaryComponent },
 

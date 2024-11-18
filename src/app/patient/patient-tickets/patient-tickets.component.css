@@ -141,3 +141,18 @@ h3{
     text-align: center;
 }
 
+.pagination-buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .pagination-buttons button {
+    font-size: 0.8rem;
+    padding: 5px 15px;
+  }
+  
+  .pagination-buttons span {
+    font-size: 12px;
+    font-weight: bold;
+  }

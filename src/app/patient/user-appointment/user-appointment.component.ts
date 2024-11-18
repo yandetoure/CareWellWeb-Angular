@@ -1,37 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../../services/appointment.service'; 
-import { FormsModule } from '@angular/forms'; 
-import { CommonModule } from '@angular/common';  
-import { HttpClientModule } from '@angular/common/http'; 
+import { AppointmentService } from '../../services/appointment.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { PatientHeaderComponent } from '../../sidebar/patient-header/patient-header.component';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
-import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-user-appointment',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, PatientHeaderComponent],
   templateUrl: './user-appointment.component.html',
-  styleUrl: './user-appointment.component.css'
+  styleUrls: ['./user-appointment.component.css']
 })
 export class UserAppointmentComponent implements OnInit {
-  @ViewChild('pdfContent', { static: false }) pdfContent?: ElementRef;
-
-  appointments: any[] = []; 
-  selectedAppointment: any; 
-
-  isDetailsModalOpen: boolean = false; 
-  isEditModalOpen: boolean = false; 
+  appointments: any[] = [];
+  selectedAppointment: any;
+  currentDate: string = '';
+  isDetailsModalOpen: boolean = false;
+  isEditModalOpen: boolean = false;
 
   constructor(
     private appointmentService: AppointmentService,
-    private router: Router 
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getAppointments(); 
+    this.currentDate = this.getTodayDate();
+    this.getAppointments();
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
   }
 
   getAppointments(): void {
@@ -40,7 +41,7 @@ export class UserAppointmentComponent implements OnInit {
         if (response.status) {
           this.appointments = response.data;
         } else {
-          console.error('Erreur : ', response.message);
+          console.error('Erreur :', response.message);
         }
       },
       (error) => {
@@ -49,17 +50,10 @@ export class UserAppointmentComponent implements OnInit {
     );
   }
 
-  getAppointmentClass(appointmentDate: string): string {
-    const today = new Date();
+  isPastDate(appointmentDate: string): boolean {
+    const today = new Date(this.currentDate);
     const appointment = new Date(appointmentDate);
-
-    if (appointment < today) {
-      return 'past-appointment'; 
-    } else if (appointment.getTime() - today.getTime() < 3 * 24 * 60 * 60 * 1000) {
-      return 'near-appointment'; 
-    } else {
-      return 'upcoming-appointment'; 
-    }
+    return appointment < today;
   }
 
   openDetailsModal(appointment: any): void {
@@ -72,8 +66,10 @@ export class UserAppointmentComponent implements OnInit {
   }
 
   openEditModal(appointment: any): void {
-    this.selectedAppointment = appointment;
-    this.isEditModalOpen = true;
+    if (!this.isPastDate(appointment.date)) {
+      this.selectedAppointment = appointment;
+      this.isEditModalOpen = true;
+    }
   }
 
   closeEditModal(): void {
@@ -86,7 +82,7 @@ export class UserAppointmentComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Rendez-vous mis à jour avec succès:', response);
-            this.getAppointments();  
+            this.getAppointments();
             this.closeEditModal();
           },
           (error) => {
@@ -110,31 +106,4 @@ export class UserAppointmentComponent implements OnInit {
         );
     }
   }
-
-  goToMedicalRecord(userId: number) {
-    this.router.navigate(['/doctor/medicalfile', userId]);
-  }
-
-  downloadAppointment() {
-    if (!this.selectedAppointment || !this.pdfContent) {
-      return; // Si aucun rendez-vous ou pdfContent n'est disponible, on sort
-    }
-  
-    const pdf = new jsPDF();
-  
-    // Capture du contenu HTML
-    html2canvas(this.pdfContent.nativeElement, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = pdf.internal.pageSize.getWidth();
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  
-      // Ajouter l'image au PDF
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-      pdf.save('rendez-vous.pdf'); // Nom du fichier à télécharger
-    }).catch((error) => {
-      console.error('Erreur lors de la génération du PDF', error);
-    });
-  }
-  
-
 }

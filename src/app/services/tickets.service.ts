@@ -17,10 +17,11 @@ export class TicketsService {
     return this.http.get(`${this.apiUrl}/tickets`, { headers });
   }
 
-  getUserTickets(): Observable<any> {
+  getUserTickets(page: number, limit: number): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.get(`${this.apiUrl}/user/tickets`, { headers });
+    return this.http.get(`${this.apiUrl}/user/tickets?page=${page}&limit=${limit}`, { headers });
   }
+
 
 addTicket(serviceData: FormData): Observable<any> {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);

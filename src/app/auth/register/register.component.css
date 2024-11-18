@@ -1,9 +1,14 @@
 .container{
     height: 100vh;
     padding-top: 200px;
-    background-image: url('/images/back2.jpeg');
+}
+body{
+    background-image: url('/images/banner.png');
     background-size: cover;
     background-position: center;
     object-fit: cover;
-
+}
+.card {
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 10px;
 }

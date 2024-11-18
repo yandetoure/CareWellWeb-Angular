@@ -83,6 +83,8 @@
         <div class="col-md-3">
           <!-- Bouton pour afficher les formulaires -->
           <button (click)="toggleForms()" class="btn w-100 mb-3">Ajouter</button>
+          <button (click)="toggleForms()" class="btn w-100 mb-3">Donner Rendez-vous</button>
+
           <div class="form-container-wrapper" [ngClass]="{'visible': showForms}">
           <!-- Conteneur des formulaires avec animation de glissement -->
           <div class="form-container" [ngClass]="{'visible': showForms}">
@@ -151,6 +153,79 @@
           </div>
         </div>
         
+
+
+
+        <div class="col-md-3">
+          <!-- Bouton pour afficher les formulaires -->
+          <button (click)="toggleForms()" class="btn w-100 mb-3">Ajouter</button>
+          <div class="form-container-wrapper" [ngClass]="{'visible': showForms}">
+          <!-- Conteneur des formulaires avec animation de glissement -->
+          <div class="form-container" [ngClass]="{'visible': showForms}">
+            <form (submit)="addNote(form.value)" #form="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
+              <div class="mb-2">
+                <label for="content" class="form-label">Note</label>
+                <input type="text" id="content" name="content" ngModel required class="form-control" placeholder="Notes">
+              </div>
+              <button type="submit" class="btn w-100">Ajouter Note</button>
+            </form>
+        
+            <form (ngSubmit)="addHistory(historyForm.value)" #historyForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
+              <div class="mb-2">
+                <label for="historyContent" class="form-label">Antécédent</label>
+                <input type="text" id="historyContent" name="content" ngModel required class="form-control" placeholder="Antécédent">
+              </div>
+              <button type="submit" class="btn w-100">Ajouter Antécédent</button>
+            </form>
+        
+            <form (ngSubmit)="addPrescription(prescriptionForm.value)" #prescriptionForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
+              <div class="mb-2">
+                <label for="prescription" class="form-label">Prescription</label>
+                <select id="prescription" name="prescription_id" ngModel required class="form-control">
+                  <option value="" disabled selected>Sélectionnez une prescription</option>
+                  <option *ngFor="let prescription of prescriptions" [value]="prescription.id">
+                    {{ prescription.name }}
+                  </option>
+                </select>
+              </div>
+              <button type="submit" class="btn w-100">Ajouter Prescription</button>
+            </form>
+        
+            <form (ngSubmit)="addExam(examForm.value)" #examForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
+              <div class="mb-2">
+                <label for="exam" class="form-label">Examen</label>
+                <select id="exam" name="exam_id" ngModel required class="form-control">
+                  <option value="" disabled selected>Sélectionnez un examen</option>
+                  <option *ngFor="let exam of exams" [value]="exam.id">
+                    {{ exam.name }}
+                  </option>
+                </select>
+              </div>
+              <button type="submit" class="btn w-100">Ajouter Examen</button>
+            </form>
+        
+            <form (ngSubmit)="addDisease(diseaseForm.value)" #diseaseForm="ngForm" class="bg-light p-2 rounded shadow-sm mb-3">
+              <div class="mb-2">
+                <label for="disease" class="form-label">Maladie</label>
+                <select id="disease" name="disease_id" ngModel required class="form-control">
+                  <option value="" disabled selected>Sélectionnez une maladie</option>
+                  <option *ngFor="let disease of diseases" [value]="disease.id">
+                    {{ disease.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label for="state" class="form-label">Stade</label>
+                <input type="text" id="state" name="state" ngModel required class="form-control" placeholder="State">
+              </div>
+              <div class="mb-2">
+                <label for="treatment" class="form-label">Traitement</label>
+                <input type="text" id="treatment" name="treatment" ngModel required class="form-control" placeholder="Traitement">
+              </div>
+              <button type="submit" class="btn w-100">Ajouter une maladie</button>
+            </form>
+          </div>
+        </div>
         
       </div>
     </div>

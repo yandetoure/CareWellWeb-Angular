@@ -4,15 +4,17 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Chart, LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler } from 'chart.js'; // Importer les contrôleurs et échelles nécessaires
+import { Chart, LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler, BarController, BarElement, DoughnutController, ArcElement } from 'chart.js';
 import { AppointmentService } from '../../services/appointment.service';
+import { ChatboxComponent } from '../../chatbox/chatbox.component';
+import { Legend } from 'chart.js';
 
 @Component({
   selector: 'app-dashbaord-patient',
   standalone: true,
-  imports: [PatientHeaderComponent, CommonModule, FormsModule, RouterLink], 
+  imports: [PatientHeaderComponent, CommonModule, FormsModule, RouterLink, ChatboxComponent], 
   templateUrl: './dashbaord-patient.component.html',
-  styleUrls: ['./dashbaord-patient.component.css'] // Corrigez `styleUrl` en `styleUrls`
+  styleUrls: ['./dashbaord-patient.component.css']
 })
 export class DashbaordPatientComponent {
   userInfo: any = {};
@@ -20,21 +22,23 @@ export class DashbaordPatientComponent {
   isModalOpen: boolean = false;
   chart: any;
   appointmentsStats: any;
-
+  userName: string = '';
   constructor(private authService: AuthService,
     private appointmentService: AppointmentService
   ) {}
 
   ngOnInit() {
-    this.loadUserInfo();
-   this.loadUserAppointmentsStats();  
+    Chart.register(LinearScale, CategoryScale, LineController, LineElement, PointElement, Filler, BarController, BarElement, DoughnutController, ArcElement, Legend);    this.loadUserInfo();
+    this.loadUserAppointmentsStats();
   }
+  
 
   loadUserInfo() {
     this.authService.getUserInfo().subscribe(
       data => {
         if (data && data.data) {
           this.userInfo = data.data;
+          this.userName = this.userInfo.name; 
         }
       },
       error => {
@@ -47,7 +51,7 @@ export class DashbaordPatientComponent {
     this.appointmentService.getUserAppointmentsStats().subscribe(
       data => {
         if (data && data.status) {
-          this.appointmentsStats = data; // Stockez les statistiques ici
+          this.appointmentsStats = data;
           this.createChart();
         }
       },
@@ -56,39 +60,63 @@ export class DashbaordPatientComponent {
       }
     );
   }
+  
 
   createChart() {
     if (!this.appointmentsStats) return;
-
+  
     const { total_appointments, upcoming_appointments, today_appointments } = this.appointmentsStats;
     const labels = ['Total', 'À venir', 'Aujourd\'hui'];
     const data = [total_appointments, upcoming_appointments, today_appointments];
-
-    // Assurez-vous de détruire le graphique précédent si nécessaire
+  
+    // Détruire l'ancien graphique s'il existe
     if (this.chart) {
       this.chart.destroy();
     }
-
+  
+    // Créer le nouveau graphique en forme de cercle
     this.chart = new Chart('appointmentsChart', {
-      type: 'bar',
+      type: 'doughnut', // Type du graphique
       data: {
         labels: labels,
         datasets: [{
           label: 'Statistiques des rendez-vous',
           data: data,
-          backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'], // Couleurs personnalisées
+          backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
+          hoverOffset: 4
         }]
       },
       options: {
         responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
+        plugins: {
+          legend: {
+            display: true, // Afficher la légende
+            position: 'top', // Position de la légende ('top', 'left', 'bottom', 'right')
+            labels: {
+              color: '#000', // Couleur du texte de la légende
+              font: {
+                size: 14 // Taille de la police
+              },
+              padding: 20 // Espacement autour des étiquettes
+            }
+          },
+          tooltip: {
+            enabled: true, // Afficher les tooltips
+            callbacks: {
+              label: function (context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                return `${label}: ${value}`;
+              }
+            }
           }
         }
       }
     });
   }
+  
+
+  
 
   // Ouvrir le modal
   openModal() {

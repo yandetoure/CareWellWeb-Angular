@@ -97,14 +97,16 @@ export class AuthService {
     );
   }
   
-
+  getUserId(): number {
+    return parseInt(localStorage.getItem('userId') || '0', 10);
+  }
 
     getUserInfo(): Observable<any> {
       return this.http.get<any>(`${this.apiUrl}/profile`, { headers: this.getHeaders() });
     }
     
     private getHeaders(): HttpHeaders {
-      const token = localStorage.getItem('auth_token'); 
+      const token = localStorage.getItem('token');       
       if (token) {
         return new HttpHeaders().set('Authorization', `Bearer ${token}`);
       } else {

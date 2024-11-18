@@ -3,40 +3,68 @@
     <div class="main-content">
       
 <header>
-    <nav class="toolbar">
-      <h1>Discussions</h1>
-      <div class="toolbar-buttons">
-        <button *ngIf="totalUnreadCount > 0" class="unread-button">
-          <span class="material-icons">mail_outline</span>
-          <span>{{ totalUnreadCount }} non lus</span>
-        </button>
-        <button (click)="startNewDiscussion()" class="add-button">
-          <span class="material-icons">add</span>
-        </button>
-      </div>
-    </nav>
-  </header>
-  
-  <main class="container">
-    <ul class="discussions-list">
-      <ng-container *ngIf="discussions.length > 0">
-        <li *ngFor="let discussion of discussions" (click)="openMessages(discussion.user_id)" class="discussion-item">
-          <div class="discussion-info">
-            <div class="profil">
-            <img *ngIf="discussion.user_photo" [src]="discussion.user_photo" alt="{{ discussion.user_first_name }}" class="photo1" />
-            <h2>{{ discussion.user_first_name }} {{ discussion.user_last_name }}</h2>
+  <div class="chat-container">
+    <!-- Colonne des discussions -->
+    <div class="discussions-column">
+      <header>
+        <nav class="toolbar">
+          <h1>Discussions</h1>
+          <div class="toolbar-buttons">
+            <button *ngIf="totalUnreadCount > 0" class="unread-button">
+              <span class="material-icons">mail_outline</span>
+              <span>{{ totalUnreadCount }} non lus</span>
+            </button>
+            <button (click)="startNewDiscussion()" class="add-button">
+              <span class="material-icons">add</span>
+            </button>
           </div>
-            <p>{{ discussion.last_message | slice: 0:30 }}...  <small>{{ discussion.last_message_time }}</small>
-            </p>
-            <p *ngIf="discussion.unread_count > 0" class="unread-count">{{ discussion.unread_count }} non lus</p>
-          </div>
-        </li>
-      </ng-container>
-    </ul>
+        </nav>
+      </header>
   
-    <div *ngIf="discussions.length === 0" class="no-discussions">
-      <p>Aucune discussion n'est disponible.</p>
-      <button (click)="startNewDiscussion()" class="start-discussion-button">Commencer une discussion</button>
+      <ul class="discussions-list">
+        <ng-container *ngIf="discussions.length > 0">
+          <li *ngFor="let discussion of discussions" (click)="openMessages(discussion.user_id)" class="discussion-item">
+            <div class="discussion-info">
+              <div class="profil">
+                <img *ngIf="discussion.user_photo" [src]="discussion.user_photo" alt="{{ discussion.user_first_name }}" class="photo1" />
+                <h2>{{ discussion.user_first_name }} {{ discussion.user_last_name }}</h2>
+              </div>
+              <p>{{ discussion.last_message | slice: 0:30 }}... <small>{{ discussion.last_message_time }}</small></p>
+              <p *ngIf="discussion.unread_count > 0" class="unread-count">{{ discussion.unread_count }} non lus</p>
+            </div>
+          </li>
+        </ng-container>
+  
+        <div *ngIf="discussions.length === 0" class="no-discussions">
+          <p>Aucune discussion n'est disponible.</p>
+          <button (click)="startNewDiscussion()" class="start-discussion-button">Commencer une discussion</button>
+        </div>
+      </ul>
     </div>
-  </main>
+  
+    <!-- Colonne des messages -->
+    <div class="messages-column" *ngIf="selectedUserId">
+      <div class="messages-header">
+        <h2>Messages avec {{ selectedUserName }}</h2>
+      </div>
+    
+    <!-- Liste des messages sans regroupement par date -->
+<!-- Liste des messages -->
+<div class="messages-list">
+  <div *ngFor="let message of messages" [ngClass]="{'sent-message': message.sender_id === authUserId, 'received-message': message.sender_id !== authUserId}">
+    <p>{{ message.message }}</p>
+    <small>{{ message.created_at | date: 'HH:mm' }}</small>
+  </div>
+</div>
+
+
+    
+      <!-- Champ de saisie pour envoyer un message -->
+      <div class="message-input">
+        <input type="text" [(ngModel)]="newMessage" placeholder="Tapez un message..." (keydown.enter)="sendMessage()" />
+        <button (click)="sendMessage()">Envoyer</button>
+      </div>
+    </div>
+    </div>
+  
   

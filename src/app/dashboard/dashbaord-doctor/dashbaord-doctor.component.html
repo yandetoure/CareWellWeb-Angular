@@ -37,18 +37,27 @@
             <p>{{ doctorStats.appointments_today }}</p>
           </div>
           <div class="card">
-            <h6>Total des rendez-vous</h6>
-            <p>{{ doctorStats.total_appointments }}</p>
+            <h6>Rendez-vous complétés</h6>
+            <p>{{ doctorStats.appointments_completed_today }}</p>
           </div>
           <div class="card">
-            <h6>Rendez-vous complétés</h6>
-            <p>{{ doctorStats.completed_appointments }}</p>
+            <h6>Total rendez-vous du mois</h6>
+            <p>{{ doctorStats.total_appointments_for_month }}</p>
           </div>
+          <div class="card">
+            <h6>Rendez-vous de l'année</h6>
+            <p>{{ doctorStats.cancelled_appointments_for_month }}</p>
+          </div>
+
         </div>
       </div>
       <div class="chart-container mt-5">
-        <canvas id="myChart" width="300" height="150"></canvas>
-    </div>
+        <canvas id="myChart"></canvas>
+        <canvas id="myPieChart"></canvas> <!-- Ajout du canvas pour le deuxième graphique -->
+        <canvas id="lineChart" width="400" height="200"></canvas>
+
+      </div>
+      
     
     </div>
   </div>

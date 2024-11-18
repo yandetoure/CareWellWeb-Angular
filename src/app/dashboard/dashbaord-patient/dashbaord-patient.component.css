@@ -152,3 +152,13 @@ h6{
 button {
   margin-top: 10px;
 }
+
+.chart-container {
+  max-width: 100%; /* Limite la largeur maximale à 100% */
+  width: 100%; /* Fait en sorte que le conteneur prenne toute la largeur */
+  height: auto; /* Ajuste la hauteur automatiquement */
+}
+canvas {
+    width: 20% !important; /* Force le canvas à s'ajuster à la largeur du conteneur */
+    height: auto !important; /* Ajuste la hauteur automatiquement */
+}
