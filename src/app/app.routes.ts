@@ -55,7 +55,7 @@ import { AddResultComponent } from './doctor/add-result/add-result.component';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' }, 
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
 
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
@@ -125,5 +125,5 @@ export const routes: Routes = [
   { path: 'accountant/exams', component: AccountantExamComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
 
 
-  { path: '**', redirectTo: '/register' }
+  { path: '**', redirectTo: '/home' }
 ];
