@@ -56,11 +56,9 @@ import { ChatboxComponent } from './chatbox/chatbox.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
-
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-      // Home Page sections
-  { path: 'us', component: AboutUsComponent },
+  { path: '**', redirectTo: '/login' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 
   { path: 'home', component: HomeComponent }, 
   { path: 'profile', component: ProfileComponent },
@@ -69,6 +67,7 @@ export const routes: Routes = [
   { path: 'home/services', component: HomeServicesComponent},
   { path: 'contacts', component: ContactsComponent},
   { path: 'chatbox', component: ChatboxComponent},
+  { path: 'us', component: AboutUsComponent },
 
   { path: 'dashboard/secretary', component: DashboardSecretaryComponent },
 
@@ -124,6 +123,4 @@ export const routes: Routes = [
   { path: 'accountant/tickets', component: AccountantTicketsComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
   { path: 'accountant/exams', component: AccountantExamComponent, canActivate: [AuthGuard], data: { role: 'Accountant' } },
 
-
-  { path: '**', redirectTo: '/login' }
 ];
