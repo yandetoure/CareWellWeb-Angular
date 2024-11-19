@@ -55,8 +55,8 @@ import { AddResultComponent } from './doctor/add-result/add-result.component';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, 
-  { path: '**', redirectTo: '/login' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
+  { path: '**', redirectTo: '/register' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
