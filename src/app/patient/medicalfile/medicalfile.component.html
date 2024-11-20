@@ -64,7 +64,7 @@
         <div class="col-md-4">
           <div class="card p-4 shadow-sm card-info">
             <h5 class="text-center">Informations de l'Utilisateur</h5>
-            <img *ngIf="medicalFile.user?.photo" [src]="'http://localhost:8000/storage/' + medicalFile.user?.photo" alt="{{ medicalFile.user?.first_name }}" class="img-fluid rounded-circle mb-3" style="width: 170px; height: 150px;" />
+            <!-- <img *ngIf="medicalFile.user?.photo" [src]="'http://localhost:8000/storage/' + medicalFile.user?.photo" alt="{{ medicalFile.user?.first_name }}" class="img-fluid rounded-circle mb-3" style="width: 170px; height: 150px;" /> -->
             <h5>Nom du patient: <span class="text-muted">{{ medicalFile?.user?.first_name }} {{ medicalFile?.user?.last_name }}</span></h5>
             <p><strong>Numéro de dossier:</strong> <span class="text-muted">{{ medicalFile?.identification_number }}</span></p>
             <p><strong>Date de naissance:</strong> <span class="text-muted">{{ medicalFile?.user?.day_of_birth | date }}</span></p>

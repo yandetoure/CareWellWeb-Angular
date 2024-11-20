@@ -53,12 +53,14 @@ import { DoctorPrescriptionsComponent } from './doctor/doctor-prescriptions/doct
 import { DoctorExamsComponent } from './doctor/doctor-exams/doctor-exams.component';
 import { AddResultComponent } from './doctor/add-result/add-result.component';
 import { ChatboxComponent } from './chatbox/chatbox.component';
+import { InfosPatientComponent } from './sidebar/infos-patient/infos-patient.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, 
 
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'infos', component: InfosPatientComponent},
       // Home Page sections
   { path: 'us', component: AboutUsComponent },
 

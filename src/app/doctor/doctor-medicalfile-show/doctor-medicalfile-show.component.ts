@@ -54,6 +54,9 @@ export class DoctorMedicalfileShowComponent {
   toggleForms() {
     this.showForms = !this.showForms;
   }
+  toggleForms2() {
+    this.showForms = !this.showForms;
+  }
   loadUserInfo() {
     this.authService.getUserInfo().subscribe(
       data => {

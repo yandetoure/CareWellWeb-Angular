@@ -8,11 +8,12 @@ import { Chart, LinearScale, CategoryScale, LineController, LineElement, PointEl
 import { AppointmentService } from '../../services/appointment.service';
 import { ChatboxComponent } from '../../chatbox/chatbox.component';
 import { Legend } from 'chart.js';
+import { InfosPatientComponent } from '../../sidebar/infos-patient/infos-patient.component';
 
 @Component({
   selector: 'app-dashbaord-patient',
   standalone: true,
-  imports: [PatientHeaderComponent, CommonModule, FormsModule, RouterLink, ChatboxComponent], 
+  imports: [PatientHeaderComponent, CommonModule, FormsModule, RouterLink, ChatboxComponent, InfosPatientComponent], 
   templateUrl: './dashbaord-patient.component.html',
   styleUrls: ['./dashbaord-patient.component.css']
 })

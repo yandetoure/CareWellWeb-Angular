@@ -48,13 +48,5 @@
         </ul>
     </div>
 
-    <div class="header">
-        <h5>Tableau de bord du Patient</h5>
-
-        <div class="profil">
-          <p>{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
-          <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
-        </div>
-    </div>
 </body>
 </html>

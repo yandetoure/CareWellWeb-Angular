@@ -75,6 +75,7 @@
     text-align: left;
     font-weight: bold; /* Gras pour le texte */
     border-bottom: 2px solid #0056b3; /* Bordure inférieure plus marquée */
+    font-size: 16px;
 }
 
 /* Styles pour les cellules de tableau */
@@ -82,6 +83,7 @@
     padding: 15px; /* Augmentation de l'espacement interne */
     text-align: left;
     border-bottom: 1px solid #ddd; /* Ligne de séparation */
+    font-size: 15px;
 }
 
 /* Effet de survol pour les lignes du tableau */

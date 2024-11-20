@@ -31,13 +31,13 @@
   
     .chat-icon {
       font-size: 30px;
-      color: #007bff;
+      color: #5c5e60;
       text-align: center;
       padding: 10px;
 
       
       /* Animation de rebond */
-      animation: bounce 1s ease infinite;
+      animation: bounce 3s ease infinite;
     }
   
     .chat-content {

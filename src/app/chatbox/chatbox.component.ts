@@ -73,7 +73,7 @@ export class ChatboxComponent {
       response = 'Pour un mal de tête, reposez-vous et buvez de l\'eau. Si ça persiste, consultez un médecin.';
     } else if (msg.includes('fièvre')) {
       response = 'Restez hydraté et reposez-vous. Si la fièvre dépasse 39°C, consultez un professionnel.';
-    } else if (msg.includes('je suis malade')) {
+    } else if (msg.includes('je suis malade') || msg.includes('je ne me sens pas bien'))  {
       response = 'Désolé d\'entendre ça. Pouvez-vous décrire vos symptômes ?';
     } else if (msg.includes('mal de ventre')) {
       response = 'Buvez des liquides clairs. Si la douleur persiste, consultez un médecin.';

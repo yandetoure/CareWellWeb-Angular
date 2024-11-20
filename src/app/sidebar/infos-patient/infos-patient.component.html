@@ -1,0 +1,39 @@
+<div class="header">
+    <h5>Tableau de bord du Patient</h5>
+
+    <div class="profil">
+      <p  class="header-title">{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
+      <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
+    </div>
+
+    <div class="notifications" (click)="toggleNotifications()">
+        <span class="material-icons notification-icon" title="Notifications">
+            notifications
+        </span>
+        <span class="notification-count" *ngIf="unreadNotifications > 0">
+            {{ unreadNotifications }}
+        </span>
+        <div class="notification-list" *ngIf="showNotifications">
+            <ul>
+                <li *ngFor="let notification of notifications">
+                    <p class="titre">Notifications</p>
+                    <div class="notification-item">
+                        <div class="notification-content">
+                          <p class="title">{{ notification.title }}</p>
+                          <p>{{ notification.message }}</p>
+                        </div>
+                        <div class="actions">
+                          <button class="mark-read-btn" (click)="markAsRead(notification.id)" title="Marquer comme lu">
+                            <span class="material-icons">visibility</span>
+                          </button>
+                          <button class="delete-btn" (click)="deleteNotification(notification.id)" title="Supprimer">
+                            <span class="material-icons">delete</span>
+                          </button>
+                        </div>
+                      </div>
+                      
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

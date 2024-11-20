@@ -18,9 +18,11 @@
           <table class="content-table">
               <thead>
                   <tr>
-                      <th>ID</th>
-                      <th>Date de création</th>
+                      <th>Prénom et Nom</th>
+                      <th>Date de naissance</th>
+                      <th>Numéro de téléphone</th>
                       <th>Prescription</th>
+                      <th>Docteur</th>
                       <th>Prix</th>
                       <th>Statut</th>
                       <th>Actions</th>
@@ -28,15 +30,32 @@
               </thead>
               <tbody>
                   <tr *ngFor="let ticket of tickets">
-                      <td>{{ ticket.id }}</td>
-                      <td>{{ ticket.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
+                      <p> {{ ticket.user?.first_name }} {{ ticket.user?.last_name }}</p>
                       <td>
                           <span *ngIf="ticket.prescription">
-                              {{ ticket.prescription.name }}
-                              ({{ ticket.prescription.quantity }})
+                            <p> {{ ticket.user?.day_of_birth }}</p>
                           </span>
                           <span *ngIf="!ticket.prescription">-</span>
                       </td>
+                      <td>
+                        <span *ngIf="ticket.prescription">
+                          <p>Dr {{ ticket.doctor?.first_name }} {{ ticket.doctor?.last_name }}</p>
+                        </span>
+                        <span *ngIf="!ticket.prescription">-</span>
+                    </td>
+                      <td>
+                        <span *ngIf="ticket.prescription">
+                          <p> {{ ticket.user?.phone_number }}</p>
+                        </span>
+                        <span *ngIf="!ticket.prescription">-</span>
+                    </td>
+                      <td>
+                        <span *ngIf="ticket.prescription">
+                            {{ ticket.prescription.name }}
+                            ({{ ticket.prescription.quantity }})
+                        </span>
+                        <span *ngIf="!ticket.prescription">-</span>
+                    </td>
                       <td>
                           <span *ngIf="ticket.prescription">
                               {{ ticket.prescription.price | number }} FCFA
@@ -60,7 +79,7 @@
                             [ngClass]="ticket.is_paid ? '' : 'unpaid'" 
                             (click)="updatePaymentStatus(ticket.id, !ticket.is_paid)"
                         >
-                            {{ ticket.is_paid ? 'Marquer comme non payé' : 'Marquer comme payé' }}
+                            {{ ticket.is_paid ? 'Non payé' : 'Payé' }}
                         </button>
                     </td>
                   </tr>

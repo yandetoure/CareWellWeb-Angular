@@ -2,12 +2,14 @@
   display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
 }
 
-app-doctor-sidebar, app-doctor-sidebar {
+app-doctor-sidebar  {
   width: 250px; /* Largeur de la sidebar */
   background-color: #ffffff; /* Couleur de fond de la sidebar */
   height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
   position: fixed; /* Fixer la sidebar */
 }
+
+app-infos-patient
 
 .sidebar {
   width: 80px;
@@ -92,19 +94,12 @@ app-doctor-sidebar, app-doctor-sidebar {
   margin-left: 140px;
 }
 
-.cards{
-  display: flex;
-  flex-wrap: wrap; /* Utiliser flexbox pour aligner les cartes côte à côte */
-  gap: 20px; /* Espace entre les cartes */   
-  margin-top: 30px; /* Ajoute un peu de marge en haut */
-  justify-content: center;
-}
 
 .card{
   display: flex;
   flex-direction: column; /* Aligner les éléments verticalement */
-  width: 260px; /* Largeur des cartes, ajuste selon tes besoins */
-  height: 140px;
+  width: 200px; /* Largeur des cartes, ajuste selon tes besoins */
+  height: 120px;
   background-color: #ffffff; /* Couleur de fond des cartes, modifiable */
   border-left: 5px solid #1F2B6C;
   border-radius: 50px;
@@ -147,6 +142,41 @@ h6{
   display: flex;
   border-radius: 5px;
   width: 700px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.card-container {
+  display: flex; /* Utilise flexbox pour l'affichage des cartes */
+  justify-content: space-between; /* Espace entre les cartes */
+  margin-top: 20px; /* Espacement au-dessus des cartes */
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  flex: 1; /* Chaque carte prend une largeur égale */
+  margin-right: 20px; /* Ajoute un espacement entre les cartes */
+}
+
+.card:last-child {
+  margin-right: 0; /* Supprime le margine à droite de la dernière carte */
+}
+
+.card h6 {
+  color: #0056b3; /* Titre en bleu */
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 0; /* Réinitialise les marges */
+  font-size: 1.2em; 
+  font-weight: bold;
 }
 
 button {

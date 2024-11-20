@@ -1,193 +1,198 @@
-.dashboard-container {
-    display: flex; 
-  }
   
   app-doctor-sidebar, app-doctor-sidebar {
     background-color: #ffffff; /* Couleur de fond de la sidebar */
     height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
     position: fixed; /* Fixer la sidebar */
   }
- /* Sidebar de base */
+
+  /* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .dashboard-container {
+    flex-direction: row;
+  }
+}
+
 .sidebar {
   width: 80px;
-  height: 100vh;
   background-color: #2f453e;
-  transition: width 0.3s;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   overflow: hidden;
+  transition: width 0.3s ease;
 }
 
-/* Sidebar en hover */
 .sidebar:hover {
   width: 250px;
 }
 
-/* Contenu principal ajustable */
 .main-content {
-  flex: 1;
-  margin-left: 80px; /* Largeur par défaut de la sidebar */
+  margin-left: 80px;
   padding: 20px;
-  transition: margin-left 0.3s ease; /* Transition douce */
   background-color: #ffffff;
+  transition: margin-left 0.3s ease;
 }
 
-/* Ajustement du contenu lorsque la sidebar est en hover */
 .sidebar:hover ~ .main-content {
-  margin-left: 250px; /* Largeur de la sidebar en mode hover */
+  margin-left: 250px;
 }
 
-
-  .header {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    background-color: #077676; 
-    color: #ffffff; 
-    font-size: 16px; 
-    font-weight: 400;
-    padding: 10px;
-    position: fixed; /* Rendre le header fixe */
-    width: 100%; /* Prendre toute la largeur */
-    z-index: 1000; 
-  }
-  
-  
-  .photo1{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    margin-right: 50px;
-    margin-left: 10px;
-    object-fit: cover;
-  }
-
-  .profil{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 20px;
-  }
-  
-  
-  .banner{
-    display: flex;
-    justify-content: center;
-    padding-top: 25px;
-    height: 200px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.275);
-    transition: box-shadow 0.3s;
-    border-radius: 30px;
-    margin: 35px;
-  }
-
-  .photo{
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    border: 5px solid #077676;
-    object-fit: cover;
-  }
-  .infos{
-    display: flex;
-    justify-content: space-between;
-    width: 550px;
-    margin-left: 140px;
-  }
-
-  .cards{
-    display: flex;
-    flex-wrap: wrap; /* Utiliser flexbox pour aligner les cartes côte à côte */
-    gap: 20px; /* Espace entre les cartes */   
-    margin-top: 30px; /* Ajoute un peu de marge en haut */
-    justify-content: center;
-  }
-
-  .card{
-    display: flex;
-    flex-direction: column; /* Aligner les éléments verticalement */
-    width: 200px; /* Largeur des cartes, ajuste selon tes besoins */
-    height: 120px;
-    background-color: #ffffff; /* Couleur de fond des cartes, modifiable */
-    border-left: 5px solid #1F2B6C;
-    border-radius: 50px;
-    padding: 20px; /* Ajoute un peu de remplissage */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.328); /* Ajoute une ombre à la carte */
-    transition: box-shadow 0.3s; /* Transition douce pour le changement d'ombre */
-    color: rgb(7, 44, 226);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .text{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  h6{
-    font-size: 20px;
-    color: #077676;
-    font-weight: 500;
-  }
-
-
-  .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    height: auto;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
   }
   
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    display: flex;
-    border-radius: 5px;
-    width: 700px;
-  }
-  
-  button {
+  .main-content {
+    margin-left: 0;
     margin-top: 10px;
   }
+}
 
+/* Banner */
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .banner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+.photo1{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  margin-right: 50px;
+  margin-left: 10px;
+  object-fit: cover;
+}
+
+.profil{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
+}
+
+
+.banner{
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+  height: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.275);
+  transition: box-shadow 0.3s;
+  border-radius: 30px;
+  margin: 35px;
+}
+
+.photo{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 5px solid #077676;
+  object-fit: cover;
+}
+@media (min-width: 768px) {
+  .photo {
+    height: 200px;
+    width: 200px;
+    margin-bottom: 0;
+  }
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .infos {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+  }
+}
+
+/* Cards */
+.cards{
+  display: flex;
+  flex-wrap: wrap; /* Utiliser flexbox pour aligner les cartes côte à côte */
+  gap: 20px; /* Espace entre les cartes */   
+  margin-top: 30px; /* Ajoute un peu de marge en haut */
+  justify-content: center;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.card {
+  flex: 1 1 calc(100% - 10px); /* Taille flexible, occupe toute la largeur en petit écran */
+  max-width: 300px;
+  min-width: 150px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h6 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #077676;
+}
+
+@media (min-width: 768px) {
   .card-container {
-    display: flex; /* Utilise flexbox pour l'affichage des cartes */
-    justify-content: space-between; /* Espace entre les cartes */
-    margin-top: 20px; /* Espacement au-dessus des cartes */
+    justify-content: space-between;
   }
+}
 
-  .card {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    flex: 1; /* Chaque carte prend une largeur égale */
-    margin-right: 20px; /* Ajoute un espacement entre les cartes */
-  }
+/* Chart container */
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
 
-  .card:last-child {
-    margin-right: 0; /* Supprime le margine à droite de la dernière carte */
-  }
+canvas {
+  max-width: 100%;
+  height: auto;
+  flex: 1 1 300px; /* Graphique flexible */
+}
 
-  .card h6 {
-    color: #0056b3; /* Titre en bleu */
-    margin-bottom: 10px;
-  }
-
-  .card p {
-    margin: 0; /* Réinitialise les marges */
-    font-size: 1.2em; 
-    font-weight: bold;
-  }
 
   .chart-container {
     max-width: 100%; /* Limite la largeur maximale à 100% */
