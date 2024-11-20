@@ -1,9 +1,7 @@
 <div class="dashboard-container">
     <app-doctor-sidebar class="sidebar"></app-doctor-sidebar>
     <div class="main-content">
-      <div class="header">
-        <h5>Bon retour Dr {{ userInfo.last_name }}</h5>
-    
+      <div class="header">    
         <div class="profil">
             <p>{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
             <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
@@ -11,7 +9,7 @@
     </div>
     
       <div class="container mt-5">
-        <h2 class="mb-4">Liste des dossiers médicaux</h2>
+        <h2 class="text-primary mt-4">Liste des dossiers médicaux</h2>
         
         <div class="input-group mb-8">
           <input type="text" class="form-control" placeholder="Rechercher un patient, un numéro de dossier..." [(ngModel)]="searchQuery" (input)="searchMedicalFiles()" aria-label="Search" aria-describedby="button-addon2">

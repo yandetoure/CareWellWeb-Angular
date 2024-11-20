@@ -4,9 +4,8 @@
     <div class="profil">
       <p  class="header-title">{{ userInfo.first_name }} {{ userInfo.last_name }}</p>
       <img *ngIf="userInfo.photo" [src]="'http://localhost:8000/storage/' + userInfo.photo" alt="{{ userInfo.first_name }}" class="photo1" />
-    </div>
 
-    <div class="notifications" (click)="toggleNotifications()">
+      <div class="notifications" (click)="toggleNotifications()">
         <span class="material-icons notification-icon" title="Notifications">
             notifications
         </span>
@@ -36,4 +35,7 @@
             </ul>
         </div>
     </div>
+    </div>
+
+
 </div>

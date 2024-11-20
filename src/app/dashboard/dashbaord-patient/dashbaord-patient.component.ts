@@ -24,6 +24,8 @@ export class DashbaordPatientComponent {
   chart: any;
   appointmentsStats: any;
   userName: string = '';
+  isSidebarOpen: boolean = false;
+
   constructor(private authService: AuthService,
     private appointmentService: AppointmentService
   ) {}
@@ -33,6 +35,9 @@ export class DashbaordPatientComponent {
     this.loadUserAppointmentsStats();
   }
   
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
 
   loadUserInfo() {
     this.authService.getUserInfo().subscribe(

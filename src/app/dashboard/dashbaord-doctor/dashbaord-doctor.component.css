@@ -82,6 +82,7 @@ body {
     text-align: left;
   }
 }
+
 .photo1{
   height: 50px;
   width: 50px;
@@ -157,7 +158,7 @@ body {
 }
 
 .card {
-  flex: 1 1 calc(100% - 10px); /* Taille flexible, occupe toute la largeur en petit écran */
+  flex: 1 1 calc(100% - 40px); /* Taille flexible, occupe toute la largeur en petit écran */
   max-width: 300px;
   min-width: 150px;
   background-color: #ffffff;

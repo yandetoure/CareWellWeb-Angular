@@ -1,42 +1,70 @@
-.dashboard-container {
-  display: flex; /* Utiliser flexbox pour aligner les éléments côte à côte */
+  
+  app-doctor-sidebar, app-doctor-sidebar {
+    background-color: #ffffff; /* Couleur de fond de la sidebar */
+    height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
+    position: fixed; /* Fixer la sidebar */
+  }
+
+  /* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-app-doctor-sidebar {
-  width: 250px; /* Largeur de la sidebar */
-  background-color: #ffffff; /* Couleur de fond de la sidebar */
-  height: 100vh; /* Hauteur de la sidebar pour couvrir toute la hauteur de la fenêtre */
-  position: fixed; /* Fixer la sidebar */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .dashboard-container {
+    flex-direction: row;
+  }
 }
 
 .sidebar {
   width: 80px;
-  height: 100vh;
   background-color: #2f453e;
-  transition: width 0.3s;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   overflow: hidden;
+  transition: width 0.3s ease;
 }
 
-/* Sidebar en hover */
 .sidebar:hover {
   width: 250px;
 }
 
-/* Contenu principal ajustable */
 .main-content {
-  flex: 1;
-  margin-left: 80px; /* Largeur par défaut de la sidebar */
+  margin-left: 80px;
   padding: 20px;
-  transition: margin-left 0.3s ease; /* Transition douce */
   background-color: #ffffff;
+  transition: margin-left 0.3s ease;
 }
 
-/* Ajustement du contenu lorsque la sidebar est en hover */
 .sidebar:hover ~ .main-content {
-  margin-left: 250px; /* Largeur de la sidebar en mode hover */
+  margin-left: 250px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+    width: 100%;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  h2{
+    font-size: 18px;
+  }
 }
 
 .card{

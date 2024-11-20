@@ -84,3 +84,48 @@
         font-weight: bold;
     }
   }
+
+
+.modal-body img {
+  width: 50%;
+  height: 300px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+
+/* Pour les petits écrans, on change la direction en colonne */
+@media (max-width: 768px) {
+
+  .main-content {
+    flex: 1;
+    margin-left: 70px; /* Largeur par défaut de la sidebar */
+    transition: margin-left 0.3s ease; /* Transition douce */
+    background-color: #ffffff;
+    margin-top: 50px;
+  }
+  
+  .head {
+    flex-direction: column; /* La direction devient colonne */
+    align-items: center; /* Centrer les éléments */
+  }
+
+  .modal-body img {
+    width: 100%; /* La largeur de l'image est plus petite */
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .modal-body h5 {
+    margin-top: 0;
+    padding-left: 0;
+    text-align: center; /* Centrer le titre sur petits écrans */
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  h6{
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
